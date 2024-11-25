@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://coe3u25nkm6iv"
+path="res://.godot/imported/Haunted Beats (1).mp3-1b73a408b6e63abc4fafbeaf661aaa93.mp3str"
+
+[deps]
+
+source_file="res://art/Haunted Beats (1).mp3"
+dest_files=["res://.godot/imported/Haunted Beats (1).mp3-1b73a408b6e63abc4fafbeaf661aaa93.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
