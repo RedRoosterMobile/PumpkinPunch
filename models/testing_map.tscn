@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=43 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://8fbwqjjsntq6" path="res://addons/kaykit_halloween_bits/gltf/path_C.gltf" id="23_iwc6b"]
 [ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="24_0n22y"]
 [ext_resource type="AudioStream" uid="uid://coe3u25nkm6iv" path="res://art/Haunted Beats (1).mp3" id="24_66wh8"]
+[ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="25_qql4s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
@@ -43,11 +44,39 @@ glow_strength = 1.2
 volumetric_fog_enabled = true
 volumetric_fog_sky_affect = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wymq3"]
-albedo_color = Color(0.403922, 0.278431, 0.14902, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ywg4o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_anx5b"]
+noise = SubResource("FastNoiseLite_ywg4o")
+
+[sub_resource type="Gradient" id="Gradient_6md00"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qm1ru"]
+noise_type = 3
+frequency = 0.0112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1w204"]
+seamless = true
+seamless_blend_skirt = 0.152
+color_ramp = SubResource("Gradient_6md00")
+noise = SubResource("FastNoiseLite_qm1ru")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4v1ve"]
+frequency = 0.034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wh3a7"]
+noise = SubResource("FastNoiseLite_4v1ve")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rga6x"]
+albedo_color = Color(1, 0.239216, 1, 1)
+albedo_texture = SubResource("NoiseTexture2D_anx5b")
+roughness_texture = SubResource("NoiseTexture2D_wh3a7")
+normal_enabled = true
+normal_scale = 16.0
+normal_texture = SubResource("NoiseTexture2D_1w204")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ju6e"]
-material = SubResource("StandardMaterial3D_wymq3")
+material = SubResource("StandardMaterial3D_rga6x")
 size = Vector2(30, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qk40o"]
@@ -115,6 +144,7 @@ shape = SubResource("BoxShape3D_2d5qd")
 
 [node name="Hand" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5127, 0.956079)
+lock_rotation = true
 
 [node name="glove_left" parent="Hand" instance=ExtResource("4_ma5p2")]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
@@ -151,13 +181,16 @@ transform = Transform3D(0.093031, 0, -0.995663, 0, 1, 0, 0.995663, 0, 0.093031, 
 transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, -6.51413, 0, 0.0212898)
 
 [node name="ribcage2" parent="decoration" instance=ExtResource("11_153vq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58659, 0, -12.9529)
+transform = Transform3D(-0.748857, 0, -1.85451, 0, 2, 0, 1.85451, 0, -0.748857, 8.87077, 0, 5.9538)
 
 [node name="shrine2" parent="decoration" instance=ExtResource("12_qs6li")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71024, 5.96046e-08, 1.02733)
+transform = Transform3D(0.988276, -0.130768, -0.0788031, 0.130355, 0.991413, -0.0103942, 0.0794856, 0, 0.996836, 7.71024, 5.96046e-08, 1.02733)
 
 [node name="skull_candle2" parent="decoration" instance=ExtResource("13_0filk")]
-transform = Transform3D(0.898878, 0, -0.438199, -0.0560588, 0.991783, -0.114994, 0.434598, 0.12793, 0.891492, 6.69515, 2.38419e-07, 0.465373)
+transform = Transform3D(0.898878, 0, -0.438199, -0.0560588, 0.991783, -0.114994, 0.434598, 0.12793, 0.891492, 4.02539, 2.38419e-07, -1.07351)
+
+[node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("25_qql4s")]
+transform = Transform3D(0.5, 2.98023e-08, 8.9407e-08, -2.98023e-08, 0.5, 8.9407e-08, -2.98023e-08, -5.21541e-08, 1, -0.0693154, 1.09092, -0.0218627)
 
 [node name="tree_dead_large2" parent="decoration" instance=ExtResource("14_f5yfn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65917, 0, -1.56068)
@@ -205,7 +238,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51528, 0, -2.22108)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -0.384281)
 
 [node name="crypt2" parent="decoration" instance=ExtResource("22_3r8pk")]
-transform = Transform3D(0.0153409, 0, 0.999882, 0, 1, 0, -0.999882, 0, 0.0153409, -10.1582, 0, 4.42366)
+transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_66wh8")
