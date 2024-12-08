@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ck0y57f2gccd1"
 path.s3tc="res://.godot/imported/pumpkin_hollow_full_Image_1.png-0c81d436d5e806a3a484eef8976de824.s3tc.ctex"
+path.etc2="res://.godot/imported/pumpkin_hollow_full_Image_1.png-0c81d436d5e806a3a484eef8976de824.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/pumpkin_hollow_full_Image_1.png"
-dest_files=["res://.godot/imported/pumpkin_hollow_full_Image_1.png-0c81d436d5e806a3a484eef8976de824.s3tc.ctex"]
+dest_files=["res://.godot/imported/pumpkin_hollow_full_Image_1.png-0c81d436d5e806a3a484eef8976de824.s3tc.ctex", "res://.godot/imported/pumpkin_hollow_full_Image_1.png-0c81d436d5e806a3a484eef8976de824.etc2.ctex"]
 
 [params]
 
