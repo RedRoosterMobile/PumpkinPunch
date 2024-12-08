@@ -30,7 +30,7 @@ float noise(vec2 p) {
 
 float fbm(vec2 uv) {
     float f;
-	
+
     //mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
 	mat2 m = mat2(vec2(1.6, 1.2), vec2(-1.2, 1.6));
 
@@ -70,24 +70,23 @@ void fragment() {
     ALPHA = a; // Set transparency
 	ALBEDO = (mix(vec3(0.0), col, a));
 }
-/*
 void vertex() {
     vec2 uv = UV;
     float t = TIME;
 
     // Compute noise values for X and Z displacement
-    float noise_y = fbm(vec2(uv.y * 5.0, t * 0.5));
-    float noise_z = fbm(vec2(uv.y * 5.0 + 100.0, t * 0.5));
+    float noise_x = fbm(vec2(uv.y * 1.0, t * 0.5));
+    float noise_z = fbm(vec2(uv.x * 1.0 + 100.0, t * 0.5));
 
     // Displacement amplitude, stronger at the top (uv.y = 1.0)
-    float amplitude = 0.1 * uv.y; // Adjust amplitude as needed
+    float amplitude = 1.1 * uv.y; // Adjust amplitude as needed
 
     // Adjust noise range from [0,1] to [-1,1]
-    float displacement_y = (noise_y - 0.5) * 2.0 * amplitude;
+    float displacement_x = (noise_x - 0.5) * 2.0 * amplitude;
     float displacement_z = (noise_z - 0.5) * 2.0 * amplitude;
 
     // Apply displacement
-    VERTEX.y += displacement_y;
+    VERTEX.x += displacement_x;
     VERTEX.z += displacement_z;
+	VERTEX.y += displacement_z;
 }
-*/

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxyfllrwk534i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7ryb"]
+radius = 0.25
+height = 0.5
+
+[node name="XROrigin3D" type="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.37162)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="LeftHandController" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.546971, 0, 0)
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHandController"]
+mesh = SubResource("SphereMesh_p7ryb")
+
+[node name="RightHandController" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.546971, 0, 0)
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightHandController"]
+mesh = SubResource("SphereMesh_p7ryb")
+skeleton = NodePath("../../LeftHandController")
