@@ -1,4 +1,4 @@
-class_name TTT extends Node3D
+class_name MyOrigin extends Node3D
 
 signal focus_lost
 signal focus_gained

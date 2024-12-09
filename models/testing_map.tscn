@@ -101,6 +101,7 @@ radius = 0.25
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
+xr_enabled = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")

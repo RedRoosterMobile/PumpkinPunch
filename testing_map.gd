@@ -52,7 +52,7 @@ func _ready() -> void:
 	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered)
 	# xr scene will add those to it's tree 
 	if xr_enabled:
-		var xr_origin_3d: TTT = XR_INIT.instantiate()
+		var xr_origin_3d: MyOrigin = XR_INIT.instantiate()
 		xr_origin_3d.left_hand_body = left_hand_body
 		xr_origin_3d.right_hand_body = right_hand_body
 		add_child(xr_origin_3d)
