@@ -1,13 +1,24 @@
-extends XROrigin3D
+class_name TTT extends Node3D
 
-# https://docs.godotengine.org/en/latest/tutorials/xr/setting_up_xr.html
+signal focus_lost
+signal focus_gained
+signal pose_recentered
+
 @export var maximum_refresh_rate : int = 90
+
+# needed? if yes forward the signal out of the scene via a new signal, like signal_lost
+@export var left_hand_body:RigidBody3D
+@export var right_hand_body:RigidBody3D
+
+@onready var left_hand_controller: XRController3D = $LeftHandController
+@onready var right_hand_controller: XRController3D = $RightHandController
 
 var xr_interface : OpenXRInterface
 var xr_is_focussed = false
+# https://github.com/godotengine/godot-demo-projects/blob/4.2/xr/openxr_origin_centric_movement/start_vr.gd
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR instantiated successfully.")
@@ -19,22 +30,26 @@ func _ready() -> void:
 		# Make sure v-sync is off, v-sync is handled by OpenXR
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-		# Enable VRS
-		if RenderingServer.get_rendering_device():
-			vp.vrs_mode = Viewport.VRS_XR
-		elif int(ProjectSettings.get_setting("xr/openxr/foveation_level")) == 0:
-			push_warning("OpenXR: Recommend setting Foveation level to High in Project Settings")
-
 		# Connect the OpenXR events
-		xr_interface.session_begun.connect(_on_openxr_session_begun)
-		xr_interface.session_visible.connect(_on_openxr_visible_state)
-		xr_interface.session_focussed.connect(_on_openxr_focused_state)
-		xr_interface.session_stopping.connect(_on_openxr_stopping)
-		xr_interface.pose_recentered.connect(_on_openxr_pose_recentered)
+		xr_interface.connect("session_begun", _on_openxr_session_begun)
+		xr_interface.connect("session_visible", _on_openxr_visible_state)
+		xr_interface.connect("session_focussed", _on_openxr_focused_state)
+		xr_interface.connect("session_stopping", _on_openxr_stopping)
+		xr_interface.connect("pose_recentered", _on_openxr_pose_recentered)
 	else:
 		# We couldn't start OpenXR.
 		print("OpenXR not instantiated!")
 		get_tree().quit()
+
+# called from the outside
+func init_hands():
+	print("if we passed in a left hand body, assign it to lhc")
+	print(left_hand_controller)
+	#left_hand_controller.add_child(left_hand_body)
+	#left_hand_controller.add_child(right_hand_body)
+	print("if we passed in a right hand body, assign it to rhc")
+	pass
+
 # Handle OpenXR session ready
 func _on_openxr_session_begun() -> void:
 	# Get the reported refresh rate
@@ -66,6 +81,7 @@ func _on_openxr_session_begun() -> void:
 	# Now match our physics rate
 	Engine.physics_ticks_per_second = current_refresh_rate
 
+
 # Handle OpenXR visible state
 func _on_openxr_visible_state() -> void:
 	# We always pass this state at startup,
@@ -76,9 +92,10 @@ func _on_openxr_visible_state() -> void:
 		xr_is_focussed = false
 
 		# pause our game
-		get_tree().paused = true
+		process_mode = Node.PROCESS_MODE_DISABLED
 
 		emit_signal("focus_lost")
+
 
 # Handle OpenXR focused state
 func _on_openxr_focused_state() -> void:
@@ -86,7 +103,7 @@ func _on_openxr_focused_state() -> void:
 	xr_is_focussed = true
 
 	# unpause our game
-	get_tree().paused = false
+	process_mode = Node.PROCESS_MODE_INHERIT
 
 	emit_signal("focus_gained")
 

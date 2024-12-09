@@ -1,6 +1,9 @@
 extends Node
 # assets https://godotengine.org/asset-library/asset/2224
-@onready var pointer: RigidBody3D = $Hand
+@export var left_hand_body: RigidBody3D 
+@export var right_hand_body: RigidBody3D
+
+@export var xr_enabled:bool = false
 
 # Inner class
 class Pumpkin:
@@ -18,6 +21,7 @@ const PUMPKIN_Y:float = 1 # up/down
 # use this for spawning
 const SPAWN_THING = preload("res://models/pumpkin_hollow_full_modified.tscn")
 const SPAWN_THING_BROKEN = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
+const XR_INIT = preload("res://xr_origin_3d.tscn")
 # use this for initial positions
 var pumpkin_start_positions: Array[Vector3] = [
 	Vector3(-1.26961, 1.08145, -2.11638),
@@ -38,12 +42,29 @@ func _ready() -> void:
 			start_pos = thing.position
 			
 	print(pumpkin_start_positions)
+	
+	print("xr_controls_enabled")
+	print(xr_enabled)
+	var hand_area_left:Area3D = left_hand_body.get_node("HandArea3D")
+	hand_area_left.connect("area_entered",_on_hand_area_3d_area_entered)
+	
+	var hand_area_right:Area3D = right_hand_body.get_node("HandArea3D")
+	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered)
+	# xr scene will add those to it's tree 
+	if xr_enabled:
+		var xr_origin_3d: TTT = XR_INIT.instantiate()
+		xr_origin_3d.left_hand_body = left_hand_body
+		xr_origin_3d.right_hand_body = right_hand_body
+		add_child(xr_origin_3d)
+		await get_tree().create_timer(2).timeout
+		xr_origin_3d.init_hands()
 
 func _physics_process(delta: float) -> void:
 	time += delta
 	
 	create_new_pumpkin()
-	follow_mouse()
+	if not xr_enabled:
+		follow_mouse()
 	# Remove null entries from the array
 	pumpkins = pumpkins.filter(func(pumpkin):
 		return pumpkin != null and pumpkin.node != null
@@ -97,6 +118,7 @@ func _on_kill_zone_area_exited(area: Area3D) -> void:
 	#print(p.node)
 	
 func follow_mouse():
+	# todo: only if not XR
 	var camera = get_viewport().get_camera_3d()
 	if camera == null:
 		return  # Ensure the camera exists
@@ -107,21 +129,14 @@ func follow_mouse():
 	var ray_origin = camera.project_ray_origin(mouse_pos)
 	var ray_direction = camera.project_ray_normal(mouse_pos)
 	var intersection_point = ray_origin + ray_direction
-	pointer.position = intersection_point
-	
-	
-	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-	#	print("splatt")
-	#pointer.position=lerp(pointer.position,intersection_point,0.001)
-
-func _on_hand_body_entered(body: Node) -> void:
-	print(body)
-	pass # Replace with function body.
+	if left_hand_body:
+		left_hand_body.position = intersection_point
 
 func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 	print("ball hit")
 	print(area.get_parent())
-	area.get_parent().splat()
+	if area.get_parent().is_in_group("pumpkins"):
+		area.get_parent().splat()
 
 func spawn_pumpkin():
 	# z -6

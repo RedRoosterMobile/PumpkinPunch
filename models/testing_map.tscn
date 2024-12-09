@@ -97,8 +97,10 @@ radius = 0.25
 
 [sub_resource type="SphereMesh" id="SphereMesh_pqm76"]
 
-[node name="testing map" type="Node"]
+[node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
+left_hand_body = NodePath("HandLeft")
+right_hand_body = NodePath("HandRight")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
@@ -146,22 +148,43 @@ broken_model = ExtResource("1_ov8g5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
 shape = SubResource("BoxShape3D_2d5qd")
 
-[node name="Hand" type="RigidBody3D" parent="."]
+[node name="HandLeft" type="RigidBody3D" parent="." groups=["hands"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5127, 0.956079)
 lock_rotation = true
 
-[node name="glove_left" parent="Hand" instance=ExtResource("4_ma5p2")]
+[node name="glove_left" parent="HandLeft" instance=ExtResource("4_ma5p2")]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
 
-[node name="HandArea3D" type="Area3D" parent="Hand"]
+[node name="HandArea3D" type="Area3D" parent="HandLeft"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand/HandArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandLeft/HandArea3D"]
 shape = SubResource("SphereShape3D_6r6ng")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandLeft"]
 shape = SubResource("SphereShape3D_ekxpw")
 
-[node name="Pointer" type="MeshInstance3D" parent="Hand"]
+[node name="Pointer" type="MeshInstance3D" parent="HandLeft"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_pqm76")
+skeleton = NodePath("../..")
+
+[node name="HandRight" type="RigidBody3D" parent="." groups=["hands"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0758, 0.796015, 1.69262)
+lock_rotation = true
+
+[node name="glove_left" parent="HandRight" instance=ExtResource("4_ma5p2")]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
+
+[node name="HandArea3D" type="Area3D" parent="HandRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandRight/HandArea3D"]
+shape = SubResource("SphereShape3D_6r6ng")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandRight"]
+shape = SubResource("SphereShape3D_ekxpw")
+
+[node name="Pointer" type="MeshInstance3D" parent="HandRight"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_pqm76")
@@ -265,5 +288,4 @@ script = ExtResource("29_47g7t")
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
 [connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]
-[connection signal="body_entered" from="Hand" to="." method="_on_hand_body_entered"]
-[connection signal="area_entered" from="Hand/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
+[connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
