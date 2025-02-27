@@ -1,3 +1,21 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+
+
+# art bs
+art/Poliigon_StoneQuartzite_8060.zip
+art/Poliigon_StoneQuartzite_8060/
+art/blender beginner tutorial part 1.blend
+art/blender beginner tutorial part 1.blend.import
+art/blender beginner tutorial part 1.blend1
+art/blender beginner tutorial part 2 - sword .blend
+art/blender beginner tutorial part 2 - sword .blend1
+art/blender beginner tutorial part 3 - sword .blend
+art/blender beginner tutorial part 3 - sword .blend1
+art/donut base.001.png
+art/donut.blend
+art/donut.blend1
+art/downloads/
+

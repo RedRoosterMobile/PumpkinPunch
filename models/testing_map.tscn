@@ -1,10 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=48 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="PackedScene" uid="uid://behm4qpk02k2s" path="res://models/pumpkin_hollow_pieces_modified.tscn" id="1_ov8g5"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
+[ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="7_usxdh"]
@@ -101,7 +102,7 @@ radius = 0.25
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
-xr_enabled = null
+xr_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
@@ -192,6 +193,7 @@ mesh = SubResource("SphereMesh_pqm76")
 skeleton = NodePath("../..")
 
 [node name="decoration" type="Node3D" parent="."]
+script = ExtResource("5_kb2wl")
 
 [node name="arch2" parent="decoration" instance=ExtResource("4_j13nx")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.23)
@@ -230,7 +232,7 @@ transform = Transform3D(0.8991, 0, 0.437744, 0, 1, 0, -0.437744, 0, 0.8991, -6.7
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 11.0334, 0, -13.1104)
 
 [node name="tree_pine_orange_medium3" parent="decoration" instance=ExtResource("16_oxlor")]
-transform = Transform3D(1.8, 0, 0, 0, 1.79965, -0.0356862, 0, 0.0356862, 1.79965, 6.28093, 0, -13.1104)
+transform = Transform3D(1.8, 0, 0, 0, 1.79967, -0.0345555, 0, 0.0345555, 1.79967, 6.28093, 0, -13.1104)
 
 [node name="tree_pine_orange_medium4" parent="decoration" instance=ExtResource("16_oxlor")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.13127, 0, -13.1104)

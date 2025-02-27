@@ -56,7 +56,7 @@ func _ready() -> void:
 		xr_origin_3d.left_hand_body = left_hand_body
 		xr_origin_3d.right_hand_body = right_hand_body
 		add_child(xr_origin_3d)
-		await get_tree().create_timer(2).timeout
+		#await get_tree().create_timer(2).timeout
 		xr_origin_3d.init_hands()
 
 func _physics_process(delta: float) -> void:
@@ -87,6 +87,7 @@ func create_new_pumpkin():
 		pumpkin.rotate_y(30) # do some deg2rad things
 		pumpkin.position = pumpkin_start_positions[0]
 		pumpkin.broken_model = pumpkin_pieces
+		pumpkin.add_to_group("pumpkins")
 		add_child(pumpkin)
 		var p = Pumpkin.new()
 		p.node = pumpkin

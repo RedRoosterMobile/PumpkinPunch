@@ -36,6 +36,9 @@ func _ready():
 		xr_interface.connect("session_focussed", _on_openxr_focused_state)
 		xr_interface.connect("session_stopping", _on_openxr_stopping)
 		xr_interface.connect("pose_recentered", _on_openxr_pose_recentered)
+		
+		left_hand_controller.get_child(0).queue_free()
+		right_hand_controller.get_child(0).queue_free()
 	else:
 		# We couldn't start OpenXR.
 		print("OpenXR not instantiated!")
@@ -45,9 +48,20 @@ func _ready():
 func init_hands():
 	print("if we passed in a left hand body, assign it to lhc")
 	print(left_hand_controller)
-	#left_hand_controller.add_child(left_hand_body)
-	#left_hand_controller.add_child(right_hand_body)
+	
+	left_hand_body.reparent(left_hand_controller)
+	right_hand_body.reparent(right_hand_controller)
+	
+	print(left_hand_controller.get_children())
+	print(right_hand_controller.get_children())
 	print("if we passed in a right hand body, assign it to rhc")
+	pass
+	
+func _physics_process(delta: float) -> void:
+	# damn!
+	# https://forum.godotengine.org/t/rigid-bodies-as-hands/67646
+	left_hand_body.global_transform = left_hand_controller.global_transform
+	right_hand_body.global_transform = right_hand_controller.global_transform
 	pass
 
 # Handle OpenXR session ready
