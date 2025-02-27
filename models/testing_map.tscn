@@ -46,7 +46,6 @@ tonemap_mode = 2
 glow_enabled = true
 glow_normalized = true
 glow_strength = 1.2
-fog_enabled = true
 fog_sky_affect = 0.18
 volumetric_fog_sky_affect = 0.0
 
@@ -92,7 +91,7 @@ size = Vector3(30, 1, 30)
 size = Vector3(20, 20, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6r6ng"]
-radius = 0.25
+radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ekxpw"]
 
@@ -109,7 +108,7 @@ environment = SubResource("Environment_2o5or")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
-shadow_enabled = true
+directional_shadow_mode = 0
 
 [node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
 
@@ -155,7 +154,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5127, 0.956079)
 lock_rotation = true
 
 [node name="glove_left" parent="HandLeft" instance=ExtResource("4_ma5p2")]
-transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="HandArea3D" type="Area3D" parent="HandLeft"]
 
@@ -176,7 +175,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0758, 0.796015, 1.69262)
 lock_rotation = true
 
 [node name="glove_left" parent="HandRight" instance=ExtResource("4_ma5p2")]
-transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="HandArea3D" type="Area3D" parent="HandRight"]
 
