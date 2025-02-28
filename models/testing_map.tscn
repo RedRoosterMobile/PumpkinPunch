@@ -108,7 +108,7 @@ environment = SubResource("Environment_2o5or")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
-directional_shadow_mode = 0
+directional_shadow_max_distance = 10.0
 
 [node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
 
@@ -276,6 +276,7 @@ bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]
 transform = Transform3D(1.10521, 0, 0, 0, 1, 0, 0, 0, 1, 0.755174, -0.871319, 0.323852)
+visible = false
 texture_albedo = ExtResource("26_fyld6")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
 upper_fade = 1.70843e-05
