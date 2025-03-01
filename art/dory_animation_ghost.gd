@@ -1,4 +1,5 @@
 extends Node3D
+@onready var skeleton_mage: Node3D = $"."
 
 var start_position:Vector3
 # Called when the node enters the scene tree for the first time.
@@ -11,8 +12,8 @@ var time:float = 0.0
 func _process(delta: float) -> void:
 	time += delta
 	var sinner:float = sin(time)
-	var cosser:float = cos(time)
+	#var cosser:float = cos(time)
 	position.x =  start_position.x + sinner * 1.0
-	position.y =  start_position.y + cosser * 0.5
+	#position.y =  start_position.y + cosser * 0.5
 
 	
