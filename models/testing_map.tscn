@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=49 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
@@ -49,6 +49,58 @@ glow_strength = 1.2
 fog_sky_affect = 0.18
 volumetric_fog_sky_affect = 0.0
 
+[sub_resource type="Shader" id="Shader_ey3m2"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_normal : hint_roughness_normal, filter_linear_mipmap, repeat_enable;
+uniform float normal_scale : hint_range(-16.0, 16.0);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	//base_uv.x+=sin(TIME)/30.;
+	//base_uv.y+=cos(TIME)/30.;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+
+	// Normal Map: Enabled
+	NORMAL_MAP = texture(texture_normal, base_uv).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+}
+"
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ywg4o"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_anx5b"]
@@ -72,16 +124,26 @@ frequency = 0.034
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wh3a7"]
 noise = SubResource("FastNoiseLite_4v1ve")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rga6x"]
-albedo_color = Color(1, 0.239216, 1, 1)
-albedo_texture = SubResource("NoiseTexture2D_anx5b")
-roughness_texture = SubResource("NoiseTexture2D_wh3a7")
-normal_enabled = true
-normal_scale = 16.0
-normal_texture = SubResource("NoiseTexture2D_1w204")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c28ly"]
+render_priority = 0
+shader = SubResource("Shader_ey3m2")
+shader_parameter/albedo = Color(1, 0.239216, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 16.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("NoiseTexture2D_anx5b")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_wh3a7")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_1w204")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ju6e"]
-material = SubResource("StandardMaterial3D_rga6x")
+material = SubResource("ShaderMaterial_c28ly")
 size = Vector2(30, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qk40o"]
@@ -101,7 +163,6 @@ radius = 0.2
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
-xr_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
