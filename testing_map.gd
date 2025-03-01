@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 		if pumpkin.node.position.z > 3:
 			pumpkin.node.position.z = PUMPKIN_Z
 func create_new_pumpkin():
-	if Input.is_action_just_pressed("spawn") or pumpkins.size()<=0 or Input.is_action_just_pressed("trigger_click"):
+	if Input.is_action_just_pressed("spawn") or pumpkins.size()<=0:#or Input.is_action_just_pressed("trigger_click"):
 		print("spawn")
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
