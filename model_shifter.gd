@@ -7,6 +7,7 @@ func _unhandled_inputt(event: InputEvent) -> void:
 		splat()
 
 func splat():
+	Audio.play("audio/splat.ogg", true, global_transform)
 	var broken_model_intance = broken_model.instantiate()
 	print(broken_model_intance)
 	
