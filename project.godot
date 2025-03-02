@@ -15,6 +15,10 @@ run/main_scene="res://models/testing_map.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FpsCounter="*res://fps_counter.tscn"
+
 [input]
 
 spawn={

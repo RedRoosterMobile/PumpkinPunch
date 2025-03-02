@@ -4,6 +4,9 @@ extends Node
 @export var right_hand_body: RigidBody3D
 
 @export var xr_enabled:bool = false
+#@onready var controller := XRHelpers.get_xr_controller(self)
+## Teleport button action
+@export var spawn_action : String = "trigger_click"
 
 # Inner class
 class Pumpkin:
@@ -19,9 +22,9 @@ const PUMPKIN_X:float = 1.1 # left/right
 const PUMPKIN_Y:float = 1 # up/down
 
 # use this for spawning
-const SPAWN_THING = preload("res://models/pumpkin_hollow_full_modified.tscn")
-const SPAWN_THING_BROKEN = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
-const XR_INIT = preload("res://xr_origin_3d.tscn")
+const SPAWN_THING:PackedScene = preload("res://models/pumpkin_hollow_full_modified.tscn")
+const SPAWN_THING_BROKEN:PackedScene = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
+const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
 # use this for initial positions
 var pumpkin_start_positions: Array[Vector3] = [
 	Vector3(-1.26961, 1.08145, -2.11638),
@@ -58,6 +61,7 @@ func _ready() -> void:
 		add_child(xr_origin_3d)
 		#await get_tree().create_timer(2).timeout
 		xr_origin_3d.init_hands()
+		
 
 #func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
@@ -80,7 +84,17 @@ func _process(delta: float) -> void:
 		if pumpkin.node.position.z > 3:
 			pumpkin.node.position.z = PUMPKIN_Z
 func create_new_pumpkin():
-	if Input.is_action_just_pressed("spawn") or pumpkins.size()<=0:#or Input.is_action_just_pressed("trigger_click"):
+	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
+	var controller_spawn:bool = false
+	if xr_enabled:
+		for name in controllers:
+			#var controller := XRHelpers.get_xr_controller(self)
+			#controller.is_button_pressed(teleport_button_action)
+			
+			var tracker : XRPositionalTracker = controllers[name]
+			if tracker.get_input(spawn_action):
+				controller_spawn = true
+	if Input.is_action_just_pressed("spawn") or pumpkins.size()<=0 or controller_spawn:
 		print("spawn")
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN

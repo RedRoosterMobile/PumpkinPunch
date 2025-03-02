@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bldl6mx4ctegn"]
+
+[ext_resource type="Script" path="res://fps_counter.gd" id="1_kpmlb"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_kpmlb")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "test"
