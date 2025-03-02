@@ -42,11 +42,17 @@ sky_material = SubResource("ProceduralSkyMaterial_kntnh")
 background_mode = 2
 sky = SubResource("Sky_albes")
 tonemap_mode = 2
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_min_cell_size = 0.29
 glow_enabled = true
 glow_normalized = true
 glow_strength = 1.2
+fog_enabled = true
 fog_sky_affect = 0.18
-volumetric_fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.19
+volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
 
 [sub_resource type="Shader" id="Shader_ey3m2"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -174,7 +180,10 @@ environment = SubResource("Environment_2o5or")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
 light_energy = 0.88
-directional_shadow_max_distance = 10.0
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 14.1
+directional_shadow_pancake_size = 9.2
 
 [node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlbrb4u1gn18y"]
+[gd_scene load_steps=14 format=3 uid="uid://dlbrb4u1gn18y"]
 
 [ext_resource type="PackedScene" uid="uid://dq3mc7c7bmetn" path="res://models/Skeleton_Mage.glb" id="1_1nx2b"]
 [ext_resource type="Script" path="res://models/skeleton_mage.gd" id="2_ejr3e"]
@@ -36,7 +36,12 @@ emission_energy_multiplier = 2.0
 rim_enabled = true
 billboard_mode = 1
 
+[sub_resource type="Curve" id="Curve_3v1uc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_or5m1"]
+curve = SubResource("Curve_3v1uc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_huoim"]
 emission_shape = 2
@@ -68,7 +73,6 @@ script = ExtResource("2_ejr3e")
 bones/1/position = Vector3(0.00818243, 0.378426, 1.18541e-10)
 bones/1/rotation = Quaternion(-3.01764e-12, 0.00117187, 6.98561e-11, 0.999999)
 bones/2/rotation = Quaternion(-0.0589653, -0.126769, -0.00776294, 0.990148)
-bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(0.00126005, -3.17758e-09, 0.000109067, 0.999999)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/position = Vector3(0.247065, 0.111489, 0.0803397)
@@ -89,7 +93,6 @@ bones/13/position = Vector3(-8.34829e-10, 0.0961251, -0.0574999)
 bones/13/rotation = Quaternion(0.151567, -0.184414, 0.67185, 0.701168)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.0847641, 0.125845, 0.00617269, 0.988403)
-bones/14/scale = Vector3(1, 1, 1)
 bones/16/position = Vector3(0.170945, 0.113587, 1.39795e-08)
 bones/16/rotation = Quaternion(0.993797, 0.0735389, 0.0402558, 0.0730688)
 bones/17/rotation = Quaternion(0.346142, 6.51212e-08, -2.42277e-07, 0.938182)
