@@ -83,19 +83,35 @@ func _process(delta: float) -> void:
 		
 		if pumpkin.node.position.z > 3:
 			pumpkin.node.position.z = PUMPKIN_Z
+	$Label3D.text = str(Engine.get_frames_per_second())
+	
+	# Variables to track state
+var controller_spawn_just_pressed: bool = false
+var prev_controller_states: Dictionary = {}  # Stores previous state for each controller
+
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
-	var controller_spawn:bool = false
+	controller_spawn_just_pressed = false  # Reset each frame
+	
 	if xr_enabled:
 		for name in controllers:
-			#var controller := XRHelpers.get_xr_controller(self)
-			#controller.is_button_pressed(teleport_button_action)
+			var tracker: XRPositionalTracker = controllers[name]
+			var current_state = tracker.get_input(spawn_action)
 			
-			var tracker : XRPositionalTracker = controllers[name]
-			if tracker.get_input(spawn_action):
-				controller_spawn = true
-	if Input.is_action_just_pressed("spawn") or pumpkins.size()<=0 or controller_spawn:
-		print("spawn")
+			# Initialize previous state if not set
+			if not prev_controller_states.has(name):
+				prev_controller_states[name] = false
+			
+			# Check if trigger was just pressed
+			if current_state and not prev_controller_states[name]:
+				controller_spawn_just_pressed = true
+			
+			# Update previous state
+			prev_controller_states[name] = current_state
+	
+	# Trigger spawn only when just pressed
+	if Input.is_action_just_pressed("spawn") or pumpkins.size() <= 0 or controller_spawn_just_pressed:
+		print("Spawning!")
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
 		pumpkin.scale *= 0.5

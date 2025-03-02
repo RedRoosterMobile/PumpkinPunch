@@ -42,14 +42,16 @@ sky_material = SubResource("ProceduralSkyMaterial_kntnh")
 background_mode = 2
 sky = SubResource("Sky_albes")
 tonemap_mode = 2
-ssil_enabled = true
-sdfgi_enabled = true
+sdfgi_read_sky_light = false
 sdfgi_min_cell_size = 0.29
+sdfgi_cascade0_distance = 18.56
+sdfgi_max_distance = 296.96
 glow_enabled = true
 glow_normalized = true
 glow_strength = 1.2
 fog_enabled = true
-fog_sky_affect = 0.18
+fog_density = 0.02
+fog_sky_affect = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.19
 volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
@@ -172,6 +174,7 @@ radius = 0.2
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
+xr_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
@@ -180,6 +183,7 @@ environment = SubResource("Environment_2o5or")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
 light_energy = 0.88
 shadow_enabled = true
+shadow_blur = 2.0
 directional_shadow_mode = 0
 directional_shadow_max_distance = 14.1
 directional_shadow_pancake_size = 9.2
@@ -368,6 +372,10 @@ visible = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.214752, 0, 0.976669, 0, 1, 0, -0.976669, 0, -0.214752, -2.5746, 1.73411, 1.03567)
+text = "test"
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
 [connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]

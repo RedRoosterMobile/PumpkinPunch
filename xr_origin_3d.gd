@@ -4,7 +4,8 @@ signal focus_lost
 signal focus_gained
 signal pose_recentered
 
-@export var maximum_refresh_rate : int = 90
+# 90 jitter sometimes
+@export var maximum_refresh_rate : int = 72
 
 # needed? if yes forward the signal out of the scene via a new signal, like signal_lost
 @export var left_hand_body:RigidBody3D
