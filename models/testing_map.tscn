@@ -181,7 +181,8 @@ environment = SubResource("Environment_2o5or")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
-light_energy = 0.88
+light_color = Color(0.842597, 0.756568, 0.323983, 1)
+light_energy = 0.66
 shadow_enabled = true
 shadow_blur = 2.0
 directional_shadow_mode = 0
@@ -287,6 +288,14 @@ transform = Transform3D(0.093031, 0, -0.995663, 0, 1, 0, 0.995663, 0, 0.093031, 
 [node name="post_lantern2" parent="decoration" instance=ExtResource("7_usxdh")]
 transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, -6.51413, 0, 0.0212898)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="decoration/post_lantern2"]
+transform = Transform3D(-0.984939, 0.121186, -0.123327, -0.115395, 0.0704528, 0.990818, 0.128762, 0.990126, -0.0554075, -0.0260446, 2.61905, 0.967334)
+light_color = Color(0.881047, 0.836329, 0.265704, 1)
+light_energy = 16.0
+spot_range = 3.571
+spot_attenuation = -2.63
+spot_angle = 40.71
+
 [node name="ribcage2" parent="decoration" instance=ExtResource("11_153vq")]
 transform = Transform3D(-0.748857, 0, -1.85451, 0, 2, 0, 1.85451, 0, -0.748857, 8.87077, 0, 5.9538)
 
@@ -298,6 +307,16 @@ transform = Transform3D(0.898878, 0, -0.438199, -0.0560588, 0.991783, -0.114994,
 
 [node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("25_qql4s")]
 transform = Transform3D(0.5, 2.98023e-08, 8.9407e-08, -2.98023e-08, 0.5, 8.9407e-08, -2.98023e-08, -5.21541e-08, 1, -0.0693154, 1.09092, -0.0218627)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="decoration/skull_candle2"]
+transform = Transform3D(0.445476, 0.892695, -0.0681721, 0.0126247, 0.0698739, 0.997476, 0.895205, -0.445211, 0.0198576, 0.40776, 2.75593, 0.794613)
+light_color = Color(0.881047, 0.836329, 0.265704, 1)
+light_energy = 3.451
+light_indirect_energy = 2.647
+light_volumetric_fog_energy = 12.412
+spot_range = 5.945
+spot_attenuation = 0.16
+spot_angle = 49.97
 
 [node name="tree_dead_large2" parent="decoration" instance=ExtResource("14_f5yfn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65917, 0, -1.56068)
@@ -353,8 +372,8 @@ autoplay = true
 bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]
-transform = Transform3D(1.10521, 0, 0, 0, 1, 0, 0, 0, 1, 0.755174, -0.871319, 0.323852)
-visible = false
+transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 3.82521, 0.254778, -0.612225)
+size = Vector3(0.680298, 2, 2)
 texture_albedo = ExtResource("26_fyld6")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
 upper_fade = 1.70843e-05
