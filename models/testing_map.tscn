@@ -1,13 +1,15 @@
-[gd_scene load_steps=50 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=62 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="PackedScene" uid="uid://behm4qpk02k2s" path="res://models/pumpkin_hollow_pieces_modified.tscn" id="1_ov8g5"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_wmay2"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
 [ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
+[ext_resource type="PackedScene" uid="uid://bs6edj1xqbyu6" path="res://vampire_bat_inherited.tscn" id="6_nqc0p"]
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="7_usxdh"]
 [ext_resource type="PackedScene" uid="uid://hj21vyhp78ye" path="res://addons/kaykit_halloween_bits/gltf/ribcage.gltf" id="11_153vq"]
 [ext_resource type="PackedScene" uid="uid://c480uebuatosg" path="res://addons/kaykit_halloween_bits/gltf/shrine.gltf" id="12_qs6li"]
@@ -29,6 +31,23 @@
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="26_fyld6"]
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
+[ext_resource type="PackedScene" uid="uid://bhpsio66inxsb" path="res://splash_fx.tscn" id="32_ivlvr"]
+[ext_resource type="Shader" uid="uid://1iu6gyjbreem" path="res://splash_fx_no_bill.tres" id="33_5qllv"]
+[ext_resource type="Texture2D" uid="uid://bjtw3tde0hhuj" path="res://images/particles/flame_05.png" id="34_vxfuj"]
+
+[sub_resource type="Resource" id="Resource_n1rqw"]
+script = ExtResource("2_wmay2")
+magnitude = 0.5
+active_during_pause = false
+indefinite = false
+duration_ms = 300
+
+[sub_resource type="Resource" id="Resource_wjjl5"]
+script = ExtResource("2_wmay2")
+magnitude = 0.5
+active_during_pause = false
+indefinite = false
+duration_ms = 300
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
@@ -52,7 +71,6 @@ glow_strength = 1.2
 fog_enabled = true
 fog_density = 0.02
 fog_sky_affect = 0.0
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.19
 volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
 
@@ -170,17 +188,49 @@ radius = 0.2
 
 [sub_resource type="QuadMesh" id="QuadMesh_55fg6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4arf4"]
+render_priority = 0
+shader = ExtResource("33_5qllv")
+shader_parameter/Hit_texture = ExtResource("34_vxfuj")
+
+[sub_resource type="Curve" id="Curve_td7g7"]
+_data = [Vector2(0.00459242, 0.992475), 0.0, 0.0, 0, 0, Vector2(0.468427, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_usl1j"]
+curve = SubResource("Curve_td7g7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_085nt"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_usl1j")
+turbulence_enabled = true
+turbulence_influence_min = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1fef0"]
+size = Vector2(0.5, 0.5)
+
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
 xr_enabled = true
+ax_button_event = SubResource("Resource_n1rqw")
+by_button_event = SubResource("Resource_wjjl5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
+visible = false
 light_color = Color(0.842597, 0.756568, 0.323983, 1)
 light_energy = 0.66
 shadow_enabled = true
@@ -273,6 +323,10 @@ skeleton = NodePath("../..")
 [node name="decoration" type="Node3D" parent="."]
 script = ExtResource("5_kb2wl")
 
+[node name="vampire bat2" parent="decoration" instance=ExtResource("6_nqc0p")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 2.28779, -2.89526)
+visible = false
+
 [node name="arch2" parent="decoration" instance=ExtResource("4_j13nx")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.23)
 
@@ -290,7 +344,7 @@ transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, 
 
 [node name="SpotLight3D" type="SpotLight3D" parent="decoration/post_lantern2"]
 transform = Transform3D(-0.984939, 0.121186, -0.123327, -0.115395, 0.0704528, 0.990818, 0.128762, 0.990126, -0.0554075, -0.0260446, 2.61905, 0.967334)
-light_color = Color(0.881047, 0.836329, 0.265704, 1)
+light_color = Color(2.42, 1.075, 0, 1)
 light_energy = 16.0
 spot_range = 3.571
 spot_attenuation = -2.63
@@ -310,7 +364,7 @@ transform = Transform3D(0.5, 2.98023e-08, 8.9407e-08, -2.98023e-08, 0.5, 8.9407e
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="decoration/skull_candle2"]
 transform = Transform3D(0.445476, 0.892695, -0.0681721, 0.0126247, 0.0698739, 0.997476, 0.895205, -0.445211, 0.0198576, 0.40776, 2.75593, 0.794613)
-light_color = Color(0.881047, 0.836329, 0.265704, 1)
+light_color = Color(2.5, 2, 0.01, 1)
 light_energy = 3.451
 light_indirect_energy = 2.647
 light_volumetric_fog_energy = 12.412
@@ -395,6 +449,19 @@ draw_pass_1 = SubResource("QuadMesh_55fg6")
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-0.214752, 0, 0.976669, 0, 1, 0, -0.976669, 0, -0.214752, -2.5746, 1.73411, 1.03567)
 text = "test"
+
+[node name="VFX" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45749, 0)
+
+[node name="hit effect" parent="VFX" instance=ExtResource("32_ivlvr")]
+
+[node name="sparks" type="GPUParticles3D" parent="VFX"]
+material_override = SubResource("ShaderMaterial_4arf4")
+amount = 24
+lifetime = 0.74
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_085nt")
+draw_pass_1 = SubResource("QuadMesh_1fef0")
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
 [connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]

@@ -29,3 +29,5 @@ tracker = &"right_hand"
 visible = false
 mesh = SubResource("SphereMesh_p7ryb")
 skeleton = NodePath("../../LeftHandController")
+
+[connection signal="button_released" from="LeftHandController" to="." method="_on_left_hand_controller_button_released"]

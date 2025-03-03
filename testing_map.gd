@@ -4,8 +4,7 @@ extends Node
 @export var right_hand_body: RigidBody3D
 
 @export var xr_enabled:bool = false
-#@onready var controller := XRHelpers.get_xr_controller(self)
-## Teleport button action
+var controller : XRController3D
 @export var spawn_action : String = "trigger_click"
 
 # Inner class
@@ -34,6 +33,7 @@ var pumpkin_start_positions: Array[Vector3] = [
 	Vector3(1.11298, 1.08145, -5.71892)
 ]
 func _ready() -> void:
+	
 	for thing:Node in get_children():
 		if thing.is_in_group("pumpkins"):
 			var p = Pumpkin.new()
@@ -59,8 +59,13 @@ func _ready() -> void:
 		xr_origin_3d.left_hand_body = left_hand_body
 		xr_origin_3d.right_hand_body = right_hand_body
 		add_child(xr_origin_3d)
-		#await get_tree().create_timer(2).timeout
+		
 		xr_origin_3d.init_hands()
+		await get_tree().create_timer(2).timeout
+		controller = XRHelpers.get_xr_controller(self)
+		print(controller)
+		if controller:
+			controller.button_pressed.connect(_on_button_pressed)
 		
 
 #func _physics_process(delta: float) -> void:
@@ -89,15 +94,39 @@ func _process(delta: float) -> void:
 var controller_spawn_just_pressed: bool = false
 var prev_controller_states: Dictionary = {}  # Stores previous state for each controller
 
+## Rumble event for pushing A or X
+@export var ax_button_event : XRToolsRumbleEvent
+
+## Rumble event for pushing B or Y
+@export var by_button_event : XRToolsRumbleEvent
+func _on_button_pressed(button_name: String) -> void:
+	print("rumble")
+	match button_name:
+		"ax_button":
+			XRToolsRumbleManager.add(controller.name + "ax", ax_button_event, [controller])
+		"by_button":
+			XRToolsRumbleManager.add(controller.name + "by", by_button_event, [controller])
+
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
 	controller_spawn_just_pressed = false  # Reset each frame
 	
 	if xr_enabled:
+		# XRhelper style of getting keys
+		# https://github.com/GodotVR/godot-xr-tools/pull/557/files#diff-a9959fdf1a493f41ed711540fffaf024b7561fb8eaf7017987b7b2c2d36317e3
+		if controller and controller.get_is_active() and controller.is_button_pressed(spawn_action):
+			# never called..
+			print(controller.get_tracker_hand())
+			print("pressed")
 		for name in controllers:
 			var tracker: XRPositionalTracker = controllers[name]
 			var current_state = tracker.get_input(spawn_action)
-			
+			# print(name) # "left_hand" "right_hand"
+			#
+			# XRPositionalTracker.TrackerHand.TRACKER_HAND_LEFT
+			# XRPositionalTracker.TrackerHand.TRACKER_HAND_RIGHT
+			# print(tracker.hand) # int
+
 			# Initialize previous state if not set
 			if not prev_controller_states.has(name):
 				prev_controller_states[name] = false
