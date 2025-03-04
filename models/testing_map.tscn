@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=57 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
 [ext_resource type="Script" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
+[ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 
 [sub_resource type="Resource" id="Resource_n1rqw"]
@@ -317,9 +318,11 @@ transform = Transform3D(0.093031, 0, -0.995663, 0, 1, 0, 0.995663, 0, 0.093031, 
 transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, -6.51413, 0, 0.0212898)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="decoration/post_lantern2"]
-transform = Transform3D(-0.984939, 0.121186, -0.123327, -0.115395, 0.0704528, 0.990818, 0.128762, 0.990126, -0.0554075, -0.0260446, 2.61905, 0.967334)
+transform = Transform3D(-0.990517, 0.126049, -0.0546507, -0.0460349, 0.0702822, 0.996464, 0.129445, 0.989531, -0.0638131, -0.0260446, 2.61905, 0.967334)
 light_color = Color(2.42, 1.075, 0, 1)
-light_energy = 16.0
+light_energy = 6.536
+light_size = 1.0
+light_specular = 0.25
 spot_range = 3.571
 spot_attenuation = -2.63
 spot_angle = 40.71
@@ -437,6 +440,10 @@ speed = 10.0
 
 [node name="better_bat2" parent="Node3D/Path3D/BatPathFollow3D" instance=ExtResource("33_npfiu")]
 transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
+
+[node name="lantern_swinging" parent="." instance=ExtResource("33_ea6jp")]
+transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
+rotation_speed = 2.0
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
 [connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]
