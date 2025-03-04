@@ -454,6 +454,7 @@ transform = Transform3D(-0.214752, 0, 0.976669, 0, 1, 0, -0.976669, 0, -0.214752
 text = "test"
 
 [node name="BatNode3D" type="Node3D" parent="."]
+visible = false
 
 [node name="Path3D" type="Path3D" parent="BatNode3D"]
 transform = Transform3D(0.999937, 0, 0, 0, 0.999937, 0, 0, 0, 0.999937, 0.190925, 0.159876, 0)
@@ -469,6 +470,7 @@ transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 
 
 [node name="lantern_swinging" parent="." instance=ExtResource("33_ea6jp")]
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
+visible = false
 rotation_speed = 2.0
 
 [connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]

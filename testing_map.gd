@@ -182,6 +182,7 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 	print(area.get_parent())
 	if area.get_parent().is_in_group("pumpkins"):
 		area.get_parent().splat()
+		XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
 	
 # dynamically load pumpkins:
 # on ready:

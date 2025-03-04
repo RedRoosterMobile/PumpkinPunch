@@ -38,8 +38,9 @@ spawn={
 
 [physics]
 
-3d/run_on_separate_thread=true
+common/physics_ticks_per_second=30
 3d/physics_engine="JoltPhysics3D"
+jolt_3d/solver/velocity_iterations=5
 
 [rendering]
 
