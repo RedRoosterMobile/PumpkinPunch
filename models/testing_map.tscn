@@ -445,6 +445,4 @@ transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
 rotation_speed = 2.0
 
-[connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
-[connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]
 [connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]

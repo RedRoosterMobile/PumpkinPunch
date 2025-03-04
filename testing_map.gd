@@ -61,11 +61,11 @@ func _ready() -> void:
 		add_child(xr_origin_3d)
 		
 		xr_origin_3d.init_hands()
-		await get_tree().create_timer(2).timeout
-		controller = XRHelpers.get_xr_controller(self)
-		print(controller)
-		if controller:
-			controller.button_pressed.connect(_on_button_pressed)
+		#await get_tree().create_timer(2).timeout
+		#controller = XRHelpers.get_xr_controller(self)
+		#print(controller)
+		#if controller:
+		#	controller.button_pressed.connect(_on_button_pressed)
 		
 
 #func _physics_process(delta: float) -> void:
@@ -157,29 +157,7 @@ func create_new_pumpkin():
 		pumpkins.append(p)
 	pass
 	
-func _on_kill_zone_area_entered(area: Area3D) -> void:
-	var pumpkin_node = area.get_parent()
-	var pp = pumpkins.filter(func(pumpkin):
-		return pumpkin.node == pumpkin_node
-	)
-	#var p: Pumpkin = pp[0]
-	#var mi:MeshInstance3D = p.node.get_child(0)
-	#mi.get_active_material()
-	#var m : StandardMaterial3D = mi.get_active_material(0)
-	#var m2 : StandardMaterial3D = mi.get_active_material(1)
-	#m.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;
-	#m2.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;
-	#print(mi)
-	#print(p.node)
 
-func _on_kill_zone_area_exited(area: Area3D) -> void:
-	var pumpkin_node = area.get_parent()
-	var pp = pumpkins.filter(func(pumpkin):
-		return pumpkin.node == pumpkin_node
-	)
-	#var p: Pumpkin = pp[0]
-	#print(p.node)
-	
 func follow_mouse():
 	# todo: only if not XR
 	var camera = get_viewport().get_camera_3d()
@@ -200,11 +178,6 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 	print(area.get_parent())
 	if area.get_parent().is_in_group("pumpkins"):
 		area.get_parent().splat()
-
-func spawn_pumpkin():
-	# z -6
-	# x 1.1 / -1.11
-	pass
 	
 # dynamically load pumpkins:
 # on ready:
