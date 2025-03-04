@@ -144,8 +144,10 @@ func create_new_pumpkin():
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
 		pumpkin.scale *= 0.5
+		# pumpkin.look_at_from_position()
+		#pumpkin.look_at(left_hand_body.global_position)
 		pumpkin.rotate_y(30) # do some deg2rad things
-		pumpkin.position = pumpkin_start_positions[0]
+		pumpkin.position = pumpkin_start_positions[4]
 		pumpkin.broken_model = pumpkin_pieces
 		pumpkin.add_to_group("pumpkins")
 		add_child(pumpkin)

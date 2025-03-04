@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2tq21rwxy8c4"
-path="res://.godot/imported/vampire bat.glb-e4f29ba5c06fc585c3a6115df1137995.scn"
+uid="uid://dgpewifp4xxof"
+path="res://.godot/imported/better_bat.glb-eb83ab2f1017119fe500073b2e36f411.scn"
 
 [deps]
 
-source_file="res://models/vampire bat.glb"
-dest_files=["res://.godot/imported/vampire bat.glb-e4f29ba5c06fc585c3a6115df1137995.scn"]
+source_file="res://models/better_bat.glb"
+dest_files=["res://.godot/imported/better_bat.glb-eb83ab2f1017119fe500073b2e36f411.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "animations": {
-"Flight": {
+"ArmatureAction": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",

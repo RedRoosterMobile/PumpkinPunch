@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://yesetwdub8ei"]
+
+[ext_resource type="PackedScene" uid="uid://bhpsio66inxsb" path="res://splash_fx.tscn" id="1_psep0"]
+[ext_resource type="Script" path="res://vfx_hit.gd" id="1_v7b1x"]
+[ext_resource type="Shader" uid="uid://1iu6gyjbreem" path="res://splash_fx_no_bill.tres" id="2_ip38j"]
+[ext_resource type="Texture2D" uid="uid://bjtw3tde0hhuj" path="res://images/particles/flame_05.png" id="3_j1skf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4arf4"]
+render_priority = 0
+shader = ExtResource("2_ip38j")
+shader_parameter/Hit_texture = ExtResource("3_j1skf")
+
+[sub_resource type="Curve" id="Curve_td7g7"]
+_data = [Vector2(0.00459242, 0.992475), 0.0, 0.0, 0, 0, Vector2(0.468427, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_usl1j"]
+curve = SubResource("Curve_td7g7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_085nt"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_usl1j")
+turbulence_enabled = true
+turbulence_influence_min = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1fef0"]
+size = Vector2(0.5, 0.5)
+
+[node name="VFX_Hit" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45749, 0)
+script = ExtResource("1_v7b1x")
+
+[node name="hit effect" parent="." instance=ExtResource("1_psep0")]
+emitting = false
+one_shot = true
+
+[node name="sparks" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_4arf4")
+emitting = false
+amount = 48
+lifetime = 0.74
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_085nt")
+draw_pass_1 = SubResource("QuadMesh_1fef0")

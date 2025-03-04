@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=54 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
-[ext_resource type="PackedScene" uid="uid://bs6edj1xqbyu6" path="res://vampire_bat_inherited.tscn" id="6_nqc0p"]
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="7_usxdh"]
 [ext_resource type="PackedScene" uid="uid://hj21vyhp78ye" path="res://addons/kaykit_halloween_bits/gltf/ribcage.gltf" id="11_153vq"]
 [ext_resource type="PackedScene" uid="uid://c480uebuatosg" path="res://addons/kaykit_halloween_bits/gltf/shrine.gltf" id="12_qs6li"]
@@ -31,9 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="26_fyld6"]
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
-[ext_resource type="PackedScene" uid="uid://bhpsio66inxsb" path="res://splash_fx.tscn" id="32_ivlvr"]
-[ext_resource type="Shader" uid="uid://1iu6gyjbreem" path="res://splash_fx_no_bill.tres" id="33_5qllv"]
-[ext_resource type="Texture2D" uid="uid://bjtw3tde0hhuj" path="res://images/particles/flame_05.png" id="34_vxfuj"]
+[ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 
 [sub_resource type="Resource" id="Resource_n1rqw"]
 script = ExtResource("2_wmay2")
@@ -67,12 +64,15 @@ sdfgi_cascade0_distance = 18.56
 sdfgi_max_distance = 296.96
 glow_enabled = true
 glow_normalized = true
-glow_strength = 1.2
+glow_strength = 0.95
+glow_bloom = 0.5
+glow_hdr_threshold = 0.95
 fog_enabled = true
-fog_density = 0.02
 fog_sky_affect = 0.0
 volumetric_fog_density = 0.19
 volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
+adjustment_contrast = 1.31
+adjustment_saturation = 0.57
 
 [sub_resource type="Shader" id="Shader_ey3m2"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -188,35 +188,6 @@ radius = 0.2
 
 [sub_resource type="QuadMesh" id="QuadMesh_55fg6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4arf4"]
-render_priority = 0
-shader = ExtResource("33_5qllv")
-shader_parameter/Hit_texture = ExtResource("34_vxfuj")
-
-[sub_resource type="Curve" id="Curve_td7g7"]
-_data = [Vector2(0.00459242, 0.992475), 0.0, 0.0, 0, 0, Vector2(0.468427, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_usl1j"]
-curve = SubResource("Curve_td7g7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_085nt"]
-particle_flag_align_y = true
-direction = Vector3(0, 1, 0)
-spread = 180.0
-initial_velocity_min = 4.0
-initial_velocity_max = 8.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.3
-scale_max = 0.5
-color = Color(2.5, 2, 0.5, 1)
-alpha_curve = SubResource("CurveTexture_usl1j")
-turbulence_enabled = true
-turbulence_influence_min = 0.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_1fef0"]
-size = Vector2(0.5, 0.5)
-
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
@@ -230,9 +201,8 @@ environment = SubResource("Environment_2o5or")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.795538, -0.239982, 0.798617, 0.551924, -1.15078, 0, 0)
-visible = false
 light_color = Color(0.842597, 0.756568, 0.323983, 1)
-light_energy = 0.66
+light_energy = 0.5
 shadow_enabled = true
 shadow_blur = 2.0
 directional_shadow_mode = 0
@@ -322,10 +292,6 @@ skeleton = NodePath("../..")
 
 [node name="decoration" type="Node3D" parent="."]
 script = ExtResource("5_kb2wl")
-
-[node name="vampire bat2" parent="decoration" instance=ExtResource("6_nqc0p")]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 2.28779, -2.89526)
-visible = false
 
 [node name="arch2" parent="decoration" instance=ExtResource("4_j13nx")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.23)
@@ -450,18 +416,8 @@ draw_pass_1 = SubResource("QuadMesh_55fg6")
 transform = Transform3D(-0.214752, 0, 0.976669, 0, 1, 0, -0.976669, 0, -0.214752, -2.5746, 1.73411, 1.03567)
 text = "test"
 
-[node name="VFX" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45749, 0)
-
-[node name="hit effect" parent="VFX" instance=ExtResource("32_ivlvr")]
-
-[node name="sparks" type="GPUParticles3D" parent="VFX"]
-material_override = SubResource("ShaderMaterial_4arf4")
-amount = 24
-lifetime = 0.74
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_085nt")
-draw_pass_1 = SubResource("QuadMesh_1fef0")
+[node name="better_bat2" parent="." instance=ExtResource("33_npfiu")]
+transform = Transform3D(-0.04465, 0, -0.194952, 0, 0.2, 0, 0.194952, 0, -0.04465, 0, 2.63814, -7.33158)
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
 [connection signal="area_exited" from="KillZone" to="." method="_on_kill_zone_area_exited"]
