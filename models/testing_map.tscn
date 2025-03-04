@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=60 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
 [ext_resource type="Script" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
+[ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="31_g8721"]
+[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 
@@ -43,7 +45,7 @@ duration_ms = 300
 
 [sub_resource type="Resource" id="Resource_wjjl5"]
 script = ExtResource("2_wmay2")
-magnitude = 0.5
+magnitude = 1.0
 active_during_pause = false
 indefinite = false
 duration_ms = 300
@@ -186,9 +188,28 @@ radius = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_pqm76"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5upae"]
+render_priority = 0
+shader = ExtResource("31_g8721")
+shader_parameter/Hit_texture = ExtResource("32_ytnan")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bkpbe"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 2.0
+tangential_accel_max = 2.0
+scale_min = 0.5
+scale_max = 0.6
+turbulence_enabled = true
+turbulence_noise_strength = 2.57
+turbulence_noise_scale = 3.451
 
 [sub_resource type="QuadMesh" id="QuadMesh_55fg6"]
+size = Vector2(0.5, 0.5)
 
 [sub_resource type="Curve3D" id="Curve3D_rqeuv"]
 _data = {
@@ -313,9 +334,11 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8.04825, -4.76837e-07, -6.279
 
 [node name="fence_broken2" parent="decoration" instance=ExtResource("6_b2gdy")]
 transform = Transform3D(0.093031, 0, -0.995663, 0, 1, 0, 0.995663, 0, 0.093031, -7.26844, 0, 10.7354)
+visible = false
 
 [node name="post_lantern2" parent="decoration" instance=ExtResource("7_usxdh")]
 transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, -6.51413, 0, 0.0212898)
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="decoration/post_lantern2"]
 transform = Transform3D(-0.990517, 0.126049, -0.0546507, -0.0460349, 0.0702822, 0.996464, 0.129445, 0.989531, -0.0638131, -0.0260446, 2.61905, 0.967334)
@@ -329,6 +352,7 @@ spot_angle = 40.71
 
 [node name="ribcage2" parent="decoration" instance=ExtResource("11_153vq")]
 transform = Transform3D(-0.748857, 0, -1.85451, 0, 2, 0, 1.85451, 0, -0.748857, 8.87077, 0, 5.9538)
+visible = false
 
 [node name="shrine2" parent="decoration" instance=ExtResource("12_qs6li")]
 transform = Transform3D(0.988276, -0.130768, -0.0788031, 0.130355, 0.991413, -0.0103942, 0.0794856, 0, 0.996836, 7.71024, 5.96046e-08, 1.02733)
@@ -341,6 +365,7 @@ transform = Transform3D(0.5, 2.98023e-08, 8.9407e-08, -2.98023e-08, 0.5, 8.9407e
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="decoration/skull_candle2"]
 transform = Transform3D(0.445476, 0.892695, -0.0681721, 0.0126247, 0.0698739, 0.997476, 0.895205, -0.445211, 0.0198576, 0.40776, 2.75593, 0.794613)
+visible = false
 light_color = Color(2.5, 2, 0.01, 1)
 light_energy = 3.451
 light_indirect_energy = 2.647
@@ -418,8 +443,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.29139)
 
 [node name="TodoLeafsGPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
-visible = false
+material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
+lifetime = 20.0
 process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
 
@@ -427,18 +453,18 @@ draw_pass_1 = SubResource("QuadMesh_55fg6")
 transform = Transform3D(-0.214752, 0, 0.976669, 0, 1, 0, -0.976669, 0, -0.214752, -2.5746, 1.73411, 1.03567)
 text = "test"
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="BatNode3D" type="Node3D" parent="."]
 
-[node name="Path3D" type="Path3D" parent="Node3D"]
+[node name="Path3D" type="Path3D" parent="BatNode3D"]
 transform = Transform3D(0.999937, 0, 0, 0, 0.999937, 0, 0, 0, 0.999937, 0.190925, 0.159876, 0)
 curve = SubResource("Curve3D_rqeuv")
 
-[node name="BatPathFollow3D" type="PathFollow3D" parent="Node3D/Path3D"]
-transform = Transform3D(-0.999852, 0.00998035, -0.0135195, 1.86263e-09, 0.804517, 0.593908, 0.0168044, 0.593825, -0.804403, -0.171464, 8.20135, -10.2822)
+[node name="BatPathFollow3D" type="PathFollow3D" parent="BatNode3D/Path3D"]
+transform = Transform3D(-0.999852, 0.00998034, -0.0135195, 0, 0.804518, 0.593907, 0.0168044, 0.593824, -0.804404, -0.171464, 8.20135, -10.2822)
 script = ExtResource("31_cqoek")
 speed = 10.0
 
-[node name="better_bat2" parent="Node3D/Path3D/BatPathFollow3D" instance=ExtResource("33_npfiu")]
+[node name="better_bat2" parent="BatNode3D/Path3D/BatPathFollow3D" instance=ExtResource("33_npfiu")]
 transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
 
 [node name="lantern_swinging" parent="." instance=ExtResource("33_ea6jp")]

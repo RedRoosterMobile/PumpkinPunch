@@ -3,6 +3,11 @@ extends PathFollow3D
 @export var speed = 2.0  # Speed in units per second
 
 func _process(delta):
+	
+	if progress <= 0.01:
+		#Audio.play("audio/crazy_bat.ogg", true, global_transform)
+		pass
+		
 	# Increase the progress along the path
 	progress += speed * delta
 	

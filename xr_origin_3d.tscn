@@ -14,6 +14,7 @@ script = ExtResource("1_o48np")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="LeftHandController" type="XRController3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 
@@ -22,6 +23,7 @@ visible = false
 mesh = SubResource("SphereMesh_p7ryb")
 
 [node name="RightHandController" type="XRController3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 

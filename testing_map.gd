@@ -4,7 +4,8 @@ extends Node
 @export var right_hand_body: RigidBody3D
 
 @export var xr_enabled:bool = false
-var controller : XRController3D
+var controller_left : XRController3D
+var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
 
 # Inner class
@@ -62,10 +63,12 @@ func _ready() -> void:
 		
 		xr_origin_3d.init_hands()
 		#await get_tree().create_timer(2).timeout
-		#controller = XRHelpers.get_xr_controller(self)
-		#print(controller)
-		#if controller:
-		#	controller.button_pressed.connect(_on_button_pressed)
+		print("left hand controller")
+		# left controller
+		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
+		print(controller_left)
+		if controller_left:
+			controller_left.button_pressed.connect(_on_button_pressed)
 		
 
 #func _physics_process(delta: float) -> void:
@@ -102,10 +105,11 @@ var prev_controller_states: Dictionary = {}  # Stores previous state for each co
 func _on_button_pressed(button_name: String) -> void:
 	print("rumble")
 	match button_name:
+		# works!
 		"ax_button":
-			XRToolsRumbleManager.add(controller.name + "ax", ax_button_event, [controller])
+			XRToolsRumbleManager.add(controller_left.name + "ax", ax_button_event, [controller_left])
 		"by_button":
-			XRToolsRumbleManager.add(controller.name + "by", by_button_event, [controller])
+			XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
 
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
@@ -114,10 +118,10 @@ func create_new_pumpkin():
 	if xr_enabled:
 		# XRhelper style of getting keys
 		# https://github.com/GodotVR/godot-xr-tools/pull/557/files#diff-a9959fdf1a493f41ed711540fffaf024b7561fb8eaf7017987b7b2c2d36317e3
-		if controller and controller.get_is_active() and controller.is_button_pressed(spawn_action):
-			# never called..
-			print(controller.get_tracker_hand())
+		if controller_left and controller_left.get_is_active() and controller_left.is_button_pressed(spawn_action):
+			print(controller_left.get_tracker_hand())
 			print("pressed")
+		# refactor this to the above??
 		for name in controllers:
 			var tracker: XRPositionalTracker = controllers[name]
 			var current_state = tracker.get_input(spawn_action)
