@@ -279,7 +279,7 @@ lock_rotation = true
 [node name="glove_left" parent="HandLeft" instance=ExtResource("4_ma5p2")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="HandArea3D" type="Area3D" parent="HandLeft"]
+[node name="HandArea3D" type="Area3D" parent="HandLeft" groups=["hand_areas"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandLeft/HandArea3D"]
 shape = SubResource("SphereShape3D_6r6ng")
@@ -300,7 +300,7 @@ lock_rotation = true
 [node name="glove_left" parent="HandRight" instance=ExtResource("4_ma5p2")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="HandArea3D" type="Area3D" parent="HandRight"]
+[node name="HandArea3D" type="Area3D" parent="HandRight" groups=["hand_areas"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandRight/HandArea3D"]
 shape = SubResource("SphereShape3D_6r6ng")
@@ -466,4 +466,5 @@ transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
 rotation_speed = 2.0
 
+[connection signal="area_entered" from="HandLeft/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
 [connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]

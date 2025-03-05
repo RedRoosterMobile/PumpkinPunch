@@ -8,9 +8,9 @@ var vfx_instance
 func _ready() -> void:
 	vfx_instance = vfx.instantiate()
 
-func _unhandled_inputt(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		splat()
+#func _unhandled_inputt(event: InputEvent) -> void:
+#	if Input.is_action_just_pressed("ui_accept"):
+#		splat()
 
 func splat():
 	var children = vfx_instance.get_children()

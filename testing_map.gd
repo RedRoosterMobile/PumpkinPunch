@@ -68,9 +68,13 @@ func _ready() -> void:
 		print("left hand controller")
 		# left controller
 		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
-		print(controller_left)
 		if controller_left:
 			controller_left.button_pressed.connect(_on_button_pressed)
+			
+		# right controller
+		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
+		if controller_right:
+			controller_right.button_pressed.connect(_on_button_pressed)
 		
 
 #func _physics_process(delta: float) -> void:
@@ -105,7 +109,8 @@ var prev_controller_states: Dictionary = {}  # Stores previous state for each co
 ## Rumble event for pushing B or Y
 @export var by_button_event : XRToolsRumbleEvent
 func _on_button_pressed(button_name: String) -> void:
-	print("rumble")
+	#print("rumble")
+	return
 	match button_name:
 		# works!
 		"ax_button":
@@ -122,7 +127,7 @@ func create_new_pumpkin():
 		# https://github.com/GodotVR/godot-xr-tools/pull/557/files#diff-a9959fdf1a493f41ed711540fffaf024b7561fb8eaf7017987b7b2c2d36317e3
 		if controller_left and controller_left.get_is_active() and controller_left.is_button_pressed(spawn_action):
 			print(controller_left.get_tracker_hand())
-			print("pressed")
+			#print("pressed")
 		# refactor this to the above??
 		for name in controllers:
 			var tracker: XRPositionalTracker = controllers[name]
@@ -180,11 +185,44 @@ func follow_mouse():
 		left_hand_body.position = intersection_point
 
 func _on_hand_area_3d_area_entered(area: Area3D) -> void:
-	print("ball hit")
+	print("ball hit---")
+	print(area)
 	print(area.get_parent())
-	if area.get_parent().is_in_group("pumpkins"):
+	print(self)  # testing_map
+	print("ball END---")
+	
+	# The area is the pumpkin's Area3D. We need to find the HandArea3D that detected it.
+	# Use the physics collision data or node hierarchy to trace back to HandArea3D
+	var colliding_area = area  # The pumpkin's Area3D
+	var is_pumpkin:bool = area.get_parent().is_in_group("pumpkins")
+	if is_pumpkin:
 		area.get_parent().splat()
-		XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
+		
+	if xr_enabled and is_pumpkin:
+		# Since we can't directly get HandArea3D from the pumpkin, we need to search for the HandArea3D
+		# that intersects with this area. This requires checking all HandArea3D nodes in the scene.
+		var hand_areas = get_tree().get_nodes_in_group("hand_areas")  # Assume HandArea3D nodes are in a "hand_areas" group
+		
+		for hand_area in hand_areas:
+			if hand_area is Area3D and hand_area.overlaps_area(colliding_area):
+				# Found the HandArea3D that detected the collision
+				print("Found HandArea3D: ", hand_area.name)
+				
+				# Check its parent to determine the hand
+				var hand_parent = hand_area.get_parent()
+				
+				if hand_parent and hand_parent.name == "HandLeft":
+					print("Left hand triggered the event")
+					# Handle left hand-specific logic here
+					XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
+				elif hand_parent and hand_parent.name == "HandRight":
+					print("Right hand triggered the event")
+					# Handle right hand-specific logic here
+					XRToolsRumbleManager.add(controller_right.name + "by", by_button_event, [controller_right])
+				else:
+					print("Unknown hand triggered the event. HandArea3D parent: ", hand_parent.name if hand_parent else "No parent")
+				break  # Exit the loop once we find the matching HandArea3D
+	
 	
 # dynamically load pumpkins:
 # on ready:
