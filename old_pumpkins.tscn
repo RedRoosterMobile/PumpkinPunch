@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo4u1n2khdt86"]
+
+[ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_kvwyt"]
+[ext_resource type="PackedScene" uid="uid://behm4qpk02k2s" path="res://models/pumpkin_hollow_pieces_modified.tscn" id="2_e3tqf"]
+
+[node name="old pumpkins" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8551, 0.771, 2.664)
+visible = false
+
+[node name="pumpkin_hollow_full" parent="." groups=["pumpkins"] instance=ExtResource("1_kvwyt")]
+transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -1.26961, 0.31045, -4.78038)
+broken_model = ExtResource("2_e3tqf")
+
+[node name="pumpkin_hollow_full2" parent="." groups=["pumpkins"] instance=ExtResource("1_kvwyt")]
+transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, 0.960844, 0.31045, -4.78038)
+broken_model = ExtResource("2_e3tqf")
+
+[node name="pumpkin_hollow_full3" parent="." groups=["pumpkins"] instance=ExtResource("1_kvwyt")]
+transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -0.0625553, 0.14348, -2.94847)
+broken_model = ExtResource("2_e3tqf")
+
+[node name="pumpkin_hollow_full4" parent="." groups=["pumpkins"] instance=ExtResource("1_kvwyt")]
+transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -1.18586, 0.31045, -8.38292)
+broken_model = ExtResource("2_e3tqf")
+
+[node name="pumpkin_hollow_full5" parent="." groups=["pumpkins"] instance=ExtResource("1_kvwyt")]
+transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, 1.11298, 0.31045, -8.38292)
+broken_model = ExtResource("2_e3tqf")

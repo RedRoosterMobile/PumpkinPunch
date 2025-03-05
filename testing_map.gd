@@ -22,8 +22,10 @@ const PUMPKIN_X:float = 1.1 # left/right
 const PUMPKIN_Y:float = 1 # up/down
 
 # use this for spawning
-const SPAWN_THING:PackedScene = preload("res://models/pumpkin_hollow_full_modified.tscn")
-const SPAWN_THING_BROKEN:PackedScene = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
+#const SPAWN_THING:PackedScene = preload("res://models/pumpkin_hollow_full_modified.tscn")
+#const SPAWN_THING_BROKEN:PackedScene = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
+const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full.tscn")
+const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces.tscn")
 const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
 # use this for initial positions
 var pumpkin_start_positions: Array[Vector3] = [
@@ -150,7 +152,7 @@ func create_new_pumpkin():
 		pumpkin.scale *= 0.5
 		# pumpkin.look_at_from_position()
 		#pumpkin.look_at(left_hand_body.global_position)
-		pumpkin.rotate_y(30) # do some deg2rad things
+		# pumpkin.rotate_y(30) # do some deg2rad things
 		pumpkin.position = pumpkin_start_positions[4]
 		pumpkin.broken_model = pumpkin_pieces
 		pumpkin.add_to_group("pumpkins")

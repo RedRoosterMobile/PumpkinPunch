@@ -11,7 +11,7 @@ func _ready() -> void:
 		piece.apply_impulse(piece.get_child(0).position.normalized() * INTENSITY*randf_range(0.8,1.2), self.global_position)
 		#await get_tree().create_timer(randf_range(3,4.5)).timeout
 		#piece.queue_free()
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 	queue_free()
 
 func _ready_dir() -> void:

@@ -1,9 +1,8 @@
-[gd_scene load_steps=60 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=59 format=3 uid="uid://b3l46tvt2tevv"]
 
-[ext_resource type="PackedScene" uid="uid://s731qn4j6ebs" path="res://models/pumpkin_hollow_full_modified.tscn" id="1_ctg6l"]
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
-[ext_resource type="PackedScene" uid="uid://behm4qpk02k2s" path="res://models/pumpkin_hollow_pieces_modified.tscn" id="1_ov8g5"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_wmay2"]
+[ext_resource type="PackedScene" uid="uid://dqvxht3mrrs01" path="res://models/lowpoly_pumpkin_full.tscn" id="3_qyoxo"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
 [ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
@@ -253,25 +252,20 @@ shape = SubResource("BoxShape3D_qk40o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771, 2.664)
 fov = 70.0
 
-[node name="pumpkin_hollow_full" parent="." groups=["pumpkins"] instance=ExtResource("1_ctg6l")]
-transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -1.26961, 1.08145, -2.11638)
-broken_model = ExtResource("1_ov8g5")
+[node name="lowpoly_pumpkin_full" parent="." groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26961, 1.08145, -2.11638)
 
-[node name="pumpkin_hollow_full2" parent="." groups=["pumpkins"] instance=ExtResource("1_ctg6l")]
-transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, 0.960844, 1.08145, -2.11638)
-broken_model = ExtResource("1_ov8g5")
+[node name="lowpoly_pumpkin_full2" parent="." groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960844, 1.08145, -2.11638)
 
-[node name="pumpkin_hollow_full3" parent="." groups=["pumpkins"] instance=ExtResource("1_ctg6l")]
-transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -0.0625553, 0.91448, -0.284467)
-broken_model = ExtResource("1_ov8g5")
+[node name="lowpoly_pumpkin_full3" parent="." groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625553, 0.91448, -0.284467)
 
-[node name="pumpkin_hollow_full4" parent="." groups=["pumpkins"] instance=ExtResource("1_ctg6l")]
-transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, -1.18586, 1.08145, -5.71892)
-broken_model = ExtResource("1_ov8g5")
+[node name="lowpoly_pumpkin_full4" parent="." groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18586, 1.08145, -5.71892)
 
-[node name="pumpkin_hollow_full5" parent="." groups=["pumpkins"] instance=ExtResource("1_ctg6l")]
-transform = Transform3D(0.0959326, 0, -0.995388, 0, 1, 0, 0.995388, 0, 0.0959326, 1.11298, 1.08145, -5.71892)
-broken_model = ExtResource("1_ov8g5")
+[node name="lowpoly_pumpkin_full5" parent="." groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11298, 1.08145, -5.71892)
 
 [node name="KillZone" type="Area3D" parent="."]
 
@@ -470,7 +464,6 @@ transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 
 
 [node name="lantern_swinging" parent="." instance=ExtResource("33_ea6jp")]
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
-visible = false
 rotation_speed = 2.0
 
 [connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
