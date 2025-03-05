@@ -181,7 +181,7 @@ size = Vector3(30, 1, 30)
 size = Vector3(20, 20, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6r6ng"]
-radius = 0.2
+radius = 0.12
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ekxpw"]
 
@@ -282,6 +282,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 [node name="HandArea3D" type="Area3D" parent="HandLeft" groups=["hand_areas"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandLeft/HandArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00405067, -0.0416127)
 shape = SubResource("SphereShape3D_6r6ng")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandLeft"]
@@ -303,6 +304,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 [node name="HandArea3D" type="Area3D" parent="HandRight" groups=["hand_areas"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandRight/HandArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00405067, -0.0416127)
 shape = SubResource("SphereShape3D_6r6ng")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandRight"]
@@ -350,6 +352,7 @@ visible = false
 
 [node name="shrine2" parent="decoration" instance=ExtResource("12_qs6li")]
 transform = Transform3D(0.988276, -0.130768, -0.0788031, 0.130355, 0.991413, -0.0103942, 0.0794856, 0, 0.996836, 7.71024, 5.96046e-08, 1.02733)
+visible = false
 
 [node name="skull_candle2" parent="decoration" instance=ExtResource("13_0filk")]
 transform = Transform3D(0.898878, 0, -0.438199, -0.0560588, 0.991783, -0.114994, 0.434598, 0.12793, 0.891492, 4.02539, 2.38419e-07, -1.07351)
