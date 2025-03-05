@@ -1,42 +1,43 @@
 extends Node3D
 
-@export var INTENSITY:float = 8.0
-var shot_direction: Vector3   # This should be set to the direction from which the pumpkin was shot
-# ideas:
-# make the explosion stronger on a certain side
-# add some randomness
+@export var INTENSITY: float = 4.0
+@export var RANDOMNESS: float = 0.5  # Controls how much random deviation (0.0 = none, 1.0 = lots)
+var shot_direction: Vector3   # Direction from which the pumpkin was shot
 
 func _ready() -> void:
-	for piece:RigidBody3D in self.get_children():
-		piece.apply_impulse(piece.get_child(0).position.normalized() * INTENSITY*randf_range(0.8,1.2), self.global_position)
-		#await get_tree().create_timer(randf_range(3,4.5)).timeout
-		#piece.queue_free()
-	await get_tree().create_timer(4).timeout
-	queue_free()
-
-func _ready_dir() -> void:
-	# pass this in from the outside
-	shot_direction = Vector3.BACK
-	# Ensure the shot_direction is normalized
-	shot_direction = shot_direction.normalized()
-
-	for piece: RigidBody3D in get_children():
-		# Calculate the vector from the explosion center to the piece
-		var direction_to_piece = (piece.global_transform.origin - global_transform.origin).normalized()
-		
-		# Compute the dot product between the piece direction and the negative shot direction
-		var cos_theta = direction_to_piece.dot(-shot_direction)
-		
-		# Adjust the intensity factor (mapping from [-1, 1] to [0, 1])
-		var intensity_factor = (cos_theta + 1) / 2
-		intensity_factor*=2
-		
-		# Calculate the impulse
-		var impulse = direction_to_piece * INTENSITY * intensity_factor
-		
-		# Apply the impulse at the piece's position
-		piece.apply_impulse(impulse, piece.global_transform.origin)
+	# Normalize shot_direction if it's been set, otherwise use default
+	if shot_direction != Vector3.ZERO:
+		shot_direction = shot_direction.normalized()
+	else:
+		shot_direction = Vector3.UP  # Default direction if none specified
 	
-	# Optional: Wait before freeing the node
-	await get_tree().create_timer(5).timeout
+	for piece: RigidBody3D in self.get_children():
+		# Base direction from piece position
+		var base_dir = piece.get_child(0).position.normalized()
+		
+		# Add influence from shot direction
+		base_dir = base_dir.lerp(shot_direction, 0.3)  # Mix in some shot direction
+		
+		# Add random variation
+		var random_offset = Vector3(
+			randf_range(-RANDOMNESS, RANDOMNESS),
+			randf_range(-RANDOMNESS, RANDOMNESS),
+			randf_range(-RANDOMNESS, RANDOMNESS)
+		)
+		
+		# Combine and normalize the final direction
+		var final_direction = (base_dir + random_offset).normalized()
+		
+		# Apply impulse with random intensity
+		var random_intensity = INTENSITY * randf_range(0.8, 1.2)
+		piece.apply_impulse(final_direction * random_intensity, self.global_position)
+	
+	# Optional: Add random angular velocity for spinning pieces
+		piece.angular_velocity = Vector3(
+			randf_range(-2.0, 2.0),
+			randf_range(-2.0, 2.0),
+			randf_range(-2.0, 2.0)
+		)
+	
+	await get_tree().create_timer(4).timeout
 	queue_free()
