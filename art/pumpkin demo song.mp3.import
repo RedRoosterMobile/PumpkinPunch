@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://p0nn68ac82gq"
+path="res://.godot/imported/pumpkin demo song.mp3-73576f4a5272d78efc1fe99baa252530.mp3str"
+
+[deps]
+
+source_file="res://art/pumpkin demo song.mp3"
+dest_files=["res://.godot/imported/pumpkin demo song.mp3-73576f4a5272d78efc1fe99baa252530.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

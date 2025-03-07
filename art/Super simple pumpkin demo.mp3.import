@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bbxxe74cgt5j3"
+path="res://.godot/imported/Super simple pumpkin demo.mp3-99ea7185430abc2cd21e54fc91a714f6.mp3str"
+
+[deps]
+
+source_file="res://art/Super simple pumpkin demo.mp3"
+dest_files=["res://.godot/imported/Super simple pumpkin demo.mp3-99ea7185430abc2cd21e54fc91a714f6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

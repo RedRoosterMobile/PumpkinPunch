@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://cxn0153qfvr2e"
+path="res://.godot/imported/simple_left.mid-084de44f1af2bc999c01eeae31ef4f84.res"
+
+[deps]
+
+source_file="res://art/simple_left.mid"
+dest_files=["res://.godot/imported/simple_left.mid-084de44f1af2bc999c01eeae31ef4f84.res"]
+
+[params]
+

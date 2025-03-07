@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=60 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_wmay2"]
@@ -24,9 +24,10 @@
 [ext_resource type="PackedScene" uid="uid://r8n4sutnqcgl" path="res://addons/kaykit_halloween_bits/gltf/crypt.gltf" id="22_3r8pk"]
 [ext_resource type="PackedScene" uid="uid://8fbwqjjsntq6" path="res://addons/kaykit_halloween_bits/gltf/path_C.gltf" id="23_iwc6b"]
 [ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="24_0n22y"]
-[ext_resource type="AudioStream" uid="uid://coe3u25nkm6iv" path="res://art/Haunted Beats (1).mp3" id="24_66wh8"]
 [ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="25_qql4s"]
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="26_fyld6"]
+[ext_resource type="MidiResource" uid="uid://cgfy738op06yc" path="res://art/simple_combined_fixed.mid" id="26_t3jci"]
+[ext_resource type="AudioStream" uid="uid://7x8dllk00135" path="res://art/Super simple pumpkin demo.wav" id="27_blul2"]
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
 [ext_resource type="Script" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
@@ -423,9 +424,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -0.384281)
 [node name="crypt2" parent="decoration" instance=ExtResource("22_3r8pk")]
 transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
 
+[node name="MidiPlayer" type="MidiPlayer" parent="."]
+midi = ExtResource("26_t3jci")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("24_66wh8")
-autoplay = true
+stream = ExtResource("27_blul2")
 bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]

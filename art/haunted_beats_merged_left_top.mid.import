@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://qkvijtagnpvw"
+path="res://.godot/imported/haunted_beats_merged_left_top.mid-8db9b88c1fe683a46e4b4543ceb874fd.res"
+
+[deps]
+
+source_file="res://art/haunted_beats_merged_left_top.mid"
+dest_files=["res://.godot/imported/haunted_beats_merged_left_top.mid-8db9b88c1fe683a46e4b4543ceb874fd.res"]
+
+[params]
+

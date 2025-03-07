@@ -75,6 +75,8 @@ func _ready() -> void:
 		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
 		if controller_right:
 			controller_right.button_pressed.connect(_on_button_pressed)
+			
+		init_midi()
 		
 
 #func _physics_process(delta: float) -> void:
@@ -258,3 +260,83 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 # with music:
 # - spawn them on midi notes
 # - TBD
+@onready var midi_player: MidiPlayer = $MidiPlayer
+@onready var asp: AudioStreamPlayer = $AudioStreamPlayer
+func init_midi():
+	# midi_player.loop = true
+	midi_player.note.connect(my_note_callback)
+
+	 # link the AudioStreamPlayer in your scene
+	# that contains the music associated with the midi
+	# NOTE: this must be an array, you can link multiple ASPs or one as 
+	# shown below and they will all sync with playback of the MIDI
+	midi_player.link_audio_stream_player([asp])
+
+	# this will also start the audio stream player (music)
+	midi_player.play()
+	pass
+
+@onready var grave_left: Node3D = $decoration/grave_A2
+@onready var grave_right: Node3D = $decoration/grave_A_destroyed3
+
+func my_note_callback(event: Variant, track: int):
+	if event['subtype'] == MIDI_MESSAGE_NOTE_ON:
+		var pitch: int = event['note']
+		var height: float = pitch / 10.0 - 5.0
+		if track == 0:
+			# left
+			#print("left")
+			 # Create a new tween
+			var tween = create_tween()
+			
+			# Configure tween behavior (optional)
+			tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
+			tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
+			# Scale up (first number is duration in seconds)
+			tween.tween_property(
+				grave_left,           # Target node
+				"scale",             # Property to animate
+				Vector3(1.5, 1.5, 1.5),   # Target scale value
+				0.05                 # Duration
+			)
+			
+			# Scale back down
+			tween.tween_property(
+				grave_left,
+				"scale",
+				Vector3(1.0, 1.0, 1.0),   # Back to original size
+				0.05
+			)
+			#spawn_pumpkin("left", height)
+			pass
+		elif track == 1:
+			# right
+			#print("right")
+			#spawn_pumpkin("right", height)#
+			 # Create a new tween
+			var tween = create_tween()
+			
+			# Configure tween behavior (optional)
+			tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
+			tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
+			
+			# Scale up (first number is duration in seconds)
+			tween.tween_property(
+				grave_right,           # Target node
+				"scale",             # Property to animate
+				Vector3(1.5, 1.5,1.5),   # Target scale value
+				0.05                  # Duration
+			)
+			
+			# Scale back down
+			tween.tween_property(
+				grave_right,
+				"scale",
+				Vector3(1.0, 1.0,1.0),   # Back to original size
+				0.05
+			)
+			pass
+		elif track == 2:
+			# bat
+			# spawn_bat(height)
+			pass
