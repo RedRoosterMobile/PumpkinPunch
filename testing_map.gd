@@ -35,19 +35,20 @@ var pumpkin_start_positions: Array[Vector3] = [
 	Vector3(-1.18586, 1.08145, -5.71892),
 	Vector3(1.11298, 1.08145, -5.71892)
 ]
+
 func _ready() -> void:
-	
-	for thing:Node in get_children():
+	for thing:Node in $DebugPumpkins.get_children():
 		if thing.is_in_group("pumpkins"):
 			var p = Pumpkin.new()
 			p.node = thing
 			p.start_position = thing.position
-			# pumpkin_start_positions.append(thing.position)
 			pumpkins.append(p)
 			thing.scale *= 0.5
 			start_pos = thing.position
-			
-	print(pumpkin_start_positions)
+	if pumpkins.size() > 0:
+		# FIXME: do this when the first pumpkin has spawned
+		var a_pumpkin: Node3D = pumpkins[0].node
+		pumpkin_grin(a_pumpkin.get_material())
 	
 	print("xr_controls_enabled")
 	print(xr_enabled)
@@ -64,7 +65,6 @@ func _ready() -> void:
 		add_child(xr_origin_3d)
 		
 		xr_origin_3d.init_hands()
-		#await get_tree().create_timer(2).timeout
 		print("left hand controller")
 		# left controller
 		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
@@ -97,7 +97,11 @@ func _process(delta: float) -> void:
 		
 		if pumpkin.node.position.z > 3:
 			pumpkin.node.position.z = PUMPKIN_Z
-	$Label3D.text = str(Engine.get_frames_per_second())
+		
+		#print("pumpkin.node.get_child(0)")
+		#print(pumpkin.node.get_child(0)) # <MeshInstance3D jack o lantern
+		#pumpkin.node.get_child(0).look_at(controller_left.position, Vector3.UP)
+	$Label3D.text = str(Engine.get_frames_per_second()) + "\n" + "a new line"
 	
 	# Variables to track state
 var controller_spawn_just_pressed: bool = false
@@ -156,8 +160,7 @@ func create_new_pumpkin():
 		var pumpkin_pieces = SPAWN_THING_BROKEN
 		pumpkin.scale *= 0.5
 		# pumpkin.look_at_from_position()
-		#pumpkin.look_at(left_hand_body.global_position)
-		# pumpkin.rotate_y(30) # do some deg2rad things
+		
 		pumpkin.position = pumpkin_start_positions[4]
 		pumpkin.broken_model = pumpkin_pieces
 		pumpkin.add_to_group("pumpkins")
@@ -165,9 +168,38 @@ func create_new_pumpkin():
 		var p = Pumpkin.new()
 		p.node = pumpkin
 		p.start_position = pumpkin.position
+		
 		pumpkins.append(p)
 	pass
 	
+
+func pumpkin_grin(stm:StandardMaterial3D) -> void:
+	# Create new tween
+	var tween: Tween
+	tween = create_tween()
+	tween.set_loops()  # Makes it repeat forever
+	
+	#var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
+	var initial_color: Color
+	
+
+	# Animation parameters
+	var animation_duration: float = 2.0  # Duration for full cycle (to white and back)
+	# Animate to white
+	tween.tween_property(
+		stm, 
+		"albedo_color", 
+		Color.BLUE, 
+		animation_duration / 2).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN)  # And this
+	
+	# Animate back to initial color
+	tween.tween_property(
+		stm, 
+		"albedo_color", 
+		initial_color, 
+		animation_duration / 2
+	).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)  # And this
+
 
 func follow_mouse():
 	# todo: only if not XR
@@ -222,19 +254,6 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 				else:
 					print("Unknown hand triggered the event. HandArea3D parent: ", hand_parent.name if hand_parent else "No parent")
 				break  # Exit the loop once we find the matching HandArea3D
-	
-	
-# dynamically load pumpkins:
-# on ready:
-# - spawn pumpkins with position
-# - add to array of custom class
-# process:
-# - filter destroyed pumpkins
-# - add more if below limit
-# - move them forward or reset if behind threshold
-# physica handler of glove:
-# - delete touched pumpkin
-# - delete reference from array
 
 # with music:
 # - spawn them on midi notes

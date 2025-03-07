@@ -64,6 +64,9 @@ void fragment() {
     c1 = clamp(c1, 0.0, 1.0);
 
     vec3 col = vec3(1.5 * c1, 1.5 * pow(c1, 3.0), pow(c1, 6.0));
+	if (UV.y >= 0.88) {
+		col = vec3(0.,0.,0.);
+	}
 
     float a = c * (1.0 - pow(uv.y, 3.0));
 	EMISSION = mix(vec3(0.0), col, a); // Use EMISSION instead of COLOR

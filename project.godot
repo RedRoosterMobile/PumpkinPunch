@@ -26,7 +26,11 @@ XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
+
+[global_group]
+
+player=""
 
 [input]
 
@@ -46,6 +50,7 @@ jolt_3d/solver/velocity_iterations=5
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=1
 
 [xr]
 
