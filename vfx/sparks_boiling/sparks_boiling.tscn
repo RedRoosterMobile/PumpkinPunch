@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://75vtg2lm6alt"]
 
-[ext_resource type="Texture2D" uid="uid://b1ohrdsk1tw3g" path="res://addons/kenney-particles/textures/circle_05.png" id="1_hhlhq"]
+[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="1_hhlhq"]
 
 [sub_resource type="Curve" id="Curve_naoyv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.110701, 1), 0.0, 0.0, 0, 0, Vector2(0.782288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.65777, 0.0, 0, 0]

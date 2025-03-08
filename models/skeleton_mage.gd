@@ -36,11 +36,8 @@ func _ready() -> void:
 	# Set the initial animation to the spawn animation
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SPAWN
 	
-	Messenger.game_finished.connect(_on_game_finished)
+	Messenger.game_finished.connect(kill)
 	Messenger.pumpkin_spawned.connect(shoot)
-
-func _on_game_finished():
-	kill()
 
 func _process(delta: float) -> void:
 	if is_moving:
@@ -62,6 +59,7 @@ func _process(delta: float) -> void:
 func kill():
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
 	Messenger.skeleton_died.emit()
+
 func shoot(pumpkin_pos: Vector3):
 	is_moving = false
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SHOOT
@@ -71,14 +69,20 @@ func shoot(pumpkin_pos: Vector3):
 	rotate_y(deg_to_rad(180))
 	
 	print("##### shoot #####")
-	await get_tree().create_timer(1.066).timeout  # Wait for shoot animation
+	var animation_time:float = 1.066
 	
+	await get_tree().create_timer(animation_time).timeout  # Wait for shoot animation
 	# Tween back to initial rotation
 	var tween = create_tween()
-	tween.tween_property(self, "quaternion", initial_rotation, 1.066).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "quaternion", initial_rotation, animation_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
 	print("##### back #####")
 	# await tween.finished  # Wait for the tween to finish
 	is_moving = true
 	
+# plan: spawn a pumpkin
+# - move the mage to the position(or rotate)
+# - spawn pumpkin at this postion when shoot animation is done
+# - make back to idle immediately
+# - rotate mage back

@@ -68,10 +68,10 @@ func _ready() -> void:
 	print("xr_controls_enabled")
 	print(xr_enabled)
 	var hand_area_left:Area3D = left_hand_body.get_node("HandArea3D")
-	hand_area_left.connect("area_entered",_on_hand_area_3d_area_entered)
+	hand_area_left.connect("area_entered",_on_hand_area_3d_area_entered_left)
 	
 	var hand_area_right:Area3D = right_hand_body.get_node("HandArea3D")
-	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered)
+	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered_right)
 	# xr scene will add those to it's tree 
 	if xr_enabled:
 		var xr_origin_3d: MyOrigin = XR_INIT.instantiate()
@@ -229,9 +229,13 @@ func follow_mouse():
 	if left_hand_body:
 		left_hand_body.position = intersection_point
 
-
+func _on_hand_area_3d_area_entered_left(area: Area3D):
+	_on_hand_area_3d_area_entered(area,controller_left)
+	
+func _on_hand_area_3d_area_entered_right(area: Area3D):
+	_on_hand_area_3d_area_entered(area,controller_right)
 # FIXME: move this to the hand area to know which on triggered the collision
-func _on_hand_area_3d_area_entered(area: Area3D) -> void:
+func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> void:
 	#print("ball hit---")
 	#print(area)
 	#print(area.get_parent())
@@ -246,29 +250,7 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 		area.get_parent().splat()
 		
 	if xr_enabled and is_pumpkin:
-		# Since we can't directly get HandArea3D from the pumpkin, we need to search for the HandArea3D
-		# that intersects with this area. This requires checking all HandArea3D nodes in the scene.
-		var hand_areas = get_tree().get_nodes_in_group("hand_areas")  # Assume HandArea3D nodes are in a "hand_areas" group
-		# FIXME: move this to the hand area to know which on triggered the collision
-		for hand_area in hand_areas:
-			if hand_area is Area3D and hand_area.overlaps_area(colliding_area):
-				# Found the HandArea3D that detected the collision
-				#print("Found HandArea3D: ", hand_area.name)
-				
-				# Check its parent to determine the hand
-				var hand_parent = hand_area.get_parent()
-				
-				if hand_parent and hand_parent.name == "HandLeft":
-					#print("Left hand triggered the event")
-					# Handle left hand-specific logic here
-					XRToolsRumbleManager.add(controller_left.name + "left", rumble_event_left, [controller_left])
-				elif hand_parent and hand_parent.name == "HandRight":
-					#print("Right hand triggered the event")
-					# Handle right hand-specific logic here
-					XRToolsRumbleManager.add(controller_right.name + "right", rumble_event_right, [controller_right])
-				else:
-					print("Unknown hand triggered the event. HandArea3D parent: ", hand_parent.name if hand_parent else "No parent")
-				break  # Exit the loop once we find the matching HandArea3D
+		XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
 
 # with music:
 # - spawn them on midi notes

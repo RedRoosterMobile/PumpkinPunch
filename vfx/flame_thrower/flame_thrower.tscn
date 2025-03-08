@@ -1,8 +1,8 @@
 [gd_scene load_steps=31 format=3 uid="uid://cct8i0oo5inaq"]
 
-[ext_resource type="Texture2D" uid="uid://dk0pxwxi60mpl" path="res://addons/kenney-particles/textures/fire_01.png" id="1_ri2r1"]
-[ext_resource type="Texture2D" uid="uid://cst6xg7q2ouuf" path="res://addons/kenney-particles/textures/fire_02.png" id="2_ie24h"]
-[ext_resource type="Texture2D" uid="uid://cofar18xbsjmn" path="res://addons/kenney-particles/textures/trace_07.png" id="3_2iao1"]
+[ext_resource type="Texture2D" uid="uid://duk48y70a5ekd" path="res://images/particles/fire_01.png" id="1_ri2r1"]
+[ext_resource type="Texture2D" uid="uid://djlevjxeqsexm" path="res://images/particles/fire_02.png" id="2_ie24h"]
+[ext_resource type="Texture2D" uid="uid://to6ajfv5tx1c" path="res://images/particles/trace_07.png" id="3_2iao1"]
 
 [sub_resource type="Curve" id="Curve_cnj2s"]
 _data = [Vector2(0, 0), 0.0, 14.2592, 0, 0, Vector2(0.135693, 1), 0.0, 0.0, 0, 0, Vector2(0.616519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

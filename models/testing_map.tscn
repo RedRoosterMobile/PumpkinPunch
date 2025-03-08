@@ -431,7 +431,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.29139)
 
 [node name="TodoLeafsGPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
-visible = false
 material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
 lifetime = 20.0
@@ -477,6 +476,4 @@ shadow_enabled = true
 spot_range = 1643.0
 
 [node name="FloatingDust" parent="." instance=ExtResource("35_ae6in")]
-
-[connection signal="area_entered" from="HandLeft/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
-[connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
+visible = false
