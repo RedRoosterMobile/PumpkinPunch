@@ -12,7 +12,7 @@ signal game_finished()
 signal skeleton_killed()
 signal skeleton_died()
 
-signal pumpkin_spawned()
+signal pumpkin_spawned(pos: Vector3)
 signal pumpkin_collision_player()
 signal pumpkin_collision_hand()
 # when it hits the killzone behind the player

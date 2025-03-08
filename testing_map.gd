@@ -182,6 +182,7 @@ func create_new_pumpkin():
 		p.start_position = pumpkin.position
 		
 		pumpkins.append(p)
+		Messenger.pumpkin_spawned.emit(p.start_position)
 	pass
 	
 

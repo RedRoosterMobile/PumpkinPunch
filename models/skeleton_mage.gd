@@ -31,6 +31,12 @@ func _ready() -> void:
 	start_position = position
 	# Set the initial animation to the spawn animation
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SPAWN
+	
+	Messenger.game_finished.connect(_on_game_finished)
+	Messenger.pumpkin_spawned.connect(shoot)
+
+func _on_game_finished():
+	kill()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -42,6 +48,19 @@ func _process(delta: float) -> void:
 		animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
 		Messenger.game_started.emit()
 		gpu_particles_3d.emitting = true
+		# do we need that??
+		# GameState.skeleton_resurrected = true
 	elif has_spawned:
 		var offset: float = sin(time*3) * OSCILLATION_AMPLITUDE
 		position.x = start_position.x + offset
+
+func kill():
+	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
+	Messenger.skeleton_died.emit()
+func shoot(pos:Vector3):
+	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SHOOT
+	print("##### shoot #####")
+	await get_tree().create_timer(1.066).timeout
+	print("##### back #####")
+	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
+	
