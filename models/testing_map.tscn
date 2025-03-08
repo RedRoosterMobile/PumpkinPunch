@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=58 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
+[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfx/floating_dust/floating_dust.tscn" id="35_ae6in"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
@@ -430,6 +431,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.29139)
 
 [node name="TodoLeafsGPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
 lifetime = 20.0
@@ -473,6 +475,8 @@ light_color = Color(0.854555, 0.33318, 0.852035, 1)
 light_energy = 16.0
 shadow_enabled = true
 spot_range = 1643.0
+
+[node name="FloatingDust" parent="." instance=ExtResource("35_ae6in")]
 
 [connection signal="area_entered" from="HandLeft/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]
 [connection signal="area_entered" from="HandRight/HandArea3D" to="." method="_on_hand_area_3d_area_entered"]

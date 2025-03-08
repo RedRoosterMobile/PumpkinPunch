@@ -75,7 +75,7 @@ func shoot(pumpkin_pos: Vector3):
 	
 	# Tween back to initial rotation
 	var tween = create_tween()
-	tween.tween_property(self, "quaternion", initial_rotation, 1.066).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "quaternion", initial_rotation, 1.066).set_trans(Tween.TRANS_CUBIC)
 	
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
 	print("##### back #####")
