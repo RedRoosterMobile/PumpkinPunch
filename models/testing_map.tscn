@@ -1,7 +1,6 @@
-[gd_scene load_steps=60 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=57 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_wmay2"]
 [ext_resource type="PackedScene" uid="uid://dqvxht3mrrs01" path="res://models/lowpoly_pumpkin_full.tscn" id="3_qyoxo"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
@@ -36,20 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 
-[sub_resource type="Resource" id="Resource_n1rqw"]
-script = ExtResource("2_wmay2")
-magnitude = 0.5
-active_during_pause = false
-indefinite = false
-duration_ms = 300
-
-[sub_resource type="Resource" id="Resource_wjjl5"]
-script = ExtResource("2_wmay2")
-magnitude = 1.0
-active_during_pause = false
-indefinite = false
-duration_ms = 200
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
 sky_horizon_color = Color(0.777201, 0.634734, 0.31145, 1)
@@ -74,7 +59,12 @@ glow_strength = 0.95
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
 fog_enabled = true
+fog_mode = 1
+fog_density = 0.8126
 fog_sky_affect = 0.1
+fog_height = 0.9
+fog_height_density = 0.3153
+fog_depth_curve = 0.327682
 volumetric_fog_density = 0.19
 volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
 adjustment_contrast = 1.31
@@ -225,8 +215,6 @@ script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
 xr_enabled = true
-ax_button_event = SubResource("Resource_n1rqw")
-by_button_event = SubResource("Resource_wjjl5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")

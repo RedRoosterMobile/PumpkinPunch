@@ -135,10 +135,11 @@ func _on_openxr_pose_recentered() -> void:
 
 
 func _on_left_hand_controller_button_released(name: String) -> void:
-	print("released")
+	#print("released")
 	
 	#var ax_button_event : XRToolsRumbleEvent = XRToolsRumbleEvent.new()
 	#XRToolsRumbleManager.add()
 	#XRToolsRumbleManager.add(controller.name + "ax", ax_button_event, [left_hand_controller])
-	print(name)
+	#print(name)
+	pass
 	

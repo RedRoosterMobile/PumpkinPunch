@@ -3,6 +3,8 @@ extends Node
 @export var left_hand_body: RigidBody3D 
 @export var right_hand_body: RigidBody3D
 
+@export var is_midi_enabled: bool = true
+
 @export var xr_enabled:bool = false
 var controller_left : XRController3D
 var controller_right : XRController3D
@@ -75,8 +77,14 @@ func _ready() -> void:
 		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
 		if controller_right:
 			controller_right.button_pressed.connect(_on_button_pressed)
-			
-		init_midi()
+		
+		if is_midi_enabled:
+			init_midi()
+		else:
+			# set demo song 
+			var audio_stream = load("res://art/Haunted Beats (1).mp3")  # Load the MP3 file directly
+			asp.stream = audio_stream
+			asp.play()
 		
 
 #func _physics_process(delta: float) -> void:
@@ -109,20 +117,17 @@ func _process(delta: float) -> void:
 var controller_spawn_just_pressed: bool = false
 var prev_controller_states: Dictionary = {}  # Stores previous state for each controller
 
-## Rumble event for pushing A or X
-@export var ax_button_event : XRToolsRumbleEvent
-
-## Rumble event for pushing B or Y
-@export var by_button_event : XRToolsRumbleEvent
+@export var rumble_event_left : XRToolsRumbleEvent
+@export var rumble_event_right : XRToolsRumbleEvent
 func _on_button_pressed(button_name: String) -> void:
 	#print("rumble")
 	return
 	match button_name:
 		# works!
 		"ax_button":
-			XRToolsRumbleManager.add(controller_left.name + "ax", ax_button_event, [controller_left])
+			pass
 		"by_button":
-			XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
+			pass
 
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
@@ -132,13 +137,13 @@ func create_new_pumpkin():
 		# XRhelper style of getting keys
 		# https://github.com/GodotVR/godot-xr-tools/pull/557/files#diff-a9959fdf1a493f41ed711540fffaf024b7561fb8eaf7017987b7b2c2d36317e3
 		if controller_left and controller_left.get_is_active() and controller_left.is_button_pressed(spawn_action):
-			print(controller_left.get_tracker_hand())
+			#print(controller_left.get_tracker_hand())
 			#print("pressed")
+			pass
 		# refactor this to the above??
 		for name in controllers:
 			var tracker: XRPositionalTracker = controllers[name]
 			var current_state = tracker.get_input(spawn_action)
-			# print(name) # "left_hand" "right_hand"
 			#
 			# XRPositionalTracker.TrackerHand.TRACKER_HAND_LEFT
 			# XRPositionalTracker.TrackerHand.TRACKER_HAND_RIGHT
@@ -218,12 +223,14 @@ func follow_mouse():
 	if left_hand_body:
 		left_hand_body.position = intersection_point
 
+
+# FIXME: move this to the hand area to know which on triggered the collision
 func _on_hand_area_3d_area_entered(area: Area3D) -> void:
-	print("ball hit---")
-	print(area)
-	print(area.get_parent())
-	print(self)  # testing_map
-	print("ball END---")
+	#print("ball hit---")
+	#print(area)
+	#print(area.get_parent())
+	#print(self)  # testing_map
+	#print("ball END---")
 	
 	# The area is the pumpkin's Area3D. We need to find the HandArea3D that detected it.
 	# Use the physics collision data or node hierarchy to trace back to HandArea3D
@@ -236,23 +243,23 @@ func _on_hand_area_3d_area_entered(area: Area3D) -> void:
 		# Since we can't directly get HandArea3D from the pumpkin, we need to search for the HandArea3D
 		# that intersects with this area. This requires checking all HandArea3D nodes in the scene.
 		var hand_areas = get_tree().get_nodes_in_group("hand_areas")  # Assume HandArea3D nodes are in a "hand_areas" group
-		
+		# FIXME: move this to the hand area to know which on triggered the collision
 		for hand_area in hand_areas:
 			if hand_area is Area3D and hand_area.overlaps_area(colliding_area):
 				# Found the HandArea3D that detected the collision
-				print("Found HandArea3D: ", hand_area.name)
+				#print("Found HandArea3D: ", hand_area.name)
 				
 				# Check its parent to determine the hand
 				var hand_parent = hand_area.get_parent()
 				
 				if hand_parent and hand_parent.name == "HandLeft":
-					print("Left hand triggered the event")
+					#print("Left hand triggered the event")
 					# Handle left hand-specific logic here
-					XRToolsRumbleManager.add(controller_left.name + "by", by_button_event, [controller_left])
+					XRToolsRumbleManager.add(controller_left.name + "left", rumble_event_left, [controller_left])
 				elif hand_parent and hand_parent.name == "HandRight":
-					print("Right hand triggered the event")
+					#print("Right hand triggered the event")
 					# Handle right hand-specific logic here
-					XRToolsRumbleManager.add(controller_right.name + "by", by_button_event, [controller_right])
+					XRToolsRumbleManager.add(controller_right.name + "right", rumble_event_right, [controller_right])
 				else:
 					print("Unknown hand triggered the event. HandArea3D parent: ", hand_parent.name if hand_parent else "No parent")
 				break  # Exit the loop once we find the matching HandArea3D

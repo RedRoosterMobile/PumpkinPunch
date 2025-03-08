@@ -23,7 +23,7 @@ const BLEND_POSITION_SHOOT: Vector2 = Vector2(1, 0)
 
 const PARAM_BLEND_POSITION:String = "parameters/blend_position"
 
-const SPAWN_DELAY: float = 1.3
+const SPAWN_DELAY: float = 2.7
 const OSCILLATION_AMPLITUDE: float = 1.0
 
 func _ready() -> void:

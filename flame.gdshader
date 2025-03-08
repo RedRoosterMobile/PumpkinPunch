@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, blend_mix;
+render_mode unshaded, cull_disabled, blend_mix, shadows_disabled, fog_disabled, ambient_light_disabled;
 
 vec2 hash(vec2 p) {
     p = vec2(dot(p, vec2(127.1, 311.7)),
