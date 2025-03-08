@@ -9,11 +9,14 @@ extends Node3D
 
 # Stores the initial position of the node
 var start_position: Vector3
+var initial_rotation: Quaternion
 
 # Timer used for both spawn delay and oscillation
 var time: float = 0.0
 
 var has_spawned: bool = false
+# aka: is not pausing 
+var is_moving: bool = true
 
 # Constants for blend positions in the AnimationTree
 const BLEND_POSITION_SPAWN: Vector2 = Vector2(0, 1)
@@ -29,6 +32,7 @@ const OSCILLATION_AMPLITUDE: float = 1.0
 func _ready() -> void:
 	# Capture the node's starting position
 	start_position = position
+	initial_rotation = quaternion
 	# Set the initial animation to the spawn animation
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SPAWN
 	
@@ -39,7 +43,8 @@ func _on_game_finished():
 	kill()
 
 func _process(delta: float) -> void:
-	time += delta
+	if is_moving:
+		time += delta
 
 	# Check if the spawn delay has elapsed and the spawn sequence hasn't completed
 	if not has_spawned and time > SPAWN_DELAY:
@@ -57,10 +62,23 @@ func _process(delta: float) -> void:
 func kill():
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
 	Messenger.skeleton_died.emit()
-func shoot(pos:Vector3):
+func shoot(pumpkin_pos: Vector3):
+	is_moving = false
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SHOOT
+	
+	# Instantly rotate to face the pumpkin
+	look_at(pumpkin_pos, Vector3.UP)
+	rotate_y(deg_to_rad(180))
+	
 	print("##### shoot #####")
-	await get_tree().create_timer(1.066).timeout
-	print("##### back #####")
+	await get_tree().create_timer(1.066).timeout  # Wait for shoot animation
+	
+	# Tween back to initial rotation
+	var tween = create_tween()
+	tween.tween_property(self, "quaternion", initial_rotation, 1.066).set_trans(Tween.TRANS_LINEAR)
+	
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
+	print("##### back #####")
+	# await tween.finished  # Wait for the tween to finish
+	is_moving = true
 	
