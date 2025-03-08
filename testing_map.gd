@@ -10,6 +10,7 @@ var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
 
+
 # Inner class
 class Pumpkin:
 	var node: Node3D
@@ -38,20 +39,32 @@ var pumpkin_start_positions: Array[Vector3] = [
 	Vector3(1.11298, 1.08145, -5.71892)
 ]
 
-func _ready() -> void:
-	for thing:Node in $DebugPumpkins.get_children():
-		if thing.is_in_group("pumpkins"):
-			var p = Pumpkin.new()
-			p.node = thing
-			p.start_position = thing.position
-			pumpkins.append(p)
-			thing.scale *= 0.5
-			start_pos = thing.position
+func _on_game_started():
+	if $DebugPumpkins:
+		for thing:Node in $DebugPumpkins.get_children():
+			if thing.is_in_group("pumpkins"):
+				var p = Pumpkin.new()
+				p.node = thing
+				p.start_position = thing.position
+				pumpkins.append(p)
+				thing.scale *= 0.5
+				start_pos = thing.position
 	if pumpkins.size() > 0:
 		# FIXME: do this when the first pumpkin has spawned
 		var a_pumpkin: Node3D = pumpkins[0].node
 		pumpkin_grin(a_pumpkin.get_material())
-	
+	GameState.game_started = true
+	time = 0.0
+	if is_midi_enabled:
+		init_midi()
+	else:
+		# set demo song 
+		var audio_stream = load("res://art/Haunted Beats (1).mp3")  # Load the MP3 file directly
+		asp.stream = audio_stream
+		asp.play()
+
+func _ready() -> void:
+	Messenger.game_started.connect(_on_game_started)
 	print("xr_controls_enabled")
 	print(xr_enabled)
 	var hand_area_left:Area3D = left_hand_body.get_node("HandArea3D")
@@ -77,21 +90,12 @@ func _ready() -> void:
 		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
 		if controller_right:
 			controller_right.button_pressed.connect(_on_button_pressed)
-		
-		if is_midi_enabled:
-			init_midi()
-		else:
-			# set demo song 
-			var audio_stream = load("res://art/Haunted Beats (1).mp3")  # Load the MP3 file directly
-			asp.stream = audio_stream
-			asp.play()
-		
 
-#func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	time += delta
 	
-	create_new_pumpkin()
+	if GameState.game_started:
+		create_new_pumpkin()
 	if not xr_enabled:
 		follow_mouse()
 	# Remove null entries from the array
@@ -99,6 +103,7 @@ func _process(delta: float) -> void:
 		return pumpkin != null and pumpkin.node != null
 	)
 
+	
 	var sinner = sin(time)
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta 

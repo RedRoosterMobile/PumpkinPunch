@@ -1,7 +1,7 @@
 [gd_scene load_steps=57 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
-[ext_resource type="PackedScene" uid="uid://dqvxht3mrrs01" path="res://models/lowpoly_pumpkin_full.tscn" id="3_qyoxo"]
+[ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
 [ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
@@ -216,6 +216,9 @@ left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
 xr_enabled = true
 
+[node name="VoxelGI" type="VoxelGI" parent="."]
+data = ExtResource("2_cntg0")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
 
@@ -224,6 +227,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0.438644, -0.417985, 0.79553
 visible = false
 light_color = Color(0.842597, 0.756568, 0.323983, 1)
 light_energy = 0.5
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 2.0
 directional_shadow_mode = 0
@@ -243,23 +247,6 @@ shape = SubResource("BoxShape3D_qk40o")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771, 2.664)
 fov = 70.0
-
-[node name="DebugPumpkins" type="Node3D" parent="."]
-
-[node name="lowpoly_pumpkin_full" parent="DebugPumpkins" groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26961, 1.08145, -2.11638)
-
-[node name="lowpoly_pumpkin_full2" parent="DebugPumpkins" groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960844, 1.08145, -2.11638)
-
-[node name="lowpoly_pumpkin_full3" parent="DebugPumpkins" groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625553, 0.91448, -0.284467)
-
-[node name="lowpoly_pumpkin_full4" parent="DebugPumpkins" groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18586, 1.08145, -5.71892)
-
-[node name="lowpoly_pumpkin_full5" parent="DebugPumpkins" groups=["pumpkins"] instance=ExtResource("3_qyoxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11298, 1.08145, -5.71892)
 
 [node name="KillZone" type="Area3D" parent="."]
 
@@ -336,6 +323,10 @@ light_color = Color(2.42, 1.075, 0, 1)
 light_energy = 6.536
 light_size = 1.0
 light_specular = 0.25
+light_bake_mode = 1
+distance_fade_enabled = true
+distance_fade_begin = 4.0
+distance_fade_length = 5.0
 spot_range = 3.571
 spot_attenuation = -2.63
 spot_angle = 40.71
@@ -360,6 +351,10 @@ light_color = Color(2.5, 2, 0.01, 1)
 light_energy = 3.451
 light_indirect_energy = 2.647
 light_volumetric_fog_energy = 12.412
+light_bake_mode = 1
+distance_fade_enabled = true
+distance_fade_begin = 4.0
+distance_fade_length = 3.0
 spot_range = 5.945
 spot_attenuation = 0.16
 spot_angle = 49.97

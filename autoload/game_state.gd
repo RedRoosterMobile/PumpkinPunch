@@ -1,4 +1,4 @@
-class_name GameState extends Node
+extends Node
 
 
 # when game is ready to spawn pumpkins
