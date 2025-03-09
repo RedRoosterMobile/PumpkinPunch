@@ -4,6 +4,7 @@ extends Node3D
 @export var vfx: PackedScene = preload("res://vfx_hit.tscn")
 @export var splat_decal: PackedScene
 @onready var pumpkin_orange_jackolantern: MeshInstance3D = $pumpkin_orange_jackolantern
+@onready var hit_vfx: Node3D = $"HIT VFX"
 
 var vfx_instance
 var splat_decal_instance
@@ -14,6 +15,8 @@ var splat_decal_instance
 func _ready() -> void:
 	vfx_instance = vfx.instantiate()
 	splat_decal_instance = splat_decal.instantiate()
+	var puff:AnimationPlayer = hit_vfx.get_child(3)
+	puff.play()
 
 func get_material() -> StandardMaterial3D:
 	var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
