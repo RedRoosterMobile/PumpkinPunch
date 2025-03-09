@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://r1vnx3njthfx"]
+
+[ext_resource type="Texture2D" uid="uid://cocdnuarngy03" path="res://vfxx/circle_05.png" id="1_kd2h8"]
+
+[sub_resource type="Curve" id="Curve_7rsak"]
+_data = [Vector2(0.0131579, 0.0145985), 0.0, 0.0, 0, 0, Vector2(0.223684, 1), 0.0, 0.0, 0, 0, Vector2(0.740132, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_m7kxr"]
+curve = SubResource("Curve_7rsak")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fv2t"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 10)
+velocity_pivot = Vector3(1, 0, 0)
+direction = Vector3(0, 0, 1)
+spread = 180.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_m7kxr")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 0.2
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlsnx"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+specular_mode = 1
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.470076, 0.470076, 0.470076, 1)
+albedo_texture = ExtResource("1_kd2h8")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_e3qlj"]
+material = SubResource("StandardMaterial3D_vlsnx")
+size = Vector2(0.1, 0.1)
+
+[node name="FloatingDust" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05255, 0)
+amount = 128
+lifetime = 10.0
+preprocess = 10.0
+draw_order = 3
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_1fv2t")
+draw_pass_1 = SubResource("QuadMesh_e3qlj")
