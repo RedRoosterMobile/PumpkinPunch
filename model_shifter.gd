@@ -15,7 +15,7 @@ func _ready() -> void:
 	var puff:AnimationPlayer = hit_vfx.get_child(3)
 	puff.play()
 	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
-	Messenger.spawn_decal_requested.connect(DecalManager._on_spawn_decal_requested)
+	Messenger.spawn_decal_requested.connect(SpriteManager._on_spawn_splat_requested)
 
 func get_material() -> StandardMaterial3D:
 	var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)

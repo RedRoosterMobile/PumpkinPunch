@@ -404,7 +404,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446246, 0, -3.56943)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51528, 0, -2.22108)
 
 [node name="path_D2" parent="decoration" instance=ExtResource("24_0n22y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -0.384281)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -1.95935)
 
 [node name="crypt2" parent="decoration" instance=ExtResource("22_3r8pk")]
 transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
@@ -487,3 +487,8 @@ visible = false
 [node name="Flamethrower2" parent="." instance=ExtResource("36_mv6ts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87014, -1.19209e-07, -7.92973)
 visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0701718, 0.001, -8.33533)
+modulate = Color(1, 0.4595, 0.31, 1)
+texture = ExtResource("26_fyld6")

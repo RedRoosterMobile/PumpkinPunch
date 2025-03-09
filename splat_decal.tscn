@@ -7,6 +7,7 @@
 size = Vector3(2, 2.21204, 2)
 texture_albedo = ExtResource("1_i3dbl")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
+albedo_mix = 0.97
 distance_fade_begin = 4.0
 distance_fade_length = 4.0
 script = ExtResource("2_acb40")

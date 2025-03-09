@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://itcxglru1f8x"]
-
-[ext_resource type="Script" path="res://decal_manager.gd" id="1_5qetq"]
-
-[node name="DecalManager" type="Node3D"]
-script = ExtResource("1_5qetq")
