@@ -1,8 +1,9 @@
 extends Node3D
 
 @export var splat_decal: PackedScene = preload("res://splat_decal.tscn")
-@export var max_decals: int = 10
+@export var max_decals: int = 5 # too many, bad for performance
 var decal_pool: Array = []
+var fade_time:float = 2.0
 
 func _ready() -> void:
 	for i in range(max_decals):
@@ -30,8 +31,8 @@ func _on_spawn_decal_requested(position: Vector3) -> void:
 
 func fade_decal(decal: Decal) -> void:
 	# Calculate fade timing (from your original Decal script)
-	var fade_start_time = 4.0 * 0.8  # 80% of 4 seconds
-	var fade_duration = 4.0 * 0.2    # 20% of 4 seconds
+	var fade_start_time:float = fade_time * 0.8  # 80% of 4 seconds
+	var fade_duration:float = fade_time * 0.2    # 20% of 4 seconds
 	
 	await get_tree().create_timer(fade_start_time).timeout
 	

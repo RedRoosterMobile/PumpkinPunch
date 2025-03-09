@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://wn4y0vr1x5ds"]
 
-[ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="1_bd2g4"]
+[ext_resource type="Texture2D" uid="uid://chw5wiali7bsd" path="res://images/splat_128.png" id="1_i3dbl"]
 [ext_resource type="Script" path="res://splat_decal.gd" id="2_acb40"]
 
 [node name="SplatDecal" type="Decal"]
 size = Vector3(2, 2.21204, 2)
-texture_albedo = ExtResource("1_bd2g4")
+texture_albedo = ExtResource("1_i3dbl")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
 distance_fade_begin = 4.0
 distance_fade_length = 4.0

@@ -9,9 +9,6 @@ extends Node3D
 var vfx_instance
 var splat_decal_instance
 
-# Animation parameters
-@export var animation_duration: float = 2.0  # Duration for full cycle (to white and back)
-
 func _ready() -> void:
 	vfx_instance = vfx.instantiate()
 	#splat_decal_instance = splat_decal.instantiate()
@@ -45,4 +42,5 @@ func splat():
 	#splat_decal_instance.time = 1.0
 	#get_parent().add_child(splat_decal_instance)
 	
+	# FIXME: send to object pool instead
 	self.queue_free()

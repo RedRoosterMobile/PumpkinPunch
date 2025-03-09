@@ -157,8 +157,9 @@ func create_new_pumpkin():
 			prev_controller_states[name] = current_state
 	
 	# Trigger spawn only when just pressed
-	if Input.is_action_just_pressed("spawn") or pumpkins.size() <= 0 or controller_spawn_just_pressed:
+	if Input.is_action_just_pressed("spawn") or controller_spawn_just_pressed:
 		print("Spawning!")
+		# FIXME: get from object pool instead
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
 		pumpkin.scale *= 0.5
