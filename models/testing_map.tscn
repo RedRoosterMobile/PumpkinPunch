@@ -34,8 +34,8 @@
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
-[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfx/floating_dust/floating_dust.tscn" id="35_ae6in"]
-[ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
+[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
+[ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
