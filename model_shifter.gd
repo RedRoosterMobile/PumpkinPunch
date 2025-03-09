@@ -17,6 +17,7 @@ func _ready() -> void:
 	splat_decal_instance = splat_decal.instantiate()
 	var puff:AnimationPlayer = hit_vfx.get_child(3)
 	puff.play()
+	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
 
 func get_material() -> StandardMaterial3D:
 	var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
