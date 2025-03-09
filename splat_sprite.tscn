@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://splat_sprite.gd" id="2_byxab"]
 
 [node name="SplatSprite" type="Sprite3D"]
+modulate = Color(2, 1.5, 0.507, 1)
 axis = 1
 texture = ExtResource("1_lnd6v")
 script = ExtResource("2_byxab")

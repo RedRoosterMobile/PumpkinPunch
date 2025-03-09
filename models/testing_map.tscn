@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=67 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -36,6 +36,8 @@
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
+[ext_resource type="Shader" path="res://floor_fog.gdshader" id="37_8npjo"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="38_vswrb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
@@ -60,7 +62,6 @@ glow_normalized = true
 glow_strength = 0.95
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
-fog_enabled = true
 fog_mode = 1
 fog_density = 0.8126
 fog_sky_affect = 0.1
@@ -211,6 +212,38 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gip54"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ymlpt"]
+seamless = true
+noise = SubResource("FastNoiseLite_gip54")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qriuu"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w34wk"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_qriuu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoumk"]
+render_priority = 0
+shader = ExtResource("37_8npjo")
+shader_parameter/speed_1 = 0.02
+shader_parameter/speed_2 = 0.005
+shader_parameter/speed_3 = 0.04
+shader_parameter/opacity = 0.5
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_ymlpt")
+shader_parameter/noise_texture_2 = ExtResource("38_vswrb")
+shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_w34wk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ldu2"]
+material = SubResource("ShaderMaterial_xoumk")
+size = Vector2(20, 20)
+orientation = 1
 
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
@@ -492,3 +525,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0701718, 0.001, -8.33533)
 modulate = Color(1, 0.4595, 0.31, 1)
 texture = ExtResource("26_fyld6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.035606, 0)
+mesh = SubResource("QuadMesh_2ldu2")
