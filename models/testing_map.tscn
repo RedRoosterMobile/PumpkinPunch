@@ -1,7 +1,8 @@
-[gd_scene load_steps=67 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=70 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
+[ext_resource type="Script" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
 [ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
@@ -62,6 +63,7 @@ glow_normalized = true
 glow_strength = 0.95
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
+fog_enabled = true
 fog_mode = 1
 fog_density = 0.8126
 fog_sky_affect = 0.1
@@ -93,7 +95,8 @@ uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
 uniform sampler2D texture_normal : hint_roughness_normal, filter_linear_mipmap, repeat_enable;
 uniform float normal_scale : hint_range(-16.0, 16.0);
-
+uniform float glow: hint_range(1.0, 15.0);
+uniform sampler2D s2d : hint_roughness_normal, filter_linear_mipmap, repeat_enable;
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
 uniform vec3 uv2_scale;
@@ -109,7 +112,11 @@ void fragment() {
 	//base_uv.y+=cos(TIME)/30.;
 
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	// TODO: rotate albedo tex
+	base_uv.x+=sin(TIME/3.)/30.;
+	base_uv.y+=cos(TIME/3.)/30.;
+	vec4 glow_tex = texture(s2d, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb*(glow_tex.r+0.5);
 
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
@@ -124,6 +131,12 @@ void fragment() {
 	NORMAL_MAP_DEPTH = normal_scale;
 }
 "
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2hiqg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ynd0x"]
+seamless = true
+noise = SubResource("FastNoiseLite_2hiqg")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ywg4o"]
 
@@ -158,6 +171,7 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/normal_scale = 16.0
+shader_parameter/glow = 15.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
@@ -165,6 +179,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/texture_albedo = SubResource("NoiseTexture2D_anx5b")
 shader_parameter/texture_roughness = SubResource("NoiseTexture2D_wh3a7")
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_1w204")
+shader_parameter/s2d = SubResource("NoiseTexture2D_ynd0x")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ju6e"]
 material = SubResource("ShaderMaterial_c28ly")
@@ -213,12 +228,13 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gip54"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ncevo"]
 noise_type = 0
+frequency = 0.0095
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ymlpt"]
 seamless = true
-noise = SubResource("FastNoiseLite_gip54")
+noise = SubResource("FastNoiseLite_ncevo")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qriuu"]
 noise_type = 3
@@ -271,9 +287,10 @@ directional_shadow_pancake_size = 9.2
 
 [node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorStaticBody3D"]
+[node name="FloorMesh" type="MeshInstance3D" parent="FloorStaticBody3D"]
 mesh = SubResource("PlaneMesh_7ju6e")
 skeleton = NodePath("../..")
+script = ExtResource("3_thqn0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorStaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -526,6 +543,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0701
 modulate = Color(1, 0.4595, 0.31, 1)
 texture = ExtResource("26_fyld6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.035606, 0)
+[node name="FloorFog" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.035606, 0)
 mesh = SubResource("QuadMesh_2ldu2")

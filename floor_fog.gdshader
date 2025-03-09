@@ -1,15 +1,15 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled, unshaded;
 
-uniform sampler2D noise_texture_1; // First noise texture
-uniform sampler2D noise_texture_2; // Second noise texture
-uniform sampler2D noise_texture_3; // Third noise texture
+uniform sampler2D noise_texture_1; // Top layer noise (most transparent)
+uniform sampler2D noise_texture_2; // Middle layer noise
+uniform sampler2D noise_texture_3; // Bottom layer noise
 
-uniform float speed_1 = 0.1; // Speed of the first layer
-uniform float speed_2 = 0.15; // Speed of the second layer
-uniform float speed_3 = 0.2; // Speed of the third layer
+uniform float speed_1 = 0.1;  // Speed of the top layer
+uniform float speed_2 = 0.15; // Speed of the middle layer
+uniform float speed_3 = 0.2;  // Speed of the bottom layer
 
-uniform float opacity = 0.5; // Overall opacity of the fog
+uniform float opacity = 0.75;  // Overall opacity multiplier
 
 void fragment() {
     // Get UV coordinates
@@ -21,14 +21,24 @@ void fragment() {
     vec2 uv3 = uv + vec2(TIME * speed_3, TIME * speed_3 * 0.3);
 
     // Sample noise textures
-    float noise1 = texture(noise_texture_1, uv1).r;
-    float noise2 = texture(noise_texture_2, uv2).r;
-    float noise3 = texture(noise_texture_3, uv3).r;
+    float noise1 = texture(noise_texture_1, uv1).r; // Top layer
+    float noise2 = texture(noise_texture_2, uv2).r; // Middle layer
+    float noise3 = texture(noise_texture_3, uv3).r; // Bottom layer
 
-    // Blend the noise layers
-    float fog_density = (noise1 + noise2 + noise3) / 3.0;
+    // Use vertex height to determine layer influence
+    // Assuming the quad's height ranges from 0 (bottom) to some small value like 0.2 (top)
+    float height = clamp(VERTEX.z / 0.2, 0.0, 1.0); // Normalize height (adjust 0.2 based on your quad's Y position)
+
+    // Define opacity for each layer
+    float alpha1 = noise1 * 0.2 * opacity * (1.0 - height);      // Top: most transparent, fades at bottom
+    float alpha2 = noise2 * 0.4 * opacity * (1.0 - abs(height - 0.5)); // Middle: peaks in the middle
+    float alpha3 = noise3 * 0.6 * opacity * height;             // Bottom: most opaque, fades at top
+
+    // Combine the layers
+    float total_alpha = alpha1 + alpha2 + alpha3;
+    total_alpha = clamp(total_alpha, 0.0, 0.8); // Cap total opacity to allow light through
 
     // Set the color and transparency
-    ALBEDO = vec3(0.8, 0.9, 1.0); // Light bluish fog color (adjust as needed)
-    ALPHA = fog_density * opacity; // Transparency based on noise and overall opacity
+    ALBEDO = vec3(0.8, 0.9, 1.0); // Light bluish fog color
+    ALPHA = total_alpha;          // Final transparency
 }
