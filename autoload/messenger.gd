@@ -19,3 +19,5 @@ signal pumpkin_collision_hand()
 signal pumpkin_auto_destroyed()
 
 signal player_hit(area: Area3D)
+
+signal spawn_decal_requested(position: Vector3)

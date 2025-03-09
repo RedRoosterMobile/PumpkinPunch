@@ -18,6 +18,7 @@ func _ready() -> void:
 	var puff:AnimationPlayer = hit_vfx.get_child(3)
 	puff.play()
 	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
+	Messenger.spawn_decal_requested.connect(DecalManager._on_spawn_decal_requested)
 
 func get_material() -> StandardMaterial3D:
 	var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
@@ -37,6 +38,7 @@ func splat():
 	for child:GPUParticles3D in children:
 		child.emitting = true
 	
+	Messenger.spawn_decal_requested.emit(global_transform.origin)
 	# decal (eats into FPS if too many)
 	#splat_decal_instance.transform = self.transform
 	#splat_decal_instance.position.y = 0.0

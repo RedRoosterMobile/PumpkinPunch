@@ -13,15 +13,3 @@ func _ready() -> void:
 	# Randomize scale
 	var random_scale = randf_range(scale_min, scale_max)
 	scale = Vector3(random_scale, random_scale, random_scale)
-	
-	# Calculate fade timing
-	var fade_start_time = time * 0.8
-	var fade_duration = time * 0.2
-	
-	# Wait for fade start
-	await get_tree().create_timer(fade_start_time).timeout
-	
-	# Start fading using modulate alpha
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, fade_duration)
-	tween.tween_callback(queue_free)
