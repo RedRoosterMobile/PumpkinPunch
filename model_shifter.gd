@@ -33,6 +33,7 @@ func splat():
 	vfx_instance.transform = self.transform
 	get_parent().add_child(vfx_instance)
 	var children = vfx_instance.get_children()
+	# FIXME: use animation player and thrigger that
 	for child:GPUParticles3D in children:
 		child.emitting = true
 	
