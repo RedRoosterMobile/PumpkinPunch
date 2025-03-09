@@ -62,7 +62,6 @@ process_material = SubResource("ParticleProcessMaterial_pxfbo")
 draw_pass_1 = SubResource("QuadMesh_sfrns")
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35531, 0)
 visible = false
-strength = 4.0
 texture = SubResource("NoiseTexture3D_etjb5")

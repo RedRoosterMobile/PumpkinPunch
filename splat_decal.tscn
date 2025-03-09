@@ -4,6 +4,9 @@
 [ext_resource type="Script" path="res://splat_decal.gd" id="2_acb40"]
 
 [node name="SplatDecal" type="Decal"]
+size = Vector3(2, 2.21204, 2)
 texture_albedo = ExtResource("1_bd2g4")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
+distance_fade_begin = 4.0
+distance_fade_length = 4.0
 script = ExtResource("2_acb40")

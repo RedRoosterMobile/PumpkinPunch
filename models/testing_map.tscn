@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=59 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfx/floating_dust/floating_dust.tscn" id="35_ae6in"]
+[ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
@@ -417,6 +418,7 @@ bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]
 transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 3.82521, 0.254778, -0.612225)
+visible = false
 size = Vector3(0.680298, 2, 2)
 texture_albedo = ExtResource("26_fyld6")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
@@ -467,7 +469,7 @@ transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
 rotation_speed = 2.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="BehindMageSpotLight3DWithShadow" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -5.23647e-05, 0, 5.23647e-05, -1, 0, 2.05422, -9.91364)
 visible = false
 light_color = Color(0.854555, 0.33318, 0.852035, 1)
@@ -476,4 +478,12 @@ shadow_enabled = true
 spot_range = 1643.0
 
 [node name="FloatingDust" parent="." instance=ExtResource("35_ae6in")]
+visible = false
+
+[node name="Flamethrower" parent="." instance=ExtResource("36_mv6ts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79852, -1.19209e-07, -7.92973)
+visible = false
+
+[node name="Flamethrower2" parent="." instance=ExtResource("36_mv6ts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87014, -1.19209e-07, -7.92973)
 visible = false

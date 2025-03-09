@@ -10,7 +10,6 @@ var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
 
-
 # Inner class
 class Pumpkin:
 	var node: Node3D
@@ -30,14 +29,6 @@ const PUMPKIN_Y:float = 1 # up/down
 const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full.tscn")
 const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces.tscn")
 const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
-# use this for initial positions
-var pumpkin_start_positions: Array[Vector3] = [
-	Vector3(-1.26961, 1.08145, -2.11638),
-	Vector3(0.960844, 1.08145, -2.11638),
-	Vector3(-0.062555, 0.91448, -0.284467),
-	Vector3(-1.18586, 1.08145, -5.71892),
-	Vector3(1.11298, 1.08145, -5.71892)
-]
 
 func _on_game_started():
 	if $DebugPumpkins:
@@ -94,7 +85,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time += delta
 	
-	if GameState.game_started:
+	if GameState.game_started and not GameState.game_finished:
 		create_new_pumpkin()
 	if not xr_enabled:
 		follow_mouse()
@@ -102,7 +93,6 @@ func _process(delta: float) -> void:
 	pumpkins = pumpkins.filter(func(pumpkin):
 		return pumpkin != null and pumpkin.node != null
 	)
-
 	
 	var sinner = sin(time)
 	for pumpkin:Pumpkin in pumpkins:
@@ -130,7 +120,8 @@ func _on_button_pressed(button_name: String) -> void:
 	match button_name:
 		# works!
 		"ax_button":
-			pass
+			Messenger.game_finished.emit()
+			GameState.game_finished = true
 		"by_button":
 			pass
 
@@ -171,9 +162,12 @@ func create_new_pumpkin():
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
 		pumpkin.scale *= 0.5
-		# pumpkin.look_at_from_position()
-		
-		pumpkin.position = pumpkin_start_positions[4]
+		var x_spawn:float
+		if randi_range(0,1):
+			x_spawn = PUMPKIN_X*-1.0
+		else:
+			x_spawn = PUMPKIN_X
+		pumpkin.position = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
 		pumpkin.broken_model = pumpkin_pieces
 		pumpkin.add_to_group("pumpkins")
 		add_child(pumpkin)
@@ -192,10 +186,8 @@ func pumpkin_grin(stm:StandardMaterial3D) -> void:
 	tween = create_tween()
 	tween.set_loops()  # Makes it repeat forever
 	
-	#var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
 	var initial_color: Color
 	
-
 	# Animation parameters
 	var animation_duration: float = 2.0  # Duration for full cycle (to white and back)
 	# Animate to white
@@ -213,9 +205,7 @@ func pumpkin_grin(stm:StandardMaterial3D) -> void:
 		animation_duration / 2
 	).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)  # And this
 
-
 func follow_mouse():
-	# todo: only if not XR
 	var camera = get_viewport().get_camera_3d()
 	if camera == null:
 		return  # Ensure the camera exists
@@ -230,11 +220,11 @@ func follow_mouse():
 		left_hand_body.position = intersection_point
 
 func _on_hand_area_3d_area_entered_left(area: Area3D):
-	_on_hand_area_3d_area_entered(area,controller_left)
+	_on_hand_area_3d_area_entered(area, controller_left)
 	
 func _on_hand_area_3d_area_entered_right(area: Area3D):
-	_on_hand_area_3d_area_entered(area,controller_right)
-# FIXME: move this to the hand area to know which on triggered the collision
+	_on_hand_area_3d_area_entered(area, controller_right)
+
 func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> void:
 	#print("ball hit---")
 	#print(area)
@@ -280,7 +270,6 @@ func my_note_callback(event: Variant, track: int):
 		var height: float = pitch / 10.0 - 5.0
 		if track == 0:
 			# left
-			#print("left")
 			 # Create a new tween
 			var tween = create_tween()
 			
@@ -306,7 +295,6 @@ func my_note_callback(event: Variant, track: int):
 			pass
 		elif track == 1:
 			# right
-			#print("right")
 			#spawn_pumpkin("right", height)#
 			 # Create a new tween
 			var tween = create_tween()

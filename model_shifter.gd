@@ -32,7 +32,7 @@ func splat():
 	for child:GPUParticles3D in children:
 		child.emitting = true
 	
-	# splat
+	# decal
 	splat_decal_instance.transform = self.transform
 	splat_decal_instance.position.y = 0.0
 	splat_decal_instance.time = 4.0
