@@ -1,8 +1,8 @@
 [gd_scene load_steps=31 format=3 uid="uid://cct8i0oo5inaq"]
 
-[ext_resource type="Texture2D" uid="uid://duk48y70a5ekd" path="res://images/particles/fire_01.png" id="1_ri2r1"]
-[ext_resource type="Texture2D" uid="uid://djlevjxeqsexm" path="res://images/particles/fire_02.png" id="2_ie24h"]
-[ext_resource type="Texture2D" uid="uid://to6ajfv5tx1c" path="res://images/particles/trace_07.png" id="3_2iao1"]
+[ext_resource type="Texture2D" uid="uid://bb63b4euo6qel" path="res://vfx/fire_01.png" id="1_unu7j"]
+[ext_resource type="Texture2D" uid="uid://1dojmfsaa780" path="res://vfx/fire_02.png" id="2_mohxj"]
+[ext_resource type="Texture2D" uid="uid://db4q58o76fk37" path="res://vfx/trace_07.png" id="3_c4qe6"]
 
 [sub_resource type="Curve" id="Curve_cnj2s"]
 _data = [Vector2(0, 0), 0.0, 14.2592, 0, 0, Vector2(0.135693, 1), 0.0, 0.0, 0, 0, Vector2(0.616519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -43,7 +43,7 @@ diffuse_mode = 3
 specular_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_ri2r1")
+albedo_texture = ExtResource("1_unu7j")
 emission_enabled = true
 emission = Color(1, 0.538, 0.16, 1)
 emission_energy_multiplier = 5.0
@@ -91,7 +91,7 @@ diffuse_mode = 3
 specular_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_ie24h")
+albedo_texture = ExtResource("2_mohxj")
 emission_enabled = true
 emission = Color(1, 0.538, 0.16, 1)
 emission_energy_multiplier = 5.0
@@ -139,7 +139,7 @@ diffuse_mode = 3
 specular_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_2iao1")
+albedo_texture = ExtResource("3_c4qe6")
 emission_enabled = true
 emission = Color(1, 0.692, 0.44, 1)
 emission_energy_multiplier = 5.0

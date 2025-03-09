@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqvxht3mrrs01"]
+[gd_scene load_steps=6 format=3 uid="uid://dqvxht3mrrs01"]
 
 [ext_resource type="PackedScene" uid="uid://bt1ibibefvniy" path="res://models/lowpoly_pumpkin_full.glb" id="1_m3vpw"]
 [ext_resource type="Script" path="res://model_shifter.gd" id="2_uwqtp"]
 [ext_resource type="PackedScene" uid="uid://bkpn05s04y1k2" path="res://models/lowpoly_pumpkin_pieces.tscn" id="3_brmxh"]
+[ext_resource type="PackedScene" uid="uid://wn4y0vr1x5ds" path="res://splat_decal.tscn" id="4_6uu1v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rx0mo"]
 radius = 0.7
@@ -10,6 +11,7 @@ radius = 0.7
 [node name="lowpoly_pumpkin_full" instance=ExtResource("1_m3vpw")]
 script = ExtResource("2_uwqtp")
 broken_model = ExtResource("3_brmxh")
+splat_decal = ExtResource("4_6uu1v")
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 0)

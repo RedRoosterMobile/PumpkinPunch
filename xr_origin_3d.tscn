@@ -49,4 +49,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02484, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.320377)
 shape = SubResource("CapsuleShape3D_8wk7p")
 
-[connection signal="button_released" from="LeftHandController" to="." method="_on_left_hand_controller_button_released"]
+[connection signal="area_entered" from="PlayerArea3D" to="." method="_on_player_area_3d_area_entered"]

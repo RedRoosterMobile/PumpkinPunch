@@ -133,13 +133,6 @@ func _on_openxr_pose_recentered() -> void:
 	# This is game implementation dependent.
 	emit_signal("pose_recentered")
 
-
-func _on_left_hand_controller_button_released(name: String) -> void:
-	#print("released")
-	
-	#var ax_button_event : XRToolsRumbleEvent = XRToolsRumbleEvent.new()
-	#XRToolsRumbleManager.add()
-	#XRToolsRumbleManager.add(controller.name + "ax", ax_button_event, [left_hand_controller])
-	#print(name)
-	pass
-	
+func _on_player_area_3d_area_entered(area: Area3D) -> void:
+	print("sth collided with player")
+	Messenger.player_hit.emit(area)

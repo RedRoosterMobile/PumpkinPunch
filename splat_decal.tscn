@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://wn4y0vr1x5ds"]
+
+[ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="1_bd2g4"]
+[ext_resource type="Script" path="res://splat_decal.gd" id="2_acb40"]
+
+[node name="SplatDecal" type="Decal"]
+texture_albedo = ExtResource("1_bd2g4")
+modulate = Color(0.737255, 0.54902, 0.101961, 1)
+script = ExtResource("2_acb40")

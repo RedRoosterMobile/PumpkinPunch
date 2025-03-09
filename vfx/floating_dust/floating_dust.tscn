@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://r1vnx3njthfx"]
 
-[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="1_1kwh5"]
+[ext_resource type="Texture2D" uid="uid://cocdnuarngy03" path="res://vfx/circle_05.png" id="1_kd2h8"]
 
 [sub_resource type="Curve" id="Curve_7rsak"]
 _data = [Vector2(0.0131579, 0.0145985), 0.0, 0.0, 0, 0, Vector2(0.223684, 1), 0.0, 0.0, 0, 0, Vector2(0.740132, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -31,7 +31,7 @@ specular_mode = 1
 disable_ambient_light = true
 disable_fog = true
 albedo_color = Color(0.470076, 0.470076, 0.470076, 1)
-albedo_texture = ExtResource("1_1kwh5")
+albedo_texture = ExtResource("1_kd2h8")
 disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_e3qlj"]

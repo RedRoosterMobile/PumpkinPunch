@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://75vtg2lm6alt"]
 
-[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="1_hhlhq"]
+[ext_resource type="Texture2D" uid="uid://cocdnuarngy03" path="res://vfx/circle_05.png" id="1_hmlru"]
 
 [sub_resource type="Curve" id="Curve_naoyv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.110701, 1), 0.0, 0.0, 0, 0, Vector2(0.782288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.65777, 0.0, 0, 0]
@@ -32,7 +32,7 @@ transparency = 1
 blend_mode = 1
 specular_mode = 2
 disable_ambient_light = true
-albedo_texture = ExtResource("1_hhlhq")
+albedo_texture = ExtResource("1_hmlru")
 emission_enabled = true
 emission = Color(1, 0.4375, 0.25, 1)
 emission_energy_multiplier = 16.0

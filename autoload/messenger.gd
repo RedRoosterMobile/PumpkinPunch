@@ -17,3 +17,5 @@ signal pumpkin_collision_player()
 signal pumpkin_collision_hand()
 # when it hits the killzone behind the player
 signal pumpkin_auto_destroyed()
+
+signal player_hit(area: Area3D)
