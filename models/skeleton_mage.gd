@@ -71,7 +71,11 @@ func shoot(pumpkin_pos: Vector3):
 	print("##### shoot #####")
 	var animation_time:float = 1.066
 	
+	
 	await get_tree().create_timer(animation_time).timeout  # Wait for shoot animation
+	
+	# here we want to actually spawn the pumpkin (callback, signal?)
+	
 	# Tween back to initial rotation
 	var tween = create_tween()
 	tween.tween_property(self, "quaternion", initial_rotation, animation_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)

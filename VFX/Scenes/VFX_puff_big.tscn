@@ -195,6 +195,7 @@ process_material = SubResource("ParticleProcessMaterial_hcf0s")
 draw_pass_1 = SubResource("SphereMesh_ex5j0")
 
 [node name="Hit effect" type="GPUParticles3D" parent="."]
+visible = false
 layers = 4
 material_override = SubResource("ShaderMaterial_xlkfy")
 emitting = false
@@ -206,6 +207,7 @@ process_material = SubResource("ParticleProcessMaterial_pos7c")
 draw_pass_1 = SubResource("QuadMesh_5pow2")
 
 [node name="sparks" type="GPUParticles3D" parent="."]
+visible = false
 layers = 4
 material_override = SubResource("ShaderMaterial_50jc2")
 emitting = false

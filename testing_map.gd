@@ -167,16 +167,17 @@ func create_new_pumpkin():
 			x_spawn = PUMPKIN_X*-1.0
 		else:
 			x_spawn = PUMPKIN_X
-		pumpkin.position = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
+		var spawn_position:Vector3 = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
+		pumpkin.position = spawn_position
 		pumpkin.broken_model = pumpkin_pieces
 		pumpkin.add_to_group("pumpkins")
 		add_child(pumpkin)
 		var p = Pumpkin.new()
 		p.node = pumpkin
-		p.start_position = pumpkin.position
+		p.start_position = spawn_position
 		
 		pumpkins.append(p)
-		Messenger.pumpkin_spawned.emit(p.start_position)
+		Messenger.pumpkin_spawned.emit(spawn_position)
 	pass
 	
 

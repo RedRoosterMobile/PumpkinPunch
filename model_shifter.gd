@@ -14,7 +14,7 @@ var splat_decal_instance
 
 func _ready() -> void:
 	vfx_instance = vfx.instantiate()
-	splat_decal_instance = splat_decal.instantiate()
+	#splat_decal_instance = splat_decal.instantiate()
 	var puff:AnimationPlayer = hit_vfx.get_child(3)
 	puff.play()
 	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
@@ -37,10 +37,10 @@ func splat():
 	for child:GPUParticles3D in children:
 		child.emitting = true
 	
-	# decal
-	splat_decal_instance.transform = self.transform
-	splat_decal_instance.position.y = 0.0
-	splat_decal_instance.time = 4.0
-	get_parent().add_child(splat_decal_instance)
+	# decal (eats into FPS if too many)
+	#splat_decal_instance.transform = self.transform
+	#splat_decal_instance.position.y = 0.0
+	#splat_decal_instance.time = 1.0
+	#get_parent().add_child(splat_decal_instance)
 	
 	self.queue_free()
