@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
+[ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
 [ext_resource type="Script" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
@@ -40,18 +41,13 @@
 [ext_resource type="Shader" path="res://floor_fog.gdshader" id="37_8npjo"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="38_vswrb"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kntnh"]
-sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
-sky_horizon_color = Color(0.777201, 0.634734, 0.31145, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-use_debanding = false
-
 [sub_resource type="Sky" id="Sky_albes"]
-sky_material = SubResource("ProceduralSkyMaterial_kntnh")
+sky_material = ExtResource("3_sc5e6")
 
 [sub_resource type="Environment" id="Environment_2o5or"]
 background_mode = 2
 sky = SubResource("Sky_albes")
+ambient_light_source = 3
 ambient_light_color = Color(0.192414, 0.244648, 0.258174, 1)
 tonemap_mode = 2
 sdfgi_read_sky_light = false
@@ -546,4 +542,9 @@ texture = ExtResource("26_fyld6")
 
 [node name="FloorFog" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.035606, 0)
+mesh = SubResource("QuadMesh_2ldu2")
+
+[node name="FloorFog2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.517618, 0)
+visible = false
 mesh = SubResource("QuadMesh_2ldu2")
