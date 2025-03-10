@@ -116,7 +116,8 @@ void fragment() {
 	base_uv.x+=sin(TIME/3.)/30.;
 	base_uv.y+=cos(TIME/3.)/30.;
 	vec4 glow_tex = texture(s2d, base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb*(glow_tex.r+0.5);
+	//ALBEDO = albedo.rgb * albedo_tex.rgb*(glow_tex.r+0.5);
+	ALBEDO = albedo.rgb * albedo_tex.rgb*(glow);
 
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
