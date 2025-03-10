@@ -1,15 +1,28 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, unshaded;
+render_mode blend_mix, depth_draw_opaque, cull_back, unshaded;
 
 uniform sampler2D noise_texture_1; // Top layer noise (most transparent)
 uniform sampler2D noise_texture_2; // Middle layer noise
 uniform sampler2D noise_texture_3; // Bottom layer noise
 
+uniform float speed_waves = 0.1;  // Speed of the waves
 uniform float speed_1 = 0.1;  // Speed of the top layer
 uniform float speed_2 = 0.15; // Speed of the middle layer
 uniform float speed_3 = 0.2;  // Speed of the bottom layer
 
 uniform float opacity = 0.75;  // Overall opacity multiplier
+uniform float height_scale = 0.5; // Controls the height of the vertex displacement
+
+void vertex() {
+    // Animate UVs for the top layer noise in the vertex shader
+    vec2 uv1 = UV + vec2(TIME * speed_waves, TIME * speed_waves * 0.5);
+
+    // Sample the top noise texture to determine height displacement
+    float noise1 = texture(noise_texture_1, uv1).r;
+
+    // Displace the vertex along the Z-axis based on noise (white = higher)
+    VERTEX.y += noise1 * height_scale;
+}
 
 void fragment() {
     // Get UV coordinates

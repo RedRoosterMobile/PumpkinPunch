@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=73 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -39,7 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 [ext_resource type="Shader" path="res://floor_fog.gdshader" id="37_8npjo"]
-[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="38_vswrb"]
+[ext_resource type="Material" uid="uid://cqe7tws065fea" path="res://models/old_fog.tres" id="40_gui2k"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -59,7 +59,6 @@ glow_normalized = true
 glow_strength = 0.95
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
-fog_enabled = true
 fog_mode = 1
 fog_density = 0.8126
 fog_sky_affect = 0.1
@@ -114,7 +113,6 @@ void fragment() {
 	vec4 glow_tex = texture(s2d, base_uv);
 	//ALBEDO = albedo.rgb * albedo_tex.rgb*(glow_tex.r+0.5);
 	ALBEDO = albedo.rgb * albedo_tex.rgb*(glow);
-
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	SPECULAR = specular;
@@ -168,7 +166,7 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/normal_scale = 16.0
-shader_parameter/glow = 15.0
+shader_parameter/glow = 2.5
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
@@ -225,36 +223,47 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ncevo"]
-noise_type = 0
-frequency = 0.0095
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bl1t3"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ymlpt"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xn8a4"]
 seamless = true
-noise = SubResource("FastNoiseLite_ncevo")
+noise = SubResource("FastNoiseLite_bl1t3")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qriuu"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dca2w"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_apjyh"]
+seamless = true
+noise = SubResource("FastNoiseLite_dca2w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xkj5h"]
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w34wk"]
-width = 256
-height = 256
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k4k1i"]
 seamless = true
-noise = SubResource("FastNoiseLite_qriuu")
+noise = SubResource("FastNoiseLite_xkj5h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoumk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amxcb"]
 render_priority = 0
 shader = ExtResource("37_8npjo")
-shader_parameter/speed_1 = 0.02
-shader_parameter/speed_2 = 0.005
-shader_parameter/speed_3 = 0.04
+shader_parameter/speed_waves = 0.1
+shader_parameter/speed_1 = 0.015
+shader_parameter/speed_2 = -0.015
+shader_parameter/speed_3 = 0.02
 shader_parameter/opacity = 0.5
-shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_ymlpt")
-shader_parameter/noise_texture_2 = ExtResource("38_vswrb")
-shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_w34wk")
+shader_parameter/height_scale = 0.11
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_xn8a4")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_apjyh")
+shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_k4k1i")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rf125"]
+material = SubResource("ShaderMaterial_amxcb")
+size = Vector2(20, 20)
+subdivide_width = 32
+subdivide_depth = 32
 
 [sub_resource type="QuadMesh" id="QuadMesh_2ldu2"]
-material = SubResource("ShaderMaterial_xoumk")
+material = ExtResource("40_gui2k")
 size = Vector2(20, 20)
 orientation = 1
 
@@ -541,8 +550,8 @@ modulate = Color(1, 0.4595, 0.31, 1)
 texture = ExtResource("26_fyld6")
 
 [node name="FloorFog" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.035606, 0)
-mesh = SubResource("QuadMesh_2ldu2")
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.141258, 0)
+mesh = SubResource("PlaneMesh_rf125")
 
 [node name="FloorFog2" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.517618, 0)
