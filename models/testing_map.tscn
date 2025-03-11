@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=78 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -40,6 +40,9 @@
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 [ext_resource type="Shader" path="res://floor_fog.gdshader" id="37_8npjo"]
 [ext_resource type="Material" uid="uid://cqe7tws065fea" path="res://models/old_fog.tres" id="40_gui2k"]
+[ext_resource type="Shader" path="res://images/butterfly/bat_boids.gdshader" id="41_s2i3x"]
+[ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="42_5naof"]
+[ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="42_gm3wk"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -268,6 +271,31 @@ subdivide_depth = 32
 material = ExtResource("40_gui2k")
 size = Vector2(20, 20)
 orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
+render_priority = 0
+shader = ExtResource("41_s2i3x")
+shader_parameter/color1 = Color(0.857865, 0.577415, 5.77569e-07, 1)
+shader_parameter/color2 = Color(0, 0.592157, 0, 1)
+shader_parameter/displ_amnt = 0.8
+shader_parameter/displ_speed = 20.0
+shader_parameter/pi = 3.14159
+shader_parameter/tex = ExtResource("42_gm3wk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mu05l"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.853026, 3.77826e-06, 1.15514e-06, 1)
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+turbulence_enabled = true
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.01
 
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
@@ -560,3 +588,13 @@ mesh = SubResource("PlaneMesh_rf125")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.517618, 0)
 visible = false
 mesh = SubResource("QuadMesh_2ldu2")
+
+[node name="Bats" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Bats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
+material_override = SubResource("ShaderMaterial_hixko")
+amount = 32
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_mu05l")
+draw_pass_1 = ExtResource("42_5naof")
