@@ -12,18 +12,62 @@ uniform float speed_3 = 0.2;  // Speed of the bottom layer
 
 uniform float opacity = 0.75;  // Overall opacity multiplier
 uniform float height_scale = 0.5; // Controls the height of the vertex displacement
-
 void vertex() {
     // Animate UVs for the top layer noise in the vertex shader
-    vec2 uv1 = UV + vec2(TIME * speed_waves, TIME * speed_waves * 0.5);
+    vec2 uv1 = UV + vec2(TIME * speed_1, TIME * speed_waves * 0.5);
 
     // Sample the top noise texture to determine height displacement
     float noise1 = texture(noise_texture_1, uv1).r;
 
     // Displace the vertex along the Z-axis based on noise (white = higher)
-    VERTEX.y += noise1 * height_scale;
+    VERTEX.y += noise1 * height_scale/80.0;
 }
+// Small offset for normal calculation
+const float NORMAL_OFFSET = 0.1;
 
+void fragment() {
+    // Get UV coordinates
+    vec2 uv = UV;
+
+    // Animate UVs for each layer using time
+    vec2 uv1 = uv + vec2(TIME * speed_1, TIME * speed_1 * 0.5);
+    vec2 uv2 = uv + vec2(TIME * speed_2, TIME * speed_2 * 0.7);
+    vec2 uv3 = uv + vec2(TIME * speed_3, TIME * speed_3 * 0.3);
+
+    // Sample noise textures
+    float noise1 = texture(noise_texture_1, uv1).r; // Top layer
+    float noise2 = texture(noise_texture_2, uv2).r; // Middle layer
+    float noise3 = texture(noise_texture_3, uv3).r; // Bottom layer
+
+    // Compute pseudo-height from noise1 (top layer) for the heightmap effect
+    float height = noise1 * height_scale;
+
+    // Calculate approximate normals by sampling neighboring pixels
+    float h_right = texture(noise_texture_1, uv1 + vec2(NORMAL_OFFSET, 0.0)).r * height_scale;
+    float h_up = texture(noise_texture_1, uv1 + vec2(0.0, NORMAL_OFFSET)).r * height_scale;
+    vec3 normal = normalize(vec3(height - h_right, height - h_up, 1.0));
+
+    // Use height to influence layer blending (similar to your original logic)
+    float normalized_height = clamp(height / height_scale, 0.0, 1.0);
+
+    // Define opacity for each layer
+    float alpha1 = noise1 * 0.2 * opacity * (1.0 - normalized_height);      // Top: fades at bottom
+    float alpha2 = noise2 * 0.4 * opacity * (1.0 - abs(normalized_height - 0.5)); // Middle: peaks in the middle
+    float alpha3 = noise3 * 0.6 * opacity * normalized_height;             // Bottom: fades at top
+
+    // Combine the layers
+    float total_alpha = alpha1 + alpha2 + alpha3;
+    total_alpha = clamp(total_alpha, 0.0, 0.8); // Cap total opacity
+
+    // Simulate lighting with the normal (optional, adjust to taste)
+    vec3 light_dir = normalize(vec3(1.0, 1.0, 1.0)); // Simple diagonal light
+    float lighting = max(0.0, dot(normal, light_dir)) * 0.5 + 0.5; // Diffuse lighting
+
+    // Set the color and transparency
+    ALBEDO = vec3(0.8, 0.9, 1.0) * lighting; // Light bluish fog with height-based lighting
+    ALPHA = total_alpha;                     // Final transparency
+}
+/*
 void fragment() {
     // Get UV coordinates
     vec2 uv = UV;
@@ -54,4 +98,4 @@ void fragment() {
     // Set the color and transparency
     ALBEDO = vec3(0.8, 0.9, 1.0); // Light bluish fog color
     ALPHA = total_alpha;          // Final transparency
-}
+}*/
