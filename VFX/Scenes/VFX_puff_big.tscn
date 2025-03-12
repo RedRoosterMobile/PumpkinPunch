@@ -58,6 +58,8 @@ color_ramp = SubResource("GradientTexture1D_hevje")
 alpha_curve = SubResource("CurveTexture_x2pap")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ex5j0"]
+radial_segments = 32
+rings = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xlkfy"]
 render_priority = 0
@@ -187,6 +189,7 @@ _data = {
 
 [node name="VFX_puff_dissipataion" type="GPUParticles3D" parent="."]
 material_override = SubResource("ShaderMaterial_ixvty")
+cast_shadow = 0
 emitting = false
 amount = 12
 one_shot = true

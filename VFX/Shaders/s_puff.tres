@@ -87,7 +87,7 @@ operator = 2
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled, fog_disabled;
+render_mode blend_add, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled, alpha_to_coverage_and_one, fog_disabled;
 
 uniform sampler2D Vertex_Noise : source_color;
 uniform float Proximity_Fade : hint_range(0, 1) = 0.20000000298023;
@@ -224,7 +224,11 @@ void light() {
 
 }
 "
+modes/blend = 1
+flags/unshaded = true
 flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+flags/alpha_to_coverage_and_one = true
 flags/fog_disabled = true
 nodes/vertex/0/position = Vector2(640, 160)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_byhh6")

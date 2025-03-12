@@ -2,6 +2,7 @@ extends Node
 
 @export var splat_sprite: PackedScene = preload("res://splat_sprite.tscn")
 @export var max_sprites: int = 10
+@export var display_time: float = 4.0
 var sprite_pool: Array = []
 
 func _ready() -> void:
@@ -30,8 +31,8 @@ func _on_spawn_splat_requested(position: Vector3) -> void:
 		fade_sprite(sprite)
 
 func fade_sprite(sprite: Sprite3D) -> void:
-	var fade_start_time = 4.0 * 0.8  # 80% of 4 seconds
-	var fade_duration = 4.0 * 0.2    # 20% of 4 seconds
+	var fade_start_time = display_time * 0.8  # 80%
+	var fade_duration = display_time * 0.2    # 20%
 	await get_tree().create_timer(fade_start_time).timeout
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate:a", 0.0, fade_duration)
