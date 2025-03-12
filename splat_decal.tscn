@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://wn4y0vr1x5ds"]
 
 [ext_resource type="Texture2D" uid="uid://chw5wiali7bsd" path="res://images/splat_128.png" id="1_i3dbl"]
-[ext_resource type="Script" path="res://splat_decal.gd" id="2_acb40"]
+[ext_resource type="Script" uid="uid://c0by0r4ifp5ai" path="res://splat_decal.gd" id="2_acb40"]
 
 [node name="SplatDecal" type="Decal"]
 size = Vector3(2, 2.21204, 2)

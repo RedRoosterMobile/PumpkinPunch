@@ -6,8 +6,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bx2os"]
 render_priority = 0
 shader = ExtResource("1_6vebj")
-shader_parameter/Proximity_Fade = 0.5
 shader_parameter/Vertex_Noise = ExtResource("2_in4ho")
+shader_parameter/Proximity_Fade = 0.5
 
 [sub_resource type="Curve" id="Curve_mkfny"]
 _data = [Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

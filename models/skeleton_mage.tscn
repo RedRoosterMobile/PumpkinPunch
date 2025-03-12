@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dlbrb4u1gn18y"]
 
 [ext_resource type="PackedScene" uid="uid://dq3mc7c7bmetn" path="res://models/Skeleton_Mage.glb" id="1_1nx2b"]
-[ext_resource type="Script" path="res://models/skeleton_mage.gd" id="2_ejr3e"]
+[ext_resource type="Script" uid="uid://ceylgworn3h5o" path="res://models/skeleton_mage.gd" id="2_ejr3e"]
 [ext_resource type="Texture2D" uid="uid://cckci8uqx1o5f" path="res://art/circle_05.png" id="3_q6joc"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rek2w"]

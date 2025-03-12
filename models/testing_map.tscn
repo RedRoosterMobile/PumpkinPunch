@@ -1,12 +1,12 @@
 [gd_scene load_steps=79 format=3 uid="uid://b3l46tvt2tevv"]
 
-[ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
+[ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
-[ext_resource type="Script" path="res://floor_mesh.gd" id="3_thqn0"]
+[ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
-[ext_resource type="Script" path="res://models/decoration.gd" id="5_kb2wl"]
+[ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://models/decoration.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="7_usxdh"]
@@ -31,16 +31,16 @@
 [ext_resource type="AudioStream" uid="uid://7x8dllk00135" path="res://art/Super simple pumpkin demo.wav" id="27_blul2"]
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
-[ext_resource type="Script" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
+[ext_resource type="Script" uid="uid://cxt7552h7hen2" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
 [ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="31_g8721"]
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
-[ext_resource type="Shader" path="res://floor_fog.gdshader" id="37_8npjo"]
+[ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="37_8npjo"]
 [ext_resource type="Material" uid="uid://cqe7tws065fea" path="res://models/old_fog.tres" id="40_gui2k"]
-[ext_resource type="Shader" path="res://images/butterfly/bat_boids.gdshader" id="41_s2i3x"]
+[ext_resource type="Shader" uid="uid://c7qelfof7s0gg" path="res://images/butterfly/bat_boids.gdshader" id="41_s2i3x"]
 [ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="42_5naof"]
 [ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="42_gm3wk"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="44_4b1da"]
@@ -165,21 +165,21 @@ noise = SubResource("FastNoiseLite_4v1ve")
 render_priority = 0
 shader = SubResource("Shader_ey3m2")
 shader_parameter/albedo = Color(1, 0.239216, 1, 1)
+shader_parameter/texture_albedo = SubResource("NoiseTexture2D_anx5b")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_wh3a7")
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_1w204")
 shader_parameter/normal_scale = 16.0
 shader_parameter/glow = 2.5
+shader_parameter/s2d = SubResource("NoiseTexture2D_ynd0x")
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture2D_anx5b")
-shader_parameter/texture_roughness = SubResource("NoiseTexture2D_wh3a7")
-shader_parameter/texture_normal = SubResource("NoiseTexture2D_1w204")
-shader_parameter/s2d = SubResource("NoiseTexture2D_ynd0x")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ju6e"]
 material = SubResource("ShaderMaterial_c28ly")
@@ -252,15 +252,15 @@ noise = SubResource("FastNoiseLite_xkj5h")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_amxcb"]
 render_priority = 0
 shader = ExtResource("37_8npjo")
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_xn8a4")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_apjyh")
+shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_k4k1i")
 shader_parameter/speed_waves = 0.5
 shader_parameter/speed_1 = 0.015
 shader_parameter/speed_2 = -0.015
 shader_parameter/speed_3 = 0.02
 shader_parameter/opacity = 0.5
 shader_parameter/height_scale = 2.5
-shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_xn8a4")
-shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_apjyh")
-shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_k4k1i")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rf125"]
 material = SubResource("ShaderMaterial_amxcb")
@@ -276,12 +276,12 @@ orientation = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
 render_priority = 0
 shader = ExtResource("41_s2i3x")
+shader_parameter/tex = ExtResource("42_gm3wk")
 shader_parameter/color1 = Color(0.809847, 0.544149, 0, 1)
 shader_parameter/color2 = Color(0, 0.236852, 0, 1)
 shader_parameter/displ_amnt = 0.8
 shader_parameter/displ_speed = 20.0
 shader_parameter/pi = 3.14159
-shader_parameter/tex = ExtResource("42_gm3wk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mu05l"]
 emission_shape = 1
@@ -599,7 +599,6 @@ visible = false
 mesh = SubResource("QuadMesh_2ldu2")
 
 [node name="Bats" type="Node3D" parent="."]
-visible = false
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54526, 0.0150414)
