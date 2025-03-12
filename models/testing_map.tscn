@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=79 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -43,6 +43,7 @@
 [ext_resource type="Shader" path="res://images/butterfly/bat_boids.gdshader" id="41_s2i3x"]
 [ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="42_5naof"]
 [ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="42_gm3wk"]
+[ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="44_4b1da"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -275,8 +276,8 @@ orientation = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
 render_priority = 0
 shader = ExtResource("41_s2i3x")
-shader_parameter/color1 = Color(0.857865, 0.577415, 5.77569e-07, 1)
-shader_parameter/color2 = Color(0, 0.592157, 0, 1)
+shader_parameter/color1 = Color(0.809847, 0.544149, 0, 1)
+shader_parameter/color2 = Color(0, 0.236852, 0, 1)
 shader_parameter/displ_amnt = 0.8
 shader_parameter/displ_speed = 20.0
 shader_parameter/pi = 3.14159
@@ -290,8 +291,12 @@ spread = 0.0
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
-color = Color(0.853026, 3.77826e-06, 1.15514e-06, 1)
-hue_variation_min = 1.0
+radial_accel_min = -2.0
+radial_accel_max = 2.0
+scale_min = 0.35
+scale_max = 0.5
+color = Color(0.719454, 2.55093e-06, 5.77569e-07, 1)
+hue_variation_min = -2.23517e-08
 hue_variation_max = 1.0
 turbulence_enabled = true
 turbulence_influence_min = 0.01
@@ -591,6 +596,13 @@ mesh = SubResource("QuadMesh_2ldu2")
 
 [node name="Bats" type="Node3D" parent="."]
 
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54526, 0.0150414)
+visible = false
+strength = -44.12
+attenuation = 0.0769467
+radius = 10.0
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
 material_override = SubResource("ShaderMaterial_hixko")
@@ -598,3 +610,6 @@ amount = 32
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_mu05l")
 draw_pass_1 = ExtResource("42_5naof")
+
+[node name="best_bat" parent="." instance=ExtResource("44_4b1da")]
+transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 0.850941, 2.50656, -1.55308)
