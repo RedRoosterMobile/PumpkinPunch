@@ -83,8 +83,8 @@ alpha_curve = SubResource("CurveTexture_doxuj")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5k6sy"]
 render_priority = 0
 shader = ExtResource("5_q4wwe")
-shader_parameter/Proximity_Fade = 0.5
 shader_parameter/Main_Texture = ExtResource("6_ar1sy")
+shader_parameter/Proximity_Fade = 0.5
 
 [sub_resource type="Curve" id="Curve_wt3jj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.21374, 1), 0.0, 0.0, 0, 0, Vector2(0.78626, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -107,6 +107,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 1.0
 emission_ring_radius = 1.6
 emission_ring_inner_radius = 1.5
+emission_ring_cone_angle = 90.0
 direction = Vector3(0, 1, 0)
 spread = 20.0
 initial_velocity_min = 6.0
@@ -128,8 +129,8 @@ turbulence_influence_min = 0.05
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rgenr"]
 render_priority = 0
 shader = ExtResource("5_q4wwe")
-shader_parameter/Proximity_Fade = 0.5
 shader_parameter/Main_Texture = ExtResource("6_ar1sy")
+shader_parameter/Proximity_Fade = 0.5
 
 [sub_resource type="QuadMesh" id="QuadMesh_eksas"]
 
@@ -220,7 +221,7 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rqtlh"]
 _data = {
-"init": SubResource("Animation_q3j26")
+&"init": SubResource("Animation_q3j26")
 }
 
 [node name="VFX_Level_UP" type="Node3D"]

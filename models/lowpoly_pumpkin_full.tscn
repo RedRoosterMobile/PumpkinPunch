@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqvxht3mrrs01"]
 
 [ext_resource type="PackedScene" uid="uid://bt1ibibefvniy" path="res://models/lowpoly_pumpkin_full.glb" id="1_m3vpw"]
-[ext_resource type="Script" path="res://model_shifter.gd" id="2_uwqtp"]
+[ext_resource type="Script" uid="uid://bipi7q3glgfnl" path="res://model_shifter.gd" id="2_uwqtp"]
 [ext_resource type="PackedScene" uid="uid://bkpn05s04y1k2" path="res://models/lowpoly_pumpkin_pieces.tscn" id="3_brmxh"]
 [ext_resource type="PackedScene" uid="uid://wn4y0vr1x5ds" path="res://splat_decal.tscn" id="4_6uu1v"]
 [ext_resource type="PackedScene" uid="uid://bj3cgi2csord" path="res://VFX/Scenes/VFX_puff_big.tscn" id="5_yoi3w"]

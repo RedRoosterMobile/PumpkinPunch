@@ -8,8 +8,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8fysc"]
 render_priority = 0
 shader = ExtResource("1_fj2r2")
-shader_parameter/Proximity_Fade = 0.3
 shader_parameter/Main_Texture = ExtResource("2_h2jjp")
+shader_parameter/Proximity_Fade = 0.3
 
 [sub_resource type="Curve" id="Curve_vghbg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498551, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -102,7 +102,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wanpx"]
 _data = {
-"hit": SubResource("Animation_hoqvr")
+&"hit": SubResource("Animation_hoqvr")
 }
 
 [node name="HIT VFX" type="Node3D"]

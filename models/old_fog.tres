@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://cqe7tws065fea"]
 
-[ext_resource type="Shader" path="res://floor_fog.gdshader" id="1_t8bgw"]
+[ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="1_t8bgw"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="2_sqsqn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ncevo"]
@@ -23,12 +23,12 @@ noise = SubResource("FastNoiseLite_qriuu")
 [resource]
 render_priority = 0
 shader = ExtResource("1_t8bgw")
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_ymlpt")
+shader_parameter/noise_texture_2 = ExtResource("2_sqsqn")
+shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_w34wk")
 shader_parameter/speed_waves = 0.1
 shader_parameter/speed_1 = -0.025
 shader_parameter/speed_2 = 0.004
 shader_parameter/speed_3 = -0.04
 shader_parameter/opacity = 1.0
 shader_parameter/height_scale = 5.0
-shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_ymlpt")
-shader_parameter/noise_texture_2 = ExtResource("2_sqsqn")
-shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_w34wk")

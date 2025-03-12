@@ -6,6 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_noncb"]
 render_priority = 0
 shader = ExtResource("1_hn4ug")
+shader_parameter/ColorParameter = Color(0, 0, 0, 1)
 shader_parameter/Hit_texture = ExtResource("2_cpjwh")
 
 [sub_resource type="Curve" id="Curve_baxrw"]

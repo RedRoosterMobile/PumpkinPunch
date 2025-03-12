@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=4 uid="uid://bkpn05s04y1k2"]
 
 [ext_resource type="Texture2D" uid="uid://ca17xoxq11ail" path="res://models/lowpoly_pumpkin_pieces_halloweenbits_texture.png" id="1_gn77y"]
-[ext_resource type="Script" path="res://model_breaker.gd" id="1_uwwtm"]
+[ext_resource type="Script" uid="uid://bii3mlxa1exlv" path="res://model_breaker.gd" id="1_uwwtm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xe42y"]
 resource_name = "HalloweenBits"

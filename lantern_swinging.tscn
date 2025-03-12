@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://r8hccr0m53pp"]
 
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="1_7p768"]
-[ext_resource type="Script" path="res://lantern_swinging.gd" id="2_12fxu"]
+[ext_resource type="Script" uid="uid://qqjsc2pkcm1m" path="res://lantern_swinging.gd" id="2_12fxu"]
 
 [node name="post_lantern2" instance=ExtResource("1_7p768")]
 script = ExtResource("2_12fxu")

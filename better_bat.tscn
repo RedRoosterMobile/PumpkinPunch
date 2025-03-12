@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cvk7hto2ne5dy"]
 
 [ext_resource type="PackedScene" uid="uid://dgpewifp4xxof" path="res://models/better_bat.glb" id="1_gmt21"]
-[ext_resource type="Script" path="res://better_bat.gd" id="2_b6d8u"]
+[ext_resource type="Script" uid="uid://fny4npn5utgt" path="res://better_bat.gd" id="2_b6d8u"]
 [ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="2_f0gdx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qad8k"]

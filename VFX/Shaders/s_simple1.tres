@@ -37,7 +37,7 @@ code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
 
 uniform sampler2D Main_Texture : source_color;
-uniform float Proximity_Fade : hint_range(0, 1) = 0.5;
+uniform float Proximity_Fade : hint_range(0.0, 1.0) = 0.5;
 uniform sampler2D depth_tex_frg_5 : hint_depth_texture;
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://s731qn4j6ebs"]
 
 [ext_resource type="PackedScene" uid="uid://5qc8lctgh4hw" path="res://models/pumpkin_hollow_full.glb" id="1_81tnc"]
-[ext_resource type="Script" path="res://model_shifter.gd" id="2_p610y"]
+[ext_resource type="Script" uid="uid://bipi7q3glgfnl" path="res://model_shifter.gd" id="2_p610y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6jvo4"]
 radius = 0.9
