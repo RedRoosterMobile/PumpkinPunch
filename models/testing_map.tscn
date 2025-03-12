@@ -599,6 +599,7 @@ visible = false
 mesh = SubResource("QuadMesh_2ldu2")
 
 [node name="Bats" type="Node3D" parent="."]
+visible = false
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54526, 0.0150414)

@@ -15,12 +15,14 @@ signal pose_recentered
 @onready var right_hand_controller: XRController3D = $RightHandController
 
 var xr_interface : OpenXRInterface
+
 var xr_is_focussed = false
 # https://github.com/godotengine/godot-demo-projects/blob/4.2/xr/openxr_origin_centric_movement/start_vr.gd
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")
+	#xr_interface.render_target_size_multiplier = 0.855  # 80% of 1680x1760
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR instantiated successfully.")
 		var vp : Viewport = get_viewport()
@@ -40,6 +42,7 @@ func _ready():
 		
 		left_hand_controller.get_child(0).queue_free()
 		right_hand_controller.get_child(0).queue_free()
+		
 	else:
 		# We couldn't start OpenXR.
 		print("OpenXR not instantiated!")
