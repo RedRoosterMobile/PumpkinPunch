@@ -11,10 +11,14 @@ func _ready() -> void:
 	else:
 		shot_direction = Vector3.UP  # Default direction if none specified
 	
-	for piece: RigidBody3D in self.get_children():
+	self.scale = Vector3(0.5, 0.5, 0.5)  # Reset parent scale
+	#print("Adjusted parent scale: ", self.scale)
+	
+	for piece in self.get_child(0).get_children():
 		# Base direction from piece position
 		var base_dir = piece.get_child(0).position.normalized()
-		
+		#piece.scale_object_local(Vector3(0.1,0.1,0.1))
+		# piece.scale*=0.1
 		# Add influence from shot direction
 		base_dir = base_dir.lerp(shot_direction, 0.3)  # Mix in some shot direction
 		

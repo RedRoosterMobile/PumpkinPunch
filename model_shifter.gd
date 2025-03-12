@@ -26,6 +26,8 @@ func splat():
 	
 	var broken_model_instance = broken_model.instantiate()
 	broken_model_instance.transform = self.transform
+	
+	#broken_model_instance.scale = self.scale
 	get_parent().add_child(broken_model_instance)
 	
 	vfx_instance.transform = self.transform

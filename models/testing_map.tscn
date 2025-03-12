@@ -63,6 +63,7 @@ glow_normalized = true
 glow_strength = 0.95
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
+fog_enabled = true
 fog_mode = 1
 fog_density = 0.1775
 fog_aerial_perspective = 0.034
