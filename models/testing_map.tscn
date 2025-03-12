@@ -309,6 +309,9 @@ right_hand_body = NodePath("HandRight")
 xr_enabled = true
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34322, 5.28999, -7.6277)
+visible = false
+size = Vector3(35.2723, 11.3253, 25.7098)
 data = ExtResource("2_cntg0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -565,6 +568,7 @@ transform = Transform3D(1, 0, 0, 0, -1, -5.23647e-05, 0, 5.23647e-05, -1, 0, 2.0
 visible = false
 light_color = Color(0.854555, 0.33318, 0.852035, 1)
 light_energy = 16.0
+light_bake_mode = 1
 shadow_enabled = true
 spot_range = 1643.0
 
