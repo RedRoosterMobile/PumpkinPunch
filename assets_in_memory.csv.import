@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://h3qty3s08t52"
+
+[deps]
+
+files=["res://assets_in_memory.Type.translation", "res://assets_in_memory.Format.translation", "res://assets_in_memory.Usage.translation"]
+
+source_file="res://assets_in_memory.csv"
+dest_files=["res://assets_in_memory.Type.translation", "res://assets_in_memory.Format.translation", "res://assets_in_memory.Usage.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,0 +1,141 @@
+Resource Path,Type,Format,Usage
+Render Target (Internal),Texture,1680x1760 RGB8,8.45 MiB
+Render Target (Internal),Texture,1680x1760 RGB8,8.45 MiB
+res://models/testing_map.tscn::NoiseTexture2D_1w204,Texture,512x512 RGBA8,1.33 MiB
+res://models/lowpoly_pumpkin_full_scaled_halloweenbits_texture.png,Texture,1024x1024 DXT1 RGB8,682.6 KiB
+res://models/Skeleton_Mage_skeleton_texture.png,Texture,1024x1024 DXT1 RGB8,682.6 KiB
+res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png,Texture,1024x1024 DXT1 RGB8,682.6 KiB
+res://models/lowpoly_pumpkin_pieces_scaled_halloweenbits_texture.png,Texture,1024x1024 DXT1 RGB8,682.6 KiB
+res://vfxx/fire_01.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://vfxx/fire_02.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://vfxx/trace_07.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://vfxx/circle_05.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://art/circle_05.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://art/splat.png,Texture,512x512 DXT5 RGBA8,341.3 KiB
+res://models/old_fog.tres::NoiseTexture2D_ymlpt,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_anx5b,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_wh3a7,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_ynd0x,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_xn8a4,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_apjyh,Texture,512x512 Lum8,341.3 KiB
+res://models/testing_map.tscn::NoiseTexture2D_k4k1i,Texture,512x512 Lum8,341.3 KiB
+res://VFX/Textures/T_fl81_vfx.png,Texture,512x512 DXT1 RGB8,170.6 KiB
+res://VFX/Textures/T_PerlinNoise_Tiled.png,Texture,512x512 DXT1 RGB8,170.6 KiB
+res://VFX/Textures/T_basic1_vfx.PNG,Texture,512x512 DXT1 RGB8,170.6 KiB
+res://images/particles/flame_05.png,Texture,512x512 DXT1 RGB8,170.6 KiB
+res://images/particles/circle_05.png,Texture,512x512 DXT1 RGB8,170.6 KiB
+res://images/particles/star_07.png,Texture,512x512 DXT1 RGB8,170.6 KiB
+,Texture,256x256 LumAlpha8,128.0 KiB
+,Texture,256x256 LumAlpha8,128.0 KiB
+,Texture,256x256 LumAlpha8,128.0 KiB
+res://models/old_fog.tres::NoiseTexture2D_w34wk,Texture,256x256 Lum8,85.33 KiB
+res://images/splat_128.png,Texture,128x128 DXT5 RGBA8,21.35 KiB
+res://images/butterfly/butterfly.png,Texture,128x128 DXT5 RGBA8,21.35 KiB
+,Texture,800x6 RGBA8,18.75 KiB
+res://splash_fx.tscn::GradientTexture1D_gy0se,Texture,256x1 RGBAFloat,4.00 KiB
+res://VFX/Scenes/VFX_puff_big.tscn::GradientTexture1D_5v6a0,Texture,256x1 RGBAFloat,4.00 KiB
+res://VFX/Scenes/VFX_puff_big.tscn::GradientTexture1D_hevje,Texture,256x1 RGBAFloat,4.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,256x1 RGBFloat,3.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,32x16 RGBA8,2.00 KiB
+,Texture,16x32 RGBA8,2.00 KiB
+,Texture,48x8 RGBA8,1.50 KiB
+,Texture,8x48 RGBA8,1.50 KiB
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,256x1 RFloat,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,16x16 RGBA8,1024 B
+,Texture,12x12 RGBA8,576 B
+,Texture,12x12 RGBA8,576 B
+,Texture,12x12 RGBA8,576 B
+,Texture,12x12 RGBA8,576 B
+,Texture,12x12 RGBA8,576 B
+,Texture,16x8 RGBA8,512 B
+,Texture,16x8 RGBA8,512 B
+,Texture,8x16 RGBA8,512 B
+,Texture,8x16 RGBA8,512 B
+,Texture,14x8 RGBA8,448 B
+,Texture,10x10 RGBA8,400 B
+,Texture,4x16 RGBA8,256 B
+,Texture,16x4 RGBA8,256 B
+,Texture,8x8 RGBA8,256 B
+,Texture,8x8 RGBA8,256 B
+,Texture,4x4 RGBA8,64 B
+,Texture,4x4 RGBA8,64 B
