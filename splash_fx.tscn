@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_noncb"]
 render_priority = 0
 shader = ExtResource("1_hn4ug")
-shader_parameter/ColorParameter = Color(0, 0, 0, 1)
+shader_parameter/ColorParameter = Color(0.848662, 0.665946, 0.164066, 1)
 shader_parameter/Hit_texture = ExtResource("2_cpjwh")
 
 [sub_resource type="Curve" id="Curve_baxrw"]
@@ -34,8 +34,8 @@ curve = SubResource("Curve_ygkbh")
 angle_min = -180.0
 angle_max = 180.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.8
-scale_max = 1.5
+scale_min = 1.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_gbxcq")
 color_ramp = SubResource("GradientTexture1D_gy0se")
 alpha_curve = SubResource("CurveTexture_olq00")
@@ -44,6 +44,7 @@ alpha_curve = SubResource("CurveTexture_olq00")
 
 [node name="hit effect" type="GPUParticles3D"]
 material_override = SubResource("ShaderMaterial_noncb")
+emitting = false
 amount = 1
 lifetime = 0.25
 explosiveness = 1.0

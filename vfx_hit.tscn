@@ -38,7 +38,6 @@ size = Vector2(0.5, 0.5)
 script = ExtResource("1_v7b1x")
 
 [node name="hit effect" parent="." instance=ExtResource("1_psep0")]
-emitting = false
 one_shot = true
 
 [node name="sparks" type="GPUParticles3D" parent="."]

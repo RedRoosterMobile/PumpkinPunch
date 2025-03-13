@@ -25,7 +25,7 @@ keep_scale = true
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, ambient_light_disabled, fog_disabled;
 
 uniform vec4 ColorParameter : source_color;
 uniform sampler2D Hit_texture : source_color;
@@ -76,7 +76,10 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-411.84, -292.8)
 flags/unshaded = true
+flags/ambient_light_disabled = true
+flags/fog_disabled = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_7ygei")
 nodes/vertex/2/position = Vector2(-420, 440)
 nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
