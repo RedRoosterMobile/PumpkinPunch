@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=82 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -44,6 +44,8 @@
 [ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="42_5naof"]
 [ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="42_gm3wk"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="44_4b1da"]
+[ext_resource type="PackedScene" uid="uid://de6v0pix3bv6e" path="res://models/ground_hills.glb" id="45_xe5yt"]
+[ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="46_gkf7v"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -271,7 +273,7 @@ shader_parameter/height_scale = 2.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rf125"]
 material = SubResource("ShaderMaterial_amxcb")
-size = Vector2(20, 20)
+size = Vector2(28, 28)
 subdivide_width = 32
 subdivide_depth = 32
 
@@ -598,12 +600,11 @@ texture = ExtResource("26_fyld6")
 
 [node name="SkyClouds" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
-visible = false
 mesh = SubResource("PlaneMesh_2eces")
 skeleton = NodePath("../FloorFog")
 
 [node name="FloorFog" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.141258, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.49922)
 mesh = SubResource("PlaneMesh_rf125")
 
 [node name="FloorFog2" type="MeshInstance3D" parent="."]
@@ -631,3 +632,10 @@ draw_pass_1 = ExtResource("42_5naof")
 [node name="best_bat" parent="." instance=ExtResource("44_4b1da")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 0.850941, 2.50656, -1.55308)
 visible = false
+
+[node name="ground_hills" parent="." instance=ExtResource("45_xe5yt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
+visible = false
+
+[node name="ground_hills2" parent="." instance=ExtResource("46_gkf7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
