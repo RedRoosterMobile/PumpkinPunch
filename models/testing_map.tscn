@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=78 format=3 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="VoxelGIData" uid="uid://b55hnvk03obj7" path="res://models/testing_map.VoxelGI_data.res" id="2_cntg0"]
@@ -35,7 +35,6 @@
 [ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="31_g8721"]
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
-[ext_resource type="PackedScene" uid="uid://cvk7hto2ne5dy" path="res://better_bat.tscn" id="33_npfiu"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 [ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="37_8npjo"]
@@ -547,7 +546,6 @@ text = "FPS
 vertical_alignment = 2
 
 [node name="BatNode3D" type="Node3D" parent="."]
-visible = false
 
 [node name="Path3D" type="Path3D" parent="BatNode3D"]
 transform = Transform3D(0.999937, 0, 0, 0, 0.999937, 0, 0, 0, 0.999937, 0.190925, 0.159876, 0)
@@ -558,8 +556,8 @@ transform = Transform3D(-0.999852, 0.00998034, -0.0135195, 0, 0.804518, 0.593907
 script = ExtResource("31_cqoek")
 speed = 10.0
 
-[node name="better_bat2" parent="BatNode3D/Path3D/BatPathFollow3D" instance=ExtResource("33_npfiu")]
-transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
+[node name="best_bat" parent="BatNode3D/Path3D/BatPathFollow3D" instance=ExtResource("44_4b1da")]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0.850941, 2.50656, -1.55308)
 
 [node name="lantern_swinging" parent="." instance=ExtResource("33_ea6jp")]
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
