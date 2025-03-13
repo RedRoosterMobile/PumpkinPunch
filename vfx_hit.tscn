@@ -35,7 +35,6 @@ turbulence_influence_min = 0.0
 size = Vector2(0.5, 0.5)
 
 [node name="VFX_Hit" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45749, 0)
 script = ExtResource("1_v7b1x")
 
 [node name="hit effect" parent="." instance=ExtResource("1_psep0")]

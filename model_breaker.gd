@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var INTENSITY: float = 1.0
+@export var INTENSITY: float = 4.0
 @export var RANDOMNESS: float = 0.5  # Controls how much random deviation (0.0 = none, 1.0 = lots)
 var shot_direction: Vector3   # Direction from which the pumpkin was shot
 
@@ -11,10 +11,10 @@ func _ready() -> void:
 	else:
 		shot_direction = Vector3.UP  # Default direction if none specified
 	
-	self.scale = Vector3(0.5, 0.5, 0.5)  # Reset parent scale
+	#self.scale = Vector3(0.5, 0.5, 0.5)  # Reset parent scale
 	#print("Adjusted parent scale: ", self.scale)
 	
-	for piece in self.get_child(0).get_children():
+	for piece in self.get_children():
 		# Base direction from piece position
 		var base_dir = piece.get_child(0).position.normalized()
 		#piece.scale_object_local(Vector3(0.1,0.1,0.1))

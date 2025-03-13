@@ -26,8 +26,10 @@ const PUMPKIN_Y:float = 1 # up/down
 # use this for spawning
 #const SPAWN_THING:PackedScene = preload("res://models/pumpkin_hollow_full_modified.tscn")
 #const SPAWN_THING_BROKEN:PackedScene = preload("res://models/pumpkin_hollow_pieces_modified.tscn")
-const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full.tscn")
-const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces.tscn")
+#const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full.tscn")
+#const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces.tscn")
+const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full_scaled.tscn")
+const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces_scaled.tscn")
 const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
 
 func _on_game_started():
@@ -162,7 +164,8 @@ func create_new_pumpkin():
 		# FIXME: get from object pool instead
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
-		pumpkin.scale *= 0.5
+		# fucks up inn gd 4.4
+		# pumpkin.scale *= 0.5
 		var x_spawn:float
 		if randi_range(0,1):
 			x_spawn = PUMPKIN_X*-1.0

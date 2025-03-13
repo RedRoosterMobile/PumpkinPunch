@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var broken_model: PackedScene
-@export var vfx: PackedScene = preload("res://vfx_hit.tscn")
+var vfx: PackedScene = preload("res://vfx_hit.tscn")
 @export var splat_decal: PackedScene
 @onready var pumpkin_orange_jackolantern: MeshInstance3D = $pumpkin_orange_jackolantern
 @onready var hit_vfx: Node3D = $"HIT VFX"
@@ -26,6 +26,7 @@ func splat():
 	
 	var broken_model_instance = broken_model.instantiate()
 	broken_model_instance.transform = self.transform
+	broken_model_instance.scale *= 2.0
 	
 	#broken_model_instance.scale = self.scale
 	get_parent().add_child(broken_model_instance)

@@ -344,71 +344,68 @@ points = PackedVector3Array(0.380287, -0.237258, -0.512863, 0.452461, -0.237258,
 [node name="lowpoly_pumpkin_pieces" type="Node3D"]
 script = ExtResource("1_uwwtm")
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="Node3D"]
-
-[node name="pumpkin_orange_jackolantern_cell_001" type="MeshInstance3D" parent="Node3D/RigidBody3D2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0896613, 0.618859, -0.280923)
+[node name="pumpkin_orange_jackolantern_cell_001" type="MeshInstance3D" parent="RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0896613, 0.618859, -0.280923)
 mesh = SubResource("ArrayMesh_4340u")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0896613, 0.618859, -0.280923)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0896613, 0.618859, -0.280923)
 shape = SubResource("ConvexPolygonShape3D_2lljb")
 
-[node name="RigidBody3D3" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
 
-[node name="pumpkin_orange_jackolantern_cell_002" type="MeshInstance3D" parent="Node3D/RigidBody3D3"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.256264, 0.561231, 0.450086)
+[node name="pumpkin_orange_jackolantern_cell_002" type="MeshInstance3D" parent="RigidBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.256264, 0.561231, 0.450086)
 mesh = SubResource("ArrayMesh_34k6c")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D3"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.256264, 0.561231, 0.450086)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.256264, 0.561231, 0.450086)
 shape = SubResource("ConvexPolygonShape3D_p0t3c")
 
-[node name="RigidBody3D4" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D4" type="RigidBody3D" parent="."]
 
-[node name="pumpkin_orange_jackolantern_cell_003" type="MeshInstance3D" parent="Node3D/RigidBody3D4"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.183149, 0.173847, 0.00650036)
+[node name="pumpkin_orange_jackolantern_cell_003" type="MeshInstance3D" parent="RigidBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.183149, 0.173847, 0.00650036)
 mesh = SubResource("ArrayMesh_ylp8y")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D4"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.183149, 0.173847, 0.00650036)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.183149, 0.173847, 0.00650036)
 shape = SubResource("ConvexPolygonShape3D_m4njp")
 
-[node name="RigidBody3D5" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D5" type="RigidBody3D" parent="."]
 
-[node name="pumpkin_orange_jackolantern_cell_004" type="MeshInstance3D" parent="Node3D/RigidBody3D5"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.310898, 0.330269, 0.232066)
+[node name="pumpkin_orange_jackolantern_cell_004" type="MeshInstance3D" parent="RigidBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310898, 0.330269, 0.232066)
 mesh = SubResource("ArrayMesh_a5gvj")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D5"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.310898, 0.330269, 0.232066)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310898, 0.330269, 0.232066)
 shape = SubResource("ConvexPolygonShape3D_u7ktr")
 
-[node name="RigidBody3D6" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D6" type="RigidBody3D" parent="."]
 
-[node name="pumpkin_orange_jackolantern_cell_005" type="MeshInstance3D" parent="Node3D/RigidBody3D6"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00592938, 1.15798, 0.0131726)
+[node name="pumpkin_orange_jackolantern_cell_005" type="MeshInstance3D" parent="RigidBody3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00592938, 1.15798, 0.0131726)
 mesh = SubResource("ArrayMesh_p52mr")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D6"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00592938, 1.15798, 0.0131726)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00592938, 1.15798, 0.0131726)
 shape = SubResource("ConvexPolygonShape3D_5lqti")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
 
-[node name="pumpkin_orange_jackolantern_cell" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.159647, 0.787252, 0.232175)
+[node name="pumpkin_orange_jackolantern_cell" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159647, 0.787252, 0.232175)
 mesh = SubResource("ArrayMesh_hh8q4")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.159647, 0.787252, 0.232175)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159647, 0.787252, 0.232175)
 shape = SubResource("ConvexPolygonShape3D_38wnh")
