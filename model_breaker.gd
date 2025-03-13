@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var INTENSITY: float = 4.0
+@export var INTENSITY: float = 1.0
 @export var RANDOMNESS: float = 0.5  # Controls how much random deviation (0.0 = none, 1.0 = lots)
 var shot_direction: Vector3   # Direction from which the pumpkin was shot
 

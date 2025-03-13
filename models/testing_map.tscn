@@ -196,6 +196,7 @@ size = Vector3(20, 20, 1)
 radius = 0.12
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ekxpw"]
+radius = 0.12
 
 [sub_resource type="SphereMesh" id="SphereMesh_pqm76"]
 
