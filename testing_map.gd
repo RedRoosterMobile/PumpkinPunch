@@ -118,7 +118,6 @@ var prev_controller_states: Dictionary = {}  # Stores previous state for each co
 @export var rumble_event_right : XRToolsRumbleEvent
 func _on_button_pressed(button_name: String) -> void:
 	#print("rumble")
-	return
 	match button_name:
 		# works!
 		"ax_button":
@@ -164,8 +163,7 @@ func create_new_pumpkin():
 		# FIXME: get from object pool instead
 		var pumpkin = SPAWN_THING.instantiate()
 		var pumpkin_pieces = SPAWN_THING_BROKEN
-		# fucks up inn gd 4.4
-		# pumpkin.scale *= 0.5
+		
 		var x_spawn:float
 		if randi_range(0,1):
 			x_spawn = PUMPKIN_X*-1.0

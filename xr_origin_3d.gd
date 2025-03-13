@@ -22,7 +22,10 @@ var xr_is_focussed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")
-	#xr_interface.render_target_size_multiplier = 0.855  # 80% of 1680x1760
+	# xr_interface.render_target_size_multiplier = 0.8  # 80% of 1680x1760
+	# 0.8 = (1344.0, 1408.0)
+	print(xr_interface.get_render_target_size())
+	
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR instantiated successfully.")
 		var vp : Viewport = get_viewport()

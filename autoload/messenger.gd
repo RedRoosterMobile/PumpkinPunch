@@ -1,8 +1,5 @@
 extends Node
 
-# do signals here
-# example
-signal screenshake(strength: float)
 
 # when game is ready to spawn pumpkins
 signal game_started()
