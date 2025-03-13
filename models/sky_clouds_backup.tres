@@ -1,0 +1,48 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://bhr38dekra14f"]
+
+[ext_resource type="Shader" uid="uid://c33o3i560ermg" path="res://sky_clouds.gdshader" id="1_ht0m8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1np8q"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_if520"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_1np8q")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xe5yt"]
+frequency = 0.0104
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gkf7v"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_xe5yt")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_if520"]
+noise_type = 2
+frequency = 0.0145
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xe5yt"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_if520")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ht0m8")
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_if520")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_gkf7v")
+shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_xe5yt")
+shader_parameter/direction_1 = Vector2(-0.7, -0.1)
+shader_parameter/direction_2 = Vector2(-0.5, 0.1)
+shader_parameter/direction_3 = Vector2(0.05, 0.3)
+shader_parameter/color_1 = Color(0.272815, 0.754322, 1, 1)
+shader_parameter/color_2 = Color(0.544112, 0.12203, 0.243258, 1)
+shader_parameter/color_3 = Color(0.8, 0.976471, 0, 1)
+shader_parameter/speed_1 = 0.05
+shader_parameter/speed_2 = -0.15
+shader_parameter/speed_3 = 0.2
+shader_parameter/opacity = 1.0
+shader_parameter/height_scale = 0.0
