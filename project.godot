@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-FpsCounter="*res://autoload/fps_counter.tscn"
+FpsCounter="res://autoload/fps_counter.tscn"
 Audio="*res://autoload/audio.gd"
 Messenger="*res://autoload/messenger.gd"
 Enums="*res://autoload/enums.gd"

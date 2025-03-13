@@ -4,7 +4,7 @@ extends Node
 # example
 # Audio.play("audio/splat.ogg", true, global_transform)
 var num_audio_players = 12
-var bus = "SFX"
+const bus = "SFX"
 
 var available: Array[AudioStreamPlayer3D] = []  # The available players
 var loaded_streams: Dictionary[String, AudioStream] = {}  # Cache of loaded audio streams {path: AudioStream}
