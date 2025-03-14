@@ -4,4 +4,5 @@
 sky_top_color = Color(0.586358, 0.168692, 0.91164, 1)
 sky_horizon_color = Color(0.777201, 0.634734, 0.31145, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_curve = 0.04
 use_debanding = false

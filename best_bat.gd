@@ -6,4 +6,4 @@ func _ready() -> void:
 	print("current animation")
 	print(animation_player.current_animation)
 	
-	animation_player.play("ArmatureAction")
+	#animation_player.play("ArmatureAction")
