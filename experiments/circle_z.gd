@@ -20,4 +20,4 @@ func _process(delta):
 	var y = sin(angle) * radius
 	
 	# Set the position (keeping original z)
-	position = Vector3(x, y, position.z)
+	#position = Vector3(x, y, position.z)

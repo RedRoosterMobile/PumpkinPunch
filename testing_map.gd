@@ -9,7 +9,8 @@ extends Node
 var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
-
+var temp_time_step: float = 1.0;
+var temp_time: float = 0.0;
 # Inner class
 class Pumpkin:
 	var node: Node3D
@@ -108,7 +109,33 @@ func _process(delta: float) -> void:
 		#print("pumpkin.node.get_child(0)")
 		#print(pumpkin.node.get_child(0)) # <MeshInstance3D jack o lantern
 		#pumpkin.node.get_child(0).look_at(controller_left.position, Vector3.UP)
-	$Label3D.text = str(Engine.get_frames_per_second()) + "\n" + "a new line"
+	#$Label3D.text = "left: "+str(GameState.is_left_hand_blocking) + "\n" + "right: "+str(GameState.is_right_hand_blocking)
+	
+	$Label3D.text = "blocking: "+str(GameState.is_left_hand_blocking and GameState.is_right_hand_blocking) + "\n" 
+	temp_time += delta
+	if(temp_time>=temp_time_step):
+		var left_hand:RigidBody3D = left_hand_body
+		var right_hand:RigidBody3D = left_hand_body
+		
+		# Get the XRController3D parents (assuming they are the parents)
+		var left_controller: XRController3D = left_hand.get_parent()
+		var right_controller: XRController3D = right_hand.get_parent()
+		
+		# Get global rotation in degrees
+		var left_rot = left_controller.global_rotation_degrees
+		var right_rot = right_controller.global_rotation_degrees
+		
+		# Display for debugging
+		#$Label3D.text = "Left: " + str(left_rot) + "\nRight: " + str(right_rot)
+		
+		# Check if blocking
+		#if is_blocking(left_rot, right_rot):
+		#	print("Blocking!")
+		#else:
+		#	print("Not blocking.")
+
+		temp_time = 0
+	
 	
 	# Variables to track state
 var controller_spawn_just_pressed: bool = false
@@ -121,9 +148,11 @@ func _on_button_pressed(button_name: String) -> void:
 	match button_name:
 		# works!
 		"ax_button":
-			Messenger.game_finished.emit()
-			GameState.game_finished = true
+			#Messenger.game_finished.emit()
+			#GameState.game_finished = true
+			pass
 		"by_button":
+			
 			pass
 
 func create_new_pumpkin():

@@ -4,7 +4,7 @@ extends PathFollow3D
 var animation_player: AnimationPlayer
 
 func _ready() -> void:
-	animation_player = get_child(0).get_child(1)
+	animation_player = get_child(0).get_child(0).get_child(1)
 
 func _process(delta):
 	

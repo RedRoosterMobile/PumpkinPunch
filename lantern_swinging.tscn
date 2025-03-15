@@ -11,10 +11,11 @@ script = ExtResource("2_12fxu")
 [node name="SpotLight3D" type="SpotLight3D" parent="post_lantern/post_lantern_lantern/HolderNode3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.582316, 0)
 light_color = Color(2.52, 2, 0.1, 1)
-light_energy = 6.5
+light_energy = 2.0
+light_volumetric_fog_energy = 0.0
 light_size = 1.0
 light_specular = 0.25
-distance_fade_enabled = true
+light_bake_mode = 1
 distance_fade_begin = 10.0
 distance_fade_length = 1.0
 spot_range = 3.571

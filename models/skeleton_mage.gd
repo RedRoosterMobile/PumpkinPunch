@@ -57,6 +57,7 @@ func _process(delta: float) -> void:
 		position.x = start_position.x + offset
 
 func kill():
+	is_moving = false
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
 	Messenger.skeleton_died.emit()
 

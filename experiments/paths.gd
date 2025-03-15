@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var path_3d: Path3D = $Path3D
 @onready var path_follow: PathFollow3D = $Path3D/PathFollow3D
-
+const PATHS_BEZIER_STYLE:Curve3D = preload("res://experiments/Paths_bezier_style.tres")
 var speed: float = 2.0
 var is_moving: bool = false
 
@@ -31,6 +31,11 @@ func _input(event):
 			print("Resetting to start")
 			path_follow.progress = 0.0
 			is_moving = false
+		if event.keycode == KEY_T:  # Reset position
+			print("load another path")
+			path_3d.curve = PATHS_BEZIER_STYLE
+			path_follow.progress = 0.0
+			# is_moving = false
 			
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
