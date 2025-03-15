@@ -48,4 +48,4 @@ shader_parameter/opacity = 1.0
 shader_parameter/height_scale = 0.0
 shader_parameter/edge_lift_strength = 20.0
 shader_parameter/emission_color = Color(0.27451, 0.752941, 1, 1)
-shader_parameter/emission_strength = 0.5
+shader_parameter/emission_strength = 5.0

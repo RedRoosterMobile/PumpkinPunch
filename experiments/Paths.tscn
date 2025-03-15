@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://j1ji1r182c87"]
+
+[ext_resource type="Script" uid="uid://b2am5dnrgfxgb" path="res://experiments/paths.gd" id="1_5io63"]
+[ext_resource type="Script" uid="uid://y7mqekt4tnhn" path="res://experiments/circle_z.gd" id="2_ri887"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5io63"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ri887"]
+sky_material = SubResource("ProceduralSkyMaterial_5io63")
+
+[sub_resource type="Environment" id="Environment_shcfp"]
+background_mode = 2
+sky = SubResource("Sky_ri887")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_5io63"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5io63"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glq6y"]
+albedo_color = Color(0.0574632, 0.757663, 0.0481163, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eu5kp"]
+material = SubResource("StandardMaterial3D_glq6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40tbr"]
+albedo_color = Color(0.990529, 0.15805, 0.113963, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tou5"]
+material = SubResource("StandardMaterial3D_40tbr")
+
+[node name="Paths" type="Node3D"]
+script = ExtResource("1_5io63")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_shcfp")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_5io63")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-1, 0, 1.50995e-07, 0, 0.999992, 0, -1.50996e-07, 0, -0.999992, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+mesh = SubResource("CapsuleMesh_5io63")
+script = ExtResource("2_ri887")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0578254, 0, -0.998327, 0, 1, 0, 0.998327, 0, -0.0578254, -16.3367, 0, 7.58327)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49934, 9.99577)
+mesh = SubResource("BoxMesh_eu5kp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.956515)
+mesh = SubResource("BoxMesh_4tou5")

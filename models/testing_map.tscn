@@ -1,10 +1,11 @@
-[gd_scene load_steps=89 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=92 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
 [ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
+[ext_resource type="PackedScene" uid="uid://r5gyhdb26e8x" path="res://models/glove_right.glb" id="5_cugqu"]
 [ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://models/decoration.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
@@ -49,13 +50,15 @@
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
-radiance_size = 1
+radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_2o5or"]
 background_mode = 2
 sky = SubResource("Sky_albes")
 ambient_light_source = 3
 ambient_light_color = Color(0.192414, 0.244648, 0.258174, 1)
+ambient_light_energy = 0.0
+reflected_light_source = 2
 tonemap_mode = 2
 sdfgi_read_sky_light = false
 sdfgi_min_cell_size = 0.29
@@ -63,7 +66,8 @@ sdfgi_cascade0_distance = 18.56
 sdfgi_max_distance = 296.96
 glow_enabled = true
 glow_normalized = true
-glow_strength = 0.95
+glow_intensity = 7.19
+glow_strength = 0.0
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
 fog_mode = 1
@@ -186,7 +190,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ju6e"]
 material = SubResource("ShaderMaterial_c28ly")
-size = Vector2(30, 30)
+size = Vector2(27, 27)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qk40o"]
 size = Vector3(30, 1, 30)
@@ -201,6 +205,11 @@ radius = 0.12
 radius = 0.12
 
 [sub_resource type="SphereMesh" id="SphereMesh_pqm76"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cugqu"]
+albedo_color = Color(0.384314, 0.207843, 0.0196078, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c8ggw"]
 
 [sub_resource type="Curve3D" id="Curve3D_rqeuv"]
 _data = {
@@ -227,8 +236,8 @@ spread = 0.0
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.0
-radial_accel_max = 2.0
+radial_accel_min = -1.0
+radial_accel_max = 0.999998
 scale_min = 0.35
 scale_max = 0.5
 color = Color(0.719454, 2.55093e-06, 5.77569e-07, 1)
@@ -413,6 +422,7 @@ directional_shadow_pancake_size = 9.2
 [node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="FloorMesh" type="MeshInstance3D" parent="FloorStaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.29829)
 mesh = SubResource("PlaneMesh_7ju6e")
 skeleton = NodePath("../..")
 script = ExtResource("3_thqn0")
@@ -453,11 +463,15 @@ mesh = SubResource("SphereMesh_pqm76")
 skeleton = NodePath("../..")
 
 [node name="HandRight" type="RigidBody3D" parent="." groups=["hands"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0758, 0.796015, 1.69262)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305306, 0.5127, 0.956079)
 lock_rotation = true
+
+[node name="glove_right" parent="HandRight" instance=ExtResource("5_cugqu")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="glove_left" parent="HandRight" instance=ExtResource("4_ma5p2")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
 
 [node name="HandArea3D" type="Area3D" parent="HandRight" groups=["hand_areas"]]
 
@@ -584,6 +598,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -1.95935)
 [node name="crypt2" parent="decoration" instance=ExtResource("22_3r8pk")]
 transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
 
+[node name="LOWEST_FLOOR" type="MeshInstance3D" parent="decoration"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -1.46594, 0)
+material_override = SubResource("StandardMaterial3D_cugqu")
+mesh = SubResource("PlaneMesh_c8ggw")
+
 [node name="MidiPlayer" type="MidiPlayer" parent="."]
 midi = ExtResource("26_t3jci")
 
@@ -641,15 +660,15 @@ texture = ExtResource("26_fyld6")
 [node name="Bats" type="Node3D" parent="."]
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54526, 0.0150414)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4955, 4.0044)
 visible = false
-strength = -44.12
-attenuation = 0.0769467
+strength = 31.14
 radius = 10.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
 material_override = SubResource("ShaderMaterial_hixko")
+cast_shadow = 0
 amount = 32
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_mu05l")
