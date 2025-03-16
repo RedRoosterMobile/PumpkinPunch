@@ -714,6 +714,7 @@ shape = SubResource("BoxShape3D_2eces")
 
 [node name="DebugMeshInstance3D" type="MeshInstance3D" parent="BatNode3D/Path3D/BatPathFollow3D/Node3D/BlockDetecorArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("PlaneMesh_ah2yn")
 surface_material_override/0 = SubResource("StandardMaterial3D_qaa3m")
 
@@ -760,6 +761,7 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
+visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
@@ -775,7 +777,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
 
 [node name="FloorFog" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.49922)
-visible = false
 mesh = SubResource("PlaneMesh_rf125")
 skeleton = NodePath("../..")
 
@@ -811,7 +812,6 @@ rotation_speed = 2.0
 
 [node name="TodoLeafsGPUParticles3D" type="GPUParticles3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
-visible = false
 material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
 lifetime = 20.0

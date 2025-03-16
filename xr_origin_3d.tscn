@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ei83vsqjkjg7" path="res://xr_origin_3d.gd" id="1_o48np"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8wk7p"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_p7ryb"]
 radius = 0.25
 height = 0.5
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8wk7p"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
 script = ExtResource("1_o48np")
@@ -22,6 +22,15 @@ light_color = Color(1, 0.916667, 0, 1)
 shadow_enabled = true
 omni_range = 10.0
 omni_attenuation = 1.448
+
+[node name="PlayerArea3D" type="Area3D" parent="XRCamera3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0.312417)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XRCamera3D/PlayerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.320377)
+visible = false
+shape = SubResource("CapsuleShape3D_8wk7p")
 
 [node name="LeftHandController" type="XRController3D" parent="."]
 unique_name_in_owner = true
@@ -42,11 +51,4 @@ visible = false
 mesh = SubResource("SphereMesh_p7ryb")
 skeleton = NodePath("../../LeftHandController")
 
-[node name="PlayerArea3D" type="Area3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.312417)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.320377)
-shape = SubResource("CapsuleShape3D_8wk7p")
-
-[connection signal="area_entered" from="PlayerArea3D" to="." method="_on_player_area_3d_area_entered"]
+[connection signal="area_entered" from="XRCamera3D/PlayerArea3D" to="." method="_on_player_area_3d_area_entered"]

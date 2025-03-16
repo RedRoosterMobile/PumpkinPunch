@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://bj3cgi2csord"]
+[gd_scene load_steps=45 format=3 uid="uid://bj3cgi2csord"]
 
 [ext_resource type="Texture2D" uid="uid://c1gkjcbosk86j" path="res://images/puff.png" id="1_03ckd"]
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://VFX/Shaders/s_puff.tres" id="1_p4ear"]
 [ext_resource type="Shader" uid="uid://dgwac6mam38tg" path="res://VFX/Shaders/s_simple1.tres" id="1_s6jba"]
+[ext_resource type="Texture2D" uid="uid://djtd4uc4abq6f" path="res://VFX/Textures/T_VFX_Glo31.png" id="2_4wjv0"]
 [ext_resource type="Texture2D" uid="uid://cj0t7xony6e4r" path="res://VFX/Textures/T_fl81_vfx.png" id="2_j0ej6"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="2_rqqmb"]
 [ext_resource type="Shader" uid="uid://bc0h30a246uhg" path="res://VFX/Shaders/s_simple2.tres" id="3_s01gx"]
@@ -15,6 +16,14 @@ point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_5ya0n"]
 curve = SubResource("Curve_28bf6")
+
+[sub_resource type="Curve" id="Curve_5ya0n"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(0.482428, 163.266), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_td6xt"]
+curve = SubResource("Curve_5ya0n")
 
 [sub_resource type="Gradient" id="Gradient_td6xt"]
 offsets = PackedFloat32Array(0, 0.201049, 1)
@@ -45,13 +54,18 @@ emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 1.0
-emission_ring_inner_radius = 1.0
+emission_ring_inner_radius = 0.5
 emission_ring_cone_angle = 90.0
 angle_min = 1.07288e-05
 angle_max = 90.0
 inherit_velocity_ratio = 0.041
 spread = 180.0
 flatness = 0.018
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 343.54
+angular_velocity_curve = SubResource("CurveTexture_td6xt")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_max = 3.0
@@ -75,9 +89,9 @@ transparency = 1
 blend_mode = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_03ckd")
-metallic = 0.92
+metallic = 1.0
+metallic_texture = ExtResource("2_4wjv0")
 roughness = 0.0
-emission_enabled = true
 emission = Color(0.828197, 0.828197, 0.828197, 1)
 emission_energy_multiplier = 0.01
 disable_receive_shadows = true
@@ -178,6 +192,21 @@ rings = 16
 radial_segments = 32
 rings = 16
 
+[sub_resource type="Animation" id="Animation_px80d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX_puff_billboards:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_hoqvr"]
 resource_name = "hit"
 length = 2.5
@@ -230,21 +259,6 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_px80d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VFX_puff_billboards:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wanpx"]
 _data = {
 &"RESET": SubResource("Animation_px80d"),
@@ -256,7 +270,9 @@ _data = {
 [node name="VFX_puff_billboards" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 amount = 12
+one_shot = true
 explosiveness = 0.85
+randomness = 0.02
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_s74d8")
 draw_pass_1 = SubResource("QuadMesh_6cgdd")
