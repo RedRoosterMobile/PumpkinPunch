@@ -12,7 +12,7 @@ var splat_decal_instance
 func _ready() -> void:
 	vfx_instance = vfx.instantiate()
 	#splat_decal_instance = splat_decal.instantiate()
-	var puff:AnimationPlayer = hit_vfx.get_child(5)
+	var puff:AnimationPlayer = hit_vfx.get_node("AnimationPlayer")
 	puff.play()
 	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
 	Messenger.spawn_decal_requested.connect(SpriteManager._on_spawn_splat_requested)
@@ -26,9 +26,7 @@ func splat():
 	
 	var broken_model_instance = broken_model.instantiate()
 	broken_model_instance.transform = self.transform
-	broken_model_instance.scale *= 2.0
 	
-	#broken_model_instance.scale = self.scale
 	get_parent().add_child(broken_model_instance)
 	
 	vfx_instance.transform = self.transform

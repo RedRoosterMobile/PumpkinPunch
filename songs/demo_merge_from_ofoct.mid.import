@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://deff3ctcp3un7"
+path="res://.godot/imported/demo_merge_from_ofoct.mid-8393fe7f6bce0e3403604ca52e8afa18.res"
+
+[deps]
+
+source_file="res://songs/demo_merge_from_ofoct.mid"
+dest_files=["res://.godot/imported/demo_merge_from_ofoct.mid-8393fe7f6bce0e3403604ca52e8afa18.res"]
+
+[params]
+

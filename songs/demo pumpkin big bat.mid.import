@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://8rvb3vpkdky0"
+path="res://.godot/imported/demo pumpkin big bat.mid-90607ef121fed34f7e2e0673240915d3.res"
+
+[deps]
+
+source_file="res://songs/demo pumpkin big bat.mid"
+dest_files=["res://.godot/imported/demo pumpkin big bat.mid-90607ef121fed34f7e2e0673240915d3.res"]
+
+[params]
+

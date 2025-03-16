@@ -101,10 +101,11 @@ func _process(delta: float) -> void:
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta 
 		#pumpkin.node.position.x = pumpkin.start_position.x + sinner 
-		pumpkin.node.position.y += sinner/300 
+		#pumpkin.node.position.y += sinner/300 
 		
 		if pumpkin.node.position.z > 3:
-			pumpkin.node.position.z = PUMPKIN_Z
+			#pumpkin.node.position.z = PUMPKIN_Z
+			pumpkin.node.queue_free()
 		
 		#print("pumpkin.node.get_child(0)")
 		#print(pumpkin.node.get_child(0)) # <MeshInstance3D jack o lantern
@@ -210,8 +211,35 @@ func create_new_pumpkin():
 		pumpkins.append(p)
 		Messenger.pumpkin_spawned.emit(spawn_position)
 	pass
-	
 
+func spawn_bats(track:int, pitch):
+	if track==2:
+		print("big bat")
+	elif track==3:
+		print("bat swarm")
+
+func spawn_pumpkin(track:int,pitch):
+	# FIXME: get from object pool instead
+	var pumpkin = SPAWN_THING.instantiate()
+	var pumpkin_pieces = SPAWN_THING_BROKEN
+	
+	var x_spawn:float
+	if track==0:
+		x_spawn = PUMPKIN_X*-1.0
+	elif track==1:
+		x_spawn = PUMPKIN_X
+	var spawn_position:Vector3 = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
+	pumpkin.position = spawn_position
+	pumpkin.broken_model = pumpkin_pieces
+	pumpkin.add_to_group("pumpkins")
+	add_child(pumpkin)
+	var p = Pumpkin.new()
+	p.node = pumpkin
+	p.start_position = spawn_position
+	
+	pumpkins.append(p)
+	Messenger.pumpkin_spawned.emit(spawn_position)	
+	
 func pumpkin_grin(stm:StandardMaterial3D) -> void:
 	# Create new tween
 	var tween: Tween
@@ -298,7 +326,20 @@ func init_midi():
 
 func my_note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON:
+		#print(event)
+		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
+
+		# 36 == C1 (only in ableton???)
 		var pitch: int = event['note']
+		var velocity: int = event['data']
+		
+		if track == 0 or track == 1:
+			spawn_pumpkin(track, pitch)
+		if track == 2 or track == 3:
+			spawn_bats(track, pitch)
+		
+		###########
+		return
 		var height: float = pitch / 10.0 - 5.0
 		if track == 0:
 			# left
@@ -325,7 +366,7 @@ func my_note_callback(event: Variant, track: int):
 			)
 			#spawn_pumpkin("left", height)
 			pass
-		elif track == 1:
+		elif track == 3:
 			# right
 			#spawn_pumpkin("right", height)#
 			 # Create a new tween

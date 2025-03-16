@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://bv1i4v83biep4"
+path="res://.godot/imported/demo pumpkin left.mid-83c70449256738bef710087ddbc4a195.res"
+
+[deps]
+
+source_file="res://songs/demo pumpkin left.mid"
+dest_files=["res://.godot/imported/demo pumpkin left.mid-83c70449256738bef710087ddbc4a195.res"]
+
+[params]
+

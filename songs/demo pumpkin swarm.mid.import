@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://cxj8420kaql74"
+path="res://.godot/imported/demo pumpkin swarm.mid-a6b8f6ff5b25cbe8f41d7a03081f9615.res"
+
+[deps]
+
+source_file="res://songs/demo pumpkin swarm.mid"
+dest_files=["res://.godot/imported/demo pumpkin swarm.mid-a6b8f6ff5b25cbe8f41d7a03081f9615.res"]
+
+[params]
+

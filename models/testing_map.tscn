@@ -28,10 +28,10 @@
 [ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="24_0n22y"]
 [ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="25_qql4s"]
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="26_fyld6"]
-[ext_resource type="MidiResource" uid="uid://cgfy738op06yc" path="res://art/simple_combined_fixed.mid" id="26_t3jci"]
-[ext_resource type="AudioStream" uid="uid://7x8dllk00135" path="res://art/Super simple pumpkin demo.wav" id="27_blul2"]
 [ext_resource type="PackedScene" uid="uid://6p4pvc65bxeq" path="res://art/TitleText.blend" id="27_xlrcx"]
+[ext_resource type="MidiResource" uid="uid://b08jclyed2bfl" path="res://songs/merge_from_ofoct (1).mid" id="28_c8ggw"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="29_74e0y"]
+[ext_resource type="AudioStream" uid="uid://c64hw2hfjecip" path="res://songs/Pumpkin demo suno ai.wav" id="29_ah2yn"]
 [ext_resource type="Script" uid="uid://cxt7552h7hen2" path="res://models/bat_path_follow_3d.gd" id="31_cqoek"]
 [ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="31_g8721"]
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
@@ -654,10 +654,10 @@ material_override = SubResource("StandardMaterial3D_cugqu")
 mesh = SubResource("PlaneMesh_c8ggw")
 
 [node name="MidiPlayer" type="MidiPlayer" parent="."]
-midi = ExtResource("26_t3jci")
+midi = ExtResource("28_c8ggw")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("27_blul2")
+stream = ExtResource("29_ah2yn")
 bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]
