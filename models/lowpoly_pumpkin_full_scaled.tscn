@@ -1,20 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://t3sbnn3xvvqi"]
+[gd_scene load_steps=7 format=3 uid="uid://t3sbnn3xvvqi"]
 
 [ext_resource type="PackedScene" uid="uid://b7yroygqk3k5i" path="res://models/lowpoly_pumpkin_full_scaled.glb" id="1_4bole"]
 [ext_resource type="Script" uid="uid://bipi7q3glgfnl" path="res://model_shifter.gd" id="2_j1lcx"]
 [ext_resource type="PackedScene" uid="uid://dklok3ghi4k16" path="res://models/lowpoly_pumpkin_pieces_scaled.tscn" id="3_7eodv"]
 [ext_resource type="PackedScene" uid="uid://bj3cgi2csord" path="res://VFX/Scenes/VFX_puff_big.tscn" id="4_7eodv"]
 [ext_resource type="PackedScene" uid="uid://ndmw0pl5n6fs" path="res://splat_sprite.tscn" id="4_v4lyj"]
-[ext_resource type="Texture2D" uid="uid://cocwyswudgep4" path="res://models/lowpoly_pumpkin_pieces_scaled_halloweenbits_texture.png" id="6_v4lyj"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4lyj"]
-albedo_texture = ExtResource("6_v4lyj")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tx276"]
-albedo_texture = ExtResource("6_v4lyj")
-emission_enabled = true
-emission = Color(0.806351, 0.798535, 0, 1)
-emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7eodv"]
 radius = 0.35
@@ -26,10 +16,6 @@ splat_decal = ExtResource("4_v4lyj")
 
 [node name="HIT VFX" parent="." index="0" instance=ExtResource("4_7eodv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.597681, 0)
-
-[node name="pumpkin_orange_jackolantern" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_v4lyj")
-surface_material_override/1 = SubResource("StandardMaterial3D_tx276")
 
 [node name="Area3D" type="Area3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 0)

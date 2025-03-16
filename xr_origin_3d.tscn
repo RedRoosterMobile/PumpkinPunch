@@ -13,6 +13,7 @@ script = ExtResource("1_o48np")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+far = 500.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="XRCamera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771, 2.664)
