@@ -317,6 +317,7 @@ func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(my_note_callback)
 	midi_player.speed_scale=1.025
+	
 
 	 # link the AudioStreamPlayer in your scene
 	# that contains the music associated with the midi

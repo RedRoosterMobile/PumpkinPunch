@@ -525,7 +525,6 @@ attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Follower/Block
 title = "right"
 
 [node name="decoration" type="Node3D" parent="."]
-visible = false
 script = ExtResource("5_kb2wl")
 
 [node name="arch2" parent="decoration" instance=ExtResource("4_j13nx")]
@@ -729,7 +728,6 @@ texture_filter = 1
 texture = ExtResource("26_fyld6")
 
 [node name="Bats" type="Node3D" parent="."]
-visible = false
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4955, 4.0044)
@@ -766,7 +764,6 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
-visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
