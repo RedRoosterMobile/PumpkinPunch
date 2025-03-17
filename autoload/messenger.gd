@@ -9,6 +9,8 @@ signal game_finished()
 signal skeleton_killed()
 signal skeleton_died()
 
+signal spawn_big_bat()
+
 signal pumpkin_spawned(pos: Vector3)
 signal pumpkin_collision_player()
 signal pumpkin_collision_hand()

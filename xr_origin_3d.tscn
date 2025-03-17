@@ -38,7 +38,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHandController"]
-visible = false
 mesh = SubResource("SphereMesh_p7ryb")
 
 [node name="RightHandController" type="XRController3D" parent="."]
@@ -47,7 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RightHandController"]
-visible = false
 mesh = SubResource("SphereMesh_p7ryb")
 skeleton = NodePath("../../LeftHandController")
 

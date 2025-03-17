@@ -151,6 +151,7 @@ func _on_button_pressed(button_name: String) -> void:
 		"ax_button":
 			#Messenger.game_finished.emit()
 			#GameState.game_finished = true
+			Messenger.spawn_big_bat.emit()
 			pass
 		"by_button":
 			
@@ -212,13 +213,18 @@ func create_new_pumpkin():
 		Messenger.pumpkin_spawned.emit(spawn_position)
 	pass
 
-func spawn_bats(track:int, pitch):
+### 0 - 127 
+func spawn_bats(track:int, pitch:int, velocity:int):
 	if track==2:
 		print("big bat")
+		#bat_node_3d.visible=true
+		Messenger.spawn_big_bat.emit()
 	elif track==3:
 		print("bat swarm")
+		Messenger.spawn_big_bat.emit()
+		#bat_node_3d.visible=true
 
-func spawn_pumpkin(track:int,pitch):
+func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	# FIXME: get from object pool instead
 	var pumpkin = SPAWN_THING.instantiate()
 	var pumpkin_pieces = SPAWN_THING_BROKEN
@@ -310,15 +316,17 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(my_note_callback)
+	midi_player.speed_scale=1.025
 
 	 # link the AudioStreamPlayer in your scene
 	# that contains the music associated with the midi
 	# NOTE: this must be an array, you can link multiple ASPs or one as 
 	# shown below and they will all sync with playback of the MIDI
-	midi_player.link_audio_stream_player([asp])
+	# midi_player.link_audio_stream_player([asp])
 
 	# this will also start the audio stream player (music)
 	midi_player.play()
+	asp.play()
 	pass
 
 @onready var grave_left: Node3D = $decoration/grave_A2
@@ -329,14 +337,14 @@ func my_note_callback(event: Variant, track: int):
 		#print(event)
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
 
-		# 36 == C1 (only in ableton???)
+		# 36 == C1 (only in ableton??? 24 otherwise)
 		var pitch: int = event['note']
 		var velocity: int = event['data']
 		
 		if track == 0 or track == 1:
-			spawn_pumpkin(track, pitch)
+			spawn_pumpkin(track, pitch, velocity)
 		if track == 2 or track == 3:
-			spawn_bats(track, pitch)
+			spawn_bats(track, pitch,velocity)
 		
 		###########
 		return

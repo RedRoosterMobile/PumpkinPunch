@@ -484,7 +484,7 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("5_c8ggw")
-attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Node3D/BlockDetecorArea3D")
+attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D")
 title = "left"
 
 [node name="HandRight" type="RigidBody3D" parent="." groups=["hands"]]
@@ -521,10 +521,11 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("5_c8ggw")
-attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Node3D/BlockDetecorArea3D")
+attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D")
 title = "right"
 
 [node name="decoration" type="Node3D" parent="."]
+visible = false
 script = ExtResource("5_kb2wl")
 
 [node name="arch2" parent="decoration" instance=ExtResource("4_j13nx")]
@@ -695,24 +696,27 @@ curve = SubResource("Curve3D_rqeuv")
 
 [node name="BatPathFollow3D" type="PathFollow3D" parent="BatNode3D/Path3D"]
 transform = Transform3D(-0.999989, -0.000794998, 0.000908843, 5.82071e-11, 0.752665, 0.65838, -0.00120749, 0.658381, -0.752663, -0.171464, 8.20135, -10.2822)
+loop = false
 script = ExtResource("31_cqoek")
+speed = 16.0
 
-[node name="Node3D" type="Node3D" parent="BatNode3D/Path3D/BatPathFollow3D"]
+[node name="Follower" type="Node3D" parent="BatNode3D/Path3D/BatPathFollow3D"]
 transform = Transform3D(-4.37114e-08, -6.51351e-15, 1, -1.49012e-07, 1, 0, -1, -1.49012e-07, -4.37114e-08, 0.00723743, 0.134025, -0.150091)
+visible = false
 
-[node name="best_bat" parent="BatNode3D/Path3D/BatPathFollow3D/Node3D" instance=ExtResource("44_4b1da")]
+[node name="best_bat" parent="BatNode3D/Path3D/BatPathFollow3D/Follower" instance=ExtResource("44_4b1da")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="BlockDetecorArea3D" type="Area3D" parent="BatNode3D/Path3D/BatPathFollow3D/Node3D"]
+[node name="BlockDetecorArea3D" type="Area3D" parent="BatNode3D/Path3D/BatPathFollow3D/Follower"]
 transform = Transform3D(-0.000908888, -0.0396361, 0.999293, -0.000795062, 0.999292, 0.0396333, -1.00007, -0.000758422, -0.000939674, 0.491023, -0.561338, 0)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BatNode3D/Path3D/BatPathFollow3D/Node3D/BlockDetecorArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_2eces")
 
-[node name="DebugMeshInstance3D" type="MeshInstance3D" parent="BatNode3D/Path3D/BatPathFollow3D/Node3D/BlockDetecorArea3D"]
+[node name="DebugMeshInstance3D" type="MeshInstance3D" parent="BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 mesh = SubResource("PlaneMesh_ah2yn")
@@ -725,6 +729,7 @@ texture_filter = 1
 texture = ExtResource("26_fyld6")
 
 [node name="Bats" type="Node3D" parent="."]
+visible = false
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4955, 4.0044)
