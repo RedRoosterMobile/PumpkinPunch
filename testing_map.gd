@@ -221,7 +221,7 @@ func spawn_bats(track:int, pitch:int, velocity:int):
 		Messenger.spawn_big_bat.emit()
 	elif track==3:
 		print("bat swarm")
-		Messenger.spawn_big_bat.emit()
+		Messenger.spawn_bat_swarm.emit()
 		#bat_node_3d.visible=true
 
 func spawn_pumpkin(track:int,pitch:int, velocity:int):

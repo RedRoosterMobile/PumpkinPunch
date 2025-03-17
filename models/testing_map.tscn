@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=98 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
+[ext_resource type="Script" uid="uid://d2hp0qsn4y0la" path="res://bat_swarm.gd" id="35_ah2yn"]
 [ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://vfxx/flame_thrower/flame_thrower.tscn" id="36_mv6ts"]
 [ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="37_8npjo"]
 [ext_resource type="Texture2D" uid="uid://b0uu6dsn2ywog" path="res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png" id="37_cugqu"]
@@ -243,7 +244,7 @@ shader_parameter/pi = 3.14159
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mu05l"]
 emission_shape = 1
-emission_sphere_radius = 5.0
+emission_sphere_radius = 2.5
 direction = Vector3(0, 0, 1)
 spread = 0.0
 initial_velocity_min = 20.0
@@ -257,8 +258,10 @@ color = Color(0.719454, 2.55093e-06, 5.77569e-07, 1)
 hue_variation_min = -2.23517e-08
 hue_variation_max = 1.0
 turbulence_enabled = true
+turbulence_noise_strength = 0.5
 turbulence_influence_min = 0.01
 turbulence_influence_max = 0.01
+collision_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqi61"]
 resource_name = "HalloweenBits"
@@ -727,19 +730,23 @@ modulate = Color(1, 0.4595, 0.31, 1)
 texture_filter = 1
 texture = ExtResource("26_fyld6")
 
-[node name="Bats" type="Node3D" parent="."]
+[node name="BatSwarm" type="Node3D" parent="."]
+script = ExtResource("35_ah2yn")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Bats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4955, 4.0044)
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.06597, -1.94023)
 visible = false
-strength = 31.14
-radius = 10.0
+layers = 0
+strength = -107.79
+cull_mask = 4293918724
+radius = 7.43
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Bats"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
+layers = 4
 material_override = SubResource("ShaderMaterial_hixko")
 cast_shadow = 0
-amount = 32
+amount = 64
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_mu05l")
 draw_pass_1 = ExtResource("42_5naof")
@@ -764,6 +771,7 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
+visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
