@@ -5,6 +5,8 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1np8q"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_if520"]
+width = 256
+height = 256
 generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_1np8q")
@@ -25,6 +27,8 @@ noise_type = 2
 frequency = 0.0145
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xe5yt"]
+width = 256
+height = 256
 generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_if520")
@@ -48,4 +52,4 @@ shader_parameter/opacity = 1.0
 shader_parameter/height_scale = 0.0
 shader_parameter/edge_lift_strength = 20.0
 shader_parameter/emission_color = Color(0.27451, 0.752941, 1, 1)
-shader_parameter/emission_strength = 5.0
+shader_parameter/emission_strength = 2.03

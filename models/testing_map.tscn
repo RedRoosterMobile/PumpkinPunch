@@ -59,8 +59,7 @@ radiance_size = 2
 background_mode = 2
 sky = SubResource("Sky_albes")
 ambient_light_source = 3
-ambient_light_color = Color(0.192414, 0.244648, 0.258174, 1)
-ambient_light_energy = 0.0
+ambient_light_energy = 2.05
 reflected_light_source = 2
 tonemap_mode = 2
 sdfgi_read_sky_light = false
@@ -183,7 +182,7 @@ shader_parameter/texture_roughness = SubResource("NoiseTexture2D_wh3a7")
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_1w204")
-shader_parameter/normal_scale = 16.0
+shader_parameter/normal_scale = 0.179001
 shader_parameter/glow = 2.5
 shader_parameter/s2d = SubResource("NoiseTexture2D_ynd0x")
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
@@ -771,7 +770,6 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
-visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
