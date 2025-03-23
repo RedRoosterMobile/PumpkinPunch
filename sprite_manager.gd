@@ -12,6 +12,8 @@ func _ready() -> void:
 		add_child(sprite)
 		sprite_pool.append(sprite)
 	print("Sprite pool initialized with ", sprite_pool.size(), " sprites")
+	#if not Messenger.spawn_decal_requested.is_connected(SpriteManager._on_spawn_splat_requested):
+	Messenger.spawn_decal_requested.connect(SpriteManager._on_spawn_splat_requested)
 
 func get_free_sprite() -> Sprite3D:
 	for sprite in sprite_pool:
