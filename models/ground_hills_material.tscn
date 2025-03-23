@@ -36,12 +36,16 @@ shadow_mesh = SubResource("ArrayMesh_va2ro")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xo8dp"]
 noise_type = 2
-frequency = 0.0009
+seed = 4
+frequency = 0.0003
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lnfcc"]
+width = 128
+height = 128
 noise = SubResource("FastNoiseLite_xo8dp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3luo"]
+shading_mode = 2
 albedo_color = Color(0.383517, 0.207405, 0.0200295, 1)
 roughness_texture = SubResource("NoiseTexture2D_lnfcc")
 

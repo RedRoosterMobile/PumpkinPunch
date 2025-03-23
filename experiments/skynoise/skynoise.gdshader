@@ -28,7 +28,7 @@ void sky() {
 	//COLOR = vec3(1.0,0.0,0.0);
 	// Normalize the eye direction vector to map it to spherical coordinates
     vec3 dir = normalize(EYEDIR);
-    
+
     // Convert direction to UV coordinates (spherical mapping)
     // u = longitude (around the sphere), v = latitude (up/down)
     float u = atan(dir.x, dir.z) / (2.0 * 3.14159) + 0.5; // Map to [0, 1]

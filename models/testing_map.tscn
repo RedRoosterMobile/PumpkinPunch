@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=99 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://de6v0pix3bv6e" path="res://models/ground_hills.glb" id="45_xe5yt"]
 [ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="46_gkf7v"]
 [ext_resource type="PackedScene" uid="uid://de35nohp21htn" path="res://models/Mourning Manor - nightmare before xmas  tree.tscn" id="48_2eces"]
+[ext_resource type="PackedScene" uid="uid://dunbv8mwcb6ce" path="res://experiments/fakefog/fakefog.tscn" id="51_qaa3m"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -828,3 +829,6 @@ draw_pass_1 = SubResource("QuadMesh_55fg6")
 
 [node name="Mourning Manor - nightmare before xmas  tree" parent="." instance=ExtResource("48_2eces")]
 transform = Transform3D(-0.569649, 0, 0.487852, 0, 0.75, 0, -0.487852, 0, -0.569649, -7.44517, -0.322784, 2.0348)
+
+[node name="Fakefog" parent="." instance=ExtResource("51_qaa3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8201, -0.182081, -0.491857)

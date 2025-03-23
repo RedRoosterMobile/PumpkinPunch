@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://3dmxmorwwq13"]
+[gd_scene load_steps=16 format=3 uid="uid://3dmxmorwwq13"]
 
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_6jt8k"]
 [ext_resource type="Shader" uid="uid://cx0qs5jevt3hv" path="res://experiments/skynoise/skynoise.gdshader" id="1_riald"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_riald"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6jt8k"]
+width = 128
+height = 128
 seamless = true
 noise = SubResource("FastNoiseLite_riald")
 
@@ -23,6 +26,8 @@ noise_type = 3
 fractal_weighted_strength = 0.57
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q75c0"]
+width = 256
+height = 256
 seamless = true
 noise = SubResource("FastNoiseLite_xmniv")
 
@@ -61,16 +66,23 @@ material = SubResource("StandardMaterial3D_dair1")
 
 [sub_resource type="TorusMesh" id="TorusMesh_riald"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_6jt8k"]
+size = Vector2(20, 20)
+
 [node name="Skynoise" type="Node3D"]
+
+[node name="StartXR" parent="." instance=ExtResource("1_6jt8k")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tlhip")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.11747)
 mesh = SubResource("BoxMesh_xmniv")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.573133, 0.567144, -0.591495, 0, 0.721809, 0.692093, 0.819462, -0.396661, 0.413692, -1.04554, 1.15093, 0.968251)
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.227816, 0.39102, -0.891742, 0.0967866, 0.920382, 0.378853, 0.968882, 0, -0.247523, -2.78916, 1.61845, -1.07449)
@@ -80,3 +92,13 @@ light_bake_mode = 1
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.274127, 0.961693, 0, -0.961693, 0.274127, 0, 0, 0, 1, 2.25084, 0, 0)
 mesh = SubResource("TorusMesh_riald")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.923478, 2.51511)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14833, 0)
+mesh = SubResource("PlaneMesh_6jt8k")

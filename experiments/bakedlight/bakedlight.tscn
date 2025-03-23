@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dts32c1c1w4w2"]
+
+[ext_resource type="PackedScene" uid="uid://bubvptisbehca" path="res://addons/kaykit_halloween_bits/gltf/post_lantern_unique.tscn" id="3_fj5m2"]
+[ext_resource type="PackedScene" uid="uid://buyr1i6ep4itx" path="res://models/Mourning Manor - nightmare before xmas  tree_unique.tscn" id="3_snbo0"]
+[ext_resource type="LightmapGIData" uid="uid://c7quq6vgo0dry" path="res://experiments/bakedlight/bakedlight.lmbake" id="3_umgho"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ynsu6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_umgho"]
+sky_material = SubResource("ProceduralSkyMaterial_ynsu6")
+
+[sub_resource type="Environment" id="Environment_fj5m2"]
+background_mode = 2
+sky = SubResource("Sky_umgho")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snbo0"]
+albedo_color = Color(0.0980392, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_am6qi"]
+lightmap_size_hint = Vector2i(52, 52)
+material = SubResource("StandardMaterial3D_snbo0")
+add_uv2 = true
+size = Vector2(10, 10)
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tibi"]
+albedo_color = Color(0.583667, 0.431787, 0.551306, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xfkn"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_1tibi")
+add_uv2 = true
+
+[node name="Bakedlight" type="Node3D"]
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+transform = Transform3D(0.932216, -0.224581, -0.283788, -2.71255e-08, -0.784159, 0.620559, -0.361901, -0.578496, -0.731006, -2.06606, 0.637966, -0.791056)
+bounces = 1
+texel_scale = 4.0
+max_texture_size = 2048
+light_data = ExtResource("3_umgho")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fj5m2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_am6qi")
+
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39009, 0.5, 0)
+mesh = SubResource("BoxMesh_0xfkn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82568, 2.18216, -1.63859)
+light_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="post_lantern3" parent="." instance=ExtResource("3_fj5m2")]
+transform = Transform3D(-0.045363, 0, 0.998971, 0, 1, 0, -0.998971, 0, -0.045363, -0.00803518, 0, 0.752661)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="post_lantern3"]
+transform = Transform3D(0.915654, -0.212458, -0.341232, 0.401957, 0.489926, 0.773565, 0.00282869, -0.845479, 0.534002, 1.00096, 1.19252, 1.00556)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03446, 2.67544, 0)
+text = "method
+https://youtu.be/7GH9UL_8eME?si=oav34dRi845AaGn5&t=81
+"
+
+[node name="Mourning Manor - nightmare before xmas  tree2" parent="." instance=ExtResource("3_snbo0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06268, 0, -3.401)
