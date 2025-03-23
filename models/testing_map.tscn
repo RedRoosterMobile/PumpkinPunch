@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=111 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -51,6 +51,12 @@
 [ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="46_gkf7v"]
 [ext_resource type="PackedScene" uid="uid://de35nohp21htn" path="res://models/Mourning Manor - nightmare before xmas  tree.tscn" id="48_2eces"]
 [ext_resource type="PackedScene" uid="uid://dunbv8mwcb6ce" path="res://experiments/fakefog/fakefog.tscn" id="51_qaa3m"]
+[ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="52_1v0wc"]
+[ext_resource type="Shader" uid="uid://bkkgnxjpkk3lh" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="53_taj82"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="54_qmh0o"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="55_cvm05"]
+[ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="56_mq777"]
+[ext_resource type="Texture2D" uid="uid://cx8tmyiaifkop" path="res://images/particles/Rotated/muzzle_01_rotated.png" id="56_taj82"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -413,6 +419,61 @@ turbulence_noise_scale = 3.451
 
 [sub_resource type="QuadMesh" id="QuadMesh_55fg6"]
 size = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_taj82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1v0wc"]
+resource_name = "trail_test"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(5, 0, -1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmh0o"]
+_data = {
+&"RESET": SubResource("Animation_taj82"),
+&"trail_test": SubResource("Animation_1v0wc")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k14l0"]
+shader = ExtResource("52_1v0wc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ac1t"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("53_taj82")
+shader_parameter/tex = ExtResource("56_taj82")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/color_ramp = ExtResource("54_qmh0o")
+shader_parameter/curve = ExtResource("55_cvm05")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 42
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrdd6"]
+material = SubResource("ShaderMaterial_0ac1t")
 
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
@@ -832,3 +893,30 @@ transform = Transform3D(-0.569649, 0, 0.487852, 0, 0.75, 0, -0.487852, 0, -0.569
 
 [node name="Fakefog" parent="." instance=ExtResource("51_qaa3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8201, -0.182081, -0.491857)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../trails")
+libraries = {
+&"": SubResource("AnimationLibrary_qmh0o")
+}
+autoplay = "trail_test"
+
+[node name="trails" type="Node3D" parent="."]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="trails"]
+amount = 99
+lifetime = 99.0
+explosiveness = 1.0
+fixed_fps = 120
+process_material = SubResource("ShaderMaterial_k14l0")
+draw_pass_1 = SubResource("QuadMesh_xrdd6")
+script = ExtResource("56_mq777")
+length = 99
+length_seconds = 0.825
+texture = ExtResource("56_taj82")
+color_ramp = ExtResource("54_qmh0o")
+curve = ExtResource("55_cvm05")
+use_red_as_alpha = true
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://cbmsti1eajx0t"
