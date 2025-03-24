@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://2guqqkbtcgct"]
+[gd_scene load_steps=5 format=3 uid="uid://2guqqkbtcgct"]
 
 [ext_resource type="Shader" uid="uid://cycp28q1lxxp2" path="res://flame.gdshader" id="1_6b0ah"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="2_a44u2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qh7tk"]
-subdivide_width = 16
-subdivide_depth = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3flo"]
 render_priority = 0
 shader = ExtResource("1_6b0ah")
+shader_parameter/noise_texture = ExtResource("2_a44u2")
 
 [node name="Flame" type="Node3D"]
 

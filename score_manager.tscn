@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0yhpigknktpu"]
+
+[ext_resource type="Script" uid="uid://crc01cy4lka70" path="res://score_manager.gd" id="1_vublb"]
+
+[node name="ScoreManager" type="Node3D"]
+script = ExtResource("1_vublb")
+
+[node name="Score" type="Label3D" parent="."]
+text = "score"
+vertical_alignment = 2

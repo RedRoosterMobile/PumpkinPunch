@@ -9,8 +9,7 @@ extends Node
 var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
-var temp_time_step: float = 1.0;
-var temp_time: float = 0.0;
+
 # Inner class
 class Pumpkin:
 	var node: Node3D
@@ -105,37 +104,17 @@ func _process(delta: float) -> void:
 		
 		if pumpkin.node.position.z > 3:
 			#pumpkin.node.position.z = PUMPKIN_Z
+			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			pumpkin.node.queue_free()
 		
 		#print("pumpkin.node.get_child(0)")
 		#print(pumpkin.node.get_child(0)) # <MeshInstance3D jack o lantern
 		#pumpkin.node.get_child(0).look_at(controller_left.position, Vector3.UP)
-	#$Label3D.text = "left: "+str(GameState.is_left_hand_blocking) + "\n" + "right: "+str(GameState.is_right_hand_blocking)
 	
-	$Label3D.text = "blocking: "+str(GameState.is_left_hand_blocking and GameState.is_right_hand_blocking) + "\n" 
-	temp_time += delta
-	if(temp_time>=temp_time_step):
-		var left_hand:RigidBody3D = left_hand_body
-		var right_hand:RigidBody3D = left_hand_body
-		
-		# Get the XRController3D parents (assuming they are the parents)
-		var left_controller: XRController3D = left_hand.get_parent()
-		var right_controller: XRController3D = right_hand.get_parent()
-		
-		# Get global rotation in degrees
-		var left_rot = left_controller.global_rotation_degrees
-		var right_rot = right_controller.global_rotation_degrees
-		
-		# Display for debugging
-		#$Label3D.text = "Left: " + str(left_rot) + "\nRight: " + str(right_rot)
-		
-		# Check if blocking
-		#if is_blocking(left_rot, right_rot):
-		#	print("Blocking!")
-		#else:
-		#	print("Not blocking.")
-
-		temp_time = 0
+	$Label3D.text = "blocking: " + str(GameState.is_left_hand_blocking and GameState.is_right_hand_blocking) + "\n" 
+	if GameState.is_left_hand_blocking and GameState.is_right_hand_blocking:
+		print("stop bat or bat swarm")
+		Messenger.is_blocking.emit()
 	
 	
 	# Variables to track state
@@ -220,8 +199,9 @@ func spawn_bats(track:int, pitch:int, velocity:int):
 		#bat_node_3d.visible=true
 		Messenger.spawn_big_bat.emit()
 	elif track==3:
+		Messenger.spawn_big_bat.emit()
 		print("bat swarm")
-		Messenger.spawn_bat_swarm.emit()
+		#Messenger.spawn_bat_swarm.emit()
 		#bat_node_3d.visible=true
 
 func spawn_pumpkin(track:int,pitch:int, velocity:int):
@@ -292,21 +272,15 @@ func _on_hand_area_3d_area_entered_right(area: Area3D):
 	_on_hand_area_3d_area_entered(area, controller_right)
 
 func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> void:
-	#print("ball hit---")
-	#print(area)
-	#print(area.get_parent())
-	#print(self)  # testing_map
-	#print("ball END---")
-	
 	# The area is the pumpkin's Area3D. We need to find the HandArea3D that detected it.
 	# Use the physics collision data or node hierarchy to trace back to HandArea3D
 	var colliding_area = area  # The pumpkin's Area3D
 	var is_pumpkin:bool = area.get_parent().is_in_group("pumpkins")
 	if is_pumpkin:
 		area.get_parent().splat()
-		
-	if xr_enabled and is_pumpkin:
-		XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
+		Messenger.add_score.emit(GameState.SCORE_PUNCHED_PUMPKIN)
+		if xr_enabled:
+			XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
 
 # with music:
 # - spawn them on midi notes
@@ -315,7 +289,7 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 @onready var asp: AudioStreamPlayer = $AudioStreamPlayer
 func init_midi():
 	# midi_player.loop = true
-	midi_player.note.connect(my_note_callback)
+	midi_player.note.connect(note_callback)
 	midi_player.speed_scale=1.025
 	
 
@@ -333,7 +307,7 @@ func init_midi():
 @onready var grave_left: Node3D = $decoration/grave_A2
 @onready var grave_right: Node3D = $decoration/grave_A_destroyed3
 
-func my_note_callback(event: Variant, track: int):
+func note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON:
 		#print(event)
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
@@ -345,63 +319,4 @@ func my_note_callback(event: Variant, track: int):
 		if track == 0 or track == 1:
 			spawn_pumpkin(track, pitch, velocity)
 		if track == 2 or track == 3:
-			spawn_bats(track, pitch,velocity)
-		
-		###########
-		return
-		var height: float = pitch / 10.0 - 5.0
-		if track == 0:
-			# left
-			 # Create a new tween
-			var tween = create_tween()
-			
-			# Configure tween behavior (optional)
-			tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
-			tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
-			# Scale up (first number is duration in seconds)
-			tween.tween_property(
-				grave_left,           # Target node
-				"scale",             # Property to animate
-				Vector3(1.5, 1.5, 1.5),   # Target scale value
-				0.05                 # Duration
-			)
-			
-			# Scale back down
-			tween.tween_property(
-				grave_left,
-				"scale",
-				Vector3(1.0, 1.0, 1.0),   # Back to original size
-				0.05
-			)
-			#spawn_pumpkin("left", height)
-			pass
-		elif track == 3:
-			# right
-			#spawn_pumpkin("right", height)#
-			 # Create a new tween
-			var tween = create_tween()
-			
-			# Configure tween behavior (optional)
-			tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
-			tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
-			
-			# Scale up (first number is duration in seconds)
-			tween.tween_property(
-				grave_right,           # Target node
-				"scale",             # Property to animate
-				Vector3(1.5, 1.5,1.5),   # Target scale value
-				0.05                  # Duration
-			)
-			
-			# Scale back down
-			tween.tween_property(
-				grave_right,
-				"scale",
-				Vector3(1.0, 1.0,1.0),   # Back to original size
-				0.05
-			)
-			pass
-		elif track == 2:
-			# bat
-			# spawn_bat(height)
-			pass
+			spawn_bats(track, pitch, velocity)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpdh2migshlj3"]
+
+[ext_resource type="PackedScene" uid="uid://o2sbssq5wa12" path="res://models/Mourning Manor - grass 1 - applied transforms.glb" id="1_dxsw7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxsw7"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(77.595, 1, 1, 1)
+emission_enabled = true
+emission = Color(82.787, 0, 0, 1)
+emission_energy_multiplier = 11.94
+
+[node name="Mourning Manor - grass 1 - applied transforms" instance=ExtResource("1_dxsw7")]
+
+[node name="Grass 2" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_dxsw7")

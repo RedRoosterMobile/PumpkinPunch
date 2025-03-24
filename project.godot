@@ -28,7 +28,7 @@ SpriteManager="*res://SpriteManager.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
+enabled=PackedStringArray("res://addons/GPUTrail/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
 
 [global_group]
 
