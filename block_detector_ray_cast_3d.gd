@@ -10,6 +10,3 @@ func _process(delta: float) -> void:
 		GameState.is_left_hand_blocking = is_blocking
 	elif title == RIGHT:
 		GameState.is_right_hand_blocking = is_blocking
-	
-		# Debug display
-		#$L

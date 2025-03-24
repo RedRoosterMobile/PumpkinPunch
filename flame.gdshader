@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, blend_mix, shadows_disabled, fog_disabled, ambient_light_disabled;
 
+// Add uniform for noise texture
+uniform sampler2D noise_texture : hint_default_white;
 vec2 hash(vec2 p) {
     p = vec2(dot(p, vec2(127.1, 311.7)),
              dot(p, vec2(269.5, 183.3)));
@@ -8,7 +10,7 @@ vec2 hash(vec2 p) {
 }
 
 // use texture instead for performance
-float noise(vec2 p) {
+float noise_(vec2 p) {
     const float K1 = 0.366025404; // (sqrt(3)-1)/2;
     const float K2 = 0.211324865; // (3-sqrt(3))/6;
 
@@ -27,6 +29,13 @@ float noise(vec2 p) {
 
     return dot(n, vec3(70.0));
 }
+// Modified noise function to use texture
+float noise(vec2 p) {
+    // Sample the noise texture
+    // You might need to adjust the scale/tiling of coordinates
+    return texture(noise_texture, p * 0.11).r; // Scale of 0.1 can be adjusted
+    // .r gets the red channel - assuming grayscale noise
+}
 
 float fbm(vec2 uv) {
     float f;
@@ -43,6 +52,28 @@ float fbm(vec2 uv) {
     f = 0.5 + 0.5 * f;
     return f;
 }
+/*
+// not needed?? remove subdivisions
+void vertex() {
+    vec2 uv = UV;
+    float t = TIME;
+
+    // Compute noise values for X and Z displacement
+    float noise_x = fbm(vec2(uv.y * 1.0, t * 0.5));
+    float noise_z = fbm(vec2(uv.x * 1.0 + 100.0, t * 0.5));
+
+    // Displacement amplitude, stronger at the top (uv.y = 1.0)
+    float amplitude = 1.1 * uv.y; // Adjust amplitude as needed
+
+    // Adjust noise range from [0,1] to [-1,1]
+    float displacement_x = (noise_x - 0.5) * 2.0 * amplitude;
+    float displacement_z = (noise_z - 0.5) * 2.0 * amplitude;
+
+    // Apply displacement
+    VERTEX.x += displacement_x;
+    VERTEX.z += displacement_z;
+	VERTEX.y += displacement_z;
+}*/
 
 void fragment() {
     vec2 uv = UV;
@@ -72,24 +103,4 @@ void fragment() {
 	EMISSION = mix(vec3(0.0), col, a); // Use EMISSION instead of COLOR
     ALPHA = a; // Set transparency
 	ALBEDO = (mix(vec3(0.0), col, a));
-}
-void vertex() {
-    vec2 uv = UV;
-    float t = TIME;
-
-    // Compute noise values for X and Z displacement
-    float noise_x = fbm(vec2(uv.y * 1.0, t * 0.5));
-    float noise_z = fbm(vec2(uv.x * 1.0 + 100.0, t * 0.5));
-
-    // Displacement amplitude, stronger at the top (uv.y = 1.0)
-    float amplitude = 1.1 * uv.y; // Adjust amplitude as needed
-
-    // Adjust noise range from [0,1] to [-1,1]
-    float displacement_x = (noise_x - 0.5) * 2.0 * amplitude;
-    float displacement_z = (noise_z - 0.5) * 2.0 * amplitude;
-
-    // Apply displacement
-    VERTEX.x += displacement_x;
-    VERTEX.z += displacement_z;
-	VERTEX.y += displacement_z;
 }

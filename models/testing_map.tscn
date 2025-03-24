@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=112 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bwa3sitcos5hl" path="res://addons/kaykit_halloween_bits/gltf/path_A.gltf" id="21_efb33"]
 [ext_resource type="PackedScene" uid="uid://c26sw1lcyjq8c" path="res://addons/kaykit_halloween_bits/gltf/path_B.gltf" id="22_1rlrd"]
 [ext_resource type="PackedScene" uid="uid://r8n4sutnqcgl" path="res://addons/kaykit_halloween_bits/gltf/crypt.gltf" id="22_3r8pk"]
+[ext_resource type="Script" uid="uid://dsxs71mo0nq2d" path="res://music_volume_grabber.gd" id="22_taj82"]
 [ext_resource type="PackedScene" uid="uid://8fbwqjjsntq6" path="res://addons/kaykit_halloween_bits/gltf/path_C.gltf" id="23_iwc6b"]
 [ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="24_0n22y"]
 [ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="25_qql4s"]
@@ -42,12 +43,11 @@
 [ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="37_8npjo"]
 [ext_resource type="Texture2D" uid="uid://b0uu6dsn2ywog" path="res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png" id="37_cugqu"]
 [ext_resource type="Material" uid="uid://bhr38dekra14f" path="res://models/sky_clouds_backup.tres" id="39_if520"]
-[ext_resource type="Material" uid="uid://cqe7tws065fea" path="res://models/old_fog.tres" id="40_gui2k"]
 [ext_resource type="Shader" uid="uid://c7qelfof7s0gg" path="res://images/butterfly/bat_boids.gdshader" id="41_s2i3x"]
 [ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="42_5naof"]
 [ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="42_gm3wk"]
+[ext_resource type="Texture2D" uid="uid://cjdho3j0sy31" path="res://images/particles/PNG (Transparent)/star_08.png" id="42_qmh0o"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="44_4b1da"]
-[ext_resource type="PackedScene" uid="uid://de6v0pix3bv6e" path="res://models/ground_hills.glb" id="45_xe5yt"]
 [ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="46_gkf7v"]
 [ext_resource type="PackedScene" uid="uid://de35nohp21htn" path="res://models/Mourning Manor - nightmare before xmas  tree.tscn" id="48_2eces"]
 [ext_resource type="PackedScene" uid="uid://dunbv8mwcb6ce" path="res://experiments/fakefog/fakefog.tscn" id="51_qaa3m"]
@@ -57,6 +57,8 @@
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="55_cvm05"]
 [ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="56_mq777"]
 [ext_resource type="Texture2D" uid="uid://cx8tmyiaifkop" path="res://images/particles/Rotated/muzzle_01_rotated.png" id="56_taj82"]
+[ext_resource type="PackedScene" uid="uid://d0yhpigknktpu" path="res://score_manager.tscn" id="58_qmh0o"]
+[ext_resource type="PackedScene" uid="uid://0d4r1pnoxdqc" path="res://spider.tscn" id="59_cvm05"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -255,6 +257,24 @@ orientation = 2
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.364706)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvm05"]
+transparency = 1
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("42_qmh0o")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_mq777"]
+material = SubResource("StandardMaterial3D_cvm05")
+
+[sub_resource type="Gradient" id="Gradient_k14l0"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.0766871, 0.411043, 1)
+colors = PackedColorArray(1, 1, 1, 0.521569, 0.968627, 0.937255, 1.01569, 2.00392, 1.722, 1.012, 0.541, 1, 0, 0, 0, 0)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
 render_priority = 0
 shader = ExtResource("41_s2i3x")
@@ -407,11 +427,6 @@ material = SubResource("ShaderMaterial_amxcb")
 size = Vector2(28, 28)
 subdivide_width = 32
 subdivide_depth = 32
-
-[sub_resource type="QuadMesh" id="QuadMesh_2ldu2"]
-material = ExtResource("40_gui2k")
-size = Vector2(20, 20)
-orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5upae"]
 render_priority = 0
@@ -592,7 +607,7 @@ light_volumetric_fog_energy = 0.0
 light_bake_mode = 1
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="decoration/post_lantern2"]
-transform = Transform3D(1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 2.28816, 0.334285, 12.3045)
+transform = Transform3D(1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 2.04004, 0.334285, 10.2773)
 light_color = Color(0.305882, 1, 0, 1)
 light_energy = 2.949
 light_volumetric_fog_energy = 0.0
@@ -603,13 +618,16 @@ transform = Transform3D(-0.748857, 0, -1.85451, 0, 2, 0, 1.85451, 0, -0.748857, 
 visible = false
 
 [node name="shrine2" parent="decoration" instance=ExtResource("12_qs6li")]
-transform = Transform3D(0.988276, -0.130768, -0.0788031, 0.130355, 0.991413, -0.0103942, 0.0794856, 0, 0.996836, 7.71024, 5.96046e-08, 1.02733)
+transform = Transform3D(0.31572, -0.0520956, -0.947421, 0.086212, 0.995937, -0.0260343, 0.944928, -0.0734589, 0.318928, 4.42661, 5.96046e-08, 1.02733)
+
+[node name="spider" parent="decoration/shrine2" instance=ExtResource("59_cvm05")]
+transform = Transform3D(0.260088, -0.301305, -0.302605, 0.194599, 0.399014, -0.230042, 0.380112, 0.00188904, 0.324825, -0.349345, 2.12311, 0.090023)
 
 [node name="skull_candle2" parent="decoration" instance=ExtResource("13_0filk")]
 transform = Transform3D(0.898878, 0, -0.438199, -0.0560588, 0.991783, -0.114994, 0.434598, 0.12793, 0.891492, 4.02539, 2.38419e-07, -1.07351)
 
 [node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("25_qql4s")]
-transform = Transform3D(0.5, 2.98023e-08, 8.9407e-08, -2.98023e-08, 0.5, 8.9407e-08, -2.98023e-08, -5.21541e-08, 1, -0.0693154, 1.09092, -0.0218627)
+transform = Transform3D(0.471448, -0.0272567, -0.328596, 0.0424141, 0.496644, 0.0786278, 0.161052, -0.051006, 0.941192, -0.0693157, 1.09092, -0.0218632)
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="decoration/skull_candle2"]
 transform = Transform3D(0.445476, 0.892695, -0.0681721, 0.0126247, 0.0698739, 0.997476, 0.895205, -0.445211, 0.0198576, 0.40776, 2.75593, 0.794613)
@@ -653,11 +671,14 @@ transform = Transform3D(0.972877, 0, 0.231323, 0, 1, 0, -0.231323, 0, 0.972877, 
 [node name="grave_A_destroyed3" parent="decoration" instance=ExtResource("18_rn3rq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25982, 0, -2.78313)
 
-[node name="grave_A2" parent="decoration" instance=ExtResource("19_g6kes")]
+[node name="grave_A2" parent="decoration" node_paths=PackedStringArray("asp") instance=ExtResource("19_g6kes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.60113, 0, -2.70661)
+script = ExtResource("22_taj82")
+asp = NodePath("../../AudioStreamPlayer")
 
 [node name="lantern_standing2" parent="decoration" instance=ExtResource("20_hqfyn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92011, 9.53674e-07, -0.793134)
+visible = false
 
 [node name="path_A2" parent="decoration" instance=ExtResource("21_efb33")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05463, 0, -4.39782)
@@ -673,6 +694,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -1.95935)
 
 [node name="crypt2" parent="decoration" instance=ExtResource("22_3r8pk")]
 transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
+
+[node name="Mourning Manor - nightmare before xmas  tree" parent="decoration" instance=ExtResource("48_2eces")]
+transform = Transform3D(-0.569649, 0, 0.487852, 0, 0.75, 0, -0.487852, 0, -0.569649, -7.44517, -0.322784, 2.0348)
 
 [node name="LOWEST_FLOOR" type="MeshInstance3D" parent="decoration"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -1.46594, 0)
@@ -702,6 +726,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.20398, 3.99153, -5.08112)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.29139)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="Skeleton_Mage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978707, 0)
 amount = 99
 lifetime = 99.0
 explosiveness = 1.0
@@ -764,8 +789,30 @@ visible = false
 mesh = SubResource("PlaneMesh_ah2yn")
 surface_material_override/0 = SubResource("StandardMaterial3D_qaa3m")
 
+[node name="BatExplosion" type="CPUParticles3D" parent="BatNode3D"]
+transform = Transform3D(-0.000908742, -0.000794948, -0.999926, -0.658339, 0.752617, -2.87187e-08, 0.752615, 0.65834, -0.00120738, 0.011992, 8.36277, -10.0804)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.02
+mesh = SubResource("QuadMesh_mq777")
+direction = Vector3(-10, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -0.8, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = 10.0
+angular_velocity_max = 90.0
+radial_accel_max = 0.1
+tangential_accel_max = 1.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_k14l0")
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0701718, 0.001, -8.33533)
+visible = false
 modulate = Color(1, 0.4595, 0.31, 1)
 texture_filter = 1
 texture = ExtResource("26_fyld6")
@@ -791,7 +838,7 @@ lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_mu05l")
 draw_pass_1 = ExtResource("42_5naof")
 
-[node name="best_bat" parent="." instance=ExtResource("44_4b1da")]
+[node name="best_bat example" parent="." instance=ExtResource("44_4b1da")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 0.850941, 2.50656, -1.55308)
 visible = false
 
@@ -817,22 +864,12 @@ transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 3
 mesh = SubResource("PlaneMesh_2eces")
 skeleton = NodePath("../FloorFog")
 
-[node name="ground_hills" parent="MovingEnvironmentPizzazz" instance=ExtResource("45_xe5yt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
-visible = false
-
 [node name="ground_hills2" parent="MovingEnvironmentPizzazz" instance=ExtResource("46_gkf7v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
 
 [node name="FloorFog" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.49922)
 mesh = SubResource("PlaneMesh_rf125")
-skeleton = NodePath("../..")
-
-[node name="FloorFog2" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.9, 0.517618, 0)
-visible = false
-mesh = SubResource("QuadMesh_2ldu2")
 skeleton = NodePath("../..")
 
 [node name="BehindMageSpotLight3DWithShadow" type="SpotLight3D" parent="MovingEnvironmentPizzazz"]
@@ -844,7 +881,7 @@ light_bake_mode = 1
 shadow_enabled = true
 spot_range = 1643.0
 
-[node name="FloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("35_ae6in")]
+[node name="BoringFloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("35_ae6in")]
 visible = false
 
 [node name="Flamethrower" parent="MovingEnvironmentPizzazz" instance=ExtResource("36_mv6ts")]
@@ -859,17 +896,18 @@ visible = false
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
 rotation_speed = 2.0
 
-[node name="TodoLeafsGPUParticles3D" type="GPUParticles3D" parent="MovingEnvironmentPizzazz"]
+[node name="Fireflies" type="GPUParticles3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
 lifetime = 20.0
 process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
 
-[node name="Mourning Manor - nightmare before xmas  tree" parent="." instance=ExtResource("48_2eces")]
-transform = Transform3D(-0.569649, 0, 0.487852, 0, 0.75, 0, -0.487852, 0, -0.569649, -7.44517, -0.322784, 2.0348)
-
 [node name="Fakefog" parent="." instance=ExtResource("51_qaa3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8201, -0.182081, -0.491857)
 visible = false
+
+[node name="ScoreManager" parent="." instance=ExtResource("58_qmh0o")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, -0.5)

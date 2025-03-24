@@ -20,4 +20,9 @@ signal pumpkin_auto_destroyed()
 
 signal player_hit(area: Area3D)
 
+# blocking anything
+signal is_blocking()
+
+signal add_score(score:int)
+
 signal spawn_decal_requested(position: Vector3)
