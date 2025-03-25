@@ -58,9 +58,9 @@ func _on_swarm_stopped() -> void:
 	print("###swarm_block_time###")
 	print(swarm_block_time)
 	# TODO: points! depending on swarm time
-	# 5 sec is "currently" optimal
+	# 5 sec is "currently" optimal -> check "attack_duration" of BatSwarm
 	if (swarm_block_time > 3.0):
-		print("you blocked the swarm")
+		print("##you blocked the swarm!")
 	swarm_block_time = 0.0
 
 func _ready() -> void:
