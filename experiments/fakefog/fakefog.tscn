@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dunbv8mwcb6ce"]
 
-[ext_resource type="Texture2D" uid="uid://1dojmfsaa780" path="res://vfxx/fire_02.png" id="1_i1jst"]
+[ext_resource type="Texture2D" uid="uid://1dojmfsaa780" path="res://VFX/vfxx/fire_02.png" id="1_i1jst"]
 [ext_resource type="Texture2D" uid="uid://dvuag4m8ayuec" path="res://images/particles/PNG (Transparent)/flame_04.png" id="2_pwgcp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwgcp"]

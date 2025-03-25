@@ -106,11 +106,11 @@ func _process(delta: float) -> void:
 			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			pumpkin.node.queue_free()
 		
-	# $Label3D.text = "blocking: " + str(GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat) + "\n" 
+	$Label3D.text = "blocking swarm hitbox: " + str(GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm) + "\n" 
 	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
 		print("stop bat")
 		Messenger.is_blocking_bat.emit()
-	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
+	if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
 		print("stop swarm")
 		Messenger.is_blocking_swarm.emit()
 	
@@ -285,7 +285,7 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 # - spawn them on midi notes
 # - TBD
 @onready var midi_player: MidiPlayer = $MidiPlayer
-@onready var asp: AudioStreamPlayer = $AudioStreamPlayer
+@onready var asp: AudioStreamPlayer = $MainMusicAudioStreamPlayer
 func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(note_callback)

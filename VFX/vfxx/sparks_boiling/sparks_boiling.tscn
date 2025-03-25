@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://75vtg2lm6alt"]
 
-[ext_resource type="Texture2D" uid="uid://cocdnuarngy03" path="res://vfxx/circle_05.png" id="1_hmlru"]
+[ext_resource type="Texture2D" uid="uid://cocdnuarngy03" path="res://VFX/vfxx/circle_05.png" id="1_hmlru"]
 
 [sub_resource type="Curve" id="Curve_naoyv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.110701, 1), 0.0, 0.0, 0, 0, Vector2(0.782288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.65777, 0.0, 0, 0]

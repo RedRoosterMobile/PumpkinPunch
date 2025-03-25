@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cocdnuarngy03"
-path.s3tc="res://.godot/imported/circle_05.png-ceca8cba33014caec3b7c2496a8a4cdd.s3tc.ctex"
-path.etc2="res://.godot/imported/circle_05.png-ceca8cba33014caec3b7c2496a8a4cdd.etc2.ctex"
+uid="uid://1dojmfsaa780"
+path.s3tc="res://.godot/imported/fire_02.png-8d16ce7037d073793e0d4a16663954ce.s3tc.ctex"
+path.etc2="res://.godot/imported/fire_02.png-8d16ce7037d073793e0d4a16663954ce.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://vfxx/circle_05.png"
-dest_files=["res://.godot/imported/circle_05.png-ceca8cba33014caec3b7c2496a8a4cdd.s3tc.ctex", "res://.godot/imported/circle_05.png-ceca8cba33014caec3b7c2496a8a4cdd.etc2.ctex"]
+source_file="res://VFX/vfxx/fire_02.png"
+dest_files=["res://.godot/imported/fire_02.png-8d16ce7037d073793e0d4a16663954ce.s3tc.ctex", "res://.godot/imported/fire_02.png-8d16ce7037d073793e0d4a16663954ce.etc2.ctex"]
 
 [params]
 

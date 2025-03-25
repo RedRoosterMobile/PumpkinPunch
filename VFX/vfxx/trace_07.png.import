@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://db4q58o76fk37"
-path.s3tc="res://.godot/imported/trace_07.png-19fe99fe900634fe899f25161710a042.s3tc.ctex"
-path.etc2="res://.godot/imported/trace_07.png-19fe99fe900634fe899f25161710a042.etc2.ctex"
+path.s3tc="res://.godot/imported/trace_07.png-79bc8f6bd0d2e4938a3243aaa0fc87d0.s3tc.ctex"
+path.etc2="res://.godot/imported/trace_07.png-79bc8f6bd0d2e4938a3243aaa0fc87d0.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://vfxx/trace_07.png"
-dest_files=["res://.godot/imported/trace_07.png-19fe99fe900634fe899f25161710a042.s3tc.ctex", "res://.godot/imported/trace_07.png-19fe99fe900634fe899f25161710a042.etc2.ctex"]
+source_file="res://VFX/vfxx/trace_07.png"
+dest_files=["res://.godot/imported/trace_07.png-79bc8f6bd0d2e4938a3243aaa0fc87d0.s3tc.ctex", "res://.godot/imported/trace_07.png-79bc8f6bd0d2e4938a3243aaa0fc87d0.etc2.ctex"]
 
 [params]
 

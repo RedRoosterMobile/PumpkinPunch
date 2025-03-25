@@ -1,8 +1,8 @@
 [gd_scene load_steps=31 format=3 uid="uid://cct8i0oo5inaq"]
 
-[ext_resource type="Texture2D" uid="uid://bb63b4euo6qel" path="res://vfxx/fire_01.png" id="1_unu7j"]
-[ext_resource type="Texture2D" uid="uid://1dojmfsaa780" path="res://vfxx/fire_02.png" id="2_mohxj"]
-[ext_resource type="Texture2D" uid="uid://db4q58o76fk37" path="res://vfxx/trace_07.png" id="3_c4qe6"]
+[ext_resource type="Texture2D" uid="uid://bb63b4euo6qel" path="res://VFX/vfxx/fire_01.png" id="1_unu7j"]
+[ext_resource type="Texture2D" uid="uid://1dojmfsaa780" path="res://VFX/vfxx/fire_02.png" id="2_mohxj"]
+[ext_resource type="Texture2D" uid="uid://db4q58o76fk37" path="res://VFX/vfxx/trace_07.png" id="3_c4qe6"]
 
 [sub_resource type="Curve" id="Curve_cnj2s"]
 _data = [Vector2(0, 0), 0.0, 14.2592, 0, 0, Vector2(0.135693, 1), 0.0, 0.0, 0, 0, Vector2(0.616519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

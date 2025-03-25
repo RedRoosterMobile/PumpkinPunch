@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb63b4euo6qel"
-path.s3tc="res://.godot/imported/fire_01.png-1aa56b1eb7bc4d66c14df8892b1057cb.s3tc.ctex"
-path.etc2="res://.godot/imported/fire_01.png-1aa56b1eb7bc4d66c14df8892b1057cb.etc2.ctex"
+path.s3tc="res://.godot/imported/fire_01.png-3ffec19cadef1daea23088877f83f60d.s3tc.ctex"
+path.etc2="res://.godot/imported/fire_01.png-3ffec19cadef1daea23088877f83f60d.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://vfxx/fire_01.png"
-dest_files=["res://.godot/imported/fire_01.png-1aa56b1eb7bc4d66c14df8892b1057cb.s3tc.ctex", "res://.godot/imported/fire_01.png-1aa56b1eb7bc4d66c14df8892b1057cb.etc2.ctex"]
+source_file="res://VFX/vfxx/fire_01.png"
+dest_files=["res://.godot/imported/fire_01.png-3ffec19cadef1daea23088877f83f60d.s3tc.ctex", "res://.godot/imported/fire_01.png-3ffec19cadef1daea23088877f83f60d.etc2.ctex"]
 
 [params]
 
