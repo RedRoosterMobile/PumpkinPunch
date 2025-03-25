@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=124 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -63,6 +63,7 @@
 [ext_resource type="PackedScene" uid="uid://d0yhpigknktpu" path="res://score_manager.tscn" id="58_qmh0o"]
 [ext_resource type="PackedScene" uid="uid://0d4r1pnoxdqc" path="res://spider.tscn" id="59_cvm05"]
 [ext_resource type="PackedScene" uid="uid://bpdh2migshlj3" path="res://models/mourning_manor___grass_1___applied_transforms.tscn" id="60_mq777"]
+[ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="64_0ac1t"]
 
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("3_sc5e6")
@@ -497,6 +498,28 @@ size = Vector2(0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvopu"]
 size = Vector3(2, 1, 3)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ac1t"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xrdd6"]
+noise = SubResource("FastNoiseLite_0ac1t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrdd6"]
+render_priority = 0
+shader = ExtResource("64_0ac1t")
+shader_parameter/speed = Vector2(0.2, 0.2)
+shader_parameter/barrier_color = Color(0.05, 0.8, 1, 1)
+shader_parameter/barrier_force = 1.0
+shader_parameter/barrier_noise_force = 0.3
+shader_parameter/barrier_fog_noise_force = 0.01
+shader_parameter/barrier_noise = SubResource("NoiseTexture2D_xrdd6")
+
+[sub_resource type="SphereMesh" id="SphereMesh_xrdd6"]
+material = SubResource("ShaderMaterial_xrdd6")
+radius = 2.0
+height = 4.0
+radial_segments = 16
+rings = 8
 
 [node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
@@ -1016,3 +1039,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1
 
 [node name="Mourning Manor - grass 1 - applied transforms2" parent="." instance=ExtResource("60_mq777")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59363, 0.0503929, -0.676336)
+
+[node name="ForceField" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76622, 0)
+mesh = SubResource("SphereMesh_xrdd6")

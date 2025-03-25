@@ -58,7 +58,7 @@ func _on_swarm_stopped() -> void:
 	print("###swarm_block_time###")
 	print(swarm_block_time)
 	# TODO: points! depending on swarm time
-	# 5 sec is "currently" optimal -> check "attack_duration" of BatSwarm
+	# 5 sec is "currently" optimal -> check "attack_duration" parameter of BatSwarm
 	if (swarm_block_time > 3.0):
 		print("##you blocked the swarm!")
 	swarm_block_time = 0.0
@@ -101,6 +101,9 @@ func _process(delta: float) -> void:
 		create_new_pumpkin()
 		if is_swarm_active:
 			swarm_block_time += delta
+			$ForceField.visible = true
+		else:
+			$ForceField.visible = false
 	if not xr_enabled:
 		follow_mouse()
 	# Remove null entries from the array
