@@ -10,8 +10,11 @@ var skeleton_active:bool = false # game started??
 var skeleton_died:bool = false
 
 # raycast stuff from gloves
-var is_left_hand_blocking:bool = false
-var is_right_hand_blocking:bool = false
+var is_left_hand_blocking_bat:bool = false
+var is_right_hand_blocking_bat:bool = false
+
+var is_left_hand_blocking_swarm:bool = false
+var is_right_hand_blocking_swarm:bool = false
 
 # punch pumpkin: 10 points
 # block swarm: 30 points

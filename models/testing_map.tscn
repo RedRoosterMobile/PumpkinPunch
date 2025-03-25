@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=117 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
@@ -208,9 +208,6 @@ size = Vector2(27, 27)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qk40o"]
 size = Vector3(30, 1, 30)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2d5qd"]
-size = Vector3(20, 20, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6r6ng"]
 radius = 0.12
@@ -534,11 +531,6 @@ shape = SubResource("BoxShape3D_qk40o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771, 2.664)
 fov = 70.0
 far = 500.0
-
-[node name="KillZone" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
-shape = SubResource("BoxShape3D_2d5qd")
 
 [node name="HandLeft" type="RigidBody3D" parent="." groups=["hands"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5127, 0.956079)

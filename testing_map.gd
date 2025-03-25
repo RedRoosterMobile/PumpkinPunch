@@ -96,26 +96,23 @@ func _process(delta: float) -> void:
 		return pumpkin != null and pumpkin.node != null
 	)
 	
-	var sinner = sin(time)
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta 
-		#pumpkin.node.position.x = pumpkin.start_position.x + sinner 
-		#pumpkin.node.position.y += sinner/300 
-		
-		if pumpkin.node.position.z > 3:
+		# tune kill zone
+		if pumpkin.node.position.z > 1:
+			# pumpkin went 6 + 1 = 7 meters
+			# -6 + 6 + 1
 			#pumpkin.node.position.z = PUMPKIN_Z
 			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			pumpkin.node.queue_free()
 		
-		#print("pumpkin.node.get_child(0)")
-		#print(pumpkin.node.get_child(0)) # <MeshInstance3D jack o lantern
-		#pumpkin.node.get_child(0).look_at(controller_left.position, Vector3.UP)
-	
-	$Label3D.text = "blocking: " + str(GameState.is_left_hand_blocking and GameState.is_right_hand_blocking) + "\n" 
-	if GameState.is_left_hand_blocking and GameState.is_right_hand_blocking:
-		print("stop bat or bat swarm")
-		Messenger.is_blocking.emit()
-	
+	# $Label3D.text = "blocking: " + str(GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat) + "\n" 
+	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
+		print("stop bat")
+		Messenger.is_blocking_bat.emit()
+	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
+		print("stop swarm")
+		Messenger.is_blocking_swarm.emit()
 	
 	# Variables to track state
 var controller_spawn_just_pressed: bool = false

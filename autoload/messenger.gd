@@ -10,6 +10,15 @@ signal skeleton_killed()
 signal skeleton_died()
 
 signal spawn_big_bat()
+
+# on swarm spawn:
+# after a timer (when the bats fly deep enough)
+# add blocking area
+# listen if we are blocking over time
+# when blocked "enough"
+# success
+# otherwise fail
+# show feedback when blocking
 signal spawn_bat_swarm()
 signal stop_bat_swarm()
 
@@ -22,7 +31,8 @@ signal pumpkin_auto_destroyed()
 signal player_hit(area: Area3D)
 
 # blocking anything
-signal is_blocking()
+signal is_blocking_bat()
+signal is_blocking_swarm()
 
 signal add_score(score:int)
 

@@ -10,7 +10,7 @@ func _ready() -> void:
 	animation_player = get_child(0).get_child(0).get_child(1)
 	# Connect to the global Messenger signal
 	Messenger.spawn_big_bat.connect(spawn)
-	Messenger.is_blocking.connect(block_bat)
+	Messenger.is_blocking_bat.connect(block_bat)
 	# Start with progress at 0 and not moving
 	progress_ratio = 0.0
 
