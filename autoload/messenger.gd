@@ -30,9 +30,7 @@ signal pumpkin_auto_destroyed()
 
 signal player_hit(area: Area3D)
 
-# blocking anything
 signal is_blocking_bat()
-signal is_blocking_swarm()
 
 signal add_score(score:int)
 

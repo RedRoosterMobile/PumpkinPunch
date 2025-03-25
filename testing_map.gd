@@ -128,13 +128,6 @@ func _process(delta: float) -> void:
 	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
 		print("stop bat")
 		Messenger.is_blocking_bat.emit()
-	# TODO:
-	# flip a switch when swarm flies
-	# start measuring blocking time
-	# after a while check time, give points or not
-	if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
-		# print("stop swarm")
-		Messenger.is_blocking_swarm.emit()
 	
 	# Variables to track state
 var controller_spawn_just_pressed: bool = false
