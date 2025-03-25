@@ -77,12 +77,12 @@ func _ready() -> void:
 		# left controller
 		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
 		if controller_left:
-			controller_left.button_pressed.connect(_on_button_pressed)
+			controller_left.button_pressed.connect(_on_button_pressed_left)
 			
 		# right controller
 		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
 		if controller_right:
-			controller_right.button_pressed.connect(_on_button_pressed)
+			controller_right.button_pressed.connect(_on_button_pressed_right)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -123,18 +123,23 @@ var prev_controller_states: Dictionary = {}  # Stores previous state for each co
 
 @export var rumble_event_left : XRToolsRumbleEvent
 @export var rumble_event_right : XRToolsRumbleEvent
-func _on_button_pressed(button_name: String) -> void:
-	#print("rumble")
+func _on_button_pressed_left(button_name: String) -> void:
 	match button_name:
-		# works!
 		"ax_button":
-			#Messenger.game_finished.emit()
-			#GameState.game_finished = true
 			Messenger.spawn_big_bat.emit()
-			pass
+			print("button: spawn bat")
 		"by_button":
-			
-			pass
+			print("button: spawn swarm")
+			Messenger.spawn_bat_swarm.emit()
+
+func _on_button_pressed_right(button_name: String) -> void:
+	match button_name:
+		"ax_button":
+			print("button: end game")
+			Messenger.game_finished.emit()
+			GameState.game_finished = true
+		"by_button":
+			print("right by_button not (yet) implemented")
 
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
