@@ -69,7 +69,6 @@ func shoot(pumpkin_pos: Vector3):
 	look_at(pumpkin_pos, Vector3.UP)
 	rotate_y(deg_to_rad(180))
 	
-	print("##### shoot #####")
 	var animation_time:float = 1.066
 	
 	
@@ -82,7 +81,6 @@ func shoot(pumpkin_pos: Vector3):
 	tween.tween_property(self, "quaternion", initial_rotation, animation_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
-	print("##### back #####")
 	# await tween.finished  # Wait for the tween to finish
 	is_moving = true
 	

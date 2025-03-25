@@ -823,7 +823,7 @@ use_red_as_alpha = true
 _defaults_have_been_set = true
 metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="DebugLabel3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00614953, 1.73411, -0.7618)
 text = "FPS
 1

@@ -13,11 +13,13 @@ var controller_right : XRController3D
 # Inner class
 class Pumpkin:
 	var node: Node3D
-	var start_position: Vector3
 
 var pumpkins:Array[Pumpkin]= []
 var time:float = 0.0
 var start_pos:Vector3
+
+var swarm_block_time:float = 0.0
+var is_swarm_active: bool = false
 
 const PUMPKIN_Z:float = -6.0 # back/front
 const PUMPKIN_X:float = 1.1 # left/right
@@ -33,15 +35,6 @@ const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pie
 const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
 
 func _on_game_started():
-	if $DebugPumpkins:
-		for thing:Node in $DebugPumpkins.get_children():
-			if thing.is_in_group("pumpkins"):
-				var p = Pumpkin.new()
-				p.node = thing
-				p.start_position = thing.position
-				pumpkins.append(p)
-				thing.scale *= 0.5
-				start_pos = thing.position
 	if pumpkins.size() > 0:
 		# FIXME: do this when the first pumpkin has spawned
 		var a_pumpkin: Node3D = pumpkins[0].node
@@ -56,8 +49,25 @@ func _on_game_started():
 		asp.stream = audio_stream
 		asp.play()
 
+func _on_swarm_started() -> void:
+	swarm_block_time = 0.0 # just to make sure
+	is_swarm_active = true
+
+func _on_swarm_stopped() -> void:
+	is_swarm_active = false
+	print("###swarm_block_time###")
+	print(swarm_block_time)
+	# TODO: points! depending on swarm time
+	# 5 sec is "currently" optimal
+	if (swarm_block_time > 3.0):
+		print("you blocked the swarm")
+	swarm_block_time = 0.0
+
 func _ready() -> void:
 	Messenger.game_started.connect(_on_game_started)
+	Messenger.spawn_bat_swarm.connect(_on_swarm_started)
+	Messenger.stop_bat_swarm.connect(_on_swarm_stopped)
+	
 	print("xr_controls_enabled")
 	print(xr_enabled)
 	var hand_area_left:Area3D = left_hand_body.get_node("HandArea3D")
@@ -89,6 +99,8 @@ func _process(delta: float) -> void:
 	
 	if GameState.game_started and not GameState.game_finished:
 		create_new_pumpkin()
+		if is_swarm_active:
+			swarm_block_time += delta
 	if not xr_enabled:
 		follow_mouse()
 	# Remove null entries from the array
@@ -106,12 +118,16 @@ func _process(delta: float) -> void:
 			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			pumpkin.node.queue_free()
 		
-	$Label3D.text = "blocking swarm hitbox: " + str(GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm) + "\n" 
+	$DebugLabel3D.text = "blocking swarm hitbox: " + str(GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm) + "\n" 
 	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
 		print("stop bat")
 		Messenger.is_blocking_bat.emit()
+	# TODO:
+	# flip a switch when swarm flies
+	# start measuring blocking time
+	# after a while check time, give points or not
 	if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
-		print("stop swarm")
+		# print("stop swarm")
 		Messenger.is_blocking_swarm.emit()
 	
 	# Variables to track state
@@ -188,11 +204,9 @@ func create_new_pumpkin():
 		add_child(pumpkin)
 		var p = Pumpkin.new()
 		p.node = pumpkin
-		p.start_position = spawn_position
 		
 		pumpkins.append(p)
 		Messenger.pumpkin_spawned.emit(spawn_position)
-	pass
 
 ### 0 - 127 
 func spawn_bats(track:int, pitch:int, velocity:int):
@@ -220,7 +234,6 @@ func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	add_child(pumpkin)
 	var p = Pumpkin.new()
 	p.node = pumpkin
-	p.start_position = spawn_position
 	
 	pumpkins.append(p)
 	Messenger.pumpkin_spawned.emit(spawn_position)	
@@ -301,7 +314,6 @@ func init_midi():
 	# this will also start the audio stream player (music)
 	midi_player.play()
 	asp.play()
-	pass
 
 @onready var grave_left: Node3D = $decoration/grave_A2
 @onready var grave_right: Node3D = $decoration/grave_A_destroyed3
