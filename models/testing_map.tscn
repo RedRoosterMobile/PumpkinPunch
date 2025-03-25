@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
 [ext_resource type="Script" uid="uid://bc4ukp0q27orl" path="res://block_detector_ray_cast_3d.gd" id="5_c8ggw"]
 [ext_resource type="PackedScene" uid="uid://r5gyhdb26e8x" path="res://models/glove_right.glb" id="5_cugqu"]
-[ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://decoration_treeshaker#.gd" id="5_kb2wl"]
+[ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://decoration_treeshaker.gd" id="5_kb2wl"]
 [ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="5_tewqk"]
 [ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="6_b2gdy"]
 [ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="7_usxdh"]

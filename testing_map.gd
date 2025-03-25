@@ -201,13 +201,10 @@ func create_new_pumpkin():
 func spawn_bats(track:int, pitch:int, velocity:int):
 	if track==2:
 		print("big bat")
-		#bat_node_3d.visible=true
 		Messenger.spawn_big_bat.emit()
 	elif track==3:
-		Messenger.spawn_big_bat.emit()
 		print("bat swarm")
-		#Messenger.spawn_bat_swarm.emit()
-		#bat_node_3d.visible=true
+		Messenger.spawn_bat_swarm.emit()
 
 func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	# FIXME: get from object pool instead

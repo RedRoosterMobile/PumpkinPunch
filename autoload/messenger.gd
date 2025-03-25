@@ -11,6 +11,7 @@ signal skeleton_died()
 
 signal spawn_big_bat()
 signal spawn_bat_swarm()
+signal stop_bat_swarm()
 
 signal pumpkin_spawned(pos: Vector3)
 signal pumpkin_collision_player()

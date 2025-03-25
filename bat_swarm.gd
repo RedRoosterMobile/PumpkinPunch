@@ -17,6 +17,7 @@ func _handle_swarm_spawn() -> void:
 	swarm.emitting = true
 	
 	await get_tree().create_timer(attack_duration).timeout
+	Messenger.stop_bat_swarm.emit()
 	#swarm.emitting = false
 	ppm.turbulence_enabled = true
 	swarm.rotation = initial_rotation
