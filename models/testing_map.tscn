@@ -1048,4 +1048,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59363, 0.0503929, -0.67633
 
 [node name="ForceField" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76622, 0)
+visible = false
 mesh = SubResource("SphereMesh_xrdd6")
