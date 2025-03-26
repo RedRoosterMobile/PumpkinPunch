@@ -102,11 +102,13 @@ func _process(delta: float) -> void:
 		if is_swarm_active:
 			if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
 				swarm_block_time += delta
-				$ForceField.visible = true
+				#$ForceFieldRim.visible = true
 			else:
-				$ForceField.visible = false
+				#$ForceFieldRim.visible = false
+				pass
 		else:
-			$ForceField.visible = false
+			#$ForceFieldRim.visible = false
+			pass
 	if not xr_enabled:
 		follow_mouse()
 	# Remove null entries from the array

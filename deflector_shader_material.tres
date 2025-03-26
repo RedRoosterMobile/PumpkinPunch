@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cfuu80k5cfxu1"]
+
+[ext_resource type="Shader" uid="uid://clwsr14h7qndi" path="res://deflector_shield.gdshader" id="1_5mntx"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5mntx")
+shader_parameter/shield_color = Color(0.0509804, 0.8, 1, 0.521569)
+shader_parameter/pulse_speed = 0.5
+shader_parameter/pulse_strength = 0.1
+shader_parameter/rim_strength = 15.0
+shader_parameter/edge_lift_strength = 0.5
