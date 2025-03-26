@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, blend_mix, shadows_disabled, fog_disabled, ambient_light_disabled;
+render_mode unshaded, cull_front, blend_mix, shadows_disabled, fog_disabled, ambient_light_disabled;
 
 // Add uniform for noise texture
 uniform sampler2D noise_texture : hint_default_white;

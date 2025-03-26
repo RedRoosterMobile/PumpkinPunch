@@ -62,7 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://cx8tmyiaifkop" path="res://images/particles/Rotated/muzzle_01_rotated.png" id="56_taj82"]
 [ext_resource type="PackedScene" uid="uid://d0yhpigknktpu" path="res://score_manager.tscn" id="58_qmh0o"]
 [ext_resource type="PackedScene" uid="uid://0d4r1pnoxdqc" path="res://spider.tscn" id="59_cvm05"]
-[ext_resource type="Material" uid="uid://cjks5pnidic2t" path="res://models/falling_leafs2.tres" id="62_d0wg7"]
+[ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="62_d0wg7"]
 [ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="63_itf4w"]
 [ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="64_0ac1t"]
 [ext_resource type="Material" uid="uid://cfuu80k5cfxu1" path="res://deflector_shader_material.tres" id="64_xrdd6"]
@@ -483,12 +483,12 @@ shader_parameter/Hit_texture = ExtResource("32_ytnan")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bkpbe"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
+emission_box_extents = Vector3(4, 0.5, 1)
 velocity_pivot = Vector3(0, 1, 0)
 direction = Vector3(0, 1, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-tangential_accel_min = 2.0
+tangential_accel_min = 0.999998
 tangential_accel_max = 2.0
 scale_min = 0.5
 scale_max = 0.6
@@ -498,24 +498,6 @@ turbulence_noise_scale = 3.451
 
 [sub_resource type="QuadMesh" id="QuadMesh_55fg6"]
 size = Vector2(0.5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kvopu"]
-size = Vector3(2, 1, 3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrdd6"]
-transparency = 2
-alpha_scissor_threshold = 1.0
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("63_itf4w")
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_va55x"]
-material = SubResource("StandardMaterial3D_xrdd6")
-orientation = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2q0m"]
 resource_name = "Grass"
@@ -688,6 +670,24 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/sway_distance = 0.15
 shader_parameter/sway_offset = 25.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrdd6"]
+transparency = 2
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("63_itf4w")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_va55x"]
+material = SubResource("StandardMaterial3D_xrdd6")
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kvopu"]
+size = Vector3(2, 1, 3)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_itf4w"]
 material = ExtResource("64_xrdd6")
@@ -1006,7 +1006,7 @@ stream = ExtResource("29_ah2yn")
 bus = &"MUSIC"
 
 [node name="Decal" type="Decal" parent="."]
-transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 3.82521, 0.254778, -0.612225)
+transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 4.45258, 1.30024, 1.18995)
 visible = false
 size = Vector3(0.680298, 2, 2)
 texture_albedo = ExtResource("26_fyld6")
@@ -1203,17 +1203,49 @@ transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3
 rotation_speed = 2.0
 
 [node name="Fireflies" type="GPUParticles3D" parent="MovingEnvironmentPizzazz"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 3.57011, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 1.15082, 4.62024)
 material_override = SubResource("ShaderMaterial_5upae")
 amount = 20
 lifetime = 20.0
 process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
 
-[node name="Fakefog" parent="." instance=ExtResource("51_qaa3m")]
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="MovingEnvironmentPizzazz/Fireflies"]
+transform = Transform3D(7.88501, 0, 0, 0, 5.79502, 0, 0, 0, 1, 0.36296, 4.11849, -3.7648)
+strength = -128.0
+
+[node name="MovingBushels" type="Node3D" parent="MovingEnvironmentPizzazz"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92142, 0.0503929, -0.53593)
+
+[node name="Grass 2" type="MeshInstance3D" parent="MovingEnvironmentPizzazz/MovingBushels"]
+transform = Transform3D(0.94033, 0, 0.340265, 0, 1, 0, -0.340265, 0, 0.94033, -0.268513, 0, 0)
+mesh = SubResource("ArrayMesh_xrdd6")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_d0wg7")
+
+[node name="Grass 4" type="MeshInstance3D" parent="MovingEnvironmentPizzazz/MovingBushels"]
+transform = Transform3D(-0.117815, 0, 0.993036, 0, 1, 0, -0.993036, 0, -0.117815, 0.00538135, 0, 0.204005)
+mesh = SubResource("ArrayMesh_va55x")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_u8t5v")
+
+[node name="Grass 3" type="MeshInstance3D" parent="MovingEnvironmentPizzazz/MovingBushels"]
+transform = Transform3D(0.864936, 0.136476, 0.207988, -0.132694, 0.889592, -0.0319084, -0.210422, -6.70552e-09, 0.875056, 0.0959888, 0, -0.379961)
+mesh = SubResource("ArrayMesh_xrdd6")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_u8t5v")
+
+[node name="Fakefog" parent="MovingEnvironmentPizzazz" instance=ExtResource("51_qaa3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8201, -0.182081, -0.491857)
 visible = false
+
+[node name="LeafsBlameCanada" type="GPUParticles3D" parent="MovingEnvironmentPizzazz"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.23173, -0.383689)
+visible = false
+amount = 80
+lifetime = 7.61
+process_material = ExtResource("62_d0wg7")
+draw_pass_1 = SubResource("QuadMesh_va55x")
 
 [node name="SwarmDetectorArea3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, -0.5)
@@ -1224,37 +1256,8 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 0.98597, -0.166924, 0, 0.166924, 0.98597, 0, 0.0652911, 1.80327)
 shape = SubResource("BoxShape3D_kvopu")
 
-[node name="Leafs" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.23173, -0.383689)
-visible = false
-amount = 80
-lifetime = 7.61
-process_material = ExtResource("62_d0wg7")
-draw_pass_1 = SubResource("QuadMesh_va55x")
-
 [node name="ScoreManager" parent="." instance=ExtResource("58_qmh0o")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, -0.383689)
-
-[node name="MovingBushels" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92142, 0.0503929, -0.53593)
-
-[node name="Grass 2" type="MeshInstance3D" parent="MovingBushels"]
-transform = Transform3D(0.94033, 0, 0.340265, 0, 1, 0, -0.340265, 0, 0.94033, -0.268513, 0, 0)
-mesh = SubResource("ArrayMesh_xrdd6")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_d0wg7")
-
-[node name="Grass 4" type="MeshInstance3D" parent="MovingBushels"]
-transform = Transform3D(-0.117815, 0, 0.993036, 0, 1, 0, -0.993036, 0, -0.117815, 0.00538135, 0, 0.204005)
-mesh = SubResource("ArrayMesh_va55x")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_u8t5v")
-
-[node name="Grass 3" type="MeshInstance3D" parent="MovingBushels"]
-transform = Transform3D(0.864936, 0.136476, 0.207988, -0.132694, 0.889592, -0.0319084, -0.210422, -6.70552e-09, 0.875056, 0.0959888, 0, -0.379961)
-mesh = SubResource("ArrayMesh_xrdd6")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_u8t5v")
 
 [node name="ForceFieldNew" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -2.58881e-08, 0.955149, 0.296125, 8.35018e-08, 0.296125, -0.955149, 0, 1.71678, -0.392802)
