@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://hk1cf8csqdrt" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large.gltf" id="14_f5yfn"]
 [ext_resource type="PackedScene" uid="uid://bko4ul30m4o85" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large_decorated.gltf" id="15_1otfv"]
 [ext_resource type="PackedScene" uid="uid://b786amta6f16o" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_orange_medium.gltf" id="16_oxlor"]
-[ext_resource type="PackedScene" uid="uid://b7ha2rvbciet0" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.gltf" id="17_htd1c"]
 [ext_resource type="PackedScene" uid="uid://qm4nhoeeteek" path="res://addons/kaykit_halloween_bits/gltf/grave_A_destroyed.gltf" id="18_rn3rq"]
 [ext_resource type="PackedScene" uid="uid://blmw4vo6qqk7x" path="res://addons/kaykit_halloween_bits/gltf/grave_A.gltf" id="19_g6kes"]
 [ext_resource type="PackedScene" uid="uid://dylag0xemlm0u" path="res://addons/kaykit_halloween_bits/gltf/lantern_standing.gltf" id="20_hqfyn"]
@@ -37,6 +36,7 @@
 [ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="31_g8721"]
 [ext_resource type="PackedScene" uid="uid://c6lw2v6pce0hu" path="res://models/Mourning Manor - rock  1.glb" id="31_kvopu"]
 [ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="32_ytnan"]
+[ext_resource type="PackedScene" uid="uid://0k4ojuq4elym" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.tscn" id="33_d0wg7"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="33_ea6jp"]
 [ext_resource type="PackedScene" uid="uid://cnvaxg2l1o7vk" path="res://models/TitleText_lower_poly.glb" id="33_xrdd6"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="35_ae6in"]
@@ -755,9 +755,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.13127, 0, -13.1104)
 [node name="tree_pine_orange_medium5" parent="decoration" instance=ExtResource("16_oxlor")]
 transform = Transform3D(1.9997, 0.0345558, 0, -0.0345558, 1.9997, 0, 0, 0, 2, -11.0291, 0, -13.1104)
 
-[node name="tree_pine_yellow_medium2" parent="decoration" instance=ExtResource("17_htd1c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0253, -4.76837e-07, -3.29202)
-
 [node name="grave_A_destroyed2" parent="decoration" instance=ExtResource("18_rn3rq")]
 transform = Transform3D(0.972877, 0, 0.231323, 0, 1, 0, -0.231323, 0, 0.972877, -4.33817, 0, -3.09523)
 
@@ -801,6 +798,9 @@ transform = Transform3D(0.191015, 0.150338, -0.970006, 0.981587, -0.0292555, 0.1
 
 [node name="TitleText_lower_poly" parent="decoration" instance=ExtResource("33_xrdd6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2106, 3.97207, -5.07717)
+
+[node name="tree_pine_yellow_medium3" parent="decoration" instance=ExtResource("33_d0wg7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0253, -4.76837e-07, -3.29202)
 
 [node name="LOWEST_FLOOR" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -4.95278, 0)
@@ -936,6 +936,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
 layers = 4
 material_override = SubResource("ShaderMaterial_hixko")
 cast_shadow = 0
+emitting = false
 amount = 64
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_mu05l")
