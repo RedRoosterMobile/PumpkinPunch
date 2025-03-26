@@ -1113,12 +1113,12 @@ texture = ExtResource("26_fyld6")
 script = ExtResource("35_ah2yn")
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.639988, 0.113011)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51453, 1.40593)
 visible = false
 layers = 4
-strength = -8.0
+strength = -80.0
 cull_mask = 4293918724
-radius = 20.0
+radius = 8.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
@@ -1128,6 +1128,7 @@ cast_shadow = 0
 emitting = false
 amount = 64
 lifetime = 3.0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 30)
 process_material = SubResource("ParticleProcessMaterial_mu05l")
 draw_pass_1 = ExtResource("42_5naof")
 
