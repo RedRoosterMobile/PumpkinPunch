@@ -17,35 +17,41 @@ func add_score(score_value:int) -> void:
 	animate_score(score_value)
 
 # FIXME: this does the wiggle and explosions, colors, pizazz
+var score_tween: Tween = null
 func animate_score(score_value):
-	var tween = create_tween()
-	# Configure tween behavior (optional)
-	tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
-	tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
+	# Kill any existing tween if it exists
+	if score_tween != null:
+		score_tween.kill()
 	
-	# Scale up (first number is duration in seconds)
-	tween.tween_property(
+	# Create a new tween and store it
+	score_tween = create_tween()
+	# Configure tween behavior (optional)
+	score_tween.set_ease(Tween.EASE_OUT)  # Makes animation smoother
+	score_tween.set_trans(Tween.TRANS_QUAD)  # Quadratic transition
+	
+	# Scale up
+	score_tween.tween_property(
 		score,           # Target node
-		"scale",             # Property to animate
-		original_scale*1.5,   # Target scale value
-		0.15                  # Duration
+		"scale",         # Property to animate
+		original_scale * 1.5,   # Target scale value
+		0.15             # Duration
 	)
-	# color
-	tween.tween_property(
+	# Color change
+	score_tween.tween_property(
 		score,           # Target node
-		"modulate",             # Property to animate
+		"modulate",      # Property to animate
 		bad_color if score_value < 0 else good_color,   # Target color value
-		0.15                  # Duration
+		0.15             # Duration
 	)
 	
 	# Scale back down
-	tween.tween_property(
+	score_tween.tween_property(
 		score,
 		"scale",
 		original_scale,   # Back to original size
 		0.15
 	)
-	tween.tween_property(
+	score_tween.tween_property(
 		score,         
 		"modulate",    
 		original_color,

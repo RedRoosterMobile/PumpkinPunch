@@ -1,0 +1,17 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://disd0lgoo5vfi"]
+
+[resource]
+emission_shape = 3
+emission_box_extents = Vector3(5, 5, 0.5)
+spread = 180.0
+flatness = 0.357
+initial_velocity_max = 1.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, -0.5, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 0.999998
+tangential_accel_min = -5.88
+tangential_accel_max = 5.88
+turbulence_enabled = true
+turbulence_noise_scale = 4.226

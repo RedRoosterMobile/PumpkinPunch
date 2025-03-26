@@ -6,5 +6,8 @@
 script = ExtResource("1_vublb")
 
 [node name="Score" type="Label3D" parent="."]
+double_sided = false
+alpha_cut = 1
+texture_filter = 0
 text = "score"
 vertical_alignment = 2
