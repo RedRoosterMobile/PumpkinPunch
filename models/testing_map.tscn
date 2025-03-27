@@ -1,7 +1,7 @@
 [gd_scene load_steps=135 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
-[ext_resource type="Material" uid="uid://ke4nlubm2wrg" path="res://models/old_sky_material.tres" id="3_sc5e6"]
+[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="2_d0wg7"]
 [ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
 [ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="4_ma5p2"]
@@ -68,7 +68,7 @@
 [ext_resource type="Material" uid="uid://cfuu80k5cfxu1" path="res://deflector_shader_material.tres" id="64_xrdd6"]
 
 [sub_resource type="Sky" id="Sky_albes"]
-sky_material = ExtResource("3_sc5e6")
+sky_material = ExtResource("2_d0wg7")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_2o5or"]
@@ -88,6 +88,7 @@ glow_intensity = 7.19
 glow_strength = 0.0
 glow_bloom = 0.5
 glow_hdr_threshold = 0.95
+fog_enabled = true
 fog_mode = 1
 fog_density = 0.1775
 fog_aerial_perspective = 0.034
@@ -993,7 +994,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0253, -4.76837e-07, -3.29
 
 [node name="LOWEST_FLOOR" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -4.95278, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_cugqu")
 mesh = SubResource("PlaneMesh_c8ggw")
 skeleton = NodePath("../decoration")
@@ -1037,13 +1037,7 @@ metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
 [node name="DebugLabel3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00614953, 1.73411, -0.7618)
-text = "FPS
-1
-2
-3
-4
-5
-6"
+text = "debug text goes here"
 vertical_alignment = 2
 
 [node name="BatNode3D" type="Node3D" parent="."]
@@ -1198,9 +1192,11 @@ shadow_enabled = true
 spot_range = 1643.0
 
 [node name="BoringFloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("35_ae6in")]
+visible = false
 
 [node name="Flamethrower" parent="MovingEnvironmentPizzazz" instance=ExtResource("36_mv6ts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79852, -1.19209e-07, -7.92973)
+visible = false
 
 [node name="Flamethrower2" parent="MovingEnvironmentPizzazz" instance=ExtResource("36_mv6ts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87014, -1.19209e-07, -7.92973)

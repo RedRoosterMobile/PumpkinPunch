@@ -21,13 +21,10 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_m7kxr")
 turbulence_noise_strength = 0.1
 turbulence_noise_scale = 0.2
-collision_use_scale = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlsnx"]
-transparency = 1
 blend_mode = 1
 shading_mode = 0
-specular_mode = 1
 disable_ambient_light = true
 disable_fog = true
 albedo_color = Color(0.470076, 0.470076, 0.470076, 1)
@@ -39,11 +36,11 @@ material = SubResource("StandardMaterial3D_vlsnx")
 size = Vector2(0.1, 0.1)
 
 [node name="FloatingDust" type="GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05255, 0)
 amount = 128
 lifetime = 10.0
-preprocess = 10.0
-draw_order = 3
+preprocess = 1.2
+interpolate = false
+fract_delta = false
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_1fv2t")
 draw_pass_1 = SubResource("QuadMesh_e3qlj")

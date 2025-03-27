@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlbrb4u1gn18y"]
+[gd_scene load_steps=16 format=3 uid="uid://dlbrb4u1gn18y"]
 
 [ext_resource type="PackedScene" uid="uid://dq3mc7c7bmetn" path="res://models/Skeleton_Mage.glb" id="1_1nx2b"]
 [ext_resource type="Script" uid="uid://ceylgworn3h5o" path="res://models/skeleton_mage.gd" id="2_ejr3e"]
@@ -65,8 +65,12 @@ scale_curve = SubResource("CurveTexture_or5m1")
 turbulence_enabled = true
 turbulence_noise_scale = 0.292
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86gfj"]
+shading_mode = 0
+
 [sub_resource type="QuadMesh" id="QuadMesh_hilah"]
 lightmap_size_hint = Vector2i(2, 2)
+material = SubResource("StandardMaterial3D_86gfj")
 size = Vector2(0.1, 0.1)
 
 [node name="Skeleton_Mage" instance=ExtResource("1_1nx2b")]
@@ -157,7 +161,6 @@ parameters/blend_position = Vector2(1.02487, -0.114537)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00521356, 1.39492, 2.03479)
 material_override = SubResource("StandardMaterial3D_bofx4")
 cast_shadow = 0
-emitting = false
 amount = 12
 lifetime = 0.34
 trail_lifetime = 1.81
