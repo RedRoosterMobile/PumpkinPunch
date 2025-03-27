@@ -1,10 +1,9 @@
 extends Node3D
 @onready var swarm: GPUParticles3D = $GPUParticles3D
-@export var attack_duration:float = 5.0
-@export var down_angle_deg:float = 23.0
-var initial_rotation:Vector3
+@export var attack_duration: float = 5.0
+@export var down_angle_deg: float = 23.0
+var initial_rotation: Vector3
 var ppm: ParticleProcessMaterial
-#@onready var gpu_particles_attractor_sphere_3d: GPUParticlesAttractorSphere3D = $GPUParticlesAttractorSphere3D
 @onready var player_bat_distractor: GPUParticlesAttractorSphere3D = $PlayerBatDistractor
 
 func _ready() -> void:
