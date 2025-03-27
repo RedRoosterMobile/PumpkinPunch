@@ -4,7 +4,8 @@ extends Node3D
 @export var down_angle_deg:float = 23.0
 var initial_rotation:Vector3
 var ppm: ParticleProcessMaterial
-@onready var gpu_particles_attractor_sphere_3d: GPUParticlesAttractorSphere3D = $GPUParticlesAttractorSphere3D
+#@onready var gpu_particles_attractor_sphere_3d: GPUParticlesAttractorSphere3D = $GPUParticlesAttractorSphere3D
+@onready var player_bat_distractor: GPUParticlesAttractorSphere3D = $PlayerBatDistractor
 
 func _ready() -> void:
 	initial_rotation=rotation
@@ -15,9 +16,9 @@ func _ready() -> void:
 
 func _process(delta:float) -> void:
 	if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
-		gpu_particles_attractor_sphere_3d.visible = true
+		player_bat_distractor.visible = true
 	else:
-		gpu_particles_attractor_sphere_3d.visible = false
+		player_bat_distractor.visible = false
 
 func _handle_swarm_spawn() -> void:
 	ppm.turbulence_enabled = false

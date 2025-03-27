@@ -918,7 +918,7 @@ spot_range = 5.945
 spot_attenuation = 0.16
 spot_angle = 49.97
 
-[node name="OmniLight3DSkullCandle" type="OmniLight3D" parent="decoration/skull_candle2"]
+[node name="OmniLight3DReeds" type="OmniLight3D" parent="decoration/skull_candle2"]
 transform = Transform3D(1, 1.67638e-08, -8.94069e-08, -1.67638e-08, 1, -1.11759e-08, 8.94069e-08, 1.11759e-08, 1, -0.458836, 2.54141, 11.9983)
 light_energy = 0.682
 light_volumetric_fog_energy = 0.0
@@ -1005,7 +1005,7 @@ midi = ExtResource("28_c8ggw")
 stream = ExtResource("29_ah2yn")
 bus = &"MUSIC"
 
-[node name="Decal" type="Decal" parent="."]
+[node name="DecalSplatExampleSlow" type="Decal" parent="."]
 transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 4.45258, 1.30024, 1.18995)
 visible = false
 size = Vector3(0.680298, 2, 2)
@@ -1112,13 +1112,21 @@ texture = ExtResource("26_fyld6")
 [node name="BatSwarm" type="Node3D" parent="."]
 script = ExtResource("35_ah2yn")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
+[node name="PlayerBatDistractor" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51453, 1.40593)
 visible = false
 layers = 4
-strength = -80.0
+strength = -120.0
 cull_mask = 4293918724
-radius = 8.0
+radius = 4.0
+
+[node name="ArcBatDistractor" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.06096, -6.61785)
+visible = false
+layers = 4
+strength = -120.0
+cull_mask = 4293918724
+radius = 2.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
@@ -1128,6 +1136,7 @@ cast_shadow = 0
 emitting = false
 amount = 64
 lifetime = 3.0
+collision_base_size = 0.1
 visibility_aabb = AABB(-4, -4, -4, 8, 8, 30)
 process_material = SubResource("ParticleProcessMaterial_mu05l")
 draw_pass_1 = ExtResource("42_5naof")
@@ -1149,17 +1158,17 @@ skeleton = NodePath("")
 transform = Transform3D(0.996664, 0, 0.081608, 0, 1, 0, -0.081608, 0, 0.996664, 0.0369394, -0.00780461, 0.220069)
 mesh = SubResource("PlaneMesh_k14l0")
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+[node name="MultiMeshInstance3DWeirdTrees" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, -6.7568)
 visible = false
 multimesh = SubResource("MultiMesh_cugqu")
 
-[node name="PopPlane" type="MeshInstance3D" parent="MultiMeshInstance3D"]
+[node name="PopPlane" type="MeshInstance3D" parent="MultiMeshInstance3DWeirdTrees"]
 visible = false
 mesh = SubResource("ArrayMesh_ah2yn")
 skeleton = NodePath("")
 
-[node name="tree_pine_yellow_medium" type="MeshInstance3D" parent="MultiMeshInstance3D"]
+[node name="tree_pine_yellow_medium" type="MeshInstance3D" parent="MultiMeshInstance3DWeirdTrees"]
 visible = false
 mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
@@ -1189,11 +1198,9 @@ shadow_enabled = true
 spot_range = 1643.0
 
 [node name="BoringFloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("35_ae6in")]
-visible = false
 
 [node name="Flamethrower" parent="MovingEnvironmentPizzazz" instance=ExtResource("36_mv6ts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79852, -1.19209e-07, -7.92973)
-visible = false
 
 [node name="Flamethrower2" parent="MovingEnvironmentPizzazz" instance=ExtResource("36_mv6ts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87014, -1.19209e-07, -7.92973)
@@ -1211,7 +1218,7 @@ lifetime = 20.0
 process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
 
-[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="MovingEnvironmentPizzazz/Fireflies"]
+[node name="FirefliesDistractorBox" type="GPUParticlesAttractorBox3D" parent="MovingEnvironmentPizzazz/Fireflies"]
 transform = Transform3D(7.88501, 0, 0, 0, 5.79502, 0, 0, 0, 1, 0.36296, 4.11849, -3.7648)
 strength = -128.0
 
