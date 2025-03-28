@@ -13,7 +13,7 @@ uniform float bubble_frequency = 3.0; // Number of simultaneous bubble rings
 void vertex() {
     // Base pulse effect
     float pulse = sin(TIME * pulse_speed + UV.y * 5.0) * pulse_strength;
-    
+
     // Edge lift
     vec2 centered_uv = UV - vec2(0.5);
     float distance_from_center = length(centered_uv);
@@ -26,26 +26,26 @@ void vertex() {
 void fragment() {
     vec2 uv = UV - vec2(0.5); // Center the UV coordinates
     float dist = length(uv);  // Distance from center
-    
+
     // Create multiple bubble rings
     float time = TIME * bubble_speed;
     float bubble = 0.0;
-    
+
     // Generate multiple bubbles based on frequency
     for (float i = 0.0; i < bubble_frequency; i += 1.0) {
         float phase = i / bubble_frequency; // Offset each bubble
         float bubble_progress = fract(time + phase); // 0 to 1 cycle for each bubble
         float bubble_dist = bubble_progress * 0.5; // Scale to match UV space
-        
+
         // Create bubble ring
-        float ring = smoothstep(0.0, bubble_size, bubble_dist - dist) * 
+        float ring = smoothstep(0.0, bubble_size, bubble_dist - dist) *
                     (1.0 - smoothstep(bubble_size, bubble_size * 2.0, bubble_dist - dist));
         bubble += ring * (1.0 - dist * 2.0); // Add to total, fade at edges
     }
-    
+
     // Rim effect
     float rim = pow(1.0 - dot(NORMAL, VIEW), 2.0) * rim_strength;
-    
+
     // Base radial fade
     float fade = smoothstep(0.5, 0.0, dist);
 
