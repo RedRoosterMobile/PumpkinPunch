@@ -6,7 +6,10 @@
 render_priority = 0
 shader = ExtResource("1_5mntx")
 shader_parameter/shield_color = Color(0.0509804, 0.8, 1, 0.521569)
-shader_parameter/pulse_speed = 10.0
-shader_parameter/pulse_strength = 0.1
+shader_parameter/pulse_speed = 5.0
+shader_parameter/pulse_strength = 0.05
 shader_parameter/rim_strength = 15.0
 shader_parameter/edge_lift_strength = 0.5
+shader_parameter/bubble_speed = 2.5
+shader_parameter/bubble_size = 0.01
+shader_parameter/bubble_frequency = 3.0

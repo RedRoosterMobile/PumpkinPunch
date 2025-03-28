@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 		time = 0.0  # Reset the timer to start oscillation from zero
 		animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
 		Messenger.game_started.emit()
-		gpu_particles_3d.emitting = true
+		#gpu_particles_3d.emitting = true
 		# do we need that??
 		# GameState.skeleton_resurrected = true
 	elif has_spawned:

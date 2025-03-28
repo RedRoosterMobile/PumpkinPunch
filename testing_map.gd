@@ -100,14 +100,15 @@ func _process(delta: float) -> void:
 	if GameState.game_started and not GameState.game_finished:
 		create_new_pumpkin()
 		if is_swarm_active:
+			# $ForceFieldNew.visible = true
 			if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
 				swarm_block_time += delta
-				#$ForceFieldRim.visible = true
+				$ForceFieldNew.visible = true
 			else:
-				#$ForceFieldRim.visible = false
+				$ForceFieldNew.visible = false
 				pass
 		else:
-			#$ForceFieldRim.visible = false
+			$ForceFieldNew.visible = false
 			pass
 	if not xr_enabled:
 		follow_mouse()

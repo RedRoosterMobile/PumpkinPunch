@@ -161,6 +161,7 @@ parameters/blend_position = Vector2(1.02487, -0.114537)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00521356, 1.39492, 2.03479)
 material_override = SubResource("StandardMaterial3D_bofx4")
 cast_shadow = 0
+emitting = false
 amount = 12
 lifetime = 0.34
 trail_lifetime = 1.81
