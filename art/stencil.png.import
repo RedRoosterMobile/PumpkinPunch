@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs0xn4oppigll"
-path.s3tc="res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.s3tc.ctex"
-path.etc2="res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.etc2.ctex"
+uid="uid://dq8htunhet283"
+path.s3tc="res://.godot/imported/stencil.png-2c40e5aa1385d07601e2d58de7e6b480.s3tc.ctex"
+path.etc2="res://.godot/imported/stencil.png-2c40e5aa1385d07601e2d58de7e6b480.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/skybox_render.png"
-dest_files=["res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.s3tc.ctex", "res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.etc2.ctex"]
+source_file="res://art/stencil.png"
+dest_files=["res://.godot/imported/stencil.png-2c40e5aa1385d07601e2d58de7e6b480.s3tc.ctex", "res://.godot/imported/stencil.png-2c40e5aa1385d07601e2d58de7e6b480.etc2.ctex"]
 
 [params]
 

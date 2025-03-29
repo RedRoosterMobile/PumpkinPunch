@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs0xn4oppigll"
-path.s3tc="res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.s3tc.ctex"
-path.etc2="res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.etc2.ctex"
+uid="uid://b1wb4i2f1c68r"
+path.s3tc="res://.godot/imported/plain_sheet.png-4b158ce14262045810c2a4dc027cfd7b.s3tc.ctex"
+path.etc2="res://.godot/imported/plain_sheet.png-4b158ce14262045810c2a4dc027cfd7b.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/skybox_render.png"
-dest_files=["res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.s3tc.ctex", "res://.godot/imported/skybox_render.png-56918d68999affc8a28a60f58cc719ea.etc2.ctex"]
+source_file="res://art/plain_sheet.png"
+dest_files=["res://.godot/imported/plain_sheet.png-4b158ce14262045810c2a4dc027cfd7b.s3tc.ctex", "res://.godot/imported/plain_sheet.png-4b158ce14262045810c2a4dc027cfd7b.etc2.ctex"]
 
 [params]
 
