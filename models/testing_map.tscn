@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=145 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
 [ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="2_d0wg7"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://hk1cf8csqdrt" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large.gltf" id="14_f5yfn"]
 [ext_resource type="PackedScene" uid="uid://bko4ul30m4o85" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large_decorated.gltf" id="15_1otfv"]
 [ext_resource type="PackedScene" uid="uid://b786amta6f16o" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_orange_medium.gltf" id="16_oxlor"]
+[ext_resource type="Texture2D" uid="uid://dcmets68xpawm" path="res://images/spiderweb.png" id="16_u8t5v"]
 [ext_resource type="PackedScene" uid="uid://qm4nhoeeteek" path="res://addons/kaykit_halloween_bits/gltf/grave_A_destroyed.gltf" id="18_rn3rq"]
 [ext_resource type="PackedScene" uid="uid://blmw4vo6qqk7x" path="res://addons/kaykit_halloween_bits/gltf/grave_A.gltf" id="19_g6kes"]
 [ext_resource type="PackedScene" uid="uid://dylag0xemlm0u" path="res://addons/kaykit_halloween_bits/gltf/lantern_standing.gltf" id="20_hqfyn"]
@@ -224,6 +225,106 @@ radius = 0.12
 radius = 0.12
 
 [sub_resource type="SphereMesh" id="SphereMesh_pqm76"]
+
+[sub_resource type="Shader" id="Shader_u8t5v"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_disabled, vertex_lighting;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float alpha_scissor_threshold : hint_range(0.0, 1.0, 0.001);
+//uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform float amplitude = 0.05; // Base amplitude of the shake
+uniform float speed = 20.0;     // Speed of the primary oscillation
+uniform float secondary_speed = 5.0; // Speed of the secondary oscillation
+void vertex() {
+    // Calculate distance from the center (UV = 0.5, 0.5)
+    vec2 uv_center = vec2(0.8, 0.61);
+    float dist_from_center = length(UV - uv_center); // Distance from center (0 to ~0.7ish)
+
+    // Scale amplitude: more shake in the center (dist = 0), less at edges (dist > 0)
+    float shake_factor = 1.0 - dist_from_center * 2.0; // 1 at center, 0 at edges
+    shake_factor = max(shake_factor, 0.0); // Clamp to avoid negative values
+
+    // Apply the shaking along Z-axis, stronger in the center
+    float shake = sin(TIME * speed) * cos(TIME * secondary_speed) * amplitude * shake_factor;
+    VERTEX.z += shake;
+
+    // Optional: Add slight X/Y movement if desired (commented out in your code)
+    // VERTEX.x += sin(TIME * 10.0) * cos(TIME * 2.5) * 0.025 * shake_factor;
+
+    // Apply UV scaling/offset (unchanged from your code)
+    UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+/*
+void vertex() {
+	// Shading Mode: Per Vertex
+	ROUGHNESS = roughness;
+	sin(TIME);
+    VERTEX.z+=sin(TIME*20.)*cos(TIME*5.)*0.05;
+	//VERTEX.x+=sin(TIME*10.)*cos(TIME*2.5)*0.025;
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}*/
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjotx"]
+render_priority = 0
+shader = SubResource("Shader_u8t5v")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("16_u8t5v")
+shader_parameter/alpha_scissor_threshold = 0.844
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/amplitude = 0.05
+shader_parameter/speed = 5.0
+shader_parameter/secondary_speed = 2.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_peo8t"]
+material = SubResource("ShaderMaterial_bjotx")
+subdivide_width = 8
+subdivide_depth = 8
+orientation = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cugqu"]
 albedo_color = Color(0.384314, 0.207843, 0.0196078, 1)
@@ -937,6 +1038,10 @@ transform = Transform3D(0.31572, -0.0520956, -0.947421, 0.086212, 0.995937, -0.0
 
 [node name="spider" parent="decoration/shrine2" instance=ExtResource("59_cvm05")]
 transform = Transform3D(0.260088, -0.301305, -0.302605, 0.194599, 0.399014, -0.230042, 0.380112, 0.00188904, 0.324825, -0.349345, 2.12311, 0.090023)
+
+[node name="spiderweb" type="MeshInstance3D" parent="decoration/shrine2"]
+transform = Transform3D(0.921845, -0.00336521, -0.387543, 0.0168867, 0.999362, 0.0314903, 0.38719, -0.0355735, 0.921313, -1.22261, 1.01016, -0.732146)
+mesh = SubResource("PlaneMesh_peo8t")
 
 [node name="skull_candle2" parent="decoration" instance=ExtResource("13_0filk")]
 transform = Transform3D(0.593041, -0.0196651, -0.45871, -0.0420441, 0.743837, -0.0862451, 0.457203, 0.0939106, 0.587066, 4.02539, 0.48235, -1.07351)
