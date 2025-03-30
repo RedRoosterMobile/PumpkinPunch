@@ -1,0 +1,38 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://b1s11ub0dgb27"]
+
+[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="1_0lr4l"]
+
+[sub_resource type="Sky" id="Sky_albes"]
+sky_material = ExtResource("1_0lr4l")
+radiance_size = 2
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_albes")
+ambient_light_source = 3
+ambient_light_energy = 2.05
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_read_sky_light = false
+sdfgi_min_cell_size = 0.29
+sdfgi_cascade0_distance = 18.56
+sdfgi_max_distance = 296.96
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 7.19
+glow_strength = 0.0
+glow_bloom = 0.5
+glow_hdr_threshold = 0.95
+fog_mode = 1
+fog_density = 0.1775
+fog_aerial_perspective = 0.034
+fog_sky_affect = 0.1
+fog_height = 0.85
+fog_height_density = 0.3153
+fog_depth_curve = 0.327682
+fog_depth_begin = 0.0
+fog_depth_end = 53.0
+volumetric_fog_density = 0.19
+volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
+adjustment_contrast = 1.31
+adjustment_saturation = 0.57

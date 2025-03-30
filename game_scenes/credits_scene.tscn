@@ -1,12 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqi6h6fm8nmuq"]
+[gd_scene load_steps=37 format=3 uid="uid://dqi6h6fm8nmuq"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_lnysx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_fm1wd"]
 [ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="2_h7sq6"]
-[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="2_xblid"]
+[ext_resource type="Script" uid="uid://olidn7fdp6bu" path="res://credits_scene.gd" id="2_vty74"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_ismy7"]
 [ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="3_ncua7"]
 [ext_resource type="Shader" uid="uid://bkkgnxjpkk3lh" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="4_f1e63"]
+[ext_resource type="Environment" uid="uid://b1s11ub0dgb27" path="res://game_scenes/credits_scene_env.tres" id="4_xyjgo"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="5_7uyiw"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="6_l838c"]
 [ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="7_bhmvs"]
@@ -16,41 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://dkuxwj8lsf6ka" path="res://audio/Laurie's Theme gothic minimal.mp3" id="13_bhmvs"]
 [ext_resource type="Script" uid="uid://bxqw338ha6lgn" path="res://rotator.gd" id="15_6dmeh"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="15_81ggd"]
-
-[sub_resource type="Sky" id="Sky_albes"]
-sky_material = ExtResource("2_xblid")
-radiance_size = 2
-
-[sub_resource type="Environment" id="Environment_fm1wd"]
-background_mode = 2
-sky = SubResource("Sky_albes")
-ambient_light_source = 3
-ambient_light_energy = 2.05
-reflected_light_source = 2
-tonemap_mode = 2
-sdfgi_read_sky_light = false
-sdfgi_min_cell_size = 0.29
-sdfgi_cascade0_distance = 18.56
-sdfgi_max_distance = 296.96
-glow_enabled = true
-glow_normalized = true
-glow_intensity = 7.19
-glow_strength = 0.0
-glow_bloom = 0.5
-glow_hdr_threshold = 0.95
-fog_mode = 1
-fog_density = 0.1775
-fog_aerial_perspective = 0.034
-fog_sky_affect = 0.1
-fog_height = 0.85
-fog_height_density = 0.3153
-fog_depth_curve = 0.327682
-fog_depth_begin = 0.0
-fog_depth_end = 53.0
-volumetric_fog_density = 0.19
-volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
-adjustment_contrast = 1.31
-adjustment_saturation = 0.57
+[ext_resource type="Texture2D" uid="uid://u6fc13tdaygq" path="res://images/particles/PNG (Transparent)/trace_06.png" id="18_xyjgo"]
+[ext_resource type="Texture2D" uid="uid://8s03ra8tp0hr" path="res://addons/godot-xr-tools/images/ring.png" id="19_l6llr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7sq6"]
 shader = ExtResource("3_ncua7")
@@ -69,13 +37,87 @@ shader_parameter/flags = 40
 [sub_resource type="QuadMesh" id="QuadMesh_6dmeh"]
 material = SubResource("ShaderMaterial_81ggd")
 
+[sub_resource type="BoxMesh" id="BoxMesh_vty74"]
+
+[sub_resource type="Curve" id="Curve_l6llr"]
+_data = [Vector2(0.014377, 0.0121262), 0.0, 0.0, 0, 0, Vector2(0.253994, 0.495554), 0.0, 0.0, 0, 0, Vector2(0.469649, 0), 0.0, 0.0, 0, 0, Vector2(0.610224, 0.339666), 0.0, 0.0, 0, 0, Vector2(0.715655, 0), 0.0, 0.0, 0, 0, Vector2(0.824281, 0.224064), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_ajvy1"]
+curve = SubResource("Curve_l6llr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l6llr"]
+emission_shape_scale = Vector3(0.5, 1, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0.002, -1, 0)
+spread = 0.5
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_min = 0.1
+alpha_curve = SubResource("CurveTexture_ajvy1")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="Curve" id="Curve_xyjgo"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0.0130435, 0.000476196), 0.0, 0.0, 0, 0, Vector2(0.0347826, 0.0157143), 0.611508, 0.611508, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajvy1"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("18_xyjgo")
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_fcp36"]
+material = SubResource("StandardMaterial3D_ajvy1")
+curve = SubResource("Curve_xyjgo")
+
+[sub_resource type="Curve" id="Curve_ajvy1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.173269), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fcp36"]
+curve = SubResource("Curve_ajvy1")
+
+[sub_resource type="Curve" id="Curve_hkt06"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iovd1"]
+curve = SubResource("Curve_hkt06")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cgqxj"]
+lifetime_randomness = 0.13
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_iovd1")
+alpha_curve = SubResource("CurveTexture_fcp36")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rkmg"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("19_l6llr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nhicc"]
+material = SubResource("StandardMaterial3D_7rkmg")
+orientation = 1
+
 [node name="SceneBase" instance=ExtResource("1_lnysx")]
+script = ExtResource("2_vty74")
 
 [node name="post_lantern2" parent="." index="0" instance=ExtResource("2_h7sq6")]
 transform = Transform3D(0.123584, 0, 0.992334, 0, 1, 0, -0.992334, 0, 0.123584, -5.06736, 0, -3.09796)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
-environment = SubResource("Environment_fm1wd")
+environment = ExtResource("4_xyjgo")
 
 [node name="LeftHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_fm1wd")]
 
@@ -114,20 +156,21 @@ metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 [node name="Headline" type="Label3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16796, -5.06541)
 modulate = Color(2.21401e-06, 0.813058, 0.00934584, 1)
+outline_modulate = Color(1, 1, 1, 1)
 text = "Credits:"
 font = ExtResource("10_f1e63")
 font_size = 128
 
-[node name="Label3D" type="Label3D" parent="Headline" index="0"]
+[node name="Names" type="Label3D" parent="Headline" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77118, 0)
 modulate = Color(0, 0.811765, 0.00784314, 1)
-text = "Philipp \"Butcher\", 
-Nick \"Creature\",
- Julio \"Monster\", 
-Jens \"Hangman\", 
-Thomas \"Terrorist\""
+text = "Philipp \"Maldito Maduro\", 
+Nick \"Cold Kim\",
+Julio \"Pol Pothead\", 
+Jens \"Mao the Cat\", 
+Thomas \"Stalin's Ghoulash\""
 font = ExtResource("10_f1e63")
-font_size = 96
+font_size = 80
 
 [node name="couch" type="Node3D" parent="." index="4"]
 transform = Transform3D(0.642119, 0, 0.766605, 0, 1, 0, -0.766605, 0, 0.642119, -3.62444, 0.770928, -4.21581)
@@ -138,7 +181,7 @@ transform = Transform3D(1, 0, 0, 0, 0.0182551, -0.999833, 0, 0.999833, 0.0182551
 [node name="skull2" parent="couch" index="1" instance=ExtResource("12_bhmvs")]
 transform = Transform3D(0.971159, 0, 0.238432, 0, 1, 0, -0.238432, 0, 0.971159, 0.174702, -0.0675941, 0.120512)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="5"]
+[node name="Credits Theme" type="AudioStreamPlayer3D" parent="." index="5"]
 stream = ExtResource("13_bhmvs")
 autoplay = true
 bus = &"MUSIC"
@@ -150,3 +193,32 @@ script = ExtResource("15_6dmeh")
 [node name="best_bat" parent="Rotator" index="0" instance=ExtResource("15_81ggd")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -13.435)
 play_on_start = true
+
+[node name="Floor" type="MeshInstance3D" parent="." index="7"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_vty74")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Floor" index="0"]
+size = Vector3(1, 1, 1)
+
+[node name="GPUParticles3DRain" type="GPUParticles3D" parent="Floor" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8303, 0)
+amount = 1000
+sub_emitter = NodePath("GPUParticles3DDrops")
+lifetime = 1.1
+randomness = 0.89
+collision_base_size = 0.1
+visibility_aabb = AABB(-4, -40, -4, 8, 100, 8)
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_l6llr")
+draw_pass_1 = SubResource("RibbonTrailMesh_fcp36")
+
+[node name="GPUParticles3DDrops" type="GPUParticles3D" parent="Floor/GPUParticles3DRain" index="0"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, -12.3303, 0)
+amount = 50
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB(-4, -40, -4, 8, 100, 8)
+process_material = SubResource("ParticleProcessMaterial_cgqxj")
+draw_pass_1 = SubResource("QuadMesh_nhicc")
