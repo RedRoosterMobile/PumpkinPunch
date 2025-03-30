@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dqi6h6fm8nmuq"]
+[gd_scene load_steps=42 format=3 uid="uid://dqi6h6fm8nmuq"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_lnysx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_fm1wd"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dkuxwj8lsf6ka" path="res://audio/Laurie's Theme gothic minimal.mp3" id="13_bhmvs"]
 [ext_resource type="Script" uid="uid://bxqw338ha6lgn" path="res://rotator.gd" id="15_6dmeh"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="15_81ggd"]
+[ext_resource type="Material" uid="uid://bhwlq241qgvic" path="res://creadits_floor_material.tres" id="18_ajvy1"]
 [ext_resource type="Texture2D" uid="uid://u6fc13tdaygq" path="res://images/particles/PNG (Transparent)/trace_06.png" id="18_xyjgo"]
 [ext_resource type="Texture2D" uid="uid://8s03ra8tp0hr" path="res://addons/godot-xr-tools/images/ring.png" id="19_l6llr"]
 
@@ -76,6 +77,7 @@ _data = {
 }
 
 [sub_resource type="BoxMesh" id="BoxMesh_vty74"]
+material = ExtResource("18_ajvy1")
 
 [sub_resource type="Curve" id="Curve_l6llr"]
 _data = [Vector2(0.014377, 0.0121262), 0.0, 0.0, 0, 0, Vector2(0.253994, 0.495554), 0.0, 0.0, 0, 0, Vector2(0.469649, 0), 0.0, 0.0, 0, 0, Vector2(0.610224, 0.339666), 0.0, 0.0, 0, 0, Vector2(0.715655, 0), 0.0, 0.0, 0, 0, Vector2(0.824281, 0.224064), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -148,6 +150,11 @@ albedo_texture = ExtResource("19_l6llr")
 material = SubResource("StandardMaterial3D_7rkmg")
 orientation = 1
 
+[sub_resource type="QuadMesh" id="QuadMesh_fcp36"]
+material = ExtResource("18_ajvy1")
+size = Vector2(100, 100)
+orientation = 1
+
 [node name="SceneBase" instance=ExtResource("1_lnysx")]
 script = ExtResource("2_vty74")
 
@@ -216,7 +223,7 @@ font = ExtResource("10_f1e63")
 font_size = 80
 
 [node name="couch" type="Node3D" parent="." index="5"]
-transform = Transform3D(0.642119, 0, 0.766605, 0, 1, 0, -0.766605, 0, 0.642119, -3.62444, 0.770928, -4.21581)
+transform = Transform3D(0.641409, 0.0470193, 0.765757, -0.030192, 0.998894, -0.0360452, -0.766605, 0, 0.642119, -3.62444, 0.630301, -4.21581)
 
 [node name="sofa3d2" parent="couch" index="0" instance=ExtResource("11_l838c")]
 transform = Transform3D(1, 0, 0, 0, 0.0182551, -0.999833, 0, 0.999833, 0.0182551, 0, 0, 0)
@@ -234,6 +241,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_fcp36")
 }
 autoplay = "flicker eyes"
+speed_scale = 2.0
 
 [node name="Credits Theme" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("13_bhmvs")
@@ -277,3 +285,8 @@ randomness = 1.0
 visibility_aabb = AABB(-4, -40, -4, 8, 100, 8)
 process_material = SubResource("ParticleProcessMaterial_cgqxj")
 draw_pass_1 = SubResource("QuadMesh_nhicc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" index="2"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, -0.1, -0.253)
+mesh = SubResource("QuadMesh_fcp36")
+skeleton = NodePath("../../Headline/Names")

@@ -152,7 +152,15 @@ func _on_button_pressed_right(button_name: String) -> void:
 			Messenger.game_finished.emit()
 			GameState.game_finished = true
 		"by_button":
-			print("right by_button not (yet) implemented")
+			# go to credits
+			print("go to credits scene")
+			# Find the XRToolsSceneBase ancestor of the current node
+			var scene_base : XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
+			if not scene_base:
+				return
+			# Request loading the next scene
+			scene_base.load_scene("res://game_scenes/credits_scene.tscn")
+			
 
 func create_new_pumpkin():
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
