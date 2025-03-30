@@ -157,29 +157,32 @@ orientation = 1
 
 [node name="SceneBase" instance=ExtResource("1_lnysx")]
 script = ExtResource("2_vty74")
+rumble_event_left = null
+rumble_event_right = null
 
 [node name="post_lantern3" parent="." index="0" instance=ExtResource("2_h7sq6")]
 transform = Transform3D(0.853551, 0, 0.52101, 0, 1, 0, -0.52101, 0, 0.853551, -3.06839, 0, -6.13993)
 
 [node name="post_lantern2" parent="." index="1" instance=ExtResource("2_h7sq6")]
 transform = Transform3D(0.123584, 0, 0.992334, 0, 1, 0, -0.992334, 0, 0.123584, -5.06736, 0, -3.09796)
+rotation_speed = 1.1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
 environment = ExtResource("4_xyjgo")
 
 [node name="LeftHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_fm1wd")]
 
-[node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/LeftHand" index="1"]
+[node name="LeftGPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/LeftHand" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0113024, -0.0129278, 0.00303748)
-amount = 99
-lifetime = 99.0
+amount = 120
+lifetime = 120.0
 explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ShaderMaterial_h7sq6")
 draw_pass_1 = SubResource("QuadMesh_6dmeh")
 script = ExtResource("7_bhmvs")
-length = 99
-length_seconds = 0.825
+length = 120
+length_seconds = 1.0
 color_ramp = ExtResource("5_7uyiw")
 curve = ExtResource("6_l838c")
 _defaults_have_been_set = true
@@ -187,17 +190,17 @@ metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
 [node name="RightHand" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("3_ismy7")]
 
-[node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/RightHand" index="1"]
+[node name="RightGPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/RightHand" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00671607, -0.0117863, 0)
-amount = 99
-lifetime = 99.0
+amount = 120
+lifetime = 120.0
 explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ShaderMaterial_h7sq6")
 draw_pass_1 = SubResource("QuadMesh_6dmeh")
 script = ExtResource("7_bhmvs")
-length = 99
-length_seconds = 0.825
+length = 120
+length_seconds = 1.0
 color_ramp = ExtResource("5_7uyiw")
 curve = ExtResource("6_l838c")
 _defaults_have_been_set = true

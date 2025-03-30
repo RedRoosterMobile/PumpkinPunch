@@ -1,7 +1,6 @@
 [gd_resource type="CurveTexture" load_steps=2 format=3 uid="uid://ct31fhxvcragr"]
 
 [sub_resource type="Curve" id="Curve_7ufs5"]
-bake_resolution = 16
 _data = [Vector2(0, 0.0109696), 0.0, 0.0, 0, 0, Vector2(0.509804, 0.0953056), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 

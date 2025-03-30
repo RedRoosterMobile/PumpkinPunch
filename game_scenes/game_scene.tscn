@@ -1,78 +1,78 @@
 [gd_scene load_steps=147 format=4 uid="uid://b3l46tvt2tevv"]
 
-[ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_woidc"]
-[ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_qix3n"]
-[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="3_clql6"]
-[ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="4_qj6mc"]
-[ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="5_xrxob"]
-[ext_resource type="Script" uid="uid://bc4ukp0q27orl" path="res://block_detector_ray_cast_3d_bat.gd" id="6_ifs5g"]
-[ext_resource type="Script" uid="uid://b5npvt0x2mxqe" path="res://block_detector_ray_cast_3d_swarm.gd" id="7_mhw3c"]
-[ext_resource type="PackedScene" uid="uid://r5gyhdb26e8x" path="res://models/glove_right.glb" id="8_luewt"]
-[ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://decoration_treeshaker.gd" id="9_8kxq5"]
-[ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="10_e2ju8"]
-[ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="11_yixv5"]
-[ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="12_g6mbw"]
-[ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="13_3sxv7"]
-[ext_resource type="PackedScene" uid="uid://hj21vyhp78ye" path="res://addons/kaykit_halloween_bits/gltf/ribcage.gltf" id="14_b8mft"]
-[ext_resource type="PackedScene" uid="uid://c480uebuatosg" path="res://addons/kaykit_halloween_bits/gltf/shrine.gltf" id="15_75s7b"]
-[ext_resource type="PackedScene" uid="uid://0d4r1pnoxdqc" path="res://spider.tscn" id="16_qsxvu"]
-[ext_resource type="Texture2D" uid="uid://dcmets68xpawm" path="res://images/spiderweb.png" id="17_f2fl4"]
-[ext_resource type="PackedScene" uid="uid://7c86jlto6a30" path="res://addons/kaykit_halloween_bits/gltf/skull_candle.gltf" id="18_woqj8"]
-[ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="19_esepk"]
-[ext_resource type="PackedScene" uid="uid://hk1cf8csqdrt" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large.gltf" id="20_x2kkl"]
-[ext_resource type="PackedScene" uid="uid://bko4ul30m4o85" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large_decorated.gltf" id="21_4ya5b"]
-[ext_resource type="PackedScene" uid="uid://b786amta6f16o" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_orange_medium.gltf" id="22_unkb3"]
-[ext_resource type="PackedScene" uid="uid://qm4nhoeeteek" path="res://addons/kaykit_halloween_bits/gltf/grave_A_destroyed.gltf" id="23_rlseg"]
-[ext_resource type="PackedScene" uid="uid://blmw4vo6qqk7x" path="res://addons/kaykit_halloween_bits/gltf/grave_A.gltf" id="24_1v7j0"]
-[ext_resource type="Script" uid="uid://dsxs71mo0nq2d" path="res://music_volume_grabber.gd" id="25_h2b0n"]
-[ext_resource type="PackedScene" uid="uid://dylag0xemlm0u" path="res://addons/kaykit_halloween_bits/gltf/lantern_standing.gltf" id="26_vtl5r"]
-[ext_resource type="PackedScene" uid="uid://bwa3sitcos5hl" path="res://addons/kaykit_halloween_bits/gltf/path_A.gltf" id="27_b4x5o"]
-[ext_resource type="PackedScene" uid="uid://c26sw1lcyjq8c" path="res://addons/kaykit_halloween_bits/gltf/path_B.gltf" id="28_0f4g4"]
-[ext_resource type="PackedScene" uid="uid://8fbwqjjsntq6" path="res://addons/kaykit_halloween_bits/gltf/path_C.gltf" id="29_yfckn"]
-[ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="30_kml4y"]
-[ext_resource type="PackedScene" uid="uid://r8n4sutnqcgl" path="res://addons/kaykit_halloween_bits/gltf/crypt.gltf" id="31_xd1tn"]
-[ext_resource type="PackedScene" uid="uid://de35nohp21htn" path="res://models/Mourning Manor - nightmare before xmas  tree.tscn" id="32_urwy4"]
-[ext_resource type="PackedScene" uid="uid://c6lw2v6pce0hu" path="res://models/Mourning Manor - rock  1.glb" id="33_lkyye"]
-[ext_resource type="PackedScene" uid="uid://cnvaxg2l1o7vk" path="res://models/TitleText_lower_poly.glb" id="34_8ekw1"]
-[ext_resource type="PackedScene" uid="uid://0k4ojuq4elym" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.tscn" id="35_jdgas"]
-[ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="36_4b12f"]
-[ext_resource type="MidiResource" uid="uid://b08jclyed2bfl" path="res://songs/merge_from_ofoct (1).mid" id="37_31hwr"]
-[ext_resource type="AudioStream" uid="uid://c64hw2hfjecip" path="res://songs/Pumpkin demo suno ai.wav" id="38_hns7k"]
-[ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="39_hnnxh"]
-[ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="40_cucey"]
-[ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="41_mcahu"]
-[ext_resource type="Shader" uid="uid://bkkgnxjpkk3lh" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="42_s3gh3"]
-[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="43_qbrtp"]
-[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="44_axdly"]
-[ext_resource type="Texture2D" uid="uid://cx8tmyiaifkop" path="res://images/particles/Rotated/muzzle_01_rotated.png" id="45_842db"]
-[ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="46_kkqe5"]
-[ext_resource type="Script" uid="uid://cxt7552h7hen2" path="res://models/bat_path_follow_3d.gd" id="47_ie8gm"]
-[ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="48_c0mmk"]
-[ext_resource type="Texture2D" uid="uid://cjdho3j0sy31" path="res://images/particles/PNG (Transparent)/star_08.png" id="49_m74vx"]
-[ext_resource type="Script" uid="uid://d2hp0qsn4y0la" path="res://bat_swarm.gd" id="50_m15rf"]
-[ext_resource type="Shader" uid="uid://c7qelfof7s0gg" path="res://images/butterfly/bat_boids.gdshader" id="51_7wypi"]
-[ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="52_uvvm2"]
-[ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="53_g27is"]
-[ext_resource type="Texture2D" uid="uid://b0uu6dsn2ywog" path="res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png" id="54_ancsn"]
-[ext_resource type="Material" uid="uid://bhr38dekra14f" path="res://models/sky_clouds_backup.tres" id="55_vlqus"]
-[ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="56_frmvu"]
-[ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="57_5n54o"]
-[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="58_klu7n"]
-[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="59_62t73"]
-[ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://VFX/vfxx/flame_thrower/flame_thrower.tscn" id="60_hh2wb"]
-[ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="61_dbjgk"]
-[ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="62_mj5ge"]
-[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="63_75bd8"]
-[ext_resource type="PackedScene" uid="uid://dunbv8mwcb6ce" path="res://experiments/fakefog/fakefog.tscn" id="64_yl8u1"]
-[ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="65_rdk1t"]
-[ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="66_iemn1"]
-[ext_resource type="PackedScene" uid="uid://d0yhpigknktpu" path="res://score_manager.tscn" id="67_fxwuu"]
-[ext_resource type="Texture2D" uid="uid://btohuiu8ivcj5" path="res://images/butterfly/bat.png" id="68_t2yte"]
-[ext_resource type="Material" uid="uid://cfuu80k5cfxu1" path="res://deflector_shader_material.tres" id="69_mo1id"]
-[ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="70_18hl2"]
+[ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
+[ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
+[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="3_4mxv4"]
+[ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="4_dbopf"]
+[ext_resource type="PackedScene" uid="uid://b5k7hj2q64bow" path="res://models/glove_left.glb" id="5_empo3"]
+[ext_resource type="Script" uid="uid://bc4ukp0q27orl" path="res://block_detector_ray_cast_3d_bat.gd" id="6_t1v0u"]
+[ext_resource type="Script" uid="uid://b5npvt0x2mxqe" path="res://block_detector_ray_cast_3d_swarm.gd" id="7_5wwxe"]
+[ext_resource type="PackedScene" uid="uid://r5gyhdb26e8x" path="res://models/glove_right.glb" id="8_fgu8x"]
+[ext_resource type="Script" uid="uid://b1glnqu4e0c55" path="res://decoration_treeshaker.gd" id="9_7tgp5"]
+[ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="10_pw2a7"]
+[ext_resource type="PackedScene" uid="uid://cb4uq6hr1k142" path="res://addons/kaykit_halloween_bits/gltf/fence.gltf" id="11_v7w1t"]
+[ext_resource type="PackedScene" uid="uid://djue7fbdwdrm1" path="res://addons/kaykit_halloween_bits/gltf/fence_broken.gltf" id="12_oihcx"]
+[ext_resource type="PackedScene" uid="uid://5p1nv0o6vop0" path="res://addons/kaykit_halloween_bits/gltf/post_lantern.gltf" id="13_auas2"]
+[ext_resource type="PackedScene" uid="uid://hj21vyhp78ye" path="res://addons/kaykit_halloween_bits/gltf/ribcage.gltf" id="14_0qvak"]
+[ext_resource type="PackedScene" uid="uid://c480uebuatosg" path="res://addons/kaykit_halloween_bits/gltf/shrine.gltf" id="15_nkc1n"]
+[ext_resource type="PackedScene" uid="uid://0d4r1pnoxdqc" path="res://spider.tscn" id="16_nlu27"]
+[ext_resource type="Texture2D" uid="uid://dcmets68xpawm" path="res://images/spiderweb.png" id="17_qf5n6"]
+[ext_resource type="PackedScene" uid="uid://7c86jlto6a30" path="res://addons/kaykit_halloween_bits/gltf/skull_candle.gltf" id="18_uxwe4"]
+[ext_resource type="PackedScene" uid="uid://2guqqkbtcgct" path="res://flame.tscn" id="19_0vwwp"]
+[ext_resource type="PackedScene" uid="uid://hk1cf8csqdrt" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large.gltf" id="20_6n0uk"]
+[ext_resource type="PackedScene" uid="uid://bko4ul30m4o85" path="res://addons/kaykit_halloween_bits/gltf/tree_dead_large_decorated.gltf" id="21_das37"]
+[ext_resource type="PackedScene" uid="uid://b786amta6f16o" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_orange_medium.gltf" id="22_28ibu"]
+[ext_resource type="PackedScene" uid="uid://qm4nhoeeteek" path="res://addons/kaykit_halloween_bits/gltf/grave_A_destroyed.gltf" id="23_h1t3y"]
+[ext_resource type="PackedScene" uid="uid://blmw4vo6qqk7x" path="res://addons/kaykit_halloween_bits/gltf/grave_A.gltf" id="24_wij77"]
+[ext_resource type="Script" uid="uid://dsxs71mo0nq2d" path="res://music_volume_grabber.gd" id="25_0hklu"]
+[ext_resource type="PackedScene" uid="uid://dylag0xemlm0u" path="res://addons/kaykit_halloween_bits/gltf/lantern_standing.gltf" id="26_jgo6c"]
+[ext_resource type="PackedScene" uid="uid://bwa3sitcos5hl" path="res://addons/kaykit_halloween_bits/gltf/path_A.gltf" id="27_tj07c"]
+[ext_resource type="PackedScene" uid="uid://c26sw1lcyjq8c" path="res://addons/kaykit_halloween_bits/gltf/path_B.gltf" id="28_5yxj8"]
+[ext_resource type="PackedScene" uid="uid://8fbwqjjsntq6" path="res://addons/kaykit_halloween_bits/gltf/path_C.gltf" id="29_ft7lx"]
+[ext_resource type="PackedScene" uid="uid://c7h22vplc4yh3" path="res://addons/kaykit_halloween_bits/gltf/path_D.gltf" id="30_3eqd5"]
+[ext_resource type="PackedScene" uid="uid://r8n4sutnqcgl" path="res://addons/kaykit_halloween_bits/gltf/crypt.gltf" id="31_do72d"]
+[ext_resource type="PackedScene" uid="uid://de35nohp21htn" path="res://models/Mourning Manor - nightmare before xmas  tree.tscn" id="32_uvld4"]
+[ext_resource type="PackedScene" uid="uid://c6lw2v6pce0hu" path="res://models/Mourning Manor - rock  1.glb" id="33_2mg8l"]
+[ext_resource type="PackedScene" uid="uid://cnvaxg2l1o7vk" path="res://models/TitleText_lower_poly.glb" id="34_vjse1"]
+[ext_resource type="PackedScene" uid="uid://0k4ojuq4elym" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.tscn" id="35_62kty"]
+[ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="36_yue88"]
+[ext_resource type="MidiResource" uid="uid://b08jclyed2bfl" path="res://songs/merge_from_ofoct (1).mid" id="37_rna4k"]
+[ext_resource type="AudioStream" uid="uid://c64hw2hfjecip" path="res://songs/Pumpkin demo suno ai.wav" id="38_4h8wo"]
+[ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="39_wjle5"]
+[ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="40_vwe6t"]
+[ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="41_b6dwd"]
+[ext_resource type="Shader" uid="uid://bkkgnxjpkk3lh" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="42_7ckyi"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="43_nc58y"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="44_bxsbr"]
+[ext_resource type="Texture2D" uid="uid://cx8tmyiaifkop" path="res://images/particles/Rotated/muzzle_01_rotated.png" id="45_m367s"]
+[ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="46_hd4de"]
+[ext_resource type="Script" uid="uid://cxt7552h7hen2" path="res://models/bat_path_follow_3d.gd" id="47_cbdxd"]
+[ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="48_s4kcc"]
+[ext_resource type="Texture2D" uid="uid://cjdho3j0sy31" path="res://images/particles/PNG (Transparent)/star_08.png" id="49_ilxcb"]
+[ext_resource type="Script" uid="uid://d2hp0qsn4y0la" path="res://bat_swarm.gd" id="50_qu74t"]
+[ext_resource type="Shader" uid="uid://c7qelfof7s0gg" path="res://images/butterfly/bat_boids.gdshader" id="51_3cfrk"]
+[ext_resource type="Texture2D" uid="uid://belqmcolfall" path="res://images/butterfly/butterfly.png" id="52_8tlvx"]
+[ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="53_mxplb"]
+[ext_resource type="Texture2D" uid="uid://b0uu6dsn2ywog" path="res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png" id="54_48nf6"]
+[ext_resource type="Material" uid="uid://bhr38dekra14f" path="res://models/sky_clouds_backup.tres" id="55_5ki65"]
+[ext_resource type="PackedScene" uid="uid://bx57plt15tr6q" path="res://models/ground_hills_material.tscn" id="56_jjmeu"]
+[ext_resource type="Shader" uid="uid://dk12040fl638a" path="res://floor_fog.gdshader" id="57_dlkqs"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="58_8dg2u"]
+[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="59_0ov1c"]
+[ext_resource type="PackedScene" uid="uid://cct8i0oo5inaq" path="res://VFX/vfxx/flame_thrower/flame_thrower.tscn" id="60_0jpa3"]
+[ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="61_48ilh"]
+[ext_resource type="Shader" uid="uid://j7ae15ou8r4a" path="res://splash_fx.tres" id="62_l0pjf"]
+[ext_resource type="Texture2D" uid="uid://cgxfsqgw6plpo" path="res://images/particles/circle_05.png" id="63_ac5oq"]
+[ext_resource type="PackedScene" uid="uid://dunbv8mwcb6ce" path="res://experiments/fakefog/fakefog.tscn" id="64_m6kbo"]
+[ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="65_oskdp"]
+[ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="66_ewo7y"]
+[ext_resource type="PackedScene" uid="uid://d0yhpigknktpu" path="res://score_manager.tscn" id="67_ld461"]
+[ext_resource type="Texture2D" uid="uid://btohuiu8ivcj5" path="res://images/butterfly/bat.png" id="68_umyyh"]
+[ext_resource type="Material" uid="uid://cfuu80k5cfxu1" path="res://deflector_shader_material.tres" id="69_h8eh1"]
+[ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="70_ilfbo"]
 
 [sub_resource type="Resource" id="Resource_peo8t"]
-script = ExtResource("2_qix3n")
+script = ExtResource("2_e7aqr")
 magnitude = 0.5
 active_during_pause = false
 indefinite = false
@@ -80,7 +80,7 @@ duration_ms = 300
 metadata/_custom_type_script = "uid://x5dxnmk8rpfj"
 
 [sub_resource type="Sky" id="Sky_woidc"]
-sky_material = ExtResource("3_clql6")
+sky_material = ExtResource("3_4mxv4")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_2o5or"]
@@ -302,7 +302,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_u8t5v")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("17_f2fl4")
+shader_parameter/texture_albedo = ExtResource("17_qf5n6")
 shader_parameter/alpha_scissor_threshold = 0.844
 shader_parameter/point_size = 1.0
 shader_parameter/specular = 0.5
@@ -327,16 +327,16 @@ albedo_color = Color(0.384314, 0.207843, 0.0196078, 1)
 size = Vector2(4, 4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k14l0"]
-shader = ExtResource("41_mcahu")
+shader = ExtResource("41_b6dwd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ac1t"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("42_s3gh3")
-shader_parameter/tex = ExtResource("45_842db")
+shader = ExtResource("42_7ckyi")
+shader_parameter/tex = ExtResource("45_m367s")
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/color_ramp = ExtResource("43_qbrtp")
-shader_parameter/curve = ExtResource("44_axdly")
+shader_parameter/color_ramp = ExtResource("43_nc58y")
+shader_parameter/curve = ExtResource("44_bxsbr")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 42
 
@@ -364,7 +364,7 @@ albedo_color = Color(1, 0, 0, 0.364706)
 transparency = 1
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("49_m74vx")
+albedo_texture = ExtResource("49_ilxcb")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -380,8 +380,8 @@ colors = PackedColorArray(1, 1, 1, 0.521569, 0.968627, 0.937255, 1.01569, 2.0039
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
 render_priority = 0
-shader = ExtResource("51_7wypi")
-shader_parameter/tex = ExtResource("52_uvvm2")
+shader = ExtResource("51_3cfrk")
+shader_parameter/tex = ExtResource("52_8tlvx")
 shader_parameter/color1 = Color(0.809847, 0.544149, 0, 1)
 shader_parameter/color2 = Color(0, 0.236852, 0, 1)
 shader_parameter/displ_amnt = 0.8
@@ -461,7 +461,7 @@ size = Vector2(1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqi61"]
 resource_name = "HalloweenBits"
-albedo_texture = ExtResource("54_ancsn")
+albedo_texture = ExtResource("54_48nf6")
 roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v6myn"]
@@ -537,7 +537,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_va2ro")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2eces"]
-material = ExtResource("55_vlqus")
+material = ExtResource("55_5ki65")
 size = Vector2(200, 200)
 subdivide_width = 6
 subdivide_depth = 6
@@ -557,9 +557,9 @@ noise = SubResource("FastNoiseLite_xkj5h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_amxcb"]
 render_priority = 0
-shader = ExtResource("57_5n54o")
+shader = ExtResource("57_dlkqs")
 shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_xn8a4")
-shader_parameter/noise_texture_2 = ExtResource("58_klu7n")
+shader_parameter/noise_texture_2 = ExtResource("58_8dg2u")
 shader_parameter/noise_texture_3 = SubResource("NoiseTexture2D_k4k1i")
 shader_parameter/speed_waves = 0.5
 shader_parameter/speed_1 = 0.015
@@ -576,9 +576,9 @@ subdivide_depth = 32
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5upae"]
 render_priority = 0
-shader = ExtResource("62_mj5ge")
+shader = ExtResource("62_l0pjf")
 shader_parameter/ColorParameter = Color(0.784, 1.67, 0.478, 1)
-shader_parameter/Hit_texture = ExtResource("63_75bd8")
+shader_parameter/Hit_texture = ExtResource("63_ac5oq")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bkpbe"]
 emission_shape = 3
@@ -775,7 +775,7 @@ transparency = 2
 alpha_scissor_threshold = 1.0
 alpha_antialiasing_mode = 0
 cull_mode = 2
-albedo_texture = ExtResource("66_iemn1")
+albedo_texture = ExtResource("66_ewo7y")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -811,7 +811,7 @@ alpha_scissor_threshold = 0.017
 alpha_antialiasing_mode = 0
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("68_t2yte")
+albedo_texture = ExtResource("68_umyyh")
 disable_receive_shadows = true
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -823,14 +823,14 @@ material = SubResource("StandardMaterial3D_itf4w")
 size = Vector2(0.5, 0.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_itf4w"]
-material = ExtResource("69_mo1id")
+material = ExtResource("69_h8eh1")
 subdivide_width = 10
 subdivide_depth = 10
 orientation = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xrdd6"]
 render_priority = 0
-shader = ExtResource("70_18hl2")
+shader = ExtResource("70_ilfbo")
 shader_parameter/barrier_color = Color(0.05, 0.8, 1, 1)
 shader_parameter/wave_strength = 0.1
 shader_parameter/wave_speed = 5.0
@@ -848,7 +848,7 @@ radius = 0.35
 height = 1.9
 
 [node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
-script = ExtResource("1_woidc")
+script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
 xr_enabled = true
@@ -875,7 +875,7 @@ directional_shadow_pancake_size = 9.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.29829)
 mesh = SubResource("PlaneMesh_7ju6e")
 skeleton = NodePath("../..")
-script = ExtResource("4_qj6mc")
+script = ExtResource("4_dbopf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorStaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -891,7 +891,7 @@ far = 500.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5127, 0.956079)
 lock_rotation = true
 
-[node name="glove_left" parent="HandLeft" instance=ExtResource("5_xrxob")]
+[node name="glove_left" parent="HandLeft" instance=ExtResource("5_empo3")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="HandArea3D" type="Area3D" parent="HandLeft" groups=["hand_areas"]]
@@ -916,7 +916,7 @@ collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-script = ExtResource("6_ifs5g")
+script = ExtResource("6_t1v0u")
 attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D")
 title = "left"
 
@@ -927,7 +927,7 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-script = ExtResource("7_mhw3c")
+script = ExtResource("7_5wwxe")
 attack_trigger = NodePath("../../SwarmDetectorArea3D")
 title = "left"
 
@@ -935,10 +935,10 @@ title = "left"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305306, 0.5127, 0.956079)
 lock_rotation = true
 
-[node name="glove_right" parent="HandRight" instance=ExtResource("8_luewt")]
+[node name="glove_right" parent="HandRight" instance=ExtResource("8_fgu8x")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="glove_left" parent="HandRight" instance=ExtResource("5_xrxob")]
+[node name="glove_left" parent="HandRight" instance=ExtResource("5_empo3")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 visible = false
 
@@ -964,7 +964,7 @@ collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-script = ExtResource("6_ifs5g")
+script = ExtResource("6_t1v0u")
 attack_trigger = NodePath("../../BatNode3D/Path3D/BatPathFollow3D/Follower/BlockDetecorArea3D")
 title = "right"
 
@@ -975,26 +975,26 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-script = ExtResource("7_mhw3c")
+script = ExtResource("7_5wwxe")
 attack_trigger = NodePath("../../SwarmDetectorArea3D")
 title = "right"
 
 [node name="decoration" type="Node3D" parent="."]
-script = ExtResource("9_8kxq5")
+script = ExtResource("9_7tgp5")
 
-[node name="arch2" parent="decoration" instance=ExtResource("10_e2ju8")]
+[node name="arch2" parent="decoration" instance=ExtResource("10_pw2a7")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.23)
 
-[node name="fence2" parent="decoration" instance=ExtResource("11_yixv5")]
+[node name="fence2" parent="decoration" instance=ExtResource("11_v7w1t")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.98572, -4.76837e-07, -6.2799)
 
-[node name="fence3" parent="decoration" instance=ExtResource("11_yixv5")]
+[node name="fence3" parent="decoration" instance=ExtResource("11_v7w1t")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8.04825, -4.76837e-07, -6.2799)
 
-[node name="fence_broken2" parent="decoration" instance=ExtResource("12_g6mbw")]
+[node name="fence_broken2" parent="decoration" instance=ExtResource("12_oihcx")]
 transform = Transform3D(0.093031, 0, -0.995663, 0, 1, 0, 0.995663, 0, 0.093031, -10.3231, 0, 5.31073)
 
-[node name="post_lantern2" parent="decoration" instance=ExtResource("13_3sxv7")]
+[node name="post_lantern2" parent="decoration" instance=ExtResource("13_auas2")]
 transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, -6.51413, 0, 0.0212898)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="decoration/post_lantern2"]
@@ -1026,23 +1026,23 @@ light_energy = 2.949
 light_volumetric_fog_energy = 0.0
 light_bake_mode = 1
 
-[node name="ribcage2" parent="decoration" instance=ExtResource("14_b8mft")]
+[node name="ribcage2" parent="decoration" instance=ExtResource("14_0qvak")]
 transform = Transform3D(-0.981856, -0.180063, 0.0310493, -0.185488, 0.953141, 0.0058657, -0.0393996, 0, -0.801377, -6.01807, 0.82817, 7.04693)
 
-[node name="shrine2" parent="decoration" instance=ExtResource("15_75s7b")]
+[node name="shrine2" parent="decoration" instance=ExtResource("15_nkc1n")]
 transform = Transform3D(0.23679, -0.0390719, -0.710566, 0.064659, 0.746952, -0.0195256, 0.708696, -0.0550947, 0.239196, 4.42661, 5.96046e-08, 1.02733)
 
-[node name="spider" parent="decoration/shrine2" instance=ExtResource("16_qsxvu")]
+[node name="spider" parent="decoration/shrine2" instance=ExtResource("16_nlu27")]
 transform = Transform3D(0.260088, -0.301305, -0.302605, 0.194599, 0.399014, -0.230042, 0.380112, 0.00188904, 0.324825, -0.349345, 2.12311, 0.090023)
 
 [node name="spiderweb" type="MeshInstance3D" parent="decoration/shrine2"]
 transform = Transform3D(0.921845, -0.00336521, -0.387543, 0.0168867, 0.999362, 0.0314903, 0.38719, -0.0355735, 0.921313, -1.22261, 1.01016, -0.732146)
 mesh = SubResource("PlaneMesh_peo8t")
 
-[node name="skull_candle2" parent="decoration" instance=ExtResource("18_woqj8")]
+[node name="skull_candle2" parent="decoration" instance=ExtResource("18_uxwe4")]
 transform = Transform3D(0.395361, -0.0131101, -0.305807, -0.0280294, 0.495892, -0.0574967, 0.304802, 0.0626071, 0.391377, 4.02539, 0.557995, -1.07351)
 
-[node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("19_esepk")]
+[node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("19_0vwwp")]
 transform = Transform3D(0.471448, -0.0272567, -0.328596, 0.0424141, 0.496644, 0.0786278, 0.161052, -0.051006, 0.941192, -0.0693157, 1.09092, -0.0218632)
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="decoration/skull_candle2"]
@@ -1067,76 +1067,76 @@ light_volumetric_fog_energy = 0.0
 light_bake_mode = 1
 omni_range = 4.0
 
-[node name="tree_dead_large2" parent="decoration" instance=ExtResource("20_x2kkl")]
+[node name="tree_dead_large2" parent="decoration" instance=ExtResource("20_6n0uk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65917, 0, -1.56068)
 
-[node name="tree_dead_large_decorated2" parent="decoration" instance=ExtResource("21_4ya5b")]
+[node name="tree_dead_large_decorated2" parent="decoration" instance=ExtResource("21_das37")]
 transform = Transform3D(0.8991, 0, 0.437744, 0, 1, 0, -0.437744, 0, 0.8991, -6.76889, 0, -2.72284)
 visible = false
 
-[node name="tree_pine_orange_medium2" parent="decoration" instance=ExtResource("22_unkb3")]
+[node name="tree_pine_orange_medium2" parent="decoration" instance=ExtResource("22_28ibu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 11.0334, 0, -13.1104)
 
-[node name="tree_pine_orange_medium3" parent="decoration" instance=ExtResource("22_unkb3")]
+[node name="tree_pine_orange_medium3" parent="decoration" instance=ExtResource("22_28ibu")]
 transform = Transform3D(1.8, 0, 0, 0, 1.79967, -0.0345555, 0, 0.0345555, 1.79967, 6.28093, 0, -13.1104)
 
-[node name="tree_pine_orange_medium4" parent="decoration" instance=ExtResource("22_unkb3")]
+[node name="tree_pine_orange_medium4" parent="decoration" instance=ExtResource("22_28ibu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.13127, 0, -13.1104)
 
-[node name="tree_pine_orange_medium5" parent="decoration" instance=ExtResource("22_unkb3")]
+[node name="tree_pine_orange_medium5" parent="decoration" instance=ExtResource("22_28ibu")]
 transform = Transform3D(1.9997, 0.0345558, 0, -0.0345558, 1.9997, 0, 0, 0, 2, -11.0291, 0, -13.1104)
 
-[node name="grave_A_destroyed2" parent="decoration" instance=ExtResource("23_rlseg")]
+[node name="grave_A_destroyed2" parent="decoration" instance=ExtResource("23_h1t3y")]
 transform = Transform3D(0.729658, 0, 0.173492, 0, 0.75, 0, -0.173492, 0, 0.729658, -4.33817, 0, -3.09523)
 
-[node name="grave_A_destroyed3" parent="decoration" instance=ExtResource("23_rlseg")]
+[node name="grave_A_destroyed3" parent="decoration" instance=ExtResource("23_h1t3y")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.25982, 0, -2.78313)
 
-[node name="grave_A2" parent="decoration" node_paths=PackedStringArray("asp") instance=ExtResource("24_1v7j0")]
+[node name="grave_A2" parent="decoration" node_paths=PackedStringArray("asp") instance=ExtResource("24_wij77")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.60113, 0, -2.70661)
-script = ExtResource("25_h2b0n")
+script = ExtResource("25_0hklu")
 asp = NodePath("../../MainMusicAudioStreamPlayer")
 
-[node name="lantern_standing2" parent="decoration" instance=ExtResource("26_vtl5r")]
+[node name="lantern_standing2" parent="decoration" instance=ExtResource("26_jgo6c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92011, 9.53674e-07, -0.793134)
 visible = false
 
-[node name="path_A2" parent="decoration" instance=ExtResource("27_b4x5o")]
+[node name="path_A2" parent="decoration" instance=ExtResource("27_tj07c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05463, 0, -4.39782)
 
-[node name="path_B2" parent="decoration" instance=ExtResource("28_0f4g4")]
+[node name="path_B2" parent="decoration" instance=ExtResource("28_5yxj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446246, 0, -3.87597)
 
-[node name="path_C2" parent="decoration" instance=ExtResource("29_yfckn")]
+[node name="path_C2" parent="decoration" instance=ExtResource("29_ft7lx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51528, 0, -2.22108)
 
-[node name="path_D2" parent="decoration" instance=ExtResource("30_kml4y")]
+[node name="path_D2" parent="decoration" instance=ExtResource("30_3eqd5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51994, 0, -1.95935)
 
-[node name="crypt2" parent="decoration" instance=ExtResource("31_xd1tn")]
+[node name="crypt2" parent="decoration" instance=ExtResource("31_do72d")]
 transform = Transform3D(0.99937, 0, 0.035475, 0, 1, 0, -0.035475, 0, 0.99937, 0.0665045, 0, -14.3052)
 
-[node name="Mourning Manor - nightmare before xmas  tree" parent="decoration" instance=ExtResource("32_urwy4")]
+[node name="Mourning Manor - nightmare before xmas  tree" parent="decoration" instance=ExtResource("32_uvld4")]
 transform = Transform3D(-0.569649, 0, 0.487852, 0, 0.75, 0, -0.487852, 0, -0.569649, -7.44517, -0.322784, 2.0348)
 
 [node name="Rock" type="Node3D" parent="decoration"]
 transform = Transform3D(0.565442, -0.824788, 0, 0.824788, 0.565442, 0, 0, 0, 1, -6.22772, 0.00187683, -1.26097)
 
-[node name="Mourning Manor - rock  2" parent="decoration/Rock" instance=ExtResource("33_lkyye")]
+[node name="Mourning Manor - rock  2" parent="decoration/Rock" instance=ExtResource("33_2mg8l")]
 transform = Transform3D(0.191015, 0.150338, -0.970006, 0.981587, -0.0292555, 0.188761, 0, -0.988202, -0.153158, 5.89585, -8.97051, -0.124095)
 
-[node name="Mourning Manor - rock  1" parent="decoration/Rock" instance=ExtResource("33_lkyye")]
+[node name="Mourning Manor - rock  1" parent="decoration/Rock" instance=ExtResource("33_2mg8l")]
 
-[node name="TitleText_lower_poly" parent="decoration" instance=ExtResource("34_8ekw1")]
+[node name="TitleText_lower_poly" parent="decoration" instance=ExtResource("34_vjse1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2106, 3.97207, -5.07717)
 
-[node name="tree_pine_yellow_medium3" parent="decoration" instance=ExtResource("35_jdgas")]
+[node name="tree_pine_yellow_medium3" parent="decoration" instance=ExtResource("35_62kty")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0253, -4.76837e-07, -3.29202)
 
 [node name="sofa" type="Node3D" parent="decoration"]
 transform = Transform3D(-0.99967, 0.0256968, -0.000681872, 0.00161542, 0.0363264, -0.999339, -0.025655, -0.99901, -0.036356, -5.33309, 0.591666, 7.2415)
 
-[node name="sofa3d2" parent="decoration/sofa" instance=ExtResource("36_4b12f")]
+[node name="sofa3d2" parent="decoration/sofa" instance=ExtResource("36_yue88")]
 
 [node name="LOWEST_FLOOR" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -4.95278, 0)
@@ -1145,22 +1145,22 @@ mesh = SubResource("PlaneMesh_c8ggw")
 skeleton = NodePath("../decoration")
 
 [node name="MidiPlayer" type="MidiPlayer" parent="."]
-midi = ExtResource("37_31hwr")
+midi = ExtResource("37_rna4k")
 
 [node name="MainMusicAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("38_hns7k")
+stream = ExtResource("38_4h8wo")
 bus = &"MUSIC"
 
 [node name="DecalSplatExampleSlow" type="Decal" parent="."]
 transform = Transform3D(0.301855, 0, 0.96198, 0, 1, 0, -1.06319, 0, 0.27312, 4.45258, 1.30024, 1.18995)
 visible = false
 size = Vector3(0.680298, 2, 2)
-texture_albedo = ExtResource("39_hnnxh")
+texture_albedo = ExtResource("39_wjle5")
 modulate = Color(0.737255, 0.54902, 0.101961, 1)
 upper_fade = 1.70843e-05
 lower_fade = 1.20804e-05
 
-[node name="Skeleton_Mage" parent="." instance=ExtResource("40_cucey")]
+[node name="Skeleton_Mage" parent="." instance=ExtResource("40_vwe6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.29139)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="Skeleton_Mage"]
@@ -1171,12 +1171,12 @@ explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ShaderMaterial_k14l0")
 draw_pass_1 = SubResource("QuadMesh_xrdd6")
-script = ExtResource("46_kkqe5")
+script = ExtResource("46_hd4de")
 length = 99
 length_seconds = 0.825
-texture = ExtResource("45_842db")
-color_ramp = ExtResource("43_qbrtp")
-curve = ExtResource("44_axdly")
+texture = ExtResource("45_m367s")
+color_ramp = ExtResource("43_nc58y")
+curve = ExtResource("44_bxsbr")
 use_red_as_alpha = true
 _defaults_have_been_set = true
 metadata/_custom_type_script = "uid://cbmsti1eajx0t"
@@ -1196,14 +1196,14 @@ curve = SubResource("Curve3D_rqeuv")
 [node name="BatPathFollow3D" type="PathFollow3D" parent="BatNode3D/Path3D"]
 transform = Transform3D(-0.999989, -0.000794998, 0.000908843, 5.82071e-11, 0.752665, 0.65838, -0.00120749, 0.658381, -0.752663, -0.171464, 8.20135, -10.2822)
 loop = false
-script = ExtResource("47_ie8gm")
+script = ExtResource("47_cbdxd")
 speed = 16.0
 
 [node name="Follower" type="Node3D" parent="BatNode3D/Path3D/BatPathFollow3D"]
 transform = Transform3D(-4.37114e-08, -6.51351e-15, 1, -1.49012e-07, 1, 0, -1, -1.49012e-07, -4.37114e-08, 0.00723743, 0.134025, -0.150091)
 visible = false
 
-[node name="best_bat" parent="BatNode3D/Path3D/BatPathFollow3D/Follower" instance=ExtResource("48_c0mmk")]
+[node name="best_bat" parent="BatNode3D/Path3D/BatPathFollow3D/Follower" instance=ExtResource("48_s4kcc")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="BlockDetecorArea3D" type="Area3D" parent="BatNode3D/Path3D/BatPathFollow3D/Follower"]
@@ -1247,41 +1247,42 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0701
 visible = false
 modulate = Color(1, 0.4595, 0.31, 1)
 texture_filter = 1
-texture = ExtResource("39_hnnxh")
+texture = ExtResource("39_wjle5")
 
 [node name="BatSwarm" type="Node3D" parent="."]
-script = ExtResource("50_m15rf")
+script = ExtResource("50_qu74t")
 
 [node name="PlayerBatDistractor" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51453, 1.40593)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89142, -0.00126553)
 visible = false
 layers = 4
-strength = -120.0
+strength = -128.0
+attenuation = 1e-05
 cull_mask = 4293918724
-radius = 4.0
+radius = 3.5
 
 [node name="ArcBatDistractor" type="GPUParticlesAttractorSphere3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.06096, -6.61785)
-visible = false
 layers = 4
-strength = -120.0
+strength = -128.0
+attenuation = 0.000560887
 cull_mask = 4293918724
 radius = 2.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="BatSwarm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3201, -23.7232)
+visible = false
 layers = 4
 material_override = SubResource("ShaderMaterial_hixko")
 cast_shadow = 0
-emitting = false
 amount = 64
 lifetime = 3.0
 collision_base_size = 0.1
 visibility_aabb = AABB(-4, -4, -4, 8, 8, 30)
 process_material = SubResource("ParticleProcessMaterial_mu05l")
-draw_pass_1 = ExtResource("53_g27is")
+draw_pass_1 = ExtResource("53_mxplb")
 
-[node name="best_bat example" parent="." instance=ExtResource("48_c0mmk")]
+[node name="best_bat example" parent="." instance=ExtResource("48_s4kcc")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 0.850941, 2.50656, -1.55308)
 visible = false
 
@@ -1320,7 +1321,7 @@ transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 3
 mesh = SubResource("PlaneMesh_2eces")
 skeleton = NodePath("../FloorFog")
 
-[node name="ground_hills2" parent="MovingEnvironmentPizzazz" instance=ExtResource("56_frmvu")]
+[node name="ground_hills2" parent="MovingEnvironmentPizzazz" instance=ExtResource("56_jjmeu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71828, -0.117627, -4.9899)
 
 [node name="FloorFog" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
@@ -1337,18 +1338,18 @@ light_bake_mode = 1
 shadow_enabled = true
 spot_range = 1643.0
 
-[node name="BoringFloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("59_62t73")]
+[node name="BoringFloatingDust" parent="MovingEnvironmentPizzazz" instance=ExtResource("59_0ov1c")]
 visible = false
 
-[node name="Flamethrower" parent="MovingEnvironmentPizzazz" instance=ExtResource("60_hh2wb")]
+[node name="Flamethrower" parent="MovingEnvironmentPizzazz" instance=ExtResource("60_0jpa3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79852, -1.19209e-07, -7.92973)
 visible = false
 
-[node name="Flamethrower2" parent="MovingEnvironmentPizzazz" instance=ExtResource("60_hh2wb")]
+[node name="Flamethrower2" parent="MovingEnvironmentPizzazz" instance=ExtResource("60_0jpa3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87014, -1.19209e-07, -7.92973)
 visible = false
 
-[node name="lantern_swinging" parent="MovingEnvironmentPizzazz" instance=ExtResource("61_dbjgk")]
+[node name="lantern_swinging" parent="MovingEnvironmentPizzazz" instance=ExtResource("61_48ilh")]
 transform = Transform3D(0.472781, 0, 0.88118, 0, 1, 0, -0.88118, 0, 0.472781, -3.37477, 0, -5.04103)
 rotation_speed = 2.0
 
@@ -1385,7 +1386,7 @@ mesh = SubResource("ArrayMesh_xrdd6")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_u8t5v")
 
-[node name="Fakefog" parent="MovingEnvironmentPizzazz" instance=ExtResource("64_yl8u1")]
+[node name="Fakefog" parent="MovingEnvironmentPizzazz" instance=ExtResource("64_m6kbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8201, -0.182081, -0.491857)
 visible = false
 
@@ -1394,7 +1395,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.2
 visible = false
 amount = 80
 lifetime = 7.61
-process_material = ExtResource("65_rdk1t")
+process_material = ExtResource("65_oskdp")
 draw_pass_1 = SubResource("QuadMesh_va55x")
 
 [node name="SwarmDetectorArea3D" type="Area3D" parent="."]
@@ -1406,7 +1407,7 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 0.98597, -0.166924, 0, 0.166924, 0.98597, 0, 0.0652911, 1.80327)
 shape = SubResource("BoxShape3D_kvopu")
 
-[node name="ScoreManager" parent="." instance=ExtResource("67_fxwuu")]
+[node name="ScoreManager" parent="." instance=ExtResource("67_ld461")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, -0.383689)
 
 [node name="BlockBatSwarmAnimation" type="GPUParticles3D" parent="."]
@@ -1428,5 +1429,4 @@ mesh = SubResource("SphereMesh_xrdd6")
 
 [node name="HumanPlayerSizeReference" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_d0wg7")
