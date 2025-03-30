@@ -13,7 +13,7 @@ config_version=5
 config/name="PumpkinPunch"
 run/main_scene="uid://he1nvwt2uarm"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://04ukjwp8muof"
 
 [autoload]
 

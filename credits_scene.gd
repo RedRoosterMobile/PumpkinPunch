@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 func _on_button_pressed_left(button_name: String) -> void:
-	# check: openXR action map at the bottom 
+	# check: openXR action map at the bottom e.g. "trigger_click", "grip_click"
 	match button_name:
 		"ax_button":
 			print("credits: x pressed")
@@ -42,4 +42,4 @@ func _on_button_pressed_right(button_name: String) -> void:
 			if not scene_base:
 				return
 			# Request loading the next scene
-			scene_base.load_scene("res://game_scenes/gamne_scene.tscn")
+			scene_base.load_scene("res://game_scenes/game_scene.tscn")

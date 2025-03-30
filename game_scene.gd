@@ -95,26 +95,29 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time += delta
 	
-	if GameState.game_started and not GameState.game_finished:
-		create_new_pumpkin()
+	var is_game_running: bool = GameState.game_started and not GameState.game_finished
+	var is_blocking_swarm: bool = GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm
+	var is_blocking_bat : bool = GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat
+	
+	if is_game_running:
 		if is_swarm_active:
-			# $ForceFieldNew.visible = true
-			if GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm:
+			if is_blocking_swarm:
 				swarm_block_time += delta
 				$ForceFieldNew.visible = true
 			else:
 				$ForceFieldNew.visible = false
-				pass
 		else:
 			$ForceFieldNew.visible = false
-			pass
+	
 	if not xr_enabled:
 		follow_mouse()
-	# Remove null entries from the array
+	
+	#region Remove null pumpkins from the array
 	pumpkins = pumpkins.filter(func(pumpkin):
 		return pumpkin != null and pumpkin.node != null
 	)
 	
+	#region pumpkin kill-zone
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta 
 		# tune kill zone
@@ -124,10 +127,12 @@ func _process(delta: float) -> void:
 			#pumpkin.node.position.z = PUMPKIN_Z
 			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			pumpkin.node.queue_free()
-		
-	$DebugLabel3D.text = "blocking swarm hitbox: " + str(GameState.is_left_hand_blocking_swarm and GameState.is_right_hand_blocking_swarm) + "\n" 
-	if GameState.is_left_hand_blocking_bat and GameState.is_right_hand_blocking_bat:
-		print("stop bat")
+	
+	#region blocking the swarm
+	# debug
+	$DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
+	
+	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
 	
 	# Variables to track state
@@ -160,61 +165,6 @@ func _on_button_pressed_right(button_name: String) -> void:
 				return
 			# Request loading the next scene
 			scene_base.load_scene("res://game_scenes/credits_scene.tscn")
-			
-
-func create_new_pumpkin():
-	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
-	controller_spawn_just_pressed = false  # Reset each frame
-	
-	if xr_enabled:
-		# XRhelper style of getting keys
-		# https://github.com/GodotVR/godot-xr-tools/pull/557/files#diff-a9959fdf1a493f41ed711540fffaf024b7561fb8eaf7017987b7b2c2d36317e3
-		if controller_left and controller_left.get_is_active() and controller_left.is_button_pressed(spawn_action):
-			#print(controller_left.get_tracker_hand())
-			#print("pressed")
-			pass
-		# refactor this to the above??
-		for name in controllers:
-			var tracker: XRPositionalTracker = controllers[name]
-			var current_state = tracker.get_input(spawn_action)
-			#
-			# XRPositionalTracker.TrackerHand.TRACKER_HAND_LEFT
-			# XRPositionalTracker.TrackerHand.TRACKER_HAND_RIGHT
-			# print(tracker.hand) # int
-
-			# Initialize previous state if not set
-			if not prev_controller_states.has(name):
-				prev_controller_states[name] = false
-			
-			# Check if trigger was just pressed
-			if current_state and not prev_controller_states[name]:
-				controller_spawn_just_pressed = true
-			
-			# Update previous state
-			prev_controller_states[name] = current_state
-	
-	# Trigger spawn only when just pressed
-	if Input.is_action_just_pressed("spawn") or controller_spawn_just_pressed:
-		print("Spawning!")
-		# FIXME: get from object pool instead
-		var pumpkin = SPAWN_THING.instantiate()
-		var pumpkin_pieces = SPAWN_THING_BROKEN
-		
-		var x_spawn:float
-		if randi_range(0,1):
-			x_spawn = PUMPKIN_X*-1.0
-		else:
-			x_spawn = PUMPKIN_X
-		var spawn_position:Vector3 = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
-		pumpkin.position = spawn_position
-		pumpkin.broken_model = pumpkin_pieces
-		pumpkin.add_to_group("pumpkins")
-		add_child(pumpkin)
-		var p = Pumpkin.new()
-		p.node = pumpkin
-		
-		pumpkins.append(p)
-		Messenger.pumpkin_spawned.emit(spawn_position)
 
 ### 0 - 127 
 func spawn_bats(track:int, pitch:int, velocity:int):
@@ -245,7 +195,8 @@ func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	
 	pumpkins.append(p)
 	Messenger.pumpkin_spawned.emit(spawn_position)	
-	
+
+# unused
 func pumpkin_grin(stm:StandardMaterial3D) -> void:
 	# Create new tween
 	var tween: Tween
