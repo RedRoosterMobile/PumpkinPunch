@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dqi6h6fm8nmuq"]
+[gd_scene load_steps=40 format=3 uid="uid://dqi6h6fm8nmuq"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_lnysx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_fm1wd"]
@@ -36,6 +36,44 @@ shader_parameter/flags = 40
 
 [sub_resource type="QuadMesh" id="QuadMesh_6dmeh"]
 material = SubResource("ShaderMaterial_81ggd")
+
+[sub_resource type="Animation" id="Animation_l6llr"]
+resource_name = "flicker eyes"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.04, 2, 2.64, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.195, 1.0, 0.396, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ajvy1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcp36"]
+_data = {
+&"RESET": SubResource("Animation_ajvy1"),
+&"flicker eyes": SubResource("Animation_l6llr")
+}
 
 [sub_resource type="BoxMesh" id="BoxMesh_vty74"]
 
@@ -113,24 +151,28 @@ orientation = 1
 [node name="SceneBase" instance=ExtResource("1_lnysx")]
 script = ExtResource("2_vty74")
 
-[node name="post_lantern2" parent="." index="0" instance=ExtResource("2_h7sq6")]
+[node name="post_lantern3" parent="." index="0" instance=ExtResource("2_h7sq6")]
+transform = Transform3D(0.853551, 0, 0.52101, 0, 1, 0, -0.52101, 0, 0.853551, -3.06839, 0, -6.13993)
+
+[node name="post_lantern2" parent="." index="1" instance=ExtResource("2_h7sq6")]
 transform = Transform3D(0.123584, 0, 0.992334, 0, 1, 0, -0.992334, 0, 0.123584, -5.06736, 0, -3.09796)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
 environment = ExtResource("4_xyjgo")
 
 [node name="LeftHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_fm1wd")]
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/LeftHand" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0113024, -0.0129278, 0.00303748)
-amount = 100
-lifetime = 100.0
+amount = 99
+lifetime = 99.0
 explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ShaderMaterial_h7sq6")
 draw_pass_1 = SubResource("QuadMesh_6dmeh")
 script = ExtResource("7_bhmvs")
-length_seconds = 0.833333
+length = 99
+length_seconds = 0.825
 color_ramp = ExtResource("5_7uyiw")
 curve = ExtResource("6_l838c")
 _defaults_have_been_set = true
@@ -140,20 +182,21 @@ metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/RightHand" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00671607, -0.0117863, 0)
-amount = 100
-lifetime = 100.0
+amount = 99
+lifetime = 99.0
 explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ShaderMaterial_h7sq6")
 draw_pass_1 = SubResource("QuadMesh_6dmeh")
 script = ExtResource("7_bhmvs")
-length_seconds = 0.833333
+length = 99
+length_seconds = 0.825
 color_ramp = ExtResource("5_7uyiw")
 curve = ExtResource("6_l838c")
 _defaults_have_been_set = true
 metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
-[node name="Headline" type="Label3D" parent="." index="3"]
+[node name="Headline" type="Label3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16796, -5.06541)
 modulate = Color(2.21401e-06, 0.813058, 0.00934584, 1)
 outline_modulate = Color(1, 1, 1, 1)
@@ -172,21 +215,32 @@ Thomas \"Stalin's Ghoulash\""
 font = ExtResource("10_f1e63")
 font_size = 80
 
-[node name="couch" type="Node3D" parent="." index="4"]
+[node name="couch" type="Node3D" parent="." index="5"]
 transform = Transform3D(0.642119, 0, 0.766605, 0, 1, 0, -0.766605, 0, 0.642119, -3.62444, 0.770928, -4.21581)
 
 [node name="sofa3d2" parent="couch" index="0" instance=ExtResource("11_l838c")]
 transform = Transform3D(1, 0, 0, 0, 0.0182551, -0.999833, 0, 0.999833, 0.0182551, 0, 0, 0)
 
 [node name="skull2" parent="couch" index="1" instance=ExtResource("12_bhmvs")]
-transform = Transform3D(0.971159, 0, 0.238432, 0, 1, 0, -0.238432, 0, 0.971159, 0.174702, -0.0675941, 0.120512)
+transform = Transform3D(0.988375, 0, -0.152037, 0, 1, 0, 0.152037, 0, 0.988375, 0.174702, -0.0675941, 0.120512)
 
-[node name="Credits Theme" type="AudioStreamPlayer3D" parent="." index="5"]
+[node name="OmniLight3D" type="OmniLight3D" parent="couch/skull2" index="1"]
+transform = Transform3D(0.751206, 0, -0.660067, 0, 1, 0, 0.660067, 0, 0.751206, -0.0180004, 0.326936, 0.320452)
+light_color = Color(1, 0.364706, 1, 1)
+omni_range = 0.423
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="couch/skull2/OmniLight3D" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_fcp36")
+}
+autoplay = "flicker eyes"
+
+[node name="Credits Theme" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("13_bhmvs")
 autoplay = true
 bus = &"MUSIC"
 
-[node name="Rotator" type="Node3D" parent="." index="6"]
+[node name="Rotator" type="Node3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.223, 0)
 script = ExtResource("15_6dmeh")
 
@@ -194,7 +248,7 @@ script = ExtResource("15_6dmeh")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -13.435)
 play_on_start = true
 
-[node name="Floor" type="MeshInstance3D" parent="." index="7"]
+[node name="Floor" type="MeshInstance3D" parent="." index="8"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_vty74")
 
@@ -206,6 +260,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8303, 0)
 amount = 1000
 sub_emitter = NodePath("GPUParticles3DDrops")
 lifetime = 1.1
+preprocess = 0.5
 randomness = 0.89
 collision_base_size = 0.1
 visibility_aabb = AABB(-4, -40, -4, 8, 100, 8)
