@@ -1,0 +1,152 @@
+[gd_scene load_steps=22 format=3 uid="uid://dqi6h6fm8nmuq"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_lnysx"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_fm1wd"]
+[ext_resource type="PackedScene" uid="uid://r8hccr0m53pp" path="res://lantern_swinging.tscn" id="2_h7sq6"]
+[ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="2_xblid"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_ismy7"]
+[ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="3_ncua7"]
+[ext_resource type="Shader" uid="uid://bkkgnxjpkk3lh" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="4_f1e63"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="5_7uyiw"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail/defaults/curve.tres" id="6_l838c"]
+[ext_resource type="Script" uid="uid://cbmsti1eajx0t" path="res://addons/GPUTrail/GPUTrail3D.gd" id="7_bhmvs"]
+[ext_resource type="FontFile" uid="uid://dbnouvrt07hge" path="res://Slimespooky.ttf" id="10_f1e63"]
+[ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="11_l838c"]
+[ext_resource type="PackedScene" uid="uid://ob8u837hgx0b" path="res://addons/kaykit_halloween_bits/gltf/skull.gltf" id="12_bhmvs"]
+[ext_resource type="AudioStream" uid="uid://dkuxwj8lsf6ka" path="res://audio/Laurie's Theme gothic minimal.mp3" id="13_bhmvs"]
+[ext_resource type="Script" uid="uid://bxqw338ha6lgn" path="res://rotator.gd" id="15_6dmeh"]
+[ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="15_81ggd"]
+
+[sub_resource type="Sky" id="Sky_albes"]
+sky_material = ExtResource("2_xblid")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_fm1wd"]
+background_mode = 2
+sky = SubResource("Sky_albes")
+ambient_light_source = 3
+ambient_light_energy = 2.05
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_read_sky_light = false
+sdfgi_min_cell_size = 0.29
+sdfgi_cascade0_distance = 18.56
+sdfgi_max_distance = 296.96
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 7.19
+glow_strength = 0.0
+glow_bloom = 0.5
+glow_hdr_threshold = 0.95
+fog_mode = 1
+fog_density = 0.1775
+fog_aerial_perspective = 0.034
+fog_sky_affect = 0.1
+fog_height = 0.85
+fog_height_density = 0.3153
+fog_depth_curve = 0.327682
+fog_depth_begin = 0.0
+fog_depth_end = 53.0
+volumetric_fog_density = 0.19
+volumetric_fog_emission = Color(0.489622, 0.489622, 0.489622, 1)
+adjustment_contrast = 1.31
+adjustment_saturation = 0.57
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7sq6"]
+shader = ExtResource("3_ncua7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81ggd"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_f1e63")
+shader_parameter/tex = ExtResource("5_7uyiw")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/color_ramp = ExtResource("5_7uyiw")
+shader_parameter/curve = ExtResource("6_l838c")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+
+[sub_resource type="QuadMesh" id="QuadMesh_6dmeh"]
+material = SubResource("ShaderMaterial_81ggd")
+
+[node name="SceneBase" instance=ExtResource("1_lnysx")]
+
+[node name="post_lantern2" parent="." index="0" instance=ExtResource("2_h7sq6")]
+transform = Transform3D(0.123584, 0, 0.992334, 0, 1, 0, -0.992334, 0, 0.123584, -5.06736, 0, -3.09796)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_fm1wd")
+
+[node name="LeftHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_fm1wd")]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/LeftHand" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0113024, -0.0129278, 0.00303748)
+amount = 100
+lifetime = 100.0
+explosiveness = 1.0
+fixed_fps = 120
+process_material = SubResource("ShaderMaterial_h7sq6")
+draw_pass_1 = SubResource("QuadMesh_6dmeh")
+script = ExtResource("7_bhmvs")
+length_seconds = 0.833333
+color_ramp = ExtResource("5_7uyiw")
+curve = ExtResource("6_l838c")
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://cbmsti1eajx0t"
+
+[node name="RightHand" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("3_ismy7")]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="XROrigin3D/RightHand" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00671607, -0.0117863, 0)
+amount = 100
+lifetime = 100.0
+explosiveness = 1.0
+fixed_fps = 120
+process_material = SubResource("ShaderMaterial_h7sq6")
+draw_pass_1 = SubResource("QuadMesh_6dmeh")
+script = ExtResource("7_bhmvs")
+length_seconds = 0.833333
+color_ramp = ExtResource("5_7uyiw")
+curve = ExtResource("6_l838c")
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://cbmsti1eajx0t"
+
+[node name="Headline" type="Label3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16796, -5.06541)
+modulate = Color(2.21401e-06, 0.813058, 0.00934584, 1)
+text = "Credits:"
+font = ExtResource("10_f1e63")
+font_size = 128
+
+[node name="Label3D" type="Label3D" parent="Headline" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77118, 0)
+modulate = Color(0, 0.811765, 0.00784314, 1)
+text = "Philipp \"Butcher\", 
+Nick \"Creature\",
+ Julio \"Monster\", 
+Jens \"Hangman\", 
+Thomas \"Terrorist\""
+font = ExtResource("10_f1e63")
+font_size = 96
+
+[node name="couch" type="Node3D" parent="." index="4"]
+transform = Transform3D(0.642119, 0, 0.766605, 0, 1, 0, -0.766605, 0, 0.642119, -3.62444, 0.770928, -4.21581)
+
+[node name="sofa3d2" parent="couch" index="0" instance=ExtResource("11_l838c")]
+transform = Transform3D(1, 0, 0, 0, 0.0182551, -0.999833, 0, 0.999833, 0.0182551, 0, 0, 0)
+
+[node name="skull2" parent="couch" index="1" instance=ExtResource("12_bhmvs")]
+transform = Transform3D(0.971159, 0, 0.238432, 0, 1, 0, -0.238432, 0, 0.971159, 0.174702, -0.0675941, 0.120512)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="5"]
+stream = ExtResource("13_bhmvs")
+autoplay = true
+bus = &"MUSIC"
+
+[node name="Rotator" type="Node3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.223, 0)
+script = ExtResource("15_6dmeh")
+
+[node name="best_bat" parent="Rotator" index="0" instance=ExtResource("15_81ggd")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -13.435)
+play_on_start = true

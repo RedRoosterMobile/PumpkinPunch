@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqumugyvkct4r"]
+[gd_scene load_steps=14 format=3 uid="uid://bqumugyvkct4r"]
 
 [ext_resource type="Script" uid="uid://c7w4gf2a63u27" path="res://addons/godot-xr-tools/staging/loading_screen.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cca5rohfgr48l" path="res://art/graveyard.webp" id="2_2lren"]
 [ext_resource type="Shader" uid="uid://4i0pwdtfmtsv" path="res://addons/godot-xr-tools/staging/loading_screen/loading_screen_shader.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://clbtsf0ahb3fm" path="res://addons/godot-xr-tools/assets/misc/progress_bar.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://ocyj01x5mtt7" path="res://addons/godot-xr-tools/assets/misc/Hold trigger to continue.png" id="5"]
@@ -17,6 +18,7 @@ size = Vector2(80, 60)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1o2lp"]
 transparency = 1
 shading_mode = 0
+albedo_texture = ExtResource("2_2lren")
 
 [sub_resource type="ShaderMaterial" id="18"]
 render_priority = 0
@@ -24,7 +26,7 @@ shader = ExtResource("3")
 shader_parameter/bar_color = Color(1, 1, 1, 1)
 shader_parameter/bar_texture = ExtResource("4")
 shader_parameter/cutout = Vector3(4.85, 0.33, 0)
-shader_parameter/progress = 0.5
+shader_parameter/progress = 0.0
 
 [sub_resource type="PlaneMesh" id="3"]
 material = SubResource("18")

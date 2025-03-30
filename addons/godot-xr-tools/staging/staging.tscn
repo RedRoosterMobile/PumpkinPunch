@@ -17,6 +17,7 @@ main_scene = "uid://b3l46tvt2tevv"
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+keep_aspect = 0
 environment = ExtResource("3_40x3a")
 
 [node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" instance=ExtResource("5")]
