@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnqnnnet4dw12"]
+[gd_scene load_steps=8 format=3 uid="uid://bnqnnnet4dw12"]
 
 [ext_resource type="Script" uid="uid://cpk3bh8nwawhc" path="res://addons/godot-xr-tools/staging/staging.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bqumugyvkct4r" path="res://addons/godot-xr-tools/staging/loading_screen.tscn" id="2"]
@@ -6,9 +6,11 @@
 [ext_resource type="Environment" uid="uid://ckiwtcdsam7ed" path="res://addons/godot-xr-tools/staging/staging_env.tres" id="3_40x3a"]
 [ext_resource type="PackedScene" uid="uid://btknduttnmoxf" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="6_balvx"]
+[ext_resource type="Texture2D" uid="uid://cca5rohfgr48l" path="res://art/graveyard.webp" id="6_ufo43"]
 
 [node name="Staging" type="Node3D"]
 script = ExtResource("1")
+main_scene = "uid://b3l46tvt2tevv"
 
 [node name="Fade" parent="." instance=ExtResource("2_htugy")]
 
@@ -28,11 +30,13 @@ tracker = &"right_hand"
 pose = &"aim"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2")]
+splash_screen = ExtResource("6_ufo43")
 progress = 0.0
 
 [node name="Scene" type="Node3D" parent="."]
 
 [node name="StartXR" parent="." instance=ExtResource("6_balvx")]
+target_refresh_rate = 72.0
 
 [connection signal="xr_ended" from="StartXR" to="." method="_on_StartXR_xr_ended"]
 [connection signal="xr_started" from="StartXR" to="." method="_on_StartXR_xr_started"]

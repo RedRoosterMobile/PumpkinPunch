@@ -1,6 +1,7 @@
-[gd_scene load_steps=145 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=148 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://testing_map.gd" id="1_eufwu"]
+[ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_bjotx"]
 [ext_resource type="Material" uid="uid://bvgndnleqwvj0" path="res://skybox_bloodmoon.tres" id="2_d0wg7"]
 [ext_resource type="Script" uid="uid://crt0xesweqqva" path="res://floor_mesh.gd" id="3_thqn0"]
 [ext_resource type="PackedScene" uid="uid://dyfbgqxg6rahm" path="res://addons/kaykit_halloween_bits/gltf/arch.gltf" id="4_j13nx"]
@@ -70,9 +71,25 @@
 [ext_resource type="Texture2D" uid="uid://btohuiu8ivcj5" path="res://images/butterfly/bat.png" id="65_itf4w"]
 [ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="68_va55x"]
 
+[sub_resource type="Resource" id="Resource_peo8t"]
+script = ExtResource("2_bjotx")
+magnitude = 0.5
+active_during_pause = false
+indefinite = false
+duration_ms = 300
+metadata/_custom_type_script = "uid://x5dxnmk8rpfj"
+
+[sub_resource type="Resource" id="Resource_607or"]
+script = ExtResource("2_bjotx")
+magnitude = 0.5
+active_during_pause = false
+indefinite = false
+duration_ms = 300
+metadata/_custom_type_script = "uid://x5dxnmk8rpfj"
+
 [sub_resource type="Sky" id="Sky_albes"]
 sky_material = ExtResource("2_d0wg7")
-radiance_size = 0
+radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_2o5or"]
 background_mode = 2
@@ -235,16 +252,9 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_di
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
 uniform float alpha_scissor_threshold : hint_range(0.0, 1.0, 0.001);
-//uniform ivec2 albedo_texture_size;
+
 uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
 uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
@@ -254,6 +264,7 @@ uniform vec3 uv2_offset;
 uniform float amplitude = 0.05; // Base amplitude of the shake
 uniform float speed = 20.0;     // Speed of the primary oscillation
 uniform float secondary_speed = 5.0; // Speed of the secondary oscillation
+
 void vertex() {
     // Calculate distance from the center (UV = 0.5, 0.5)
     vec2 uv_center = vec2(0.8, 0.61);
@@ -268,7 +279,7 @@ void vertex() {
     VERTEX.z += shake;
 
     // Optional: Add slight X/Y movement if desired (commented out in your code)
-    // VERTEX.x += sin(TIME * 10.0) * cos(TIME * 2.5) * 0.025 * shake_factor;
+    VERTEX.x += sin(TIME * speed) * cos(TIME * secondary_speed) * 0.025 * shake_factor;
 
     // Apply UV scaling/offset (unchanged from your code)
     UV = UV * uv1_scale.xy + uv1_offset.xy;
@@ -276,7 +287,6 @@ void vertex() {
 /*
 void vertex() {
 	// Shading Mode: Per Vertex
-	ROUGHNESS = roughness;
 	sin(TIME);
     VERTEX.z+=sin(TIME*20.)*cos(TIME*5.)*0.05;
 	//VERTEX.x+=sin(TIME*10.)*cos(TIME*2.5)*0.025;
@@ -289,13 +299,8 @@ void fragment() {
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 
-	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
 	SPECULAR = specular;
 
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
 	ALPHA *= albedo.a * albedo_tex.a;
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
 }
@@ -308,15 +313,12 @@ shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("16_u8t5v")
 shader_parameter/alpha_scissor_threshold = 0.844
 shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/amplitude = 0.05
+shader_parameter/amplitude = 0.1
 shader_parameter/speed = 5.0
 shader_parameter/secondary_speed = 2.5
 
@@ -853,11 +855,13 @@ rings = 8
 radius = 0.35
 height = 1.9
 
-[node name="testing map" type="Node" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
+[node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_eufwu")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
 xr_enabled = true
+rumble_event_left = SubResource("Resource_peo8t")
+rumble_event_right = SubResource("Resource_607or")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2o5or")
@@ -888,6 +892,7 @@ shape = SubResource("BoxShape3D_qk40o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771, 2.664)
+current = true
 fov = 70.0
 far = 500.0
 
@@ -1024,7 +1029,7 @@ light_volumetric_fog_energy = 0.0
 light_bake_mode = 1
 
 [node name="OmniLight3DSkullCandle" type="OmniLight3D" parent="decoration/post_lantern2"]
-transform = Transform3D(1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 2.14186, 0.677759, 10.271)
+transform = Transform3D(1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 2.20975, 0.776467, 10.2627)
 light_color = Color(0.305882, 1, 0, 1)
 light_energy = 2.949
 light_volumetric_fog_energy = 0.0
@@ -1034,7 +1039,7 @@ light_bake_mode = 1
 transform = Transform3D(-0.981856, -0.180063, 0.0310493, -0.185488, 0.953141, 0.0058657, -0.0393996, 0, -0.801377, -6.01807, 0.82817, 7.04693)
 
 [node name="shrine2" parent="decoration" instance=ExtResource("12_qs6li")]
-transform = Transform3D(0.31572, -0.0520956, -0.947421, 0.086212, 0.995937, -0.0260343, 0.944928, -0.0734589, 0.318928, 4.42661, 5.96046e-08, 1.02733)
+transform = Transform3D(0.23679, -0.0390719, -0.710566, 0.064659, 0.746952, -0.0195256, 0.708696, -0.0550947, 0.239196, 4.42661, 5.96046e-08, 1.02733)
 
 [node name="spider" parent="decoration/shrine2" instance=ExtResource("59_cvm05")]
 transform = Transform3D(0.260088, -0.301305, -0.302605, 0.194599, 0.399014, -0.230042, 0.380112, 0.00188904, 0.324825, -0.349345, 2.12311, 0.090023)
@@ -1044,7 +1049,7 @@ transform = Transform3D(0.921845, -0.00336521, -0.387543, 0.0168867, 0.999362, 0
 mesh = SubResource("PlaneMesh_peo8t")
 
 [node name="skull_candle2" parent="decoration" instance=ExtResource("13_0filk")]
-transform = Transform3D(0.593041, -0.0196651, -0.45871, -0.0420441, 0.743837, -0.0862451, 0.457203, 0.0939106, 0.587066, 4.02539, 0.48235, -1.07351)
+transform = Transform3D(0.395361, -0.0131101, -0.305807, -0.0280294, 0.495892, -0.0574967, 0.304802, 0.0626071, 0.391377, 4.02539, 0.557995, -1.07351)
 
 [node name="Flame" parent="decoration/skull_candle2" instance=ExtResource("25_qql4s")]
 transform = Transform3D(0.471448, -0.0272567, -0.328596, 0.0424141, 0.496644, 0.0786278, 0.161052, -0.051006, 0.941192, -0.0693157, 1.09092, -0.0218632)
@@ -1091,13 +1096,13 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.13127, 0, -13.1104)
 transform = Transform3D(1.9997, 0.0345558, 0, -0.0345558, 1.9997, 0, 0, 0, 2, -11.0291, 0, -13.1104)
 
 [node name="grave_A_destroyed2" parent="decoration" instance=ExtResource("18_rn3rq")]
-transform = Transform3D(0.972877, 0, 0.231323, 0, 1, 0, -0.231323, 0, 0.972877, -4.33817, 0, -3.09523)
+transform = Transform3D(0.729658, 0, 0.173492, 0, 0.75, 0, -0.173492, 0, 0.729658, -4.33817, 0, -3.09523)
 
 [node name="grave_A_destroyed3" parent="decoration" instance=ExtResource("18_rn3rq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25982, 0, -2.78313)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.25982, 0, -2.78313)
 
 [node name="grave_A2" parent="decoration" node_paths=PackedStringArray("asp") instance=ExtResource("19_g6kes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.60113, 0, -2.70661)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.60113, 0, -2.70661)
 script = ExtResource("22_taj82")
 asp = NodePath("../../MainMusicAudioStreamPlayer")
 
@@ -1432,5 +1437,4 @@ mesh = SubResource("SphereMesh_xrdd6")
 
 [node name="HumanPlayerSizeReference" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_d0wg7")

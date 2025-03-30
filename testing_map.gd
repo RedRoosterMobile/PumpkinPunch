@@ -1,4 +1,4 @@
-extends Node
+extends XRToolsSceneBase
 # assets https://godotengine.org/asset-library/asset/2224
 @export var left_hand_body: RigidBody3D 
 @export var right_hand_body: RigidBody3D
@@ -32,7 +32,7 @@ const PUMPKIN_Y:float = 1 # up/down
 #const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces.tscn")
 const SPAWN_THING:PackedScene = preload("res://models/lowpoly_pumpkin_full_scaled.tscn")
 const SPAWN_THING_BROKEN:PackedScene = preload("res://models/lowpoly_pumpkin_pieces_scaled.tscn")
-const XR_INIT:PackedScene = preload("res://xr_origin_3d.tscn")
+const XR_ORIGIN:PackedScene = preload("res://xr_origin_3d.tscn")
 
 func _on_game_started():
 	if pumpkins.size() > 0:
@@ -77,12 +77,10 @@ func _ready() -> void:
 	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered_right)
 	# xr scene will add those to it's tree 
 	if xr_enabled:
-		var xr_origin_3d: MyOrigin = XR_INIT.instantiate()
-		xr_origin_3d.left_hand_body = left_hand_body
-		xr_origin_3d.right_hand_body = right_hand_body
+		var xr_origin_3d: MyOrigin = XR_ORIGIN.instantiate()
 		add_child(xr_origin_3d)
 		
-		xr_origin_3d.init_hands()
+		xr_origin_3d.init_hands(left_hand_body, right_hand_body)
 		print("left hand controller")
 		# left controller
 		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
