@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=36 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -9,8 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://nlwbi78o28pc" path="res://images/intro/scene_2.png" id="4_wxrqt"]
 [ext_resource type="Texture2D" uid="uid://bl7bj3s1n7ru8" path="res://images/intro/scene_3.png" id="5_gawlo"]
 [ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
+[ext_resource type="Texture2D" uid="uid://13fly0kjk8ga" path="res://images/intro/scene_4.png" id="6_vkqmo"]
 [ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="10_eqod3"]
 [ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="11_vkqmo"]
+[ext_resource type="Texture2D" uid="uid://bdt7jpf63bsd7" path="res://images/particles/PNG (Transparent)/star_07.png" id="12_eqod3"]
 
 [sub_resource type="Resource" id="Resource_gawlo"]
 script = ExtResource("2_8uvi6")
@@ -28,6 +30,12 @@ metadata/_custom_type_script = "uid://cn73falcxqp1c"
 script = ExtResource("2_8uvi6")
 image = ExtResource("5_gawlo")
 story = "Drawn by power, a rogue mage arrived, his dark ambition twisting the very fabric of night. Harnessing forbidden magic, he woke the swamp from its slumber."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="Resource" id="Resource_54eow"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("6_vkqmo")
+story = "Under his spell, ordinary pumpkins turned into creatures of nightmare, crawling forth to spread terror."
 metadata/_custom_type_script = "uid://cn73falcxqp1c"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4a0uo"]
@@ -68,9 +76,61 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_xrdd6")
 orientation = 1
 
+[sub_resource type="Curve" id="Curve_eqod3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vkqmo"]
+texture_mode = 1
+curve = SubResource("Curve_eqod3")
+
+[sub_resource type="Gradient" id="Gradient_54eow"]
+colors = PackedColorArray(0.783333, 0, 1, 1, 0.803652, 0.193901, 0.330503, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o1s48"]
+gradient = SubResource("Gradient_54eow")
+
+[sub_resource type="Gradient" id="Gradient_vkqmo"]
+colors = PackedColorArray(1.677, 0.987, 0.851, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_54eow"]
+gradient = SubResource("Gradient_vkqmo")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_eh6v3"]
+_data = [Vector2(0.0159744, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ru1ff"]
+curve = SubResource("Curve_eh6v3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1s48"]
+emission_shape_scale = Vector3(4, 1, 4)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+color_ramp = SubResource("GradientTexture1D_54eow")
+color_initial_ramp = SubResource("GradientTexture1D_o1s48")
+alpha_curve = SubResource("CurveTexture_vkqmo")
+emission_curve = SubResource("CurveTexture_ru1ff")
+turbulence_enabled = true
+turbulence_noise_speed_random = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh6v3"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("12_eqod3")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ru1ff"]
+material = SubResource("StandardMaterial3D_eh6v3")
+
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_0ju8l")
-story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o")])
+story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o"), SubResource("Resource_54eow")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8uvi6")
@@ -120,3 +180,9 @@ amount = 80
 lifetime = 7.61
 process_material = ExtResource("10_eqod3")
 draw_pass_1 = SubResource("QuadMesh_54eow")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79162, -0.364392)
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_o1s48")
+draw_pass_1 = SubResource("QuadMesh_ru1ff")
