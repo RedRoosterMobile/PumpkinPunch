@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=18 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://borjdnajtf5xo" path="res://images/intro/scene_1.png" id="3_4a0uo"]
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="4_esmw3"]
 [ext_resource type="Texture2D" uid="uid://nlwbi78o28pc" path="res://images/intro/scene_2.png" id="4_wxrqt"]
+[ext_resource type="Texture2D" uid="uid://bl7bj3s1n7ru8" path="res://images/intro/scene_3.png" id="5_gawlo"]
 [ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
 
 [sub_resource type="Resource" id="Resource_gawlo"]
@@ -19,6 +20,12 @@ metadata/_custom_type_script = "uid://cn73falcxqp1c"
 script = ExtResource("2_8uvi6")
 image = ExtResource("4_wxrqt")
 story = "Generations passed, and the swamp swallowed memories, leaving only forgotten graves and restless spirits. But something ancient stirs beneath the soil."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="Resource" id="Resource_svk4o"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("5_gawlo")
+story = "Drawn by power, a rogue mage arrived, his dark ambition twisting the very fabric of night. Harnessing forbidden magic, he woke the swamp from its slumber."
 metadata/_custom_type_script = "uid://cn73falcxqp1c"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4a0uo"]
@@ -46,7 +53,7 @@ material = SubResource("StandardMaterial3D_a83fi")
 
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_0ju8l")
-story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid")])
+story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8uvi6")
