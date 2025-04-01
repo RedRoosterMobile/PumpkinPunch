@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=151 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -70,6 +70,8 @@
 [ext_resource type="Texture2D" uid="uid://btohuiu8ivcj5" path="res://images/butterfly/bat.png" id="68_umyyh"]
 [ext_resource type="Material" uid="uid://cfuu80k5cfxu1" path="res://deflector_shader_material.tres" id="69_h8eh1"]
 [ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="70_ilfbo"]
+[ext_resource type="PackedScene" uid="uid://da3275vxc3l7n" path="res://models/bottle.glb" id="71_e7aqr"]
+[ext_resource type="PackedScene" uid="uid://4swnnytuc70x" path="res://bottle.tscn" id="72_4mxv4"]
 
 [sub_resource type="Resource" id="Resource_peo8t"]
 script = ExtResource("2_e7aqr")
@@ -847,6 +849,18 @@ rings = 8
 radius = 0.35
 height = 1.9
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mxv4"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.169, 2, 0.224, 1)
+refraction_scale = 0.57
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dbopf"]
+material = SubResource("StandardMaterial3D_4mxv4")
+top_radius = 0.8
+bottom_radius = 0.8
+height = 1.8
+
 [node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
@@ -1195,7 +1209,7 @@ transform = Transform3D(0.999937, 0, 0, 0, 0.999937, 0, 0, 0, 0.999937, 0.190925
 curve = SubResource("Curve3D_rqeuv")
 
 [node name="BatPathFollow3D" type="PathFollow3D" parent="BatNode3D/Path3D"]
-transform = Transform3D(-0.999989, -0.000794998, 0.000908843, 5.82071e-11, 0.752665, 0.65838, -0.00120749, 0.658381, -0.752663, -0.171464, 8.20135, -10.2822)
+transform = Transform3D(-0.999988, -0.000794997, 0.000908842, 5.8207e-11, 0.752664, 0.65838, -0.00120749, 0.658381, -0.752662, -0.171464, 8.20135, -10.2822)
 loop = false
 script = ExtResource("47_cbdxd")
 speed = 16.0
@@ -1315,6 +1329,7 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
+visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)
@@ -1431,3 +1446,19 @@ mesh = SubResource("SphereMesh_xrdd6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_d0wg7")
+
+[node name="HealthMeter" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.64858, 0, -0.717157)
+
+[node name="bottle" parent="HealthMeter" instance=ExtResource("71_e7aqr")]
+visible = false
+
+[node name="Node3D" type="Node3D" parent="HealthMeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164024, 0)
+
+[node name="liquid" type="MeshInstance3D" parent="HealthMeter/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90187, 0)
+mesh = SubResource("CylinderMesh_dbopf")
+skeleton = NodePath("../..")
+
+[node name="bottle2" parent="HealthMeter" instance=ExtResource("72_4mxv4")]

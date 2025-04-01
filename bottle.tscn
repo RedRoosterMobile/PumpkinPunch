@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://4swnnytuc70x"]
+
+[ext_resource type="PackedScene" uid="uid://da3275vxc3l7n" path="res://models/bottle.glb" id="1_xiyir"]
+[ext_resource type="Shader" uid="uid://btu3s4421absx" path="res://glass.gdshader" id="2_skn5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcuet"]
+render_priority = 0
+shader = ExtResource("2_skn5d")
+shader_parameter/albedo = Color(1, 1, 1, 0.363)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+
+[node name="bottle" instance=ExtResource("1_xiyir")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_mcuet")

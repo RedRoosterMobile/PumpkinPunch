@@ -120,6 +120,8 @@ func _process(delta: float) -> void:
 	#region pumpkin kill-zone
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta 
+		# var time_zto = sin(time*0.5)*0.5+0.5
+		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
 		if pumpkin.node.position.z > 1:
 			# pumpkin went 6 + 1 = 7 meters
@@ -179,13 +181,14 @@ func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	# FIXME: get from object pool instead
 	var pumpkin = SPAWN_THING.instantiate()
 	var pumpkin_pieces = SPAWN_THING_BROKEN
-	
+	0-127
 	var x_spawn:float
 	if track==0:
 		x_spawn = PUMPKIN_X*-1.0
 	elif track==1:
 		x_spawn = PUMPKIN_X
-	var spawn_position:Vector3 = Vector3(x_spawn, PUMPKIN_Y, PUMPKIN_Z)
+	var spawn_height:float = randf_range(PUMPKIN_Y*0.5,PUMPKIN_Y*1.5)
+	var spawn_position:Vector3 = Vector3(x_spawn, spawn_height, PUMPKIN_Z)
 	pumpkin.position = spawn_position
 	pumpkin.broken_model = pumpkin_pieces
 	pumpkin.add_to_group("pumpkins")
