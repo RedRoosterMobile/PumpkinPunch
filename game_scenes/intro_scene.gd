@@ -46,19 +46,17 @@ func display_story_segment(index: int) -> void:
 		print("Current story is null at index: " + str(index))
 		return
 	
-	# Update the image
-	if image_display and image_display.get_active_material(0) and current_story.image:
-		image_display.get_active_material(0).albedo_texture = current_story.image
+	# Update the image and story
+	if story_label and image_display and image_display.get_active_material(0) and current_story.image and current_story.story:
+		
+		set_next(current_story.image,current_story.story)
 	else:
 		push_error("Failed to update image: Check material or image data")
-	
-	# Update the story text
-	if story_label and current_story.story:
-		story_label.text = current_story.story
-	else:
-		push_error("Failed to update story text: Check label or story data")
 
 
+func set_next(image: Texture2D, story: String):
+	image_display.get_active_material(0).albedo_texture = image
+	story_label.text = story
 
 
 func _on_button_pressed(button_name: String) -> void:
