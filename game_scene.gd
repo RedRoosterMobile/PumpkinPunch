@@ -72,6 +72,7 @@ func _ready() -> void:
 	Messenger.game_started.connect(_on_game_started)
 	Messenger.spawn_bat_swarm.connect(_on_swarm_started)
 	Messenger.stop_bat_swarm.connect(_on_swarm_stopped)
+	show_game_state_label(false, '')
 	
 	print("xr_controls_enabled")
 	print(xr_enabled)
@@ -151,7 +152,7 @@ func lose_mana(amount:float):
 		Messenger.game_finished.emit()
 		GameState.game_finished = true
 		Messenger.skeleton_won.emit()
-		print("your ded buddy")
+		show_game_state_label(true, '')
 	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
 	pass
 func add_mana(amount:float):
@@ -317,3 +318,9 @@ func note_callback(event: Variant, track: int):
 			spawn_pumpkin(track, pitch, velocity)
 		if track == 2 or track == 3:
 			spawn_bats(track, pitch, velocity)
+			
+			
+func show_game_state_label(show, msg):
+	$GameStateLabel.visible = show
+	if msg:
+		$GameStateLabel.text = msg
