@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=37 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="10_eqod3"]
 [ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="11_vkqmo"]
 [ext_resource type="Texture2D" uid="uid://bdt7jpf63bsd7" path="res://images/particles/PNG (Transparent)/star_07.png" id="12_eqod3"]
+[ext_resource type="AudioStream" uid="uid://dbeq4b0axr7ux" path="res://audio/ElevenLabs_2025-04-01T23_08_05_Grandpa Spuds Oxley_pvc_sp82_s88_sb75_se2_b_m2.mp3" id="14_54eow"]
 
 [sub_resource type="Resource" id="Resource_gawlo"]
 script = ExtResource("2_8uvi6")
@@ -186,3 +187,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79162, -0.364392)
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_o1s48")
 draw_pass_1 = SubResource("QuadMesh_ru1ff")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_54eow")
+autoplay = true

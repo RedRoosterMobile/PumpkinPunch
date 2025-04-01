@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dbeq4b0axr7ux"
+path="res://.godot/imported/ElevenLabs_2025-04-01T23_08_05_Grandpa Spuds Oxley_pvc_sp82_s88_sb75_se2_b_m2.mp3-b738d4fa0f6e6e039723746a7e9e3c3f.mp3str"
+
+[deps]
+
+source_file="res://audio/ElevenLabs_2025-04-01T23_08_05_Grandpa Spuds Oxley_pvc_sp82_s88_sb75_se2_b_m2.mp3"
+dest_files=["res://.godot/imported/ElevenLabs_2025-04-01T23_08_05_Grandpa Spuds Oxley_pvc_sp82_s88_sb75_se2_b_m2.mp3-b738d4fa0f6e6e039723746a7e9e3c3f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
