@@ -7,7 +7,9 @@ signal game_started()
 signal game_finished()
 
 signal skeleton_killed()
+# player won! 
 signal skeleton_died()
+#player lose!
 signal skeleton_won()
 
 signal spawn_big_bat()
