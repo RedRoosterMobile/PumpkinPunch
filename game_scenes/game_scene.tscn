@@ -104,7 +104,6 @@ glow_bloom = 0.5
 glow_hdr_threshold = 0.95
 fog_mode = 1
 fog_density = 0.1775
-fog_aerial_perspective = 0.034
 fog_sky_affect = 0.1
 fog_height = 0.85
 fog_height_density = 0.3153
@@ -1401,7 +1400,6 @@ mesh = SubResource("ArrayMesh_2eces")
 skeleton = NodePath("")
 
 [node name="MovingEnvironmentPizzazz" type="Node3D" parent="."]
-visible = false
 
 [node name="SkyClouds" type="MeshInstance3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(2, 0, 0, 0, -2, 1.74846e-07, 0, -1.74846e-07, -2, 0.9, 30, 0)

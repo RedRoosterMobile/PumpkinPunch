@@ -53,4 +53,5 @@ func stop_bat(blocked:bool):
 	is_moving = false
 	animation_player.stop(false)
 	progress_ratio = 1.0  # Ensure it's at the end
-	Messenger.add_score.emit(GameState.SCORE_BLOCKED_BAT if blocked else GameState.SCORE_MISSED_BAT)
+	if blocked:
+		Messenger.add_score.emit(GameState.SCORE_BLOCKED_BAT)

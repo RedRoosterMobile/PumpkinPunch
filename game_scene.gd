@@ -124,7 +124,8 @@ func _process(delta: float) -> void:
 	
 	#region pumpkin kill-zone
 	for pumpkin:Pumpkin in pumpkins:
-		pumpkin.node.position.z += delta 
+		pumpkin.node.position.z += delta
+		print(delta)
 		# var time_zto = sin(time*0.5)*0.5+0.5
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
@@ -132,7 +133,7 @@ func _process(delta: float) -> void:
 			# pumpkin went 6 + 1 = 7 meters
 			# -6 + 6 + 1
 			#pumpkin.node.position.z = PUMPKIN_Z
-			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
+			# Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
 			lose_mana(mana_change_amount)
 			mana.scale.y -= 0.1
 			# fill reduce mana?
