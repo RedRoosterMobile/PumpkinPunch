@@ -8,6 +8,7 @@ signal game_finished()
 
 signal skeleton_killed()
 signal skeleton_died()
+signal skeleton_won()
 
 signal spawn_big_bat()
 

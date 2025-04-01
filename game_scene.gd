@@ -125,7 +125,6 @@ func _process(delta: float) -> void:
 	#region pumpkin kill-zone
 	for pumpkin:Pumpkin in pumpkins:
 		pumpkin.node.position.z += delta
-		print(delta)
 		# var time_zto = sin(time*0.5)*0.5+0.5
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
@@ -151,6 +150,7 @@ func lose_mana(amount:float):
 	if GameState.mana_fill_level<=0.0:
 		Messenger.game_finished.emit()
 		GameState.game_finished = true
+		Messenger.skeleton_won.emit()
 		print("your ded buddy")
 	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
 	pass
@@ -305,7 +305,7 @@ func init_midi():
 @onready var grave_right: Node3D = $decoration/grave_A_destroyed3
 
 func note_callback(event: Variant, track: int):
-	if event['subtype'] == MIDI_MESSAGE_NOTE_ON:
+	if event['subtype'] == MIDI_MESSAGE_NOTE_ON and not GameState.game_finished:
 		#print(event)
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
 

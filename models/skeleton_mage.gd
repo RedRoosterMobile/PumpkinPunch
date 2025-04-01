@@ -6,7 +6,7 @@ extends Node3D
 # Reference to the AnimationTree node, initialized when the node is ready
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
-
+var tween:Tween
 # Stores the initial position of the node
 var start_position: Vector3
 var initial_rotation: Quaternion
@@ -23,6 +23,7 @@ const BLEND_POSITION_SPAWN: Vector2 = Vector2(0, 1)
 const BLEND_POSITION_IDLE: Vector2 = Vector2(-1, 0)
 const BLEND_POSITION_DIE: Vector2 = Vector2(0, -1)
 const BLEND_POSITION_SHOOT: Vector2 = Vector2(1, 0)
+const BLEND_CELEBRATION: Vector2 = Vector2(0, 0)
 
 const PARAM_BLEND_POSITION:String = "parameters/blend_position"
 
@@ -38,30 +39,47 @@ func _ready() -> void:
 	
 	Messenger.game_finished.connect(kill)
 	Messenger.pumpkin_spawned.connect(shoot)
+	Messenger.skeleton_won.connect(celebrate)
 
 func _process(delta: float) -> void:
 	if is_moving:
 		time += delta
 
-	# Check if the spawn delay has elapsed and the spawn sequence hasn't completed
-	if not has_spawned and time > SPAWN_DELAY:
-		has_spawned = true
-		time = 0.0  # Reset the timer to start oscillation from zero
-		animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
-		Messenger.game_started.emit()
-		#gpu_particles_3d.emitting = true
-		# do we need that??
-		# GameState.skeleton_resurrected = true
-	elif has_spawned:
-		var offset: float = sin(time*3) * OSCILLATION_AMPLITUDE
-		position.x = start_position.x + offset
+	if not GameState.game_finished:
+		
+		# Check if the spawn delay has elapsed and the spawn sequence hasn't completed
+		if not has_spawned and time > SPAWN_DELAY:
+			has_spawned = true
+			time = 0.0  # Reset the timer to start oscillation from zero
+			animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
+			Messenger.game_started.emit()
+			#gpu_particles_3d.emitting = true
+			# do we need that??
+			# GameState.skeleton_resurrected = true
+		elif has_spawned:
+			var offset: float = sin(time*3) * OSCILLATION_AMPLITUDE
+			position.x = start_position.x + offset
 
 func kill():
-	is_moving = false
-	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
-	Messenger.skeleton_died.emit()
+	
+	if GameState.mana_fill_level>=0.0:
+		print("kill-----")
+		is_moving = false
+		animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_DIE
+		Messenger.skeleton_died.emit()
+
+func celebrate():
+	print("celebrate++++")
+	if tween:
+		tween.kill()
+	
+	if GameState.mana_fill_level <= 0.0:
+		is_moving = false
+		animation_tree[PARAM_BLEND_POSITION] = BLEND_CELEBRATION
+	
 
 func shoot(pumpkin_pos: Vector3):
+	print("shoot####")
 	is_moving = false
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_SHOOT
 	
@@ -77,7 +95,8 @@ func shoot(pumpkin_pos: Vector3):
 	# here we want to actually spawn the pumpkin (callback, signal?)
 	
 	# Tween back to initial rotation
-	var tween = create_tween()
+	
+	tween = create_tween()
 	tween.tween_property(self, "quaternion", initial_rotation, animation_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
 	animation_tree[PARAM_BLEND_POSITION] = BLEND_POSITION_IDLE
