@@ -998,9 +998,6 @@ _data = {
 script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
-is_midi_enabled = null
-xr_enabled = true
-spawn_action = null
 rumble_event_left = SubResource("Resource_peo8t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1582,7 +1579,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_d0wg7")
 
 [node name="HealthMeter" type="Node3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.64858, 0, -0.717157)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.64858, 0, 0.259146)
 
 [node name="bottle" parent="HealthMeter" instance=ExtResource("71_e7aqr")]
 visible = false

@@ -4,12 +4,14 @@ extends XRToolsSceneBase
 @export var right_hand_body: RigidBody3D
 @onready var mana: Node3D = $HealthMeter/mana
 const mana_change_amount: float = 0.1
-@export var is_midi_enabled: bool = true
 
-@export var xr_enabled:bool = false
 var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
+@export var spawn_big_bat_action : String = "ax_button"
+@export var spawn_swarm_action : String = "bx_button"
+@export var end_game_action : String = "ax_button"
+@export var next_scene_action : String = "bx_button"
 
 # Inner class
 class Pumpkin:
@@ -42,13 +44,7 @@ func _on_game_started():
 		pumpkin_grin(a_pumpkin.get_material())
 	GameState.game_started = true
 	time = 0.0
-	if is_midi_enabled:
-		init_midi()
-	else:
-		# set demo song 
-		var audio_stream = load("res://art/Haunted Beats (1).mp3")  # Load the MP3 file directly
-		asp.stream = audio_stream
-		asp.play()
+	init_midi()
 
 func _on_swarm_started() -> void:
 	swarm_block_time = 0.0 # just to make sure
@@ -64,7 +60,7 @@ func _on_swarm_stopped() -> void:
 		print("##you blocked the swarm!")
 		add_mana(mana_change_amount)
 	else:
-		# losr
+		print("##eaten by the swarm!")
 		lose_mana(mana_change_amount)
 	swarm_block_time = 0.0
 
@@ -72,31 +68,29 @@ func _ready() -> void:
 	Messenger.game_started.connect(_on_game_started)
 	Messenger.spawn_bat_swarm.connect(_on_swarm_started)
 	Messenger.stop_bat_swarm.connect(_on_swarm_stopped)
-	show_game_state_label(false, '')
+	show_game_state_label(false)
 	
 	print("xr_controls_enabled")
-	print(xr_enabled)
 	var hand_area_left:Area3D = left_hand_body.get_node("HandArea3D")
 	hand_area_left.connect("area_entered",_on_hand_area_3d_area_entered_left)
 	
 	var hand_area_right:Area3D = right_hand_body.get_node("HandArea3D")
 	hand_area_right.connect("area_entered",_on_hand_area_3d_area_entered_right)
 	# xr scene will add those to it's tree 
-	if xr_enabled:
-		var xr_origin_3d: MyOrigin = XR_ORIGIN.instantiate()
-		add_child(xr_origin_3d)
+	
+	var xr_origin_3d: MyOrigin = XR_ORIGIN.instantiate()
+	add_child(xr_origin_3d)
 		
-		xr_origin_3d.init_hands(left_hand_body, right_hand_body)
-		print("left hand controller")
-		# left controller
-		controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
-		if controller_left:
-			controller_left.button_pressed.connect(_on_button_pressed_left)
-			
-		# right controller
-		controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
-		if controller_right:
-			controller_right.button_pressed.connect(_on_button_pressed_right)
+	xr_origin_3d.init_hands(left_hand_body, right_hand_body)
+	# left controller
+	controller_left = XRHelpers.get_xr_controller(xr_origin_3d.get_child(1))
+	if controller_left:
+		controller_left.button_pressed.connect(_on_button_pressed_left)
+	
+	# right controller
+	controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
+	if controller_right:
+		controller_right.button_pressed.connect(_on_button_pressed_right)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -115,9 +109,6 @@ func _process(delta: float) -> void:
 		else:
 			$ForceFieldNew.visible = false
 	
-	if not xr_enabled:
-		follow_mouse()
-	
 	#region Remove null pumpkins from the array
 	pumpkins = pumpkins.filter(func(pumpkin):
 		return pumpkin != null and pumpkin.node != null
@@ -130,10 +121,8 @@ func _process(delta: float) -> void:
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
 		if pumpkin.node.position.z > 0.5:
-			# pumpkin went 6 + 1 = 7 meters
-			# -6 + 6 + 1
-			#pumpkin.node.position.z = PUMPKIN_Z
-			# Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
+			# pumpkin went 6 + 0.5 = 6.5 meters
+			# -6 + 6 + 0.5
 			lose_mana(mana_change_amount)
 			mana.scale.y -= 0.1
 			# fill reduce mana?
@@ -146,43 +135,43 @@ func _process(delta: float) -> void:
 	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
 	mana.scale.y = GameState.mana_fill_level
+
 func lose_mana(amount:float):
 	GameState.mana_fill_level -= amount
 	if GameState.mana_fill_level<=0.0:
 		Messenger.game_finished.emit()
 		GameState.game_finished = true
 		Messenger.skeleton_won.emit()
-		show_game_state_label(true, '')
+		show_game_state_label(true)
 	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
-	pass
+
 func add_mana(amount:float):
 	GameState.mana_fill_level += amount
 	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
-		
-	pass
-	
-	# Variables to track state
-var controller_spawn_just_pressed: bool = false
-var prev_controller_states: Dictionary = {}  # Stores previous state for each controller
 
 @export var rumble_event_left : XRToolsRumbleEvent
 @export var rumble_event_right : XRToolsRumbleEvent
+
 func _on_button_pressed_left(button_name: String) -> void:
 	match button_name:
-		"ax_button":
+		spawn_big_bat_action:
 			Messenger.spawn_big_bat.emit()
 			print("button: spawn bat")
-		"by_button":
+		spawn_swarm_action:
 			print("button: spawn swarm")
 			Messenger.spawn_bat_swarm.emit()
+		spawn_action:
+			print("button: spawn a pumpkin")
+			#spawn_pumpkin(0, 50, 120)
+			show_game_state_label(true, "test")
 
 func _on_button_pressed_right(button_name: String) -> void:
 	match button_name:
-		"ax_button":
+		end_game_action:
 			print("button: end game")
-			Messenger.game_finished.emit()
+			Messenger.game_finished.emit() # kill
 			GameState.game_finished = true
-		"by_button":
+		next_scene_action:
 			# go to credits
 			print("go to credits scene")
 			# Find the XRToolsSceneBase ancestor of the current node
@@ -278,8 +267,7 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 		area.get_parent().splat()
 		Messenger.add_score.emit(GameState.SCORE_PUNCHED_PUMPKIN)
 		add_mana(mana_change_amount)
-		if xr_enabled:
-			XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
+		XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
 
 # with music:
 # - spawn them on midi notes
@@ -301,7 +289,13 @@ func init_midi():
 	# this will also start the audio stream player (music)
 	midi_player.play()
 	asp.play()
+	asp.connect("finished", _on_music_ended)
 
+func _on_music_ended():
+	print("Music ended")
+	GameState.game_finished = true
+	Messenger.game_finished.emit() # kill mage
+	show_game_state_label(true, "Winner, Winner, Chicken Dinner! \nscore: " + str(GameState.score))
 @onready var grave_left: Node3D = $decoration/grave_A2
 @onready var grave_right: Node3D = $decoration/grave_A_destroyed3
 
@@ -320,7 +314,8 @@ func note_callback(event: Variant, track: int):
 			spawn_bats(track, pitch, velocity)
 			
 			
-func show_game_state_label(show, msg):
+func show_game_state_label(show:bool, msg:String = ""):
 	$GameStateLabel.visible = show
-	if msg:
+	if msg.length() > 0:
 		$GameStateLabel.text = msg
+	$GameStateLabel/AnimationPlayer.play("end_game_fly_in")
