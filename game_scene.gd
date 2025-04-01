@@ -2,7 +2,8 @@ extends XRToolsSceneBase
 # assets https://godotengine.org/asset-library/asset/2224
 @export var left_hand_body: RigidBody3D 
 @export var right_hand_body: RigidBody3D
-
+@onready var mana: Node3D = $HealthMeter/mana
+const mana_change_amount: float = 0.1
 @export var is_midi_enabled: bool = true
 
 @export var xr_enabled:bool = false
@@ -61,6 +62,10 @@ func _on_swarm_stopped() -> void:
 	# 5 sec is "currently" optimal -> check "attack_duration" parameter of BatSwarm
 	if (swarm_block_time > 3.0):
 		print("##you blocked the swarm!")
+		add_mana(mana_change_amount)
+	else:
+		# losr
+		lose_mana(mana_change_amount)
 	swarm_block_time = 0.0
 
 func _ready() -> void:
@@ -123,11 +128,14 @@ func _process(delta: float) -> void:
 		# var time_zto = sin(time*0.5)*0.5+0.5
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
-		if pumpkin.node.position.z > 1:
+		if pumpkin.node.position.z > 0.5:
 			# pumpkin went 6 + 1 = 7 meters
 			# -6 + 6 + 1
 			#pumpkin.node.position.z = PUMPKIN_Z
 			Messenger.add_score.emit(GameState.SCORE_MISSED_PUMPKIN)
+			lose_mana(mana_change_amount)
+			mana.scale.y -= 0.1
+			# fill reduce mana?
 			pumpkin.node.queue_free()
 	
 	#region blocking the swarm
@@ -136,6 +144,20 @@ func _process(delta: float) -> void:
 	
 	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
+	mana.scale.y = GameState.mana_fill_level
+func lose_mana(amount:float):
+	GameState.mana_fill_level -= amount
+	if GameState.mana_fill_level<=0.0:
+		Messenger.game_finished.emit()
+		GameState.game_finished = true
+		print("your ded buddy")
+	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
+	pass
+func add_mana(amount:float):
+	GameState.mana_fill_level += amount
+	GameState.mana_fill_level = clampf(GameState.mana_fill_level, 0.0, 1.0)
+		
+	pass
 	
 	# Variables to track state
 var controller_spawn_just_pressed: bool = false
@@ -253,6 +275,7 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 	if is_pumpkin:
 		area.get_parent().splat()
 		Messenger.add_score.emit(GameState.SCORE_PUNCHED_PUMPKIN)
+		add_mana(mana_change_amount)
 		if xr_enabled:
 			XRToolsRumbleManager.add(controller.name + "left", rumble_event_left, [controller])
 

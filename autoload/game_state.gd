@@ -21,6 +21,8 @@ var is_right_hand_blocking_swarm:bool = false
 # block big bat: 50 points
 # miss pumpkin: -5 points
 
+var mana_fill_level:float = 1.0
+
 const SCORE_BLOCKED_BAT:int = 50
 const SCORE_MISSED_BAT:int = -25
 

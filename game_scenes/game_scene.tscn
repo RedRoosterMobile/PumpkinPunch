@@ -857,8 +857,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
 
 uniform float roughness : hint_range(0.0, 1.0);
 uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
@@ -870,10 +869,7 @@ uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
 
-uniform float time; // Time to animate the wobble
 uniform float wave_amplitude : hint_range(0.0, 1.0, 0.01) = 0.1; // How much the surface wobbles
 uniform float wave_frequency : hint_range(0.0, 10.0, 0.01) = 2.0; // Speed of the waves
 
@@ -912,6 +908,7 @@ void fragment() {
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
+	ALPHA = 0.5;
 }
 "
 
@@ -919,17 +916,12 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_4mxv4")
 shader_parameter/albedo = Color(0.169, 2, 0.224, 1)
-shader_parameter/albedo_texture_size = Vector2i(0, 0)
-shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/time = 0.0
 shader_parameter/wave_amplitude = 0.1
 shader_parameter/wave_frequency = 2.0
 
@@ -1533,10 +1525,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.64858, 0, -0.717157)
 [node name="bottle" parent="HealthMeter" instance=ExtResource("71_e7aqr")]
 visible = false
 
-[node name="Node3D" type="Node3D" parent="HealthMeter"]
+[node name="mana" type="Node3D" parent="HealthMeter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164024, 0)
 
-[node name="liquid" type="MeshInstance3D" parent="HealthMeter/Node3D"]
+[node name="liquid" type="MeshInstance3D" parent="HealthMeter/mana"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90187, 0)
 mesh = SubResource("CylinderMesh_dbopf")
 skeleton = NodePath("../..")
