@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=160 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -72,6 +72,7 @@
 [ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="70_ilfbo"]
 [ext_resource type="PackedScene" uid="uid://da3275vxc3l7n" path="res://models/bottle.glb" id="71_e7aqr"]
 [ext_resource type="PackedScene" uid="uid://4swnnytuc70x" path="res://bottle.tscn" id="72_4mxv4"]
+[ext_resource type="Texture2D" uid="uid://bgx750c8scddu" path="res://images/particles/PNG (Transparent)/star_05.png" id="72_empo3"]
 [ext_resource type="FontFile" uid="uid://dbnouvrt07hge" path="res://Slimespooky.ttf" id="73_dbopf"]
 
 [sub_resource type="Resource" id="Resource_peo8t"]
@@ -305,7 +306,7 @@ render_priority = 0
 shader = SubResource("Shader_u8t5v")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("16_4mxv4")
-shader_parameter/alpha_scissor_threshold = 0.844
+shader_parameter/alpha_scissor_threshold = 0.495
 shader_parameter/point_size = 1.0
 shader_parameter/specular = 0.5
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
@@ -849,6 +850,32 @@ rings = 8
 radius = 0.35
 height = 1.9
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbopf"]
+emission_shape_scale = Vector3(0.5, 0.5, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1v0u"]
+transparency = 2
+alpha_scissor_threshold = 0.747
+alpha_antialiasing_mode = 0
+depth_draw_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("72_empo3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_empo3"]
+material = SubResource("StandardMaterial3D_t1v0u")
+size = Vector2(0.2, 0.2)
+orientation = 0
+
 [sub_resource type="Shader" id="Shader_4mxv4"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
 
@@ -908,7 +935,7 @@ void fragment() {
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
-	ALPHA = 0.5;
+	ALPHA = max(UV.y,0.2);
 }
 "
 
@@ -1508,8 +1535,9 @@ process_material = SubResource("ParticleProcessMaterial_bkpbe")
 draw_pass_1 = SubResource("QuadMesh_55fg6")
 
 [node name="FirefliesDistractorBox" type="GPUParticlesAttractorBox3D" parent="MovingEnvironmentPizzazz/Fireflies"]
-transform = Transform3D(7.88501, 0, 0, 0, 5.79502, 0, 0, 0, 1, 0.36296, 4.11849, -3.7648)
+transform = Transform3D(7.88501, 0, 0, 0, 5.79502, 0, 0, 0, 1, 0.36296, 4.11849, -2.49348)
 strength = -128.0
+cull_mask = 4294443007
 
 [node name="MovingBushels" type="Node3D" parent="MovingEnvironmentPizzazz"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92142, 0.0503929, -0.53593)
@@ -1583,6 +1611,14 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.64858, 0, 0.259146)
 
 [node name="bottle" parent="HealthMeter" instance=ExtResource("71_e7aqr")]
 visible = false
+
+[node name="Bubbles" type="GPUParticles3D" parent="HealthMeter"]
+transform = Transform3D(1, 0, 0, 0, 0.0104369, 0.999946, 0, -0.999946, 0.0104369, 0, 0.206914, 0.000447631)
+layers = 524288
+amount = 80
+visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
+process_material = SubResource("ParticleProcessMaterial_dbopf")
+draw_pass_1 = SubResource("QuadMesh_empo3")
 
 [node name="mana" type="Node3D" parent="HealthMeter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164024, 0)
