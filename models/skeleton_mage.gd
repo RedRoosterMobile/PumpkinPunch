@@ -61,7 +61,6 @@ func _process(delta: float) -> void:
 			position.x = start_position.x + offset
 
 func kill():
-	
 	if GameState.mana_fill_level>=0.0:
 		print("kill-----")
 		is_moving = false
