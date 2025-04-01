@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=152 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -849,17 +849,97 @@ rings = 8
 radius = 0.35
 height = 1.9
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mxv4"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.169, 2, 0.224, 1)
-refraction_scale = 0.57
+[sub_resource type="Shader" id="Shader_4mxv4"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform float time; // Time to animate the wobble
+uniform float wave_amplitude : hint_range(0.0, 1.0, 0.01) = 0.1; // How much the surface wobbles
+uniform float wave_frequency : hint_range(0.0, 10.0, 0.01) = 2.0; // Speed of the waves
+
+void vertex() {
+    UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+    // Assume the top of the cylinder is at Y = 1.0 (adjust this value based on your model)
+    float top_threshold = 0.5; // Slightly less than 1 to catch the top face
+
+    if (VERTEX.y > top_threshold) { // Check if this vertex is on the top face
+        // Calculate a radial distance from the center for circular waves
+        vec3 world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+        float distance_from_center = length(world_pos.xz); // Distance in X-Z plane
+
+        // Create a wave effect using sine, influenced by time and position
+        float wave = sin(TIME * wave_frequency + distance_from_center * 5.0) * wave_amplitude;
+		VERTEX.y+=wave;
+        
+    }
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+
+	// Vertex Color Use as Albedo: Enabled
+	albedo_tex *= COLOR;
+
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbopf"]
+render_priority = 0
+shader = SubResource("Shader_4mxv4")
+shader_parameter/albedo = Color(0.169, 2, 0.224, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/time = 0.0
+shader_parameter/wave_amplitude = 0.1
+shader_parameter/wave_frequency = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dbopf"]
-material = SubResource("StandardMaterial3D_4mxv4")
+material = SubResource("ShaderMaterial_dbopf")
 top_radius = 0.8
 bottom_radius = 0.8
 height = 1.8
+radial_segments = 16
+rings = 2
 
 [node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_dbdnp")
