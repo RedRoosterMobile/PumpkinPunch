@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=22 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://nlwbi78o28pc" path="res://images/intro/scene_2.png" id="4_wxrqt"]
 [ext_resource type="Texture2D" uid="uid://bl7bj3s1n7ru8" path="res://images/intro/scene_3.png" id="5_gawlo"]
 [ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
+[ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="10_eqod3"]
+[ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="11_vkqmo"]
 
 [sub_resource type="Resource" id="Resource_gawlo"]
 script = ExtResource("2_8uvi6")
@@ -51,6 +53,21 @@ albedo_texture = ExtResource("5_wxrqt")
 [sub_resource type="QuadMesh" id="QuadMesh_4kpdv"]
 material = SubResource("StandardMaterial3D_a83fi")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrdd6"]
+transparency = 2
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("11_vkqmo")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_54eow"]
+material = SubResource("StandardMaterial3D_xrdd6")
+orientation = 1
+
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_0ju8l")
 story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o")])
@@ -60,6 +77,7 @@ environment = SubResource("Environment_8uvi6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
@@ -76,9 +94,11 @@ tracker = &"right_hand"
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D"]
+omni_range = 20.0
+
 [node name="StorySegment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73421, -2.82237)
-visible = false
 script = ExtResource("2_4kpdv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StorySegment"]
@@ -92,3 +112,11 @@ font = ExtResource("2_inse2")
 autowrap_mode = 2
 
 [node name="FloatingDust" parent="." instance=ExtResource("4_esmw3")]
+
+[node name="LeafsBlameCanada" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74986, -0.383689)
+visible = false
+amount = 80
+lifetime = 7.61
+process_material = ExtResource("10_eqod3")
+draw_pass_1 = SubResource("QuadMesh_54eow")

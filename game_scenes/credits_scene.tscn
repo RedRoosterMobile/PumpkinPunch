@@ -122,7 +122,7 @@ material = ExtResource("18_ajvy1")
 _data = [Vector2(0.014377, 0.0121262), 0.0, 0.0, 0, 0, Vector2(0.253994, 0.495554), 0.0, 0.0, 0, 0, Vector2(0.469649, 0), 0.0, 0.0, 0, 0, Vector2(0.610224, 0.339666), 0.0, 0.0, 0, 0, Vector2(0.715655, 0), 0.0, 0.0, 0, 0, Vector2(0.824281, 0.224064), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 7
 
-[sub_resource type="CurveTexture" id="CurveTexture_ajvy1"]
+[sub_resource type="CurveTexture" id="CurveTexture_hkt06"]
 curve = SubResource("Curve_l6llr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l6llr"]
@@ -134,19 +134,19 @@ spread = 0.5
 initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 scale_min = 0.1
-alpha_curve = SubResource("CurveTexture_ajvy1")
+alpha_curve = SubResource("CurveTexture_hkt06")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
 sub_emitter_mode = 3
 sub_emitter_amount_at_collision = 1
 
-[sub_resource type="Curve" id="Curve_xyjgo"]
+[sub_resource type="Curve" id="Curve_iovd1"]
 _limits = [0.0, 0.1, 0.0, 1.0]
 _data = [Vector2(0.0130435, 0.000476196), 0.0, 0.0, 0, 0, Vector2(0.0347826, 0.0157143), 0.611508, 0.611508, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajvy1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgqxj"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
@@ -155,38 +155,38 @@ albedo_texture = ExtResource("18_xyjgo")
 use_particle_trails = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_fcp36"]
-material = SubResource("StandardMaterial3D_ajvy1")
-curve = SubResource("Curve_xyjgo")
+material = SubResource("StandardMaterial3D_cgqxj")
+curve = SubResource("Curve_iovd1")
 
 [sub_resource type="Curve" id="Curve_ajvy1"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.173269), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_fcp36"]
+[sub_resource type="CurveTexture" id="CurveTexture_7rkmg"]
 curve = SubResource("Curve_ajvy1")
 
 [sub_resource type="Curve" id="Curve_hkt06"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_iovd1"]
+[sub_resource type="CurveTexture" id="CurveTexture_nhicc"]
 curve = SubResource("Curve_hkt06")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cgqxj"]
 lifetime_randomness = 0.13
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
-scale_curve = SubResource("CurveTexture_iovd1")
-alpha_curve = SubResource("CurveTexture_fcp36")
+scale_curve = SubResource("CurveTexture_nhicc")
+alpha_curve = SubResource("CurveTexture_7rkmg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rkmg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxfiq"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("19_l6llr")
 
 [sub_resource type="QuadMesh" id="QuadMesh_nhicc"]
-material = SubResource("StandardMaterial3D_7rkmg")
+material = SubResource("StandardMaterial3D_nxfiq")
 orientation = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_fcp36"]

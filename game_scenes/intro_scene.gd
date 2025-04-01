@@ -26,6 +26,8 @@ func _ready() -> void:
 	original_image_pos = image_display.position
 	original_label_pos = story_label.position
 	story_segment.visible = false
+	#var mat:StandardMaterial3D = image_display.get_active_material(0)
+	#mat.albedo_color.a = 0.0
 	
 	if story_array.size() > 0:
 		display_story_segment(current_index)
@@ -60,38 +62,87 @@ func set_next(image: Texture2D, story: String) -> void:
 	
 	is_animating = true
 	
+	# Ensure all nodes are valid before proceeding
+	if not image_display or not story_label or not story_segment:
+		push_error("One or more nodes (image_display, story_label, or story_segment) are null!")
+		is_animating = false
+		return
+	
 	var tween_image: Tween = create_tween()
 	var tween_story: Tween = create_tween()
+	
+	# Check if tweens were created successfully
+	if not tween_image or not tween_story:
+		push_error("Failed to create tweens!")
+		is_animating = false
+		return
 	
 	print("Setting next story at index: ", current_index)
 	
 	var target_image_pos = original_image_pos - Vector3(fade_distance, 0, 0)
 	var target_label_pos = original_label_pos + Vector3(fade_distance, 0, 0)
 	
-	# Animate out
-	tween_image.tween_property(image_display, "position", target_image_pos, fade_speed) \
+	# Ensure the material for image_display supports transparency
+	if image_display and image_display.get_active_material(0):
+		var material = image_display.get_active_material(0)
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA  # Enable transparency
+		
+		# Initial state: set material to fully transparent
+		material.albedo_color.a = 0.0
+	
+	# Initial state for label: fully transparent
+	story_label.modulate.a = 0.0
+	story_segment.visible = true
+	
+	# Fade out and move out for image (using material alpha)
+	tween_image.tween_property(image_display, "position", target_image_pos, fade_speed/2.0) \
 		.set_ease(Tween.EASE_OUT) \
 		.set_trans(Tween.TRANS_QUART)
 	
-	tween_story.tween_property(story_label, "position", target_label_pos, fade_speed) \
+	# Fade out image (material alpha) and label (modulate)
+	tween_image.parallel().tween_method(
+		func(value): 
+			if image_display and image_display.get_active_material(0):
+				var mat:StandardMaterial3D = image_display.get_active_material(0)
+				mat.albedo_color.a = value, 1.0, 0.0, fade_speed/2.0)\
 		.set_ease(Tween.EASE_OUT) \
 		.set_trans(Tween.TRANS_QUART)
 	
-	# Set new data after moving out
+	tween_story.tween_property(story_label, "position", target_label_pos, fade_speed/2.0) \
+		.set_ease(Tween.EASE_OUT) \
+		.set_trans(Tween.TRANS_QUART)
+	
+	tween_story.parallel().tween_property(story_label, "modulate:a", 0.0, fade_speed/2.0) \
+		.set_ease(Tween.EASE_OUT) \
+		.set_trans(Tween.TRANS_QUART)
+	
+	# Set new data after moving out (still transparent)
 	tween_image.tween_callback(func():
 		if image_display and image_display.get_active_material(0):
 			image_display.get_active_material(0).albedo_texture = image
 		if story_label:
 			story_label.text = story
-		story_segment.visible = true
 	)
 	
-	# Animate back
-	tween_image.tween_property(image_display, "position", original_image_pos, fade_speed) \
+	# Move back and fade in for image (using material alpha)
+	tween_image.chain().tween_property(image_display, "position", original_image_pos, fade_speed/2.0) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUART)
 	
-	tween_story.tween_property(story_label, "position", original_label_pos, fade_speed) \
+	tween_story.chain().tween_property(story_label, "position", original_label_pos, fade_speed/2.0) \
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_QUART)
+	
+	# Fade in image (material alpha) and label (modulate)
+	tween_image.parallel().tween_method(
+		func(value): 
+			if image_display and image_display.get_active_material(0):
+				var mat = image_display.get_active_material(0)
+				mat.albedo_color.a = value, 0.0, 1.0, fade_speed/2.0) \
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_QUART)
+	
+	tween_story.parallel().tween_property(story_label, "modulate:a", 1.0, fade_speed/2.0) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUART)
 	

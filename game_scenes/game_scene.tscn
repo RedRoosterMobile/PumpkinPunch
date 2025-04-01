@@ -773,7 +773,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/sway_distance = 0.15
 shader_parameter/sway_offset = 25.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrdd6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_empo3"]
 transparency = 2
 alpha_scissor_threshold = 1.0
 alpha_antialiasing_mode = 0
@@ -785,7 +785,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_va55x"]
-material = SubResource("StandardMaterial3D_xrdd6")
+material = SubResource("StandardMaterial3D_empo3")
 orientation = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvopu"]
