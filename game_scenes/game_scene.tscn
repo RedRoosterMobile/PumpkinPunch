@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=153 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -72,6 +72,7 @@
 [ext_resource type="Shader" uid="uid://bo8muvyqvi7c2" path="res://force_field.gdshader" id="70_ilfbo"]
 [ext_resource type="PackedScene" uid="uid://da3275vxc3l7n" path="res://models/bottle.glb" id="71_e7aqr"]
 [ext_resource type="PackedScene" uid="uid://4swnnytuc70x" path="res://bottle.tscn" id="72_4mxv4"]
+[ext_resource type="FontFile" uid="uid://dbnouvrt07hge" path="res://Slimespooky.ttf" id="73_dbopf"]
 
 [sub_resource type="Resource" id="Resource_peo8t"]
 script = ExtResource("2_e7aqr")
@@ -936,7 +937,9 @@ rings = 2
 script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
+is_midi_enabled = null
 xr_enabled = true
+spawn_action = null
 rumble_event_left = SubResource("Resource_peo8t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1532,3 +1535,10 @@ mesh = SubResource("CylinderMesh_dbopf")
 skeleton = NodePath("../..")
 
 [node name="bottle2" parent="HealthMeter" instance=ExtResource("72_4mxv4")]
+
+[node name="GameStateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, -4)
+modulate = Color(0.737255, 0.419608, 1, 1)
+text = "You are dead buddy"
+font = ExtResource("73_dbopf")
+font_size = 50
