@@ -83,13 +83,13 @@ indefinite = false
 duration_ms = 300
 metadata/_custom_type_script = "uid://x5dxnmk8rpfj"
 
-[sub_resource type="Sky" id="Sky_woidc"]
+[sub_resource type="Sky" id="Sky_empo3"]
 sky_material = ExtResource("3_4mxv4")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_2o5or"]
 background_mode = 2
-sky = SubResource("Sky_woidc")
+sky = SubResource("Sky_empo3")
 ambient_light_source = 3
 ambient_light_energy = 2.05
 reflected_light_source = 2

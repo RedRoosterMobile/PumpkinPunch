@@ -1,0 +1,86 @@
+[gd_scene load_steps=16 format=3 uid="uid://bfbpfn3x5j8ea"]
+
+[ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
+[ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
+[ext_resource type="Script" uid="uid://cn73falcxqp1c" path="res://StoryData.gd" id="2_8uvi6"]
+[ext_resource type="FontFile" uid="uid://dbnouvrt07hge" path="res://Slimespooky.ttf" id="2_inse2"]
+[ext_resource type="Texture2D" uid="uid://borjdnajtf5xo" path="res://images/intro/scene_1.png" id="3_4a0uo"]
+[ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="4_esmw3"]
+[ext_resource type="Texture2D" uid="uid://nlwbi78o28pc" path="res://images/intro/scene_2.png" id="4_wxrqt"]
+[ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
+
+[sub_resource type="Resource" id="Resource_gawlo"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("3_4a0uo")
+story = "On the edge of a forgotten village lies a cursed swamp—a place of whispers and lingering souls. Legends speak of dark magic buried beneath the murky waters."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="Resource" id="Resource_foqid"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("4_wxrqt")
+story = "Generations passed, and the swamp swallowed memories, leaving only forgotten graves and restless spirits. But something ancient stirs beneath the soil."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4a0uo"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.147074, 0.151741, 0.159108, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.14902, 0.152941, 0.160784, 1)
+ground_curve = 0.069644
+
+[sub_resource type="Sky" id="Sky_a83fi"]
+sky_material = SubResource("ProceduralSkyMaterial_4a0uo")
+
+[sub_resource type="Environment" id="Environment_8uvi6"]
+background_mode = 2
+sky = SubResource("Sky_a83fi")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a83fi"]
+shading_mode = 0
+albedo_texture = ExtResource("5_wxrqt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_4kpdv"]
+material = SubResource("StandardMaterial3D_a83fi")
+
+[node name="IntroScene" type="Node3D"]
+script = ExtResource("1_0ju8l")
+story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid")])
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8uvi6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+current = true
+
+[node name="HandLeft" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="HandRight" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="StorySegment" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73421, -2.82237)
+script = ExtResource("2_4kpdv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorySegment"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 2, 0, 1.36205, -0.793274)
+mesh = SubResource("QuadMesh_4kpdv")
+
+[node name="Label3D" type="Label3D" parent="StorySegment"]
+modulate = Color(0, 0.811765, 0.00784314, 1)
+text = "On the edge of a forgotten village lies a cursed swamp—a place of whispers and lingering souls. Legends speak of dark magic buried beneath the murky waters."
+font = ExtResource("2_inse2")
+autowrap_mode = 2
+
+[node name="FloatingDust" parent="." instance=ExtResource("4_esmw3")]
