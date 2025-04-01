@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqi6h6fm8nmuq"]
+[gd_scene load_steps=47 format=3 uid="uid://dqi6h6fm8nmuq"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_lnysx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_fm1wd"]
@@ -15,10 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="11_l838c"]
 [ext_resource type="PackedScene" uid="uid://ob8u837hgx0b" path="res://addons/kaykit_halloween_bits/gltf/skull.gltf" id="12_bhmvs"]
 [ext_resource type="AudioStream" uid="uid://dkuxwj8lsf6ka" path="res://audio/Laurie's Theme gothic minimal.mp3" id="13_bhmvs"]
+[ext_resource type="Script" uid="uid://bu48hllt7gfux" path="res://couch.gd" id="13_fcp36"]
 [ext_resource type="Script" uid="uid://bxqw338ha6lgn" path="res://rotator.gd" id="15_6dmeh"]
 [ext_resource type="PackedScene" uid="uid://cu8sq0m770rh6" path="res://best_bat.tscn" id="15_81ggd"]
 [ext_resource type="Material" uid="uid://bhwlq241qgvic" path="res://creadits_floor_material.tres" id="18_ajvy1"]
 [ext_resource type="Texture2D" uid="uid://u6fc13tdaygq" path="res://images/particles/PNG (Transparent)/trace_06.png" id="18_xyjgo"]
+[ext_resource type="PackedScene" uid="uid://tv0atxmnh6mq" path="res://models/commie star.glb" id="19_hkt06"]
 [ext_resource type="Texture2D" uid="uid://8s03ra8tp0hr" path="res://addons/godot-xr-tools/images/ring.png" id="19_l6llr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7sq6"]
@@ -74,6 +76,43 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_ajvy1"),
 &"flicker eyes": SubResource("Animation_l6llr")
+}
+
+[sub_resource type="Animation" id="Animation_iovd1"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.933034, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708), Vector3(6.28319, 0, -1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_cgqxj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rkmg"]
+_data = {
+&"RESET": SubResource("Animation_cgqxj"),
+&"rotate": SubResource("Animation_iovd1")
 }
 
 [sub_resource type="BoxMesh" id="BoxMesh_vty74"]
@@ -227,6 +266,7 @@ font_size = 80
 
 [node name="couch" type="Node3D" parent="." index="5"]
 transform = Transform3D(0.641409, 0.0470193, 0.765757, -0.030192, 0.998894, -0.0360452, -0.766605, 0, 0.642119, -3.62444, 0.630301, -4.21581)
+script = ExtResource("13_fcp36")
 
 [node name="sofa3d2" parent="couch" index="0" instance=ExtResource("11_l838c")]
 transform = Transform3D(1, 3.72529e-09, 0, -1.05676e-09, 1, -1.98056e-09, 0, 0, 1, 0.0187161, -0.619214, 0.0223446)
@@ -259,7 +299,25 @@ script = ExtResource("15_6dmeh")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -13.435)
 play_on_start = true
 
-[node name="Floor" type="MeshInstance3D" parent="." index="8"]
+[node name="Node3D" type="Node3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7318, 4.88818, -2.23895)
+
+[node name="commie star" parent="Node3D" index="0" instance=ExtResource("19_hkt06")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.790504, -2.6183, -0.693559)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/commie star" index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_7rkmg")
+}
+autoplay = "rotate"
+speed_scale = 0.1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D" index="1"]
+transform = Transform3D(-0.11074, -3.38126e-09, 0.993849, -1.49012e-08, 1, 1.74181e-09, -0.993849, -1.46166e-08, -0.11074, 12.2697, 0, 0)
+shadow_enabled = true
+spot_range = 205.105
+
+[node name="Floor" type="MeshInstance3D" parent="." index="9"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_vty74")
 
