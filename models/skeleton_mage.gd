@@ -69,8 +69,7 @@ func kill():
 
 func celebrate():
 	print("celebrate++++")
-	if tween:
-		tween.kill()
+	
 	
 	if GameState.mana_fill_level <= 0.0:
 		is_moving = false

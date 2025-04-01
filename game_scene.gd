@@ -124,8 +124,7 @@ func _process(delta: float) -> void:
 			# pumpkin went 6 + 0.5 = 6.5 meters
 			# -6 + 6 + 0.5
 			lose_mana(mana_change_amount)
-			mana.scale.y -= 0.1
-			# fill reduce mana?
+			mana.scale.y -= mana_change_amount
 			pumpkin.node.queue_free()
 	
 	#region blocking the swarm
@@ -196,12 +195,14 @@ func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	# FIXME: get from object pool instead
 	var pumpkin = SPAWN_THING.instantiate()
 	var pumpkin_pieces = SPAWN_THING_BROKEN
-	0-127
+	
+	
 	var x_spawn:float
 	if track==0:
 		x_spawn = PUMPKIN_X*-1.0
 	elif track==1:
 		x_spawn = PUMPKIN_X
+	
 	var spawn_height:float = randf_range(PUMPKIN_Y*0.5,PUMPKIN_Y*1.5)
 	var spawn_position:Vector3 = Vector3(x_spawn, spawn_height, PUMPKIN_Z)
 	pumpkin.position = spawn_position
@@ -295,11 +296,10 @@ func init_midi():
 
 func _on_music_ended():
 	print("Music ended")
-	GameState.game_finished = true
-	Messenger.game_finished.emit() # kill mage
-	show_game_state_label(true, "Winner, Winner, Chicken Dinner! \nscore: " + str(GameState.score))
-@onready var grave_left: Node3D = $decoration/grave_A2
-@onready var grave_right: Node3D = $decoration/grave_A_destroyed3
+	if not GameState.game_finished:
+		GameState.game_finished = true
+		Messenger.game_finished.emit() # kill mage
+		show_game_state_label(true, "Winner, Winner, Chicken Dinner! \nscore: " + str(GameState.score))
 
 func note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON and not GameState.game_finished:
