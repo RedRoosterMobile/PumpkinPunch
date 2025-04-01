@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=156 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -933,6 +933,67 @@ height = 1.8
 radial_segments = 16
 rings = 2
 
+[sub_resource type="Animation" id="Animation_dbopf"]
+resource_name = "end_game_fly_in"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.01, 2.03),
+"transitions": PackedFloat32Array(0.164938, 1, 1),
+"update": 0,
+"values": [Vector3(0, 10, -4), Vector3(0, 5.4, -4), Vector3(0, 5.4, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.01, 2.58, 3, 3.57, 4.01, 4.58),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_empo3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 5.4, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t1v0u"]
+_data = {
+&"RESET": SubResource("Animation_empo3"),
+&"end_game_fly_in": SubResource("Animation_dbopf")
+}
+
 [node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
@@ -1539,6 +1600,11 @@ skeleton = NodePath("../..")
 [node name="GameStateLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, -4)
 modulate = Color(0.737255, 0.419608, 1, 1)
-text = "You are dead buddy"
+text = "You're dead, buddy!"
 font = ExtResource("73_dbopf")
 font_size = 50
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameStateLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_t1v0u")
+}
