@@ -33,7 +33,7 @@ void fragment() {
 
 	// apply glass look
 	float a = mix(0.001, 1.0, _albedo.a);
-	ALPHA = mix(fresnel * edge_color.a, 1.0, a);
+	ALPHA =0.1+mix(fresnel * edge_color.a, 1.0, a);
 	ALBEDO = mix(edge_color.rgb * edge_color.a, _albedo.rgb, a);
 
 	ROUGHNESS = _roughness;

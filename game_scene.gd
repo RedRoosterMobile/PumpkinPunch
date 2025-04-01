@@ -9,9 +9,9 @@ var controller_left : XRController3D
 var controller_right : XRController3D
 @export var spawn_action : String = "trigger_click"
 @export var spawn_big_bat_action : String = "ax_button"
-@export var spawn_swarm_action : String = "bx_button"
+@export var spawn_swarm_action : String = "by_button"
 @export var end_game_action : String = "ax_button"
-@export var next_scene_action : String = "bx_button"
+@export var next_scene_action : String = "by_button"
 
 # Inner class
 class Pumpkin:
@@ -166,7 +166,9 @@ func _on_button_pressed_left(button_name: String) -> void:
 			show_game_state_label(true, "test")
 
 func _on_button_pressed_right(button_name: String) -> void:
+	print(button_name)
 	match button_name:
+		
 		end_game_action:
 			print("button: end game")
 			Messenger.game_finished.emit() # kill
