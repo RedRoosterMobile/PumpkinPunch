@@ -1,9 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://bj3cgi2csord"]
+[gd_scene load_steps=44 format=3 uid="uid://bj3cgi2csord"]
 
 [ext_resource type="Texture2D" uid="uid://c1gkjcbosk86j" path="res://images/puff.png" id="1_03ckd"]
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://VFX/Shaders/s_puff.tres" id="1_p4ear"]
 [ext_resource type="Shader" uid="uid://dgwac6mam38tg" path="res://VFX/Shaders/s_simple1.tres" id="1_s6jba"]
-[ext_resource type="Texture2D" uid="uid://djtd4uc4abq6f" path="res://VFX/Textures/T_VFX_Glo31.png" id="2_4wjv0"]
 [ext_resource type="Texture2D" uid="uid://cj0t7xony6e4r" path="res://VFX/Textures/T_fl81_vfx.png" id="2_j0ej6"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="2_rqqmb"]
 [ext_resource type="Shader" uid="uid://bc0h30a246uhg" path="res://VFX/Shaders/s_simple2.tres" id="3_s01gx"]
@@ -87,13 +86,10 @@ turbulence_initial_displacement_max = 0.100001
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2knf"]
 transparency = 1
 blend_mode = 1
+shading_mode = 0
+diffuse_mode = 3
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_03ckd")
-metallic = 1.0
-metallic_texture = ExtResource("2_4wjv0")
-roughness = 0.0
-emission = Color(0.828197, 0.828197, 0.828197, 1)
-emission_energy_multiplier = 0.01
 disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_6cgdd"]
@@ -269,7 +265,7 @@ _data = {
 
 [node name="VFX_puff_billboards" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-amount = 12
+amount = 5
 one_shot = true
 explosiveness = 0.85
 randomness = 0.02

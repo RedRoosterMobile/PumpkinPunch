@@ -218,4 +218,3 @@ draw_pass_1 = SubResource("QuadMesh_ru1ff")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_54eow")
-autoplay = true

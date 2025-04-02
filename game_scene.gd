@@ -193,6 +193,9 @@ func spawn_bats(track:int, pitch:int, velocity:int):
 
 func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	# FIXME: get from object pool instead
+	print("pitch: ",pitch)
+	# C1 = 36
+	# C#1 = 37
 	var pumpkin = SPAWN_THING.instantiate()
 	var pumpkin_pieces = SPAWN_THING_BROKEN
 	
@@ -280,16 +283,24 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(note_callback)
-	midi_player.speed_scale=1.025
+	# working for demo song
+	midi_player.speed_scale = 1.025
 	
-
+	# caluclate this via bpm
+	#midi_player.speed_scale = 1.15
+	
+	#123 120
+	
+	#138
+	#120
+	
 	 # link the AudioStreamPlayer in your scene
 	# that contains the music associated with the midi
 	# NOTE: this must be an array, you can link multiple ASPs or one as 
 	# shown below and they will all sync with playback of the MIDI
-	# midi_player.link_audio_stream_player([asp])
-
 	# this will also start the audio stream player (music)
+	# midi_player.link_audio_stream_player([asp])
+	
 	midi_player.play()
 	asp.play()
 	asp.connect("finished", _on_music_ended)
@@ -303,7 +314,7 @@ func _on_music_ended():
 
 func note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON and not GameState.game_finished:
-		#print(event)
+		print(event)
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
 
 		# 36 == C1 (only in ableton??? 24 otherwise)

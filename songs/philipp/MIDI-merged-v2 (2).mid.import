@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://bf8rmsuo7hjhw"
+path="res://.godot/imported/MIDI-merged-v2 (2).mid-0224e7a5c216930280ad987962cd39d1.res"
+
+[deps]
+
+source_file="res://songs/philipp/MIDI-merged-v2 (2).mid"
+dest_files=["res://.godot/imported/MIDI-merged-v2 (2).mid-0224e7a5c216930280ad987962cd39d1.res"]
+
+[params]
+
