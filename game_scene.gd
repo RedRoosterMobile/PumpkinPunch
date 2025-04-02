@@ -284,10 +284,13 @@ func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(note_callback)
 	# working for demo song
-	midi_player.speed_scale = 1.025
+	#midi_player.speed_scale = 1.025
 	
 	# caluclate this via bpm
-	#midi_player.speed_scale = 1.15
+	midi_player.speed_scale = 1.15
+	
+	
+	#midi_player.speed_scale = 3.0
 	
 	#123 120
 	
@@ -299,7 +302,7 @@ func init_midi():
 	# NOTE: this must be an array, you can link multiple ASPs or one as 
 	# shown below and they will all sync with playback of the MIDI
 	# this will also start the audio stream player (music)
-	# midi_player.link_audio_stream_player([asp])
+	#midi_player.link_audio_stream_player([asp])
 	
 	midi_player.play()
 	asp.play()
@@ -312,14 +315,17 @@ func _on_music_ended():
 		Messenger.game_finished.emit() # kill mage
 		show_game_state_label(true, "Winner, Winner, Chicken Dinner! \nscore: " + str(GameState.score))
 
+var first_note:Dictionary[int,bool] = {}
 func note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON and not GameState.game_finished:
-		print(event)
+		
+		
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
 
 		# 36 == C1 (only in ableton??? 24 otherwise)
 		var pitch: int = event['note']
 		var velocity: int = event['data']
+		
 		
 		if track == 0 or track == 1:
 			spawn_pumpkin(track, pitch, velocity)

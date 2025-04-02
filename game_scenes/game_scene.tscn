@@ -36,8 +36,8 @@
 [ext_resource type="PackedScene" uid="uid://cnvaxg2l1o7vk" path="res://models/TitleText_lower_poly.glb" id="34_vjse1"]
 [ext_resource type="PackedScene" uid="uid://0k4ojuq4elym" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.tscn" id="35_62kty"]
 [ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="36_yue88"]
-[ext_resource type="MidiResource" uid="uid://b08jclyed2bfl" path="res://songs/merge_from_ofoct (1).mid" id="37_rna4k"]
-[ext_resource type="AudioStream" uid="uid://c64hw2hfjecip" path="res://songs/Pumpkin demo suno ai.wav" id="38_4h8wo"]
+[ext_resource type="MidiResource" uid="uid://fucgl3l8qogo" path="res://songs/philipp/MIDI_merge_mitVosprann.mid" id="37_dbopf"]
+[ext_resource type="AudioStream" uid="uid://du8uwmqttpf2y" path="res://songs/philipp/vr-game-jam-hackathon-musik-v3-mitVorspann.wav" id="38_empo3"]
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="39_wjle5"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="40_vwe6t"]
 [ext_resource type="Shader" uid="uid://ct0v5o57dthjr" path="res://addons/GPUTrail/shaders/trail.gdshader" id="41_b6dwd"]
@@ -1318,10 +1318,10 @@ mesh = SubResource("PlaneMesh_c8ggw")
 skeleton = NodePath("../decoration")
 
 [node name="MidiPlayer" type="MidiPlayer" parent="."]
-midi = ExtResource("37_rna4k")
+midi = ExtResource("37_dbopf")
 
 [node name="MainMusicAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("38_4h8wo")
+stream = ExtResource("38_empo3")
 bus = &"MUSIC"
 
 [node name="DecalSplatExampleSlow" type="Decal" parent="."]
