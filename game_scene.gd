@@ -21,6 +21,7 @@ class Pumpkin:
 	var spiral_time: float = 0.0 # Only used for spiral pumpkins
 	var movement_radius: float
 	var movement_frequency: float
+	var velocity_multiplier: float
 
 	func _init(_type: String):
 		type = _type
@@ -125,8 +126,8 @@ func _process(delta: float) -> void:
 	)
 	
 	#region pumpkin kill-zone
-	for pumpkin: Pumpkin in pumpkins:
-		pumpkin.node.position.z += delta
+	for pumpkin:Pumpkin in pumpkins:
+		pumpkin.node.position.z += delta * pumpkin.velocity_multiplier
 		# var time_zto = sin(time*0.5)*0.5+0.5
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
@@ -148,7 +149,7 @@ func _process(delta: float) -> void:
 	
 	#region blocking the swarm
 	# debug
-	$DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n"
+	# $DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
 	
 	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
@@ -211,6 +212,9 @@ func spawn_bats(track: int, pitch: int, velocity: int):
 
 func spawn_pumpkin(track: int, pitch: int, velocity: int):
 	# FIXME: get from object pool instead
+	print("pitch: ",pitch)
+	# C1 = 36
+	# C#1 = 37
 	var pumpkin = SPAWN_THING.instantiate()
 	var pumpkin_pieces = SPAWN_THING_BROKEN
 
@@ -231,9 +235,15 @@ func spawn_pumpkin(track: int, pitch: int, velocity: int):
 	var spawn_position: Vector3 = Vector3(x_spawn, spawn_height, PUMPKIN_Z)
 	pumpkin.position = spawn_position
 	pumpkin.broken_model = pumpkin_pieces
+	
 	pumpkin.add_to_group("pumpkins")
 	add_child(pumpkin)
 	var p = Pumpkin.new(pumpkin_type)
+	
+	if (velocity >100):
+		p.velocity_multiplier = 1.5
+	else: 
+		p.velocity_multiplier = 1.0
 	p.node = pumpkin
 	
 	pumpkins.append(p)
@@ -304,16 +314,27 @@ func _on_hand_area_3d_area_entered(area: Area3D, controller: XRController3D) -> 
 func init_midi():
 	# midi_player.loop = true
 	midi_player.note.connect(note_callback)
-	midi_player.speed_scale = 1.025
+	# working for demo song
+	#midi_player.speed_scale = 1.025
 	
-
+	# caluclate this via bpm
+	midi_player.speed_scale = 1.15
+	
+	
+	#midi_player.speed_scale = 3.0
+	
+	#123 120
+	
+	#138
+	#120
+	
 	 # link the AudioStreamPlayer in your scene
 	# that contains the music associated with the midi
 	# NOTE: this must be an array, you can link multiple ASPs or one as 
 	# shown below and they will all sync with playback of the MIDI
-	# midi_player.link_audio_stream_player([asp])
-
 	# this will also start the audio stream player (music)
+	#midi_player.link_audio_stream_player([asp])
+	
 	midi_player.play()
 	asp.play()
 	asp.connect("finished", _on_music_ended)
@@ -325,14 +346,16 @@ func _on_music_ended():
 		Messenger.game_finished.emit() # kill mage
 		show_game_state_label(true, "Winner, Winner, Chicken Dinner! \nscore: " + str(GameState.score))
 
+var first_note:Dictionary[int,bool] = {}
 func note_callback(event: Variant, track: int):
 	if event['subtype'] == MIDI_MESSAGE_NOTE_ON and not GameState.game_finished:
-		#print(event)
+		
+		
 		# { "type": "note", "track": 1, "subtype": 9, "delta": 1536.0, "note": 36, "data": 100, "channel": 0 }
 		# 36 == C1 (only in ableton??? 24 otherwise)
 		var pitch: int = event['note']
 		var velocity: int = event['data']
-		
+				
 		if track == 0 or track == 1:
 			spawn_pumpkin(track, pitch, velocity)
 		if track == 2 or track == 3:

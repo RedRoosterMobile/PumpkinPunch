@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://fucgl3l8qogo"
+path="res://.godot/imported/MIDI_merge_mitVosprann.mid-4aca29af3b591fcf5fe1f91080fa1c8a.res"
+
+[deps]
+
+source_file="res://songs/philipp/MIDI_merge_mitVosprann.mid"
+dest_files=["res://.godot/imported/MIDI_merge_mitVosprann.mid-4aca29af3b591fcf5fe1f91080fa1c8a.res"]
+
+[params]
+

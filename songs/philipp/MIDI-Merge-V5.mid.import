@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://dg3ilhvbi5bdo"
+path="res://.godot/imported/MIDI-Merge-V5.mid-934842000bfe442f591fac72297efa94.res"
+
+[deps]
+
+source_file="res://songs/philipp/MIDI-Merge-V5.mid"
+dest_files=["res://.godot/imported/MIDI-Merge-V5.mid-934842000bfe442f591fac72297efa94.res"]
+
+[params]
+
