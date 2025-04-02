@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://he1nvwt2uarm"]
+[gd_scene load_steps=3 format=3 uid="uid://he1nvwt2uarm"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1_5ubdh"]
+[ext_resource type="Texture2D" uid="uid://dxaa3jhi85566" path="res://images/loading_screen.png" id="2_gq4ge"]
 
 [node name="Staging" instance=ExtResource("1_5ubdh")]
 main_scene = "uid://bfbpfn3x5j8ea"
 prompt_for_continue = false
+
+[node name="LoadingScreen" parent="." index="2"]
+splash_screen = ExtResource("2_gq4ge")
