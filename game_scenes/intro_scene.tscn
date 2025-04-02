@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=39 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -78,8 +78,8 @@ material = SubResource("StandardMaterial3D_xrdd6")
 orientation = 1
 
 [sub_resource type="Curve" id="Curve_eqod3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.485623, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_vkqmo"]
 texture_mode = 1
@@ -105,10 +105,22 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_ru1ff"]
 curve = SubResource("Curve_eh6v3")
 
+[sub_resource type="Curve" id="Curve_54eow"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.482428, 0.203045), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o1s48"]
+curve = SubResource("Curve_54eow")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1s48"]
 emission_shape_scale = Vector3(4, 1, 4)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0.1, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_o1s48")
 color_ramp = SubResource("GradientTexture1D_54eow")
 color_initial_ramp = SubResource("GradientTexture1D_o1s48")
 alpha_curve = SubResource("CurveTexture_vkqmo")
@@ -128,6 +140,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_ru1ff"]
 material = SubResource("StandardMaterial3D_eh6v3")
+size = Vector2(0.5, 0.5)
 
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_0ju8l")
@@ -183,8 +196,9 @@ process_material = ExtResource("10_eqod3")
 draw_pass_1 = SubResource("QuadMesh_54eow")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79162, -0.364392)
 amount = 40
+lifetime = 5.0
+randomness = 0.04
 process_material = SubResource("ParticleProcessMaterial_o1s48")
 draw_pass_1 = SubResource("QuadMesh_ru1ff")
 

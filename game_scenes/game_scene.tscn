@@ -914,7 +914,7 @@ void vertex() {
         // Create a wave effect using sine, influenced by time and position
         float wave = sin(TIME * wave_frequency + distance_from_center * 5.0) * wave_amplitude;
 		VERTEX.y+=wave;
-        
+
     }
 }
 
