@@ -36,7 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://cnvaxg2l1o7vk" path="res://models/TitleText_lower_poly.glb" id="34_vjse1"]
 [ext_resource type="PackedScene" uid="uid://0k4ojuq4elym" path="res://addons/kaykit_halloween_bits/gltf/tree_pine_yellow_medium.tscn" id="35_62kty"]
 [ext_resource type="PackedScene" uid="uid://muj0nh5oqh21" path="res://models/sofa3d2.glb" id="36_yue88"]
-[ext_resource type="MidiResource" uid="uid://fucgl3l8qogo" path="res://songs/philipp/MIDI_merge_mitVosprann.mid" id="37_dbopf"]
+[ext_resource type="MidiResource" uid="uid://dg3ilhvbi5bdo" path="res://songs/philipp/MIDI-Merge-V5.mid" id="37_dbopf"]
 [ext_resource type="AudioStream" uid="uid://du8uwmqttpf2y" path="res://songs/philipp/vr-game-jam-hackathon-musik-v3-mitVorspann.wav" id="38_empo3"]
 [ext_resource type="Texture2D" uid="uid://pr0p8iu584up" path="res://art/splat.png" id="39_wjle5"]
 [ext_resource type="PackedScene" uid="uid://dlbrb4u1gn18y" path="res://models/skeleton_mage.tscn" id="40_vwe6t"]
@@ -1356,6 +1356,7 @@ metadata/_custom_type_script = "uid://cbmsti1eajx0t"
 
 [node name="DebugLabel3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00614953, 1.73411, -0.7618)
+visible = false
 text = "debug text goes here"
 vertical_alignment = 2
 
@@ -1613,6 +1614,7 @@ visible = false
 
 [node name="Bubbles" type="GPUParticles3D" parent="HealthMeter"]
 transform = Transform3D(1, 0, 0, 0, 0.0104369, 0.999946, 0, -0.999946, 0.0104369, 0, 0.206914, 0.000447631)
+visible = false
 layers = 524288
 amount = 80
 visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)

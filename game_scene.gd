@@ -16,6 +16,7 @@ var controller_right : XRController3D
 # Inner class
 class Pumpkin:
 	var node: Node3D
+	var velocity_multiplier: float
 
 var pumpkins:Array[Pumpkin]= []
 var time:float = 0.0
@@ -116,7 +117,7 @@ func _process(delta: float) -> void:
 	
 	#region pumpkin kill-zone
 	for pumpkin:Pumpkin in pumpkins:
-		pumpkin.node.position.z += delta
+		pumpkin.node.position.z += delta * pumpkin.velocity_multiplier
 		# var time_zto = sin(time*0.5)*0.5+0.5
 		# pumpkin.node.position.y = PUMPKIN_Y * time_zto*1.0
 		# tune kill zone
@@ -129,7 +130,7 @@ func _process(delta: float) -> void:
 	
 	#region blocking the swarm
 	# debug
-	$DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
+	# $DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
 	
 	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
@@ -210,9 +211,15 @@ func spawn_pumpkin(track:int,pitch:int, velocity:int):
 	var spawn_position:Vector3 = Vector3(x_spawn, spawn_height, PUMPKIN_Z)
 	pumpkin.position = spawn_position
 	pumpkin.broken_model = pumpkin_pieces
+	
 	pumpkin.add_to_group("pumpkins")
 	add_child(pumpkin)
 	var p = Pumpkin.new()
+	
+	if (velocity >100):
+		p.velocity_multiplier = 1.5
+	else: 
+		p.velocity_multiplier = 1.0
 	p.node = pumpkin
 	
 	pumpkins.append(p)
@@ -325,8 +332,7 @@ func note_callback(event: Variant, track: int):
 		# 36 == C1 (only in ableton??? 24 otherwise)
 		var pitch: int = event['note']
 		var velocity: int = event['data']
-		
-		
+				
 		if track == 0 or track == 1:
 			spawn_pumpkin(track, pitch, velocity)
 		if track == 2 or track == 3:

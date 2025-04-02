@@ -17,6 +17,7 @@ var controller_right: XRController3D
 var is_animating: bool = false  # Flag to prevent overlapping animations
 
 func _ready() -> void:
+	
 	print("howdy, story_array size: ", story_array.size())
 	
 	if not story_segment or not image_display or not story_label:
@@ -151,6 +152,7 @@ func set_next(image: Texture2D, story: String) -> void:
 
 func _on_button_pressed(button_name: String) -> void:
 	print("Button pressed, current_index before: ", current_index, " array size: ", story_array.size(), " is_animating: ", is_animating)
+	
 	if story_array.size() > 0 and not is_animating:
 		current_index += 1
 		if current_index >= story_array.size():

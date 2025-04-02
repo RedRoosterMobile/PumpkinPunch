@@ -14,19 +14,23 @@ func _ready() -> void:
 	#splat_decal_instance = splat_decal.instantiate()
 	var puff:AnimationPlayer = hit_vfx.get_node("AnimationPlayer")
 	puff.play()
-	Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
+	#/Users/thomasranker/pumpkinpunch/songs/Pumpkin-hit.wav
+	#Audio.play("audio/656066__ihitokage__soft-explosion-puff.mp3", true, global_transform)
+	
 
 func get_material() -> StandardMaterial3D:
 	var stm: StandardMaterial3D = pumpkin_orange_jackolantern.get_active_material(1)
 	return stm
 
 func splat():
-	Audio.play("audio/splat.ogg", true, global_transform)
+	#Audio.play("audio/splat.ogg", true, global_transform)
+	Audio.play("songs/Pumpkin-hit.wav", true, global_transform)
 	
-	var broken_model_instance = broken_model.instantiate()
-	broken_model_instance.transform = self.transform
-	
-	get_parent().add_child(broken_model_instance)
+	var show_splat:bool = randf_range(0.0,1.0) < 0.33;
+	if (show_splat):
+		var broken_model_instance = broken_model.instantiate()
+		broken_model_instance.transform = self.transform
+		get_parent().add_child(broken_model_instance)
 	
 	vfx_instance.transform = self.transform
 	get_parent().add_child(vfx_instance)
