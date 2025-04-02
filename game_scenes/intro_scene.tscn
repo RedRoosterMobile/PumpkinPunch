@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=43 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bl7bj3s1n7ru8" path="res://images/intro/scene_3.png" id="5_gawlo"]
 [ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
 [ext_resource type="Texture2D" uid="uid://13fly0kjk8ga" path="res://images/intro/scene_4.png" id="6_vkqmo"]
+[ext_resource type="Texture2D" uid="uid://hqsmto3i5m7n" path="res://images/intro/scene_5.png" id="7_eh6v3"]
+[ext_resource type="Texture2D" uid="uid://csskuwcgy7bql" path="res://images/intro/scene_6.png" id="8_ru1ff"]
 [ext_resource type="Material" uid="uid://disd0lgoo5vfi" path="res://models/falling_leafs.tres" id="10_eqod3"]
 [ext_resource type="Texture2D" uid="uid://oop7pv60wxl4" path="res://images/maple-leaf.png" id="11_vkqmo"]
 [ext_resource type="Texture2D" uid="uid://bdt7jpf63bsd7" path="res://images/particles/PNG (Transparent)/star_07.png" id="12_eqod3"]
@@ -37,6 +39,18 @@ metadata/_custom_type_script = "uid://cn73falcxqp1c"
 script = ExtResource("2_8uvi6")
 image = ExtResource("6_vkqmo")
 story = "Under his spell, ordinary pumpkins turned into creatures of nightmare, crawling forth to spread terror."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="Resource" id="Resource_6sgdc"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("7_eh6v3")
+story = "Now you stand alone against the mage's dark creations. Your mana is your lifeline—each misstep drains its precious light. Protect it with your life, for when your mana fades completely, so too does your chance to escape this swamp alive."
+metadata/_custom_type_script = "uid://cn73falcxqp1c"
+
+[sub_resource type="Resource" id="Resource_6c2do"]
+script = ExtResource("2_8uvi6")
+image = ExtResource("8_ru1ff")
+story = "Survive, and the mana remaining will amplify your legend, marking your triumph over darkness. The swamp awaits—defend your spirit and claim your victory"
 metadata/_custom_type_script = "uid://cn73falcxqp1c"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4a0uo"]
@@ -144,7 +158,7 @@ size = Vector2(0.5, 0.5)
 
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_0ju8l")
-story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o"), SubResource("Resource_54eow")])
+story_array = Array[ExtResource("2_8uvi6")]([SubResource("Resource_gawlo"), SubResource("Resource_foqid"), SubResource("Resource_svk4o"), SubResource("Resource_54eow"), SubResource("Resource_6sgdc"), SubResource("Resource_6c2do")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8uvi6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=4 uid="uid://b3l46tvt2tevv"]
+[gd_scene load_steps=159 format=4 uid="uid://b3l46tvt2tevv"]
 
 [ext_resource type="Script" uid="uid://evbk64svyunb" path="res://game_scene.gd" id="1_dbdnp"]
 [ext_resource type="Script" uid="uid://x5dxnmk8rpfj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="2_e7aqr"]
@@ -51,7 +51,6 @@
 [ext_resource type="Texture2D" uid="uid://cjdho3j0sy31" path="res://images/particles/PNG (Transparent)/star_08.png" id="49_ilxcb"]
 [ext_resource type="Script" uid="uid://d2hp0qsn4y0la" path="res://bat_swarm.gd" id="50_qu74t"]
 [ext_resource type="Shader" uid="uid://c7qelfof7s0gg" path="res://images/butterfly/bat_boids.gdshader" id="51_3cfrk"]
-[ext_resource type="Texture2D" uid="uid://ddscsko2p51lj" path="res://addons/godot-xr-tools/images/bat-nick.png" id="52_4mxv4"]
 [ext_resource type="ArrayMesh" uid="uid://cdrpf00if4rs7" path="res://images/butterfly/butterfly.obj" id="53_mxplb"]
 [ext_resource type="Texture2D" uid="uid://b0uu6dsn2ywog" path="res://addons/kaykit_halloween_bits/gltf/halloweenbits_texture.png" id="54_48nf6"]
 [ext_resource type="Material" uid="uid://bhr38dekra14f" path="res://models/sky_clouds_backup.tres" id="55_5ki65"]
@@ -100,9 +99,9 @@ sdfgi_cascade0_distance = 18.56
 sdfgi_max_distance = 296.96
 glow_enabled = true
 glow_normalized = true
-glow_intensity = 7.19
-glow_strength = 0.0
-glow_bloom = 0.5
+glow_intensity = 0.2
+glow_strength = 0.2
+glow_bloom = 0.2
 glow_hdr_threshold = 0.95
 fog_mode = 1
 fog_density = 0.1775
@@ -384,7 +383,7 @@ colors = PackedColorArray(1, 1, 1, 0.521569, 0.968627, 0.937255, 1.01569, 2.0039
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hixko"]
 render_priority = 0
 shader = ExtResource("51_3cfrk")
-shader_parameter/tex = ExtResource("52_4mxv4")
+shader_parameter/tex = ExtResource("68_umyyh")
 shader_parameter/color1 = Color(0.459259, 0.000678547, 0.571961, 1)
 shader_parameter/color2 = Color(0, 0.236852, 0, 1)
 shader_parameter/displ_amnt = 0.8
