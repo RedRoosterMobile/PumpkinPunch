@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bfbpfn3x5j8ea"]
+[gd_scene load_steps=42 format=3 uid="uid://bfbpfn3x5j8ea"]
 
 [ext_resource type="Script" uid="uid://boak0rolsltb8" path="res://game_scenes/intro_scene.gd" id="1_0ju8l"]
 [ext_resource type="Script" uid="uid://plv7deasho3f" path="res://story_segment.gd" id="2_4kpdv"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://r1vnx3njthfx" path="res://VFX/vfxx/floating_dust/floating_dust.tscn" id="4_esmw3"]
 [ext_resource type="Texture2D" uid="uid://nlwbi78o28pc" path="res://images/intro/scene_2.png" id="4_wxrqt"]
 [ext_resource type="Texture2D" uid="uid://bl7bj3s1n7ru8" path="res://images/intro/scene_3.png" id="5_gawlo"]
-[ext_resource type="Texture2D" uid="uid://c31c1wxmm812k" path="res://models/vampire bat_Image_0.png" id="5_wxrqt"]
 [ext_resource type="Texture2D" uid="uid://13fly0kjk8ga" path="res://images/intro/scene_4.png" id="6_vkqmo"]
 [ext_resource type="Texture2D" uid="uid://hqsmto3i5m7n" path="res://images/intro/scene_5.png" id="7_eh6v3"]
 [ext_resource type="Texture2D" uid="uid://csskuwcgy7bql" path="res://images/intro/scene_6.png" id="8_ru1ff"]
@@ -70,8 +69,9 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a83fi"]
+transparency = 1
 shading_mode = 0
-albedo_texture = ExtResource("5_wxrqt")
+albedo_texture = ExtResource("3_4a0uo")
 
 [sub_resource type="QuadMesh" id="QuadMesh_4kpdv"]
 material = SubResource("StandardMaterial3D_a83fi")

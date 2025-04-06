@@ -1,3 +1,4 @@
+@tool
 extends XRToolsSceneBase
 
 @onready var story_segment: Node3D = $StorySegment
@@ -151,7 +152,9 @@ func set_next(image: Texture2D, story: String) -> void:
 	tween_image.tween_callback(func(): is_animating = false)
 
 func _on_button_pressed(button_name: String) -> void:
-	print("Button pressed, current_index before: ", current_index, " array size: ", story_array.size(), " is_animating: ", is_animating)
+	if not button_name == "ax_button":
+		return
+	print("AX Button pressed, current_index before: ", current_index, " array size: ", story_array.size(), " is_animating: ", is_animating)
 	
 	if story_array.size() > 0 and not is_animating:
 		current_index += 1

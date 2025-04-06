@@ -788,7 +788,7 @@ material = SubResource("StandardMaterial3D_empo3")
 orientation = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvopu"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2, 0.5, 2)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d0wg7"]
 emission_shape = 6
@@ -1020,7 +1020,7 @@ _data = {
 &"end_game_fly_in": SubResource("Animation_dbopf")
 }
 
-[node name="testing map" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("left_hand_body", "right_hand_body")]
 script = ExtResource("1_dbdnp")
 left_hand_body = NodePath("HandLeft")
 right_hand_body = NodePath("HandRight")
@@ -1578,7 +1578,7 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="SwarmDetectorCollisionShape3D" type="CollisionShape3D" parent="SwarmDetectorArea3D"]
-transform = Transform3D(1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0.0652911, 1.80327)
+transform = Transform3D(1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, -0.355852, 2.16046)
 shape = SubResource("BoxShape3D_kvopu")
 
 [node name="ScoreManager" parent="." instance=ExtResource("67_ld461")]

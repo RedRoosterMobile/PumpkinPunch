@@ -1,3 +1,4 @@
+@tool
 extends XRToolsSceneBase
 
 # TODO: add some stuff, 

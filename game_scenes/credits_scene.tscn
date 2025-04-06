@@ -194,7 +194,7 @@ material = ExtResource("18_ajvy1")
 size = Vector2(100, 100)
 orientation = 1
 
-[node name="SceneBase" instance=ExtResource("1_lnysx")]
+[node name="CreditsScene" instance=ExtResource("1_lnysx")]
 script = ExtResource("2_vty74")
 rumble_event_left = null
 rumble_event_right = null

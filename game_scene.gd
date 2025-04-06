@@ -14,6 +14,11 @@ var controller_right: XRController3D
 @export var end_game_action: String = "ax_button"
 @export var next_scene_action: String = "by_button"
 
+
+
+@onready var ap: AnimationPlayer = $GameStateLabel/AnimationPlayer
+	
+
 # Inner class
 class Pumpkin:
 	var node: Node3D
@@ -49,6 +54,10 @@ const SPAWN_THING_BROKEN: PackedScene = preload("res://models/lowpoly_pumpkin_pi
 const XR_ORIGIN: PackedScene = preload("res://xr_origin_3d.tscn")
 
 func _on_game_started():
+	#start_game()
+	pass
+	
+func start_game():
 	if pumpkins.size() > 0:
 		# FIXME: do this when the first pumpkin has spawned
 		var a_pumpkin: Node3D = pumpkins[0].node
@@ -102,6 +111,8 @@ func _ready() -> void:
 	controller_right = XRHelpers.get_xr_controller(xr_origin_3d.get_child(2))
 	if controller_right:
 		controller_right.button_pressed.connect(_on_button_pressed_right)
+	
+	start_game()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -149,7 +160,7 @@ func _process(delta: float) -> void:
 	
 	#region blocking the swarm
 	# debug
-	# $DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
+	$DebugLabel3D.text = "blocking swarm hitbox: " + str(is_blocking_swarm) + "\n" 
 	
 	if is_blocking_bat:
 		Messenger.is_blocking_bat.emit()
@@ -194,12 +205,7 @@ func _on_button_pressed_right(button_name: String) -> void:
 		next_scene_action:
 			# go to credits
 			print("go to credits scene")
-			# Find the XRToolsSceneBase ancestor of the current node
-			var scene_base: XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
-			if not scene_base:
-				return
-			# Request loading the next scene
-			scene_base.load_scene("res://game_scenes/credits_scene.tscn")
+			go_to_credits_scene()
 
 ### 0 - 127 
 func spawn_bats(track: int, pitch: int, velocity: int):
@@ -363,7 +369,20 @@ func note_callback(event: Variant, track: int):
 			
 			
 func show_game_state_label(show: bool, msg: String = ""):
+	print("show_game_state_label")
 	$GameStateLabel.visible = show
 	if msg.length() > 0:
 		$GameStateLabel.text = msg
-	$GameStateLabel/AnimationPlayer.play("end_game_fly_in")
+	if show:
+		ap.play("end_game_fly_in")
+		await get_tree().create_timer(4).timeout
+		go_to_credits_scene()
+
+func go_to_credits_scene():
+	print("go_to_credits_scene")
+	# Find the XRToolsSceneBase ancestor of the current node
+	var scene_base: XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
+	if not scene_base:
+		return
+	# Request loading the next scene
+	scene_base.load_scene("res://game_scenes/credits_scene.tscn")
